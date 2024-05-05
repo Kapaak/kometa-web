@@ -1,6 +1,11 @@
-import "components/styles/globals.css";
-import type { AppProps } from "next/app";
+import type { AppProps } from 'next/app'
+
+import { StyleContext } from '~/contexts/StyleContext'
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <StyleContext>
+      <Component {...pageProps} />
+    </StyleContext>
+  )
 }
