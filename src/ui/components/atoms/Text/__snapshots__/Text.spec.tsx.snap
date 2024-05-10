@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text should render successfully 1`] = `
+<body>
+  <div>
+    <p
+      class="sc-9d1450c7-0 sc-9d1450c7-1 iwXIAU ilGYDJ"
+    />
+  </div>
+</body>
+`;

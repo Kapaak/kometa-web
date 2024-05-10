@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A should render successfully 1`] = `
+<body>
+  <div>
+    <a
+      class="sc-9d1450c7-0 sc-9d1450c7-1 sc-28285d2b-0 ilGYDJ bfpbMI"
+    />
+  </div>
+</body>
+`;

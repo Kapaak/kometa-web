@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Flex should render successfully 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-a0ffddf9-0 netTT"
+    >
+      This is inside flex
+    </div>
+  </div>
+</body>
+`;

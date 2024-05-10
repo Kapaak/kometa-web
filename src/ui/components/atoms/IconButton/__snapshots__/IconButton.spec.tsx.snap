@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButton should render successfully 1`] = `
+<body>
+  <div>
+    <button
+      class="sc-63139522-0 sc-63139522-1 jAaKDT jYLPWX sc-55faf2dc-0"
+    >
+      <span
+        class="sc-63139522-2 flvQkd"
+      />
+    </button>
+  </div>
+</body>
+`;

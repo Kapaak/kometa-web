@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Strong should render successfully 1`] = `
+<body>
+  <div>
+    <strong
+      class="sc-c87a1b7e-0 hcWRRQ"
+    >
+      Stronk
+    </strong>
+  </div>
+</body>
+`;

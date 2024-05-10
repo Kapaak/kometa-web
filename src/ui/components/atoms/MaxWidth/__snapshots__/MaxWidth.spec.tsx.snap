@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MaxWidth should render successfully 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-e3b4cabf-0 jeNnzm"
+    />
+  </div>
+</body>
+`;

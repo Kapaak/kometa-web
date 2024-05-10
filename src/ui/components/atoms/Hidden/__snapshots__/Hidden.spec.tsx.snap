@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hidden should render successfully 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-81fb8bc0-0 jSuDTw"
+    >
+      This is hidden
+    </div>
+  </div>
+</body>
+`;

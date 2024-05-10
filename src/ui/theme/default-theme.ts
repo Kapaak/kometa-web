@@ -1,22 +1,40 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme } from 'styled-components';
 
-import { calculateEmFromPx } from '~/utils/dimensions'
+import { calculateEmFromPx } from '~/utils/dimensions';
 
 export const theme: DefaultTheme = {
   colors: {
     primary: {
       light: '#DCE9FA',
       main: '#2172DD',
+      dark: '#1A5FBF',
     },
     secondary: {
+      light: '#FFCA0F',
       main: '#FFCA0F',
+      dark: '#e6b812',
     },
     tetriary: {
+      light: '#73F0C0',
       main: '#73F0C0',
+      dark: '#73F0C0',
+    },
+    error: {
+      light: '#FF0000',
+      main: '#FF0000',
+      dark: '#FF0000',
+    },
+    success: {
+      light: '#34C759',
+      main: '#34C759',
+      dark: '#34C759',
     },
     grey: {
       100: '#fff',
       200: '#F8F8F8',
+      400: '#EDEDED',
+      500: '#DADADA',
+      700: '#9A9A9A',
       900: '#000000',
     },
   },
@@ -46,6 +64,31 @@ export const theme: DefaultTheme = {
       fontWeight: 400,
       lineHeight: '2.4rem',
     },
+    body3: {
+      fontSize: '1.6rem',
+      fontWeight: 600,
+      lineHeight: '3.2rem',
+    },
+    body4: {
+      fontSize: '1.4rem',
+      fontWeight: 400,
+      lineHeight: '2.4rem',
+    },
+    body5: {
+      fontSize: '1.4rem',
+      fontWeight: 500,
+      lineHeight: '2.4rem',
+    },
+    body6: {
+      fontSize: '1.4rem',
+      fontWeight: 600,
+      lineHeight: '2.4rem',
+    },
+  },
+  maxWidth: {
+    small: '108rem',
+    main: '145rem',
+    wide: '145rem',
   },
   shadows: {
     main: '0px 0px 10px 0px rgba(0, 0, 0, 0.05)',
@@ -62,4 +105,4 @@ export const theme: DefaultTheme = {
     xl: calculateEmFromPx(1200),
     xxl: calculateEmFromPx(1920),
   },
-}
+};

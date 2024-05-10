@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VerticalStack should render successfully 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-49f318d3-0 bFXauE"
+    >
+      This is inside VerticalStack
+    </div>
+  </div>
+</body>
+`;

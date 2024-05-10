@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sponsor should render successfully 1`] = `
+<body>
+  <div>
+    <a
+      class="sc-6081e0f6-0 bLjdoT"
+      href=""
+    />
+  </div>
+</body>
+`;

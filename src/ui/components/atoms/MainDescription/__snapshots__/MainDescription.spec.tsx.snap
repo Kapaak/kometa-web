@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainDescription should render successfully 1`] = `
+<body>
+  <div>
+    <p
+      class="sc-9d1450c7-0 sc-9d1450c7-1 sc-ba5afda-0 iwXIAU ilGYDJ bujXOk"
+    >
+      Lorem ipsum
+    </p>
+  </div>
+</body>
+`;

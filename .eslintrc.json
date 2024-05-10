@@ -47,7 +47,22 @@
                 "position": "after"
               },
               {
+                "pattern": "./parts",
+                "group": "object",
+                "position": "after"
+              },
+              {
                 "pattern": "./*.style",
+                "group": "object",
+                "position": "after"
+              },
+              {
+                "pattern": "./*.data",
+                "group": "object",
+                "position": "after"
+              },
+              {
+                "pattern": "./*.type",
                 "group": "object",
                 "position": "after"
               }

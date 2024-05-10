@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`H1 should render successfully 1`] = `
+<body>
+  <div>
+    <h1
+      class="sc-9d1450c7-0 sc-9d1450c7-1 sc-ea7106a6-0 ilGYDJ gSefII"
+    >
+      Headline
+    </h1>
+  </div>
+</body>
+`;
