@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { isMobile, isTablet } from 'react-device-detect';
 
 import { CaretDown } from '@phosphor-icons/react/dist/ssr';
 import * as RadixUiSelect from '@radix-ui/react-select';
@@ -73,13 +72,14 @@ export const MultiSelect = ({
                   key={option.value}
                   value={option.value}
                   checked={selectedValues?.includes(option.value)}
-                  onTouchEnd={() => {
-                    //on mobile the onClick is sometimes ignored when clicking too fast
-                    (isMobile || isTablet) && handleValueChange(option.value);
-                  }}
-                  onClick={() => {
-                    !isMobile && !isTablet && handleValueChange(option.value);
-                  }}
+                  // onTouchEnd={() => {
+                  //   //on mobile the onClick is sometimes ignored when clicking too fast
+                  //   (isMobile || isTablet) && handleValueChange(option.value);
+                  // }}
+                  // onClick={() => {
+                  //   !isMobile && !isTablet && handleValueChange(option.value);
+                  // }}
+                  onClick={() => handleValueChange(option.value)}
                 >
                   {option.label}
                 </MultiSelectItem>

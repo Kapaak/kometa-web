@@ -80,6 +80,11 @@ export const Select = ({
 //when using Select, selecting item causes to also click behind the item and can trigger unwanted button clicks
 const useSelectInteractionFix = (selectors: string) => {
   const timeoutRef = useRef<number | undefined>();
+
+  if (typeof document === 'undefined') {
+    return;
+  }
+
   const root = document.querySelector<HTMLElement>(selectors);
 
   if (!root) {

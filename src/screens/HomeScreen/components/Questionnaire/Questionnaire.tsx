@@ -64,29 +64,29 @@ export function Questionnaire({}: QuestionnaireProps) {
             <FormProvider {...form}>
               <S.FormContent>
                 <S.ControlledItems>
-                  <ControlledMultiSelect
+                  <ControlledSelect
                     name="gender"
                     placeholder="Pohlaví dítěte"
                     options={childrenGenderOptions}
                   />
                   <ControlledMultiSelect
                     name="day"
-                    placeholder="Preferovaný den"
+                    placeholder="Preferované dny"
                     options={dayOptions}
                   />
                   <ControlledMultiSelect
                     name="place"
-                    placeholder="Preferované místo"
+                    placeholder="Preferovaná místa"
                     options={placeOptions}
                   />
-                  <ControlledMultiSelect
+                  <ControlledSelect
                     name="age"
                     placeholder="Věk dítěte"
                     options={ageOptions}
                   />
                   <ControlledMultiSelect
                     name="time"
-                    placeholder="Preferovaný čas"
+                    placeholder="Preferované časy"
                     options={timeOptions}
                   />
                   <ControlledSelect
