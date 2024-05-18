@@ -23,11 +23,9 @@ import {
   ControlledSelect,
 } from '~/ui/components/molecules';
 
-import * as S from './Questionnaire.style';
+import * as S from './QuestionnaireSection.style';
 
-interface QuestionnaireProps {}
-
-export function Questionnaire({}: QuestionnaireProps) {
+export function QuestionnaireSection() {
   //this will be used when switching between swimming courses and summer camps
   const [open, setOpen] = useState(true);
 

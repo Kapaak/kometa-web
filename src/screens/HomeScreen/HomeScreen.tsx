@@ -1,18 +1,19 @@
 import { Sponsors } from '~/components';
 import { PageLayout } from '~/ui/components/templates';
 
-import { Questionnaire } from './components';
+import { HeroSection, QuestionnaireSection, ServicesSection } from './parts';
 
-import { ServicesSection } from './parts';
+import * as S from './HomeScreen.style';
 
-interface HomeScreenProps {}
-
-export function HomeScreen({}: HomeScreenProps) {
+export function HomeScreen() {
   return (
     <PageLayout>
-      <ServicesSection />
-      <Questionnaire />
-      <Sponsors />
+      <S.HomeScreenMain>
+        <HeroSection />
+        <ServicesSection />
+        <QuestionnaireSection />
+        <Sponsors />
+      </S.HomeScreenMain>
     </PageLayout>
   );
 }

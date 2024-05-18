@@ -6,7 +6,7 @@ export const theme: DefaultTheme = {
   colors: {
     primary: {
       light: '#DCE9FA',
-      main: '#2172DD',
+      main: '#014B8B',
       dark: '#1A5FBF',
     },
     secondary: {
@@ -40,9 +40,9 @@ export const theme: DefaultTheme = {
   },
   typography: {
     h1: {
-      fontSize: '2.8rem',
-      fontWeight: 400,
-      lineHeight: '4.8rem',
+      fontSize: '2.4rem',
+      fontWeight: 600,
+      lineHeight: '3.6rem',
     },
     h2: {
       fontSize: '5.6rem',
