@@ -11,8 +11,7 @@ export const servicesData: ServicesData[] = [
     title: 'Plavecké kurzy pro děti',
     imageAlt: 'Děti na plaveckém kurzu kometa',
     imageUrl: '/images/service/kid-swimming.png',
-    chips: ['Začátečníci', 'Kondiční', 'Školy a školky'],
-    url: 'https://www.plavanikometa.cz/plavani-pro-deti/',
+    url: '/kurzy-pro-deti',
   },
   {
     title: 'Závodní plavání',

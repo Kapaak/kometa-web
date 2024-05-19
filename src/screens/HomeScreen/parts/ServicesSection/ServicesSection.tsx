@@ -5,9 +5,7 @@ import * as S from './ServicesSection.style';
 
 import { servicesData } from './ServicesSection.data';
 
-interface ServicesSectionProps {}
-
-export function ServicesSection({}: ServicesSectionProps) {
+export function ServicesSection() {
   return (
     <S.ServicesSection>
       <MaxWidth>
@@ -17,7 +15,7 @@ export function ServicesSection({}: ServicesSectionProps) {
               key={service.title}
               title={service.title}
               imageAlt={service.imageAlt}
-              imageUrl={service.imageUrl}
+              image={service.imageUrl}
               chips={service.chips}
               url={service.url}
             />

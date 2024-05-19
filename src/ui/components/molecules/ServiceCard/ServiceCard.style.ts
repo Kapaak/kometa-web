@@ -16,6 +16,7 @@ export const ServiceCard = styled(Card)`
 export const ServiceCardBackgroundImage = styled(Image)`
   position: fixed;
   border-radius: inherit;
+  object-fit: cover;
 `;
 export const DarkenImage = styled.div<{ hoverable: boolean }>`
   border-radius: inherit;

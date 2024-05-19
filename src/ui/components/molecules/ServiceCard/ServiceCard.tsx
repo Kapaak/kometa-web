@@ -4,7 +4,7 @@ import * as S from './ServiceCard.style';
 
 interface ServiceCardProps {
   title: string;
-  imageUrl: string;
+  image: string;
   imageAlt: string;
   chips?: string[];
   url?: string;
@@ -13,19 +13,14 @@ interface ServiceCardProps {
 export function ServiceCard({
   chips,
   imageAlt,
-  imageUrl,
+  image,
   title,
   url,
 }: ServiceCardProps) {
   const card = (
     <S.ServiceCard>
       <S.DarkenImage hoverable={Boolean(url)}>
-        <S.ServiceCardBackgroundImage
-          src={imageUrl}
-          alt={imageAlt}
-          fill
-          objectFit="cover"
-        />
+        <S.ServiceCardBackgroundImage src={image} alt={imageAlt} fill />
       </S.DarkenImage>
       {chips && (
         <S.ServiceChipContainer>
