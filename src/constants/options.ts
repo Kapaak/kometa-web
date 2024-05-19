@@ -14,23 +14,23 @@ export const childrenGenderOptions = [
 export const dayOptions = [
   {
     label: 'Pondělí',
-    value: DayInWeek.MONDAY,
+    value: String(DayInWeek.MONDAY),
   },
   {
     label: 'Úterý',
-    value: DayInWeek.TUESDAY,
+    value: String(DayInWeek.TUESDAY),
   },
   {
     label: 'Středa',
-    value: DayInWeek.WEDNESDAY,
+    value: String(DayInWeek.WEDNESDAY),
   },
   {
     label: 'Čtvrtek',
-    value: DayInWeek.THURSDAY,
+    value: String(DayInWeek.THURSDAY),
   },
   {
     label: 'Pátek',
-    value: DayInWeek.FRIDAY,
+    value: String(DayInWeek.FRIDAY),
   },
 ];
 
