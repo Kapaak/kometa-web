@@ -20,7 +20,12 @@ export function ServiceCard({
   const card = (
     <S.ServiceCard>
       <S.DarkenImage hoverable={Boolean(url)}>
-        <S.ServiceCardBackgroundImage src={image} alt={imageAlt} fill />
+        <S.ServiceCardBackgroundImage
+          src={image}
+          alt={imageAlt}
+          fill
+          sizes="(max-width: 1368px) 623px, 33vw"
+        />
       </S.DarkenImage>
       {chips && (
         <S.ServiceChipContainer>

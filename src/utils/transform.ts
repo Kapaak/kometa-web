@@ -1,5 +1,7 @@
 import { SanityKidsCourse, TransformedKidsCourse } from '~/domains';
 
+import { urlForImage } from './sanity';
+
 export function transformKidsCourse(
   course: SanityKidsCourse
 ): TransformedKidsCourse {
@@ -7,6 +9,10 @@ export function transformKidsCourse(
     id: course.id || '',
     name: course.name || '',
     url: course.url || '',
+    alt: course.alt || '',
+    image: course?.image
+      ? urlForImage(course.image)?.url()
+      : '/images/place/generic-swimming-pool.jpeg',
     isSchoolOrKindergartenAvailable:
       course.isSchoolOrKindergartenAvailable || false,
     basic:

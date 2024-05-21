@@ -18,8 +18,8 @@ export function CoursesWithTitle({ courses, title }: CoursesWithTitleProps) {
             key={course.id}
             title={course.name}
             chips={getChipsForCourse(course)}
-            imageAlt={`Bazén ${course.name}`}
-            image="/images/place/generic-swimming-pool.jpeg"
+            imageAlt={course.alt}
+            image={course.image}
             url={course.url}
           />
         ))}

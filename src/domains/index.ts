@@ -29,6 +29,8 @@ export type SanityKidsCourseVariant = {
 export type SanityKidsCourse = {
   id?: string;
   name?: string;
+  image?: string;
+  alt?: string;
   url?: string;
   privateSwimmingPool?: boolean;
   isSchoolOrKindergartenAvailable?: boolean;
@@ -40,6 +42,8 @@ export type SanityKidsCourse = {
 export type TransformedKidsCourse = {
   id: string;
   name: string;
+  image: string;
+  alt: string;
   url: string;
   isSchoolOrKindergartenAvailable: boolean;
   basic: boolean;
