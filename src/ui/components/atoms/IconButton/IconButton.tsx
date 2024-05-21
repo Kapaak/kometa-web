@@ -1,11 +1,12 @@
-import { PropsWithChildren, ReactNode } from 'react'
+import { PropsWithChildren, ReactNode } from 'react';
 
-import { ButtonProps } from '../Button/Button.type'
+import { ButtonProps } from '../Button/Button.type';
 
-import * as S from './IconButton.style'
+import * as S from './IconButton.style';
 
 interface IconButtonProps extends ButtonProps {
-  icon: ReactNode
+  icon: ReactNode;
+  transparent?: boolean;
 }
 
 export function IconButton({
@@ -20,5 +21,5 @@ export function IconButton({
       {!loading && children}
       {!loading && icon}
     </S.IconButton>
-  )
+  );
 }

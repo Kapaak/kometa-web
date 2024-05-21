@@ -25,6 +25,7 @@ export function HeroSection() {
             </Text>
             <IconButton
               variant="outlined"
+              transparent
               color="grey"
               customColor="#fff"
               icon={<ArrowRight size={20} />}
