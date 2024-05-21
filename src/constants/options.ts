@@ -1,4 +1,4 @@
-import { DayInWeek, Gender } from '~/domains';
+import { DayInWeek, Gender } from '~/types';
 
 export const childrenGenderOptions = [
   {

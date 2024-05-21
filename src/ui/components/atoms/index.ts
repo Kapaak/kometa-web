@@ -1,7 +1,6 @@
 export * from './A';
 export * from './Button';
 export * from './Card';
-export * from './Chip';
 export * from './Danger';
 export * from './Divider';
 export * from './Flex';
@@ -16,5 +15,6 @@ export * from './Scrollable';
 export * from './Select';
 export * from './Sponsor';
 export * from './Strong';
+export * from './Tag';
 export * from './Text';
 export * from './VerticalStack';

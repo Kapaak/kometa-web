@@ -1,4 +1,5 @@
-import { SanityKidsCourse, TransformedKidsCourse } from '~/domains';
+import { SanityCamps, SanityKidsCourse } from '~/domains';
+import { TransformedKidsCourse } from '~/types';
 
 import { urlForImage } from './sanity';
 
@@ -31,5 +32,18 @@ export function transformKidsCourse(
         course.condition.availableCourses.length > 0) ||
       false,
     privateSwimmingPool: course.privateSwimmingPool || false,
+  };
+}
+
+export function transformCamps(course: SanityCamps): SanityCamps {
+  return {
+    id: course.id || '',
+    name: course.name || '',
+    url: course.url || '',
+    alt: course.alt || '',
+    image: course?.image
+      ? urlForImage(course.image)?.url()
+      : '/images/place/generic-swimming-pool.jpeg',
+    tags: course.tags || [],
   };
 }

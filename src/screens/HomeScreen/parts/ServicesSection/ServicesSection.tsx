@@ -16,7 +16,7 @@ export function ServicesSection() {
               title={service.title}
               imageAlt={service.imageAlt}
               image={service.imageUrl}
-              chips={service.chips}
+              tags={service.tags}
               url={service.url}
             />
           ))}

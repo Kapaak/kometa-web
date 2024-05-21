@@ -2,11 +2,11 @@ import { render } from '@testing-library/react';
 
 import { withTheme } from '~/ui/theme';
 
-import { Chip } from './Chip';
+import { Tag } from './Tag';
 
-describe('Chip', () => {
+describe('Tag', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(withTheme(<Chip>This is Chip</Chip>));
+    const { baseElement } = render(withTheme(<Tag>This is Tag</Tag>));
 
     expect(baseElement).toBeTruthy();
     expect(baseElement).toMatchSnapshot();

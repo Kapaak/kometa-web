@@ -2,7 +2,7 @@ type ServicesData = {
   title: string;
   imageAlt: string;
   imageUrl: string;
-  chips?: string[];
+  tags?: string[];
   url: string;
 };
 
@@ -35,7 +35,7 @@ export const servicesData: ServicesData[] = [
     title: 'Příměstské tábory',
     imageAlt: 'Skupina dětí na táboře kometa',
     imageUrl: '/images/service/camps.png',
-    url: 'https://www.plavanikometa.cz/primestske-tabory/',
+    url: '/tabory',
   },
   {
     title: 'Plavecké kurzy pro dospělé',

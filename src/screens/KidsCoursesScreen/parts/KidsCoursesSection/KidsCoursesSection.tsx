@@ -1,4 +1,4 @@
-import { TransformedKidsCourse } from '~/domains';
+import { TransformedKidsCourse } from '~/types';
 import { MaxWidth } from '~/ui/components/atoms';
 
 import { CoursesWithTitle } from '../../components';

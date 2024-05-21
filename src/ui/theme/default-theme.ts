@@ -101,7 +101,7 @@ export const theme: DefaultTheme = {
   breakpoints: {
     sm: calculateEmFromPx(600),
     md: calculateEmFromPx(790),
-    lg: calculateEmFromPx(1024),
+    lg: calculateEmFromPx(1023),
     xl: calculateEmFromPx(1200),
     xxl: calculateEmFromPx(1920),
   },

@@ -1,6 +1,6 @@
-import { createGlobalStyle, css } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components';
 
-import { styleReset } from './style-reset'
+import { styleReset } from './style-reset';
 
 export const GlobalStyle = createGlobalStyle(
   ({ theme: { colors, fonts } }) => css`
@@ -15,9 +15,13 @@ export const GlobalStyle = createGlobalStyle(
 
     html {
       font-size: 62.5%;
+      min-height: 100%;
+      height: 100%;
     }
 
     body {
+      min-height: 100%;
+      height: 100%;
       font: 400 1.6rem ${fonts.primary};
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
@@ -25,6 +29,11 @@ export const GlobalStyle = createGlobalStyle(
       font-smooth: always;
       color: ${colors.grey['900']};
       background-color: ${colors.grey['200']};
+    }
+
+    #__next {
+      min-height: 100%;
+      height: 100%;
     }
 
     a,
@@ -41,4 +50,4 @@ export const GlobalStyle = createGlobalStyle(
       -webkit-box-shadow: 0 0 0 3rem ${colors.grey[100]} inset;
     }
   `
-)
+);

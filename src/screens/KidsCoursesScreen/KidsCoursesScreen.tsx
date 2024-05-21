@@ -1,4 +1,4 @@
-import { TransformedKidsCourse } from '~/domains';
+import { TransformedKidsCourse } from '~/types';
 import { PageLayout } from '~/ui/components/templates';
 
 import { KidsCoursesSection } from './parts';

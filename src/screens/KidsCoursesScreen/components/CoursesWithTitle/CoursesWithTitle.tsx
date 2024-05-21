@@ -1,4 +1,4 @@
-import { SwimmingVariantTranslation, TransformedKidsCourse } from '~/domains';
+import { SwimmingVariantTranslation, TransformedKidsCourse } from '~/types';
 import { ServiceCard } from '~/ui/components/molecules';
 
 import * as S from './CoursesWithTitle.style';
@@ -17,7 +17,7 @@ export function CoursesWithTitle({ courses, title }: CoursesWithTitleProps) {
           <ServiceCard
             key={course.id}
             title={course.name}
-            chips={getChipsForCourse(course)}
+            tags={getChipsForCourse(course)}
             imageAlt={course.alt}
             image={course.image}
             url={course.url}

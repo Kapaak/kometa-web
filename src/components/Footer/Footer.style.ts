@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
-import { MaxWidth } from '~/ui/components/atoms'
-import { minBreakpoint } from '~/utils/dimensions'
+import { MaxWidth } from '~/ui/components/atoms';
+import { minBreakpoint } from '~/utils/dimensions';
 
-export const Footer = styled.div`
+export const Footer = styled.footer`
   padding: 4rem 1rem;
   background-color: ${({ theme }) => theme.colors.primary.main};
 
@@ -13,7 +13,7 @@ export const Footer = styled.div`
       padding: 2rem;
     }
   `}
-`
+`;
 
 export const MaxWidthContainer = styled(MaxWidth)`
   ${({ theme }) => css`
@@ -23,7 +23,7 @@ export const MaxWidthContainer = styled(MaxWidth)`
       padding: 4rem;
     }
   `}
-`
+`;
 
 export const FlexContainer = styled.div`
   display: grid;
@@ -46,4 +46,4 @@ export const FlexContainer = styled.div`
         'external-links external-links';
     }
   `}
-`
+`;

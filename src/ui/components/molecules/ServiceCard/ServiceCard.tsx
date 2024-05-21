@@ -1,4 +1,4 @@
-import { Chip } from '../../atoms';
+import { Tag } from '../../atoms';
 
 import * as S from './ServiceCard.style';
 
@@ -6,12 +6,12 @@ interface ServiceCardProps {
   title: string;
   image: string;
   imageAlt: string;
-  chips?: string[];
+  tags?: string[];
   url?: string;
 }
 
 export function ServiceCard({
-  chips,
+  tags,
   imageAlt,
   image,
   title,
@@ -27,10 +27,10 @@ export function ServiceCard({
           sizes="(max-width: 1368px) 623px, 33vw"
         />
       </S.DarkenImage>
-      {chips && (
+      {tags && (
         <S.ServiceChipContainer>
-          {chips.map((chip) => (
-            <Chip key={chip}>{chip}</Chip>
+          {tags.map((tag) => (
+            <Tag key={tag}>{tag}</Tag>
           ))}
         </S.ServiceChipContainer>
       )}
