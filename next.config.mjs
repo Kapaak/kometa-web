@@ -21,7 +21,11 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ['cdn.sanity.io'],
+    remotePatterns: [
+      {
+        hostname: 'cdn.sanity.io',
+      },
+    ],
   },
 };
 

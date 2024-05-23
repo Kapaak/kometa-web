@@ -12,7 +12,6 @@ export function HeroSection() {
           <S.HeroSectionBannerImage
             src="/images/place/banner.jpeg"
             fill
-            objectFit="cover"
             alt="Plavecký bazén Kraví hora, kde se pořádají kurzy pod záštitou Kometa Brno"
           />
           <S.HeroSectionBannerDescription>

@@ -38,6 +38,7 @@ export const HeroSectionBannerDescription = styled(VerticalStack)`
 
 export const HeroSectionBannerImage = styled(Image)`
   border-radius: inherit;
+  object-fit: cover;
 `;
 
 export const HeroSectionBannerDescriptionTitle = styled(Text).attrs({

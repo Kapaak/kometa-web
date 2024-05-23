@@ -1,9 +1,9 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react';
 
-import * as S from './FooterMainContentItemWrapper.style'
+import * as S from './FooterMainContentItemWrapper.style';
 
 interface FooterMainContentItemWrapperProps extends PropsWithChildren {
-  title: string
+  title: string;
 }
 
 export function FooterMainContentItemWrapper({
@@ -16,5 +16,5 @@ export function FooterMainContentItemWrapper({
 
       {children}
     </S.FooterMainContentItemWrapper>
-  )
+  );
 }
