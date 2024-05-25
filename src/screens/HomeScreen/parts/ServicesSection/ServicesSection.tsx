@@ -7,7 +7,7 @@ import { servicesData } from './ServicesSection.data';
 
 export function ServicesSection() {
   return (
-    <S.ServicesSection>
+    <S.ServicesSection id="kurzy">
       <MaxWidth>
         <S.ServicesSectionContainer>
           {servicesData.map((service) => (
