@@ -1,11 +1,15 @@
 import NextLink from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+
+import { Hamburger } from '~/ui/components/atoms';
 
 import * as S from './HamburgerMenu.style';
 
 interface HamburgerMenuProps {
   open: boolean;
   onClose: () => void;
+  onToggle: () => void;
   menuItems: {
     label: string;
     href: string;
@@ -15,8 +19,10 @@ interface HamburgerMenuProps {
 export function HamburgerMenu({
   open,
   onClose,
+  onToggle,
   menuItems,
 }: HamburgerMenuProps) {
+  const [parentElement, setParentElement] = useState<HTMLElement | null>(null);
   //not all styles are overriden using styled-components
   const styles = {
     bmOverlay: {
@@ -33,6 +39,11 @@ export function HamburgerMenu({
     },
   };
 
+  useEffect(() => {
+    //fix SSR issue
+    setParentElement(document.querySelector('nav'));
+  }, []);
+
   //disable scrolling when menu is open
   useEffect(() => {
     if (open) {
@@ -47,19 +58,30 @@ export function HamburgerMenu({
   }, [open]);
 
   return (
-    <S.HamburgerMenu
-      isOpen={open}
-      right
-      onClose={onClose}
-      customBurgerIcon={false}
-      customCrossIcon={false}
-      styles={styles}
-    >
-      {menuItems.map((item) => (
-        <S.HamburgerMenuItem variant="body1" key={item.label} onClick={onClose}>
-          <NextLink href={item.href}>{item.label}</NextLink>
-        </S.HamburgerMenuItem>
-      ))}
-    </S.HamburgerMenu>
+    <>
+      <Hamburger isOpen={open} onChange={onToggle} />
+      {parentElement &&
+        createPortal(
+          <S.HamburgerMenu
+            isOpen={open}
+            right
+            onClose={onClose}
+            customBurgerIcon={false}
+            customCrossIcon={false}
+            styles={styles}
+          >
+            {menuItems.map((item) => (
+              <S.HamburgerMenuItem
+                variant="body1"
+                key={item.label}
+                onClick={onClose}
+              >
+                <NextLink href={item.href}>{item.label}</NextLink>
+              </S.HamburgerMenuItem>
+            ))}
+          </S.HamburgerMenu>,
+          parentElement
+        )}
+    </>
   );
 }

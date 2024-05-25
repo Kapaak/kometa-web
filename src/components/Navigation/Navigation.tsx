@@ -2,7 +2,7 @@ import NextImage from 'next/image';
 import NextLink from 'next/link';
 import { useState } from 'react';
 
-import { Hamburger, MaxWidth, Text } from '~/ui/components/atoms';
+import { MaxWidth, Text } from '~/ui/components/atoms';
 
 import { HamburgerMenu } from './parts';
 
@@ -10,17 +10,10 @@ import * as S from './Navigation.style';
 
 import { navigationData } from './Navigation.data';
 
-interface NavigationProps {}
-
-export function Navigation({}: NavigationProps) {
+export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <S.Navigation>
-      <HamburgerMenu
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        menuItems={navigationData}
-      />
       <MaxWidth>
         <S.NavigationMenuList>
           <S.Logo>
@@ -42,9 +35,11 @@ export function Navigation({}: NavigationProps) {
               </NextLink>
             </S.NavigationMenuItem>
           ))}
-          <Hamburger
-            isOpen={isOpen}
-            onChange={() => setIsOpen((prev) => !prev)}
+          <HamburgerMenu
+            onToggle={() => setIsOpen((prev) => !prev)}
+            open={isOpen}
+            onClose={() => setIsOpen(false)}
+            menuItems={navigationData}
           />
         </S.NavigationMenuList>
       </MaxWidth>
