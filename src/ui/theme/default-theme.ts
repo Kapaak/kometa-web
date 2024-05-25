@@ -34,6 +34,7 @@ export const theme: DefaultTheme = {
       200: '#F8F8F8',
       400: '#EDEDED',
       500: '#DADADA',
+      600: '#999999',
       700: '#9A9A9A',
       900: '#000000',
     },

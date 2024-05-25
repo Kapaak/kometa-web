@@ -1,4 +1,4 @@
-import { PageLayout } from '~/ui/components/templates';
+import { CampsLayout } from './components';
 
 import { CampsSection } from './parts';
 
@@ -8,10 +8,8 @@ interface CampsScreenProps {
 
 export function CampsScreen({ camps }: CampsScreenProps) {
   return (
-    <PageLayout>
-      <main>
-        <CampsSection camps={camps} />
-      </main>
-    </PageLayout>
+    <CampsLayout>
+      <CampsSection camps={camps} />
+    </CampsLayout>
   );
 }

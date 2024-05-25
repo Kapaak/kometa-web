@@ -1,5 +1,6 @@
 import { TransformedKidsCourse } from '~/types';
-import { PageLayout } from '~/ui/components/templates';
+
+import { KidsCoursesLayout } from './components';
 
 import { KidsCoursesSection } from './parts';
 
@@ -9,10 +10,8 @@ interface KidsCoursesScreenProps {
 
 export function KidsCoursesScreen({ courses }: KidsCoursesScreenProps) {
   return (
-    <PageLayout>
-      <main>
-        <KidsCoursesSection courses={courses} />
-      </main>
-    </PageLayout>
+    <KidsCoursesLayout>
+      <KidsCoursesSection courses={courses} />
+    </KidsCoursesLayout>
   );
 }
