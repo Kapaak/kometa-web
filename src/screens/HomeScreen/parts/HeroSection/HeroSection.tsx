@@ -1,3 +1,5 @@
+import NextLink from 'next/link';
+
 import { ArrowRight } from '@phosphor-icons/react/dist/ssr';
 
 import { IconButton, MaxWidth, Text } from '~/ui/components/atoms';
@@ -22,15 +24,18 @@ export function HeroSection() {
               Patříme k největším a nejúspěšnějším plaveckým klubům v ČR.
               Tradice, profesionalita, zkušenost a radost to je KOMETA BRNO.
             </Text>
-            <IconButton
-              variant="outlined"
-              transparent
-              color="grey"
-              customColor="#fff"
-              icon={<ArrowRight size={20} />}
-            >
-              Zobrazit více
-            </IconButton>
+
+            <NextLink href="/dostupne-lekce">
+              <IconButton
+                variant="outlined"
+                transparent
+                color="grey"
+                customColor="#fff"
+                icon={<ArrowRight size={20} />}
+              >
+                Zobrazit více
+              </IconButton>
+            </NextLink>
           </S.HeroSectionBannerDescription>
         </S.HeroSectionBanner>
       </MaxWidth>
