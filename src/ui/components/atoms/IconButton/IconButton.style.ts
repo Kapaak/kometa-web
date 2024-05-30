@@ -12,7 +12,7 @@ export const IconButton = styled(Button).withConfig({
 
   &:hover {
     background-color: ${({ transparent = false }) =>
-      transparent ? 'transparent' : 'auto'};
+      transparent ? 'transparent !important' : 'auto'};
 
     svg {
       transform: translateX(0.4rem);

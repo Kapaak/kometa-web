@@ -15,9 +15,9 @@ export const theme: DefaultTheme = {
       dark: '#e6b812',
     },
     tetriary: {
-      light: '#73F0C0',
+      light: '#85FFD1',
       main: '#73F0C0',
-      dark: '#73F0C0',
+      dark: '#5BCBA6',
     },
     error: {
       light: '#FF0000',

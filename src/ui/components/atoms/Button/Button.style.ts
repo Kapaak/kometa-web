@@ -32,7 +32,8 @@ export const Button = styled(ButtonInitial)`
     switch (size) {
       case 'small':
         return css`
-          //TODO
+          padding: 0.5rem 1.2rem;
+          min-width: 15rem;
         `;
       case 'regular':
         return css`
@@ -57,6 +58,13 @@ export const Button = styled(ButtonInitial)`
           background-color: ${colors.secondary.main};
           &:hover {
             background-color: ${colors.secondary.dark};
+          }
+        `;
+      case 'tetriary':
+        return css`
+          background-color: ${colors.tetriary.main};
+          &:hover {
+            background-color: ${colors.tetriary.dark};
           }
         `;
       case 'success':
@@ -115,7 +123,11 @@ ${({
         `;
       case 'filled':
         return css`
-          color: ${color === 'grey' ? colors.grey[900] : colors.grey[100]};
+          color: ${customColor
+            ? customColor
+            : color === 'grey'
+              ? colors.grey[900]
+              : colors.grey[100]};
         `;
 
       case 'outlined':
