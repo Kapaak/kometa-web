@@ -23,4 +23,5 @@ export const ServicesSectionContainer = styled.div`
 
 export const ServicesSection = styled.section`
   padding: 0 2rem;
+  scroll-margin-top: 10rem;
 `;
