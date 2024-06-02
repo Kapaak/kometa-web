@@ -17,14 +17,14 @@ export function AvailableCoursesLayout({
 
   return (
     <PageLayout>
-      <main>
+      <S.AvailableCoursesSectionMain>
         <S.BreadcrumbsWrapper>
           <MaxWidth>
             <Breadcrumbs breadcrumbs={breadcrumbs} />
           </MaxWidth>
         </S.BreadcrumbsWrapper>
         {children}
-      </main>
+      </S.AvailableCoursesSectionMain>
     </PageLayout>
   );
 }

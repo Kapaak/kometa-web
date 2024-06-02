@@ -16,16 +16,18 @@ export function AvailableCoursesSection({}: AvailableCoursesSectionProps) {
     <S.AvailableCoursesSection>
       <MaxWidth>
         <AvailableCoursesFilter />
-        <Table
-          headerCells={table?.getHeaderGroups()}
-          bodyCells={table?.getRowModel()}
-          showNoData={!isLoading && table?.getRowModel()?.rows?.length === 0}
-          noDataChildren={
-            <VerticalStack>
-              <Text variant="body2">Nenalezeno.</Text>
-            </VerticalStack>
-          }
-        />
+        <S.Scrollable>
+          <Table
+            headerCells={table?.getHeaderGroups()}
+            bodyCells={table?.getRowModel()}
+            showNoData={!isLoading && table?.getRowModel()?.rows?.length === 0}
+            noDataChildren={
+              <VerticalStack>
+                <Text variant="body2">Nenalezeno.</Text>
+              </VerticalStack>
+            }
+          />
+        </S.Scrollable>
       </MaxWidth>
     </S.AvailableCoursesSection>
   );

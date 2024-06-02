@@ -4,12 +4,17 @@ import * as S from './Scrollable.style';
 
 interface ScrollableProps extends PropsWithChildren {
   maxHeight?: string;
+  className?: string;
 }
 
-export function Scrollable({ maxHeight, children }: ScrollableProps) {
+export function Scrollable({
+  maxHeight,
+  className,
+  children,
+}: ScrollableProps) {
   return (
     <S.ScrollAreaRoot type="auto">
-      <S.ScrollAreaViewport maxHeight={maxHeight}>
+      <S.ScrollAreaViewport maxHeight={maxHeight} className={className}>
         {children}
       </S.ScrollAreaViewport>
       <S.ScrollAreaScrollbar orientation="vertical">

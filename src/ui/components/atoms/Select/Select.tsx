@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import { ArrowUp, CaretDown } from '@phosphor-icons/react/dist/ssr';
+import { CaretDown } from '@phosphor-icons/react/dist/ssr';
 import * as RadixUiSelect from '@radix-ui/react-select';
 
 type Option = {
@@ -15,6 +15,7 @@ export interface SelectProps {
   onChange?: (value: string) => void;
 }
 
+import { Scrollable } from '../Scrollable';
 import { Text } from '../Text';
 
 import { SelectItem } from './parts';
@@ -61,27 +62,25 @@ export const Select = ({
             setOpen(false);
           }}
         >
-          <RadixUiSelect.ScrollUpButton>
-            <ArrowUp />
-          </RadixUiSelect.ScrollUpButton>
-          <S.SelectViewport>
-            <RadixUiSelect.Group
-              ref={(ref) =>
-                ref?.addEventListener('touchend', (e) => e.preventDefault())
-              }
-            >
-              {options?.map((option) => (
-                <SelectItem
-                  key={option.value}
-                  value={option.value}
-                  checked={selectedValue === option.value}
-                >
-                  {option.label}
-                </SelectItem>
-              ))}
-            </RadixUiSelect.Group>
-          </S.SelectViewport>
-          <RadixUiSelect.ScrollDownButton />
+          <Scrollable maxHeight="25rem">
+            <S.SelectViewport>
+              <RadixUiSelect.Group
+                ref={(ref) =>
+                  ref?.addEventListener('touchend', (e) => e.preventDefault())
+                }
+              >
+                {options?.map((option) => (
+                  <SelectItem
+                    key={option.value}
+                    value={option.value}
+                    checked={selectedValue === option.value}
+                  >
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </RadixUiSelect.Group>
+            </S.SelectViewport>
+          </Scrollable>
         </S.SelectContent>
       </RadixUiSelect.Portal>
     </S.Select>

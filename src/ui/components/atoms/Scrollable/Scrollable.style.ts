@@ -7,7 +7,6 @@ export const ScrollAreaRoot = styled(ScrollArea.Root)`
   height: 100%;
   border-radius: 0.4rem;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.colors.grey['100']};
 `;
 
 export const ScrollAreaScrollbar = styled(ScrollArea.Scrollbar)`
@@ -62,5 +61,5 @@ export const ScrollAreaViewport = styled(ScrollArea.Viewport).withConfig({
   width: 100%;
   height: 100%;
   border-radius: inherit;
-  max-height: ${({ maxHeight }) => maxHeight ?? '25rem'};
+  max-height: ${({ maxHeight }) => maxHeight ?? 'initial'};
 `;

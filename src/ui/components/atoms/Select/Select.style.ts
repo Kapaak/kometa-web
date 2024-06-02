@@ -46,13 +46,4 @@ export const SelectViewport = styled(RadixUiSelect.Viewport)`
 export const SelectValue = styled(RadixUiSelect.Value)`
   background-color: red;
   font-size: 20rem;
-  span {
-    color: red !important;
-  }
 `;
-// export const SelectValue = styled(RadixUiSelect.Value)(
-//   ({ theme: { typography } }) => ({
-//     color: 'red',
-//     ...{ ...typography.body5 },
-//   })
-// );
