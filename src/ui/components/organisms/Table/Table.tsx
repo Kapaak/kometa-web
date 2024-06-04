@@ -2,7 +2,9 @@ import { ReactNode } from 'react';
 
 import { HeaderGroup, RowModel } from '@tanstack/react-table';
 
-import { TableBody, TableHead } from '../../molecules';
+// import { TableBody, TableHead } from '../../molecules';
+import { TableBody } from '../../molecules';
+import { TableHead } from '../../molecules/TableHead';
 
 import * as S from './Table.style';
 

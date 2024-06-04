@@ -2,12 +2,19 @@ import { AvailableCoursesLayout } from './components';
 
 import { AvailableCoursesSection } from './parts';
 
-interface AvailableCoursesScreenProps {}
+interface AvailableCoursesScreenProps {
+  filter?: {
+    age: number;
+    gender: string;
+  };
+}
 
-export function AvailableCoursesScreen({}: AvailableCoursesScreenProps) {
+export function AvailableCoursesScreen({
+  filter,
+}: AvailableCoursesScreenProps) {
   return (
     <AvailableCoursesLayout>
-      <AvailableCoursesSection />
+      <AvailableCoursesSection filter={filter} />
     </AvailableCoursesLayout>
   );
 }

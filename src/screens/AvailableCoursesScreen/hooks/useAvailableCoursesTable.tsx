@@ -1,3 +1,4 @@
+import NextLink from 'next/link';
 import { useMemo, useState } from 'react';
 
 import {
@@ -8,31 +9,29 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
+import { GetAPICourse } from '~/domains';
 import { Button, Text } from '~/ui/components/atoms';
+import { joinValues } from '~/utils/format';
 
-type AvailableCourseTable = {
-  name?: string;
-  skillLevel?: string;
-  day?: string;
-  time?: string;
-  age?: string;
-  capacity?: string;
-};
+//prevents infinite loop for react-table when courses is empty (on load)
+const EMPTY_ARRAY: GetAPICourse[] = [];
 
-export function useAvailableCoursesTable() {
+export function useAvailableCoursesTable(
+  courses: GetAPICourse[] = EMPTY_ARRAY
+) {
   const [sortBy, setSortBy] = useState<SortingState>([
     { id: 'name', desc: true },
   ]);
 
   const columns = useMemo(() => {
-    const columnHelper = createColumnHelper<AvailableCourseTable>();
+    const columnHelper = createColumnHelper<GetAPICourse>();
 
     return [
       columnHelper.accessor('name', {
         header: 'Bazén',
         cell: (info) => <Text variant="body3">{info.getValue()}</Text>,
       }),
-      columnHelper.accessor('skillLevel', {
+      columnHelper.accessor('skillLevelName', {
         header: 'Úroveň',
         meta: {
           align: 'center',
@@ -46,26 +45,35 @@ export function useAvailableCoursesTable() {
         },
         cell: (info) => <Text variant="body2">{info.getValue()}</Text>,
       }),
-      columnHelper.accessor('time', {
+      columnHelper.accessor('timeFrom', {
         header: 'Čas',
         meta: {
           align: 'center',
         },
-        cell: (info) => <Text variant="body2">{info.getValue()}</Text>,
+        cell: (info) => {
+          const { timeTo } = info.row.original ?? {};
+
+          return (
+            <Text variant="body2">
+              {joinValues([info.getValue(), timeTo], { separator: ' - ' })}
+            </Text>
+          );
+        },
       }),
-      columnHelper.accessor('age', {
+      columnHelper.accessor('ageFrom', {
         header: 'Věk',
         meta: {
           align: 'center',
         },
-        cell: (info) => <Text variant="body2">{info.getValue()}</Text>,
-      }),
-      columnHelper.accessor('capacity', {
-        header: 'Kapacita',
-        meta: {
-          align: 'center',
+        cell: (info) => {
+          const { ageTo } = info.row.original ?? {};
+
+          return (
+            <Text variant="body2">
+              {joinValues([info.getValue(), ageTo], { separator: ' - ' })}
+            </Text>
+          );
         },
-        cell: (info) => <Text variant="body2">{info.getValue()}</Text>,
       }),
       columnHelper.display({
         id: 'actions',
@@ -78,56 +86,21 @@ export function useAvailableCoursesTable() {
               customColor="#000"
               style={{ display: 'inline-flex' }}
             >
-              Zobrazit kurz
+              <NextLink href={info.row.original?.url}>Zobrazit kurz</NextLink>
             </Button>
           );
         },
         enableSorting: false,
         meta: {
           align: 'center',
-          bodyCellSx: {
-            maxWidth: '6.6rem',
-          },
-          headerCellSx: {
-            maxWidth: '6.6rem',
-          },
+          cursor: 'auto',
         },
       }),
     ];
   }, []);
 
-  const data: AvailableCourseTable[] = useMemo(
-    () => [
-      {
-        name: 'Kohoutovice',
-        skillLevel: 'začátečník',
-        day: 'pondělí',
-        time: '18-19',
-        age: 'mladi',
-        capacity: 'full',
-      },
-      {
-        name: 'Kohoutovice',
-        skillLevel: 'začátečník',
-        day: 'pondělí',
-        time: '18-19',
-        age: 'mladi',
-        capacity: 'full',
-      },
-      {
-        name: 'Lužánky',
-        skillLevel: 'začátečník',
-        day: 'pondělí',
-        time: '18-19',
-        age: 'mladi',
-        capacity: 'full',
-      },
-    ],
-    []
-  );
-
   const table = useReactTable({
-    data,
+    data: courses,
     columns,
     state: {
       sorting: sortBy,

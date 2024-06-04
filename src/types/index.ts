@@ -24,6 +24,12 @@ export type TransformedKidsCourse = {
   privateSwimmingPool: boolean;
 };
 
+export enum SwimmingVariant {
+  BASIC = 'basic',
+  ADVANCED = 'advanced',
+  CONDITION = 'condition',
+}
+
 export enum SwimmingVariantTranslation {
   BASIC = 'Základní',
   ADVANCED = 'Zdokonalovací',

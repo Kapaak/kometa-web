@@ -1,17 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form';
 
-import {
-  ageOptions,
-  childrenGenderOptions,
-  dayOptions,
-  placeOptions,
-  skillLevelOptions,
-  timeOptions,
-} from '~/constants/options';
-import {
-  ControlledMultiSelect,
-  ControlledSelect,
-} from '~/ui/components/molecules';
+import { childrenGenderOptions } from '~/constants/options';
+import { ControlledSelect } from '~/ui/components/molecules';
 
 import * as S from './AvailableCoursesFilter.style';
 
@@ -30,7 +20,7 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
             placeholder="Pohlaví dítěte"
             options={childrenGenderOptions}
           />
-          <ControlledMultiSelect
+          {/*  <ControlledMultiSelect
             name="day"
             placeholder="Preferované dny"
             options={dayOptions}
@@ -54,7 +44,7 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
             name="skillLevel"
             placeholder="Aktuální plavecká úroveň"
             options={skillLevelOptions}
-          />
+          /> */}
         </S.ControlledItems>
       </FormProvider>
     </div>

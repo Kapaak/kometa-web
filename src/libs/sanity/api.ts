@@ -4,8 +4,35 @@ import { SanityCamps, SanityKidsCourse } from '~/domains';
 
 import { client } from './config';
 
-export async function getKidsCourses(): Promise<SanityKidsCourse[]> {
-  const query = groq`*[_type == "kidCourse"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,isSchoolOrKindergartenAvailable,basic{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},advanced{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},condition{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]}}`;
+interface Filters {
+  age?: number;
+}
+
+//will contain camps in future too
+export async function getAvailableCourses(
+  filters: Filters = {}
+): Promise<SanityKidsCourse[]> {
+  let filterQuery = '*[_type == "kidCourse"]';
+
+  if (filters?.age) {
+    filterQuery += `[basic.age.ageFrom <= ${filters.age} && basic.age.ageTo >= ${filters.age}]`;
+  }
+  const query = groq`${filterQuery}{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,isSchoolOrKindergartenAvailable,basic{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses[isFull == false]{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},advanced{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses[isFull == false]{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},condition{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses[isFull == false]{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]}}`;
+
+  const course: SanityKidsCourse[] = await client.fetch(query);
+
+  return course;
+}
+
+export async function getKidsCourses(
+  filters: Filters = {}
+): Promise<SanityKidsCourse[]> {
+  let filterQuery = '*[_type == "kidCourse"]';
+
+  if (filters?.age) {
+    filterQuery += `[basic.age.ageFrom <= ${filters.age} && basic.age.ageTo >= ${filters.age}]`;
+  }
+  const query = groq`${filterQuery}{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,isSchoolOrKindergartenAvailable,basic{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},advanced{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},condition{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]}}`;
 
   const course: SanityKidsCourse[] = await client.fetch(query);
 

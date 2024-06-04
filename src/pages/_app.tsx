@@ -1,11 +1,17 @@
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
 
-import { StyleContext } from '~/contexts/StyleContext'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { StyleContext } from '~/contexts/StyleContext';
+
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <StyleContext>
-      <Component {...pageProps} />
-    </StyleContext>
-  )
+    <QueryClientProvider client={queryClient}>
+      <StyleContext>
+        <Component {...pageProps} />
+      </StyleContext>
+    </QueryClientProvider>
+  );
 }

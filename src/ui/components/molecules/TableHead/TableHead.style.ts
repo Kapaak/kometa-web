@@ -11,13 +11,22 @@ export const TableHead = styled.thead`
 export const TableHeadRow = styled(TableRow)``;
 
 export const TableHeadButton = styled.button.withConfig({
-  shouldForwardProp: (prop) => prop !== 'sortable',
-})<{ sortable?: boolean; textAlign?: string; justifyContent?: string }>`
+  shouldForwardProp: (prop) =>
+    prop !== 'sortable' &&
+    prop !== 'textAlign' &&
+    prop !== 'justifyContent' &&
+    prop !== 'cursor',
+})<{
+  sortable?: boolean;
+  textAlign?: string;
+  justifyContent?: string;
+  cursor?: string;
+}>`
   display: flex;
   align-items: center;
   justify-content: ${({ justifyContent }) => justifyContent};
   text-align: ${({ textAlign }) => textAlign};
-  cursor: pointer;
+  cursor: ${({ cursor }) => cursor};
   width: 100%;
   &:hover > {
     text-decoration: ${({ sortable }) => (sortable ? 'underline' : 'none')};

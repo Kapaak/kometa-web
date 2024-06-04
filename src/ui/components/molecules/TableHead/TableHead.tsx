@@ -15,7 +15,7 @@ export function TableHead<T>({ rows }: TableHeadProps<T>) {
         <S.TableHeadRow key={columns.id}>
           {columns.headers.map((cell) => {
             const meta = cell.column?.columnDef?.meta as
-              | { align?: string }
+              | { align?: string; cursor?: string }
               | undefined;
 
             return (
@@ -28,6 +28,7 @@ export function TableHead<T>({ rows }: TableHeadProps<T>) {
                 <S.TableHeadButton
                   textAlign={meta?.align ?? 'left'}
                   justifyContent={meta?.align ?? 'left'}
+                  cursor={meta?.cursor ?? 'pointer'}
                   sortable={cell.column?.getCanSort()}
                 >
                   {flexRender(cell.column.columnDef.header, cell.getContext())}

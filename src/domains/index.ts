@@ -1,3 +1,5 @@
+import { SwimmingVariant } from '~/types';
+
 export type SanityKidsCourseVariant = {
   url?: string;
   ageFrom?: number;
@@ -33,4 +35,24 @@ export type SanityCamps = {
   alt?: string;
   url?: string;
   tags?: string[];
+};
+
+export type GetAPICourse = {
+  ageFrom: number;
+  ageTo: number;
+  alt: string;
+  day: string;
+  dayId: number;
+  id: string;
+  isFull: boolean;
+  isSchoolOrKindergartenAvailable: boolean;
+  name: string;
+  priceSemester: number;
+  priceYear: number;
+  privateSwimmingPool: boolean;
+  timeFrom: string;
+  timeTo: string;
+  url: string;
+  skillLevel: SwimmingVariant;
+  skillLevelName: string;
 };
