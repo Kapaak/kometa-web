@@ -1,6 +1,6 @@
 import NextLink from 'next/link';
 
-import { ArrowRight } from '@phosphor-icons/react/dist/ssr';
+import { ArrowRight } from '@phosphor-icons/react';
 
 import { IconButton, MaxWidth, Text } from '~/ui/components/atoms';
 

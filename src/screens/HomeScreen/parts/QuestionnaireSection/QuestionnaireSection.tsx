@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { ArrowRight } from '@phosphor-icons/react/dist/ssr';
+import { ArrowRight } from '@phosphor-icons/react';
 import * as RadixAccordion from '@radix-ui/react-accordion';
 
 import {

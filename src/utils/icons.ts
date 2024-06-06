@@ -24,7 +24,7 @@ import {
   Swap,
   SwimmingPool,
   TreePalm,
-} from '@phosphor-icons/react/dist/ssr';
+} from '@phosphor-icons/react';
 
 export type AvailableIcons =
   | 'ClipboardText'

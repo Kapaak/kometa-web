@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import { CaretDown } from '@phosphor-icons/react/dist/ssr';
+import { CaretDown } from '@phosphor-icons/react';
 import * as RadixUiSelect from '@radix-ui/react-select';
 
 type Option = {

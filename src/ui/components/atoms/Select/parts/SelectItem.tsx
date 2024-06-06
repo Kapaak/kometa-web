@@ -1,6 +1,6 @@
 import { PropsWithChildren, Ref, forwardRef } from 'react';
 
-import { Check } from '@phosphor-icons/react/dist/ssr';
+import { Check } from '@phosphor-icons/react';
 import * as RadixUiSelect from '@radix-ui/react-select';
 
 import { Text } from '../../Text';

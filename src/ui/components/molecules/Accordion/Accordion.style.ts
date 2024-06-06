@@ -1,4 +1,4 @@
-import { CaretDown } from '@phosphor-icons/react/dist/ssr';
+import { CaretDown } from '@phosphor-icons/react';
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import styled, { keyframes } from 'styled-components';
 

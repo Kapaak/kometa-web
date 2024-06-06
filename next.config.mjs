@@ -15,10 +15,8 @@ const nextConfig = {
 
     return config;
   },
-  modularizeImports: {
-    '@phosphor-icons/react': {
-      transform: '@phosphor-icons/react/dist/ssr/{{member}}',
-    },
+  experimental: {
+    optimizePackageImports: ['@phosphor-icons/react'],
   },
   images: {
     remotePatterns: [

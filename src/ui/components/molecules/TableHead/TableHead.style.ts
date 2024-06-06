@@ -1,4 +1,4 @@
-import { CaretDown } from '@phosphor-icons/react/dist/ssr';
+import { CaretDown } from '@phosphor-icons/react';
 import { SortDirection } from '@tanstack/react-table';
 import styled from 'styled-components';
 
