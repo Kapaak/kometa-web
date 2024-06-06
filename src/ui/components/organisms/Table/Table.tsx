@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 
 import { HeaderGroup, RowModel } from '@tanstack/react-table';
+import { useTheme } from 'styled-components';
 
-// import { TableBody, TableHead } from '../../molecules';
-import { TableBody } from '../../molecules';
-import { TableHead } from '../../molecules/TableHead';
+import { Loader } from '../../atoms';
+import { TableBody, TableHead } from '../../molecules';
 
 import * as S from './Table.style';
 
@@ -25,14 +25,24 @@ export function Table<T>({
   isLoading,
   showNoData,
 }: TableProps<T>) {
+  const theme = useTheme();
+  const { primary } = theme.colors;
+
   return (
-    <S.Table>
-      <TableHead rows={headerCells} />
-      <TableBody
-        rows={bodyCells}
-        showNoData={showNoData}
-        noDataChildren={noDataChildren}
-      />
-    </S.Table>
+    <>
+      <S.Table>
+        <TableHead rows={headerCells} />
+        <TableBody
+          rows={bodyCells}
+          showNoData={showNoData}
+          noDataChildren={noDataChildren}
+        />
+      </S.Table>
+      {isLoading && (
+        <S.TableLoadingBox>
+          <Loader color={primary.main} />
+        </S.TableLoadingBox>
+      )}
+    </>
   );
 }
