@@ -3,20 +3,15 @@ import { MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
 import { Table } from '~/ui/components/organisms';
 
 import { AvailableCoursesFilter } from '../../components';
+import { useAvailableCoursesFilterContext } from '../../contexts';
 import { useAvailableCoursesTable } from '../../hooks';
 
 import * as S from './AvailableCoursesSection.style';
 
-interface AvailableCoursesSectionProps {
-  filter?: {
-    age: number;
-  };
-}
+export function AvailableCoursesSection() {
+  const { filter } = useAvailableCoursesFilterContext();
 
-export function AvailableCoursesSection({
-  filter,
-}: AvailableCoursesSectionProps) {
-  const { data, isLoading, isError } = useAvailableCourses({
+  const { data, isLoading } = useAvailableCourses({
     filter,
   });
 

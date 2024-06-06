@@ -19,6 +19,8 @@ export const BreadcrumbLink = styled(NextLink)`
   &[data-current] {
     color: ${({ theme }) => theme.colors.grey['900']};
     font-weight: 500;
+    pointer-events: none;
+    cursor: auto;
   }
 `;
 
@@ -27,7 +29,6 @@ export const Breadcrumb = styled(ReactAriaBreadcrumb)`
   outline: none;
   position: relative;
   text-decoration: none;
-  cursor: pointer;
 `;
 
 export const Breadcrumbs = styled(ReactAriaBreadcrumbs)`

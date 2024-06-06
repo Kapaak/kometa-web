@@ -4,16 +4,18 @@ import { GetAPICourse } from '~/domains';
 
 type AvailableCoursesProps = {
   filter?: {
-    skillLevel?: string;
-    day?: string;
-    time?: string;
     age?: number;
+    gender?: string;
+    skillLevel?: string;
+    day?: string[] | string;
+    time?: string[] | string;
+    place?: string[] | string;
   };
 };
 
 export function useAvailableCourses({ filter }: AvailableCoursesProps) {
   const { data, isError, isLoading } = useQuery<GetAPICourse[]>({
-    queryKey: ['availableCourses'],
+    queryKey: ['availableCourses', filter],
     queryFn: async () => {
       const params = new URLSearchParams(filter as Record<string, string>);
 

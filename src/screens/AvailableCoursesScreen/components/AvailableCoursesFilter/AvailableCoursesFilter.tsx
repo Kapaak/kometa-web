@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import { useCallback, useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import {
@@ -12,13 +14,72 @@ import {
   ControlledMultiSelect,
   ControlledSelect,
 } from '~/ui/components/molecules';
+import { filterEmptyValuesFromObject } from '~/utils/filter';
+
+import { useAvailableCoursesFilterContext } from '../../contexts';
 
 import * as S from './AvailableCoursesFilter.style';
 
 interface AvailableCoursesFilterProps {}
 
+type FormData = {
+  gender?: string;
+  day?: string;
+  time?: string[] | string;
+  place?: string[] | string;
+  age?: string;
+  skillLevel?: string;
+};
+
 export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
-  const form = useForm();
+  const router = useRouter();
+
+  const { filter, setFilter } = useAvailableCoursesFilterContext();
+
+  const form = useForm<FormData>({
+    values: {
+      gender: filter?.gender,
+      day: filter?.day,
+      age: filter?.age,
+      skillLevel: filter?.skillLevel,
+      time: Boolean(filter?.time)
+        ? Array.isArray(filter?.time)
+          ? filter?.time
+          : [filter?.time]
+        : [],
+      place: Boolean(filter?.place)
+        ? Array.isArray(filter?.place)
+          ? filter?.place
+          : [filter?.place]
+        : [],
+    },
+  });
+  const { watch } = form;
+
+  const updateQueryParams = useCallback(
+    (newParams: { [key: string]: string }) => {
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, ...newParams },
+        },
+        undefined,
+        { shallow: true }
+      );
+    },
+    [router]
+  );
+
+  useEffect(() => {
+    const subscription = watch((values, { name }) => {
+      const filteredValues = filterEmptyValuesFromObject(values);
+
+      updateQueryParams(filteredValues);
+
+      setFilter(filteredValues);
+    });
+    return () => subscription.unsubscribe();
+  }, [setFilter, updateQueryParams, watch]);
 
   return (
     <div>

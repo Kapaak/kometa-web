@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { CaretDown } from '@phosphor-icons/react';
 import * as RadixUiSelect from '@radix-ui/react-select';
@@ -10,7 +10,7 @@ type Option = {
 
 export interface MultiSelectProps {
   placeholder?: string;
-  value?: string;
+  value?: string[];
   options?: Option[];
   onChange?: (value: string[]) => void;
 }
@@ -26,9 +26,10 @@ export const MultiSelect = ({
   placeholder,
   options,
   onChange,
+  value,
 }: MultiSelectProps) => {
   const [open, setOpen] = useState(false);
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const [selectedValues, setSelectedValues] = useState<string[]>(value ?? []);
 
   const displayValue = useMemo(() => {
     if (selectedValues.length === 0) {
@@ -40,12 +41,16 @@ export const MultiSelect = ({
 
   const handleValueChange = (val: string) => {
     const newSelectedValues = selectedValues.includes(val)
-      ? selectedValues.filter((v) => v !== val)
+      ? selectedValues?.filter((v) => v !== val)
       : [...selectedValues, val];
 
     onChange?.(newSelectedValues);
     setSelectedValues(newSelectedValues);
   };
+
+  useEffect(() => {
+    setSelectedValues(value ?? []);
+  }, [value]);
 
   return (
     <S.MultiSelect

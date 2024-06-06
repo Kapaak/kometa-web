@@ -2,11 +2,15 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { SanityKidsCourse } from '~/domains';
 import { getAvailableCourses } from '~/libs/sanity';
-import { SwimmingVariant, SwimmingVariantTranslation } from '~/types';
+import { Gender, SwimmingVariant, SwimmingVariantTranslation } from '~/types';
 
 interface ExtendedNextApiRequest extends NextApiRequest {
   query: {
     age?: string;
+    gender?: Gender;
+    skillLevel?: SwimmingVariant;
+    day?: string;
+    time?: string;
   };
 }
 
@@ -14,10 +18,14 @@ export default async function handler(
   req: ExtendedNextApiRequest,
   res: NextApiResponse
 ) {
-  const { age } = req.query ?? {};
+  const { age, gender, skillLevel, day, time } = req.query ?? {};
 
   const courses = await getAvailableCourses({
     age: Number(age),
+    gender,
+    skillLevel,
+    day,
+    time,
   });
 
   const transformedCourses = courses?.map(transformCourse);

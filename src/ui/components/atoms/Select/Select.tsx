@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { CaretDown } from '@phosphor-icons/react';
 import * as RadixUiSelect from '@radix-ui/react-select';
@@ -42,6 +42,10 @@ export const Select = ({
 
     return foundItem?.label ?? '';
   }, [options, selectedValue]);
+
+  useEffect(() => {
+    setSelectedValue(value ?? '');
+  }, [value]);
 
   return (
     <S.Select

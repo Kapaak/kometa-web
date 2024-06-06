@@ -24,6 +24,7 @@ export function ControlledMultiSelect<T extends FieldValues>({
           placeholder={placeholder}
           options={options}
           onChange={field.onChange}
+          value={field.value}
         />
       )}
     />

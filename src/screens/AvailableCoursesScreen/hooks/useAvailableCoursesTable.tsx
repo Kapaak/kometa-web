@@ -70,7 +70,7 @@ export function useAvailableCoursesTable(
 
           return (
             <Text variant="body2">
-              {joinValues([info.getValue(), ageTo], { separator: ' - ' })}
+              {joinValues([info.getValue(), ageTo], { separator: ' - ' })} let
             </Text>
           );
         },
