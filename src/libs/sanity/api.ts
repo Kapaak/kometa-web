@@ -52,7 +52,7 @@ export async function getAvailableCourses(
     skillLevelQuery = groq`basic{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses[isFull == false ${dayFilter}${timeFilter}]{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},advanced{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses[isFull == false ${dayFilter}${timeFilter}]{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},condition{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses[isFull == false ${dayFilter}${timeFilter}]{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]}`;
   }
 
-  const query = groq`${filterQuery}{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,isSchoolOrKindergartenAvailable,${skillLevelQuery}}`;
+  const query = groq`${filterQuery}{"id":_id,"swimmingPoolId":swimmingPoolDetail->._id,"name":swimmingPoolDetail->.name,"alt":swimmingPoolDetail->.image.alt,"image":swimmingPoolDetail->.image{asset->{...,metadata}},"url":swimmingPoolDetail->.url,"privateSwimmingPool":swimmingPoolDetail->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPoolDetail->.isSchoolOrKindergartenAvailable,${skillLevelQuery}}`;
 
   const course: SanityKidsCourse[] = await client.fetch(query);
 
@@ -67,7 +67,7 @@ export async function getKidsCourses(
   if (filters?.age) {
     filterQuery += `[basic.age.ageFrom <= ${filters.age} && basic.age.ageTo >= ${filters.age}]`;
   }
-  const query = groq`${filterQuery}{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,isSchoolOrKindergartenAvailable,basic{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},advanced{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},condition{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]}}`;
+  const query = groq`${filterQuery}{"id":_id,"swimmingPoolId":swimmingPoolDetail->._id,"name":swimmingPoolDetail->.name,"alt":swimmingPoolDetail->.image.alt,"image":swimmingPoolDetail->.image{asset->{...,metadata}},"url":swimmingPoolDetail->.url,"privateSwimmingPool":swimmingPoolDetail->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPoolDetail->.isSchoolOrKindergartenAvailable,basic{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},advanced{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},condition{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]}}`;
 
   const course: SanityKidsCourse[] = await client.fetch(query);
 
