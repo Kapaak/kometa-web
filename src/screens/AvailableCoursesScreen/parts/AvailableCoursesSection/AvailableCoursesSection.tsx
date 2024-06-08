@@ -1,5 +1,10 @@
 import { useAvailableCourses } from '~/adapters';
-import { MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
+import {
+  InfiniteScrollObserver,
+  MaxWidth,
+  Text,
+  VerticalStack,
+} from '~/ui/components/atoms';
 import { Table } from '~/ui/components/organisms';
 
 import { AvailableCoursesFilter } from '../../components';
@@ -11,7 +16,7 @@ import * as S from './AvailableCoursesSection.style';
 export function AvailableCoursesSection() {
   const { filter } = useAvailableCoursesFilterContext();
 
-  const { data, isLoading } = useAvailableCourses({
+  const { data, fetchNextPage, hasNextPage, isLoading } = useAvailableCourses({
     filter,
   });
 
@@ -35,6 +40,10 @@ export function AvailableCoursesSection() {
           />
         </S.Scrollable>
       </MaxWidth>
+      <InfiniteScrollObserver
+        hasNextPage={hasNextPage}
+        onLoadNextPage={() => void fetchNextPage()}
+      />
     </S.AvailableCoursesSection>
   );
 }

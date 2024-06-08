@@ -9,6 +9,7 @@ export * from './H1';
 export * from './Hamburger';
 export * from './Hidden';
 export * from './IconButton';
+export * from './InfiniteScrollObserver';
 export * from './Loader';
 export * from './MainDescription';
 export * from './MaxWidth';

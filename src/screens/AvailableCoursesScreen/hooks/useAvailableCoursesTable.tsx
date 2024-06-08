@@ -19,9 +19,7 @@ const EMPTY_ARRAY: GetAPICourse[] = [];
 export function useAvailableCoursesTable(
   courses: GetAPICourse[] = EMPTY_ARRAY
 ) {
-  const [sortBy, setSortBy] = useState<SortingState>([
-    { id: 'name', desc: true },
-  ]);
+  const [sortBy, setSortBy] = useState<SortingState>([]);
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<GetAPICourse>();

@@ -16,6 +16,8 @@ interface Filters {
   day?: string;
   time?: string;
   place?: string;
+  lastId?: string;
+  pageSize?: number;
 }
 
 export async function getAvailableCourses(
@@ -54,9 +56,12 @@ export async function getAvailableCourses(
 
   const mergedFilter = filterQuery.join(' && ');
 
-  const queryAvailableCourses = groq`*[_type == "kidsCourse"][${mergedFilter}]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[][0...20]`;
+  const queryAvailableCourses = groq`*[_type == "kidsCourse" && _id > $lastId][${mergedFilter}]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[] [0...$pageSize]`;
 
-  const course = await client.fetch(queryAvailableCourses);
+  const course = await client.fetch(queryAvailableCourses, {
+    lastId: filters.lastId,
+    pageSize: filters.pageSize,
+  });
 
   return course;
 }
