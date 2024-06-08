@@ -1,9 +1,8 @@
 import type { InferGetStaticPropsType } from 'next';
 
-import { SanityKidsCourse } from '~/domains';
 import { getKidsCourses } from '~/libs/sanity';
 import { KidsCoursesScreen } from '~/screens/KidsCoursesScreen';
-import { transformKidsCourse } from '~/utils/transform';
+import { transformKidsCourses } from '~/utils/transform';
 
 interface KidsCoursesPageProps
   extends InferGetStaticPropsType<typeof getStaticProps> {}
@@ -13,9 +12,9 @@ export default function KidsCoursesPage({ kidsCourses }: KidsCoursesPageProps) {
 }
 
 export async function getStaticProps() {
-  const kidsCourses: SanityKidsCourse[] = await getKidsCourses();
+  const kidsCourses = await getKidsCourses();
 
-  const transformedKidsCourses = kidsCourses.map(transformKidsCourse);
+  const transformedKidsCourses = transformKidsCourses(kidsCourses);
 
   return {
     props: {

@@ -17,11 +17,10 @@ export type TransformedKidsCourse = {
   image: string;
   alt: string;
   url: string;
+  swimmingPoolId: string;
   isSchoolOrKindergartenAvailable: boolean;
-  basic: boolean;
-  advanced: boolean;
-  condition: boolean;
   privateSwimmingPool: boolean;
+  categories: string[];
 };
 
 export enum SwimmingVariant {

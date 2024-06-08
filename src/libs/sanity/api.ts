@@ -1,6 +1,10 @@
 import { groq } from 'next-sanity';
 
-import { SanityCamps, SanityKidsCourse } from '~/domains';
+import {
+  SanityAvailableCourse,
+  SanityCamps,
+  SanityKidsCourse,
+} from '~/domains';
 import { Gender, SwimmingVariant } from '~/types';
 
 import { client } from './config';
@@ -14,14 +18,15 @@ interface Filters {
   place?: string;
 }
 
-//will contain camps in future too
 export async function getAvailableCourses(
   filters: Filters = {}
-): Promise<SanityKidsCourse[]> {
-  let filterQuery = '*[_type == "kidCourse"]';
+): Promise<SanityAvailableCourse[]> {
+  let filterQuery = [];
 
   if (filters?.age) {
-    filterQuery += `[basic.age.ageFrom <= ${filters.age} && basic.age.ageTo >= ${filters.age}]`;
+    filterQuery.push(
+      `age.ageFrom <= ${filters.age} && age.ageTo >= ${filters.age}`
+    );
   }
 
   //TODO: not specified in SANITY yet
@@ -31,53 +36,43 @@ export async function getAvailableCourses(
 
   //TODO: preferovana mista
 
-  let dayFilter = '';
   if (filters?.day) {
-    dayFilter = ` && dayId in [${filters?.day}]`;
+    filterQuery.push(`dayId in [${filters?.day}]`);
   }
 
-  let timeFilter = '';
   if (filters?.time) {
     const hours = Array.isArray(filters.time.split(','))
       ? filters.time.split(',').map((time) => `"${time.concat(':00')}"`)
       : [`"${filters.time.concat(':00')}"`];
 
-    timeFilter += ` && [${hours}] match timeFrom`;
+    filterQuery.push(`[${hours}] match timeFrom`);
   }
 
-  let skillLevelQuery = '';
   if (filters?.skillLevel) {
-    skillLevelQuery = groq`${filters.skillLevel}{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses[isFull == false ${dayFilter}${timeFilter}]{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]}`;
-  } else {
-    skillLevelQuery = groq`basic{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses[isFull == false ${dayFilter}${timeFilter}]{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},advanced{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses[isFull == false ${dayFilter}${timeFilter}]{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},condition{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses[isFull == false ${dayFilter}${timeFilter}]{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]}`;
+    filterQuery.push(`["${filters.skillLevel}"] match categoryId`);
   }
 
-  const query = groq`${filterQuery}{"id":_id,"swimmingPoolId":swimmingPoolDetail->._id,"name":swimmingPoolDetail->.name,"alt":swimmingPoolDetail->.image.alt,"image":swimmingPoolDetail->.image{asset->{...,metadata}},"url":swimmingPoolDetail->.url,"privateSwimmingPool":swimmingPoolDetail->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPoolDetail->.isSchoolOrKindergartenAvailable,${skillLevelQuery}}`;
+  const mergedFilter = filterQuery.join(' && ');
 
-  const course: SanityKidsCourse[] = await client.fetch(query);
+  const queryAvailableCourses = groq`*[_type == "kidsCourse"][${mergedFilter}]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[][0...20]`;
+
+  const course = await client.fetch(queryAvailableCourses);
 
   return course;
 }
 
-export async function getKidsCourses(
-  filters: Filters = {}
-): Promise<SanityKidsCourse[]> {
-  let filterQuery = '*[_type == "kidCourse"]';
+export async function getKidsCourses(): Promise<SanityKidsCourse[]> {
+  const queryKidsCourses = groq`*[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]`;
 
-  if (filters?.age) {
-    filterQuery += `[basic.age.ageFrom <= ${filters.age} && basic.age.ageTo >= ${filters.age}]`;
-  }
-  const query = groq`${filterQuery}{"id":_id,"swimmingPoolId":swimmingPoolDetail->._id,"name":swimmingPoolDetail->.name,"alt":swimmingPoolDetail->.image.alt,"image":swimmingPoolDetail->.image{asset->{...,metadata}},"url":swimmingPoolDetail->.url,"privateSwimmingPool":swimmingPoolDetail->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPoolDetail->.isSchoolOrKindergartenAvailable,basic{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},advanced{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]},condition{url,"ageFrom":age.ageFrom,"ageTo":age.ageTo,availableCourses{"id":_key,dayId,isFull,"priceYear":price.priceYear,"priceSemester":price.priceSemester,timeFrom,timeTo}[]}}`;
-
-  const course: SanityKidsCourse[] = await client.fetch(query);
+  const course = await client.fetch(queryKidsCourses);
 
   return course;
 }
 
 export async function getCamps(): Promise<SanityCamps[]> {
-  const query = groq`*[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]`;
+  const queryCamps = groq`*[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]`;
 
-  const course: SanityCamps[] = await client.fetch(query);
+  const course: SanityCamps[] = await client.fetch(queryCamps);
 
   return course;
 }

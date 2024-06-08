@@ -404,9 +404,47 @@ export type Slug = {
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../../websites/kometa-web/src/libs/sanity/api.ts
 // Variable: queryAvailableCourses
-// Query: *[_type == "kidCourse"]{"id":_id,"swimmingPoolId":swimmingPoolDetail->._id,"name":swimmingPoolDetail->.name,"alt":swimmingPoolDetail->.image.alt,"image":swimmingPoolDetail->.image{asset->{...,metadata}},"url":swimmingPoolDetail->.url,"privateSwimmingPool":swimmingPoolDetail->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPoolDetail->.isSchoolOrKindergartenAvailable,}
+// Query: *[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[][0...20]
 export type QueryAvailableCoursesResult = Array<{
   id: string;
+  priceYear: number | null;
+  priceSemester: number | null;
+  isFull: boolean | null;
+  categoryId: 'advanced' | 'basic' | 'condition' | null;
+  dayId: 1 | 2 | 3 | 4 | 5 | null;
+  timeFrom:
+    | '15:00'
+    | '15:15'
+    | '15:30'
+    | '15:45'
+    | '16:00'
+    | '16:15'
+    | '16:30'
+    | '16:45'
+    | '17:00'
+    | '17:15'
+    | '17:30'
+    | '17:45'
+    | '18:00'
+    | null;
+  timeTo:
+    | '15:45'
+    | '16:00'
+    | '16:15'
+    | '16:30'
+    | '16:45'
+    | '17:00'
+    | '17:15'
+    | '17:30'
+    | '17:45'
+    | '18:00'
+    | '18:15'
+    | '18:30'
+    | '18:45'
+    | '19:00'
+    | null;
+  ageFrom: number | null;
+  ageTo: number | null;
   swimmingPoolId: string | null;
   name: string | null;
   alt: string | null;
@@ -438,12 +476,79 @@ export type QueryAvailableCoursesResult = Array<{
   privateSwimmingPool: boolean | null;
   isSchoolOrKindergartenAvailable: boolean | null;
 }>;
-// Variable: filterQuery
-// Query: *[_type == "post"]
-export type FilterQueryResult = Array<never>;
 // Variable: queryKidsCourses
-// Query: *[_type == "post"][]
-export type QueryKidsCoursesResult = Array<never>;
+// Query: *[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]
+export type QueryKidsCoursesResult = Array<{
+  id: string;
+  priceYear: number | null;
+  priceSemester: number | null;
+  isFull: boolean | null;
+  categoryId: 'advanced' | 'basic' | 'condition' | null;
+  dayId: 1 | 2 | 3 | 4 | 5 | null;
+  timeFrom:
+    | '15:00'
+    | '15:15'
+    | '15:30'
+    | '15:45'
+    | '16:00'
+    | '16:15'
+    | '16:30'
+    | '16:45'
+    | '17:00'
+    | '17:15'
+    | '17:30'
+    | '17:45'
+    | '18:00'
+    | null;
+  timeTo:
+    | '15:45'
+    | '16:00'
+    | '16:15'
+    | '16:30'
+    | '16:45'
+    | '17:00'
+    | '17:15'
+    | '17:30'
+    | '17:45'
+    | '18:00'
+    | '18:15'
+    | '18:30'
+    | '18:45'
+    | '19:00'
+    | null;
+  ageFrom: number | null;
+  ageTo: number | null;
+  swimmingPoolId: string | null;
+  name: string | null;
+  alt: string | null;
+  image: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata: SanityImageMetadata | null;
+      source?: SanityAssetSourceData;
+    } | null;
+  } | null;
+  url: string | null;
+  privateSwimmingPool: boolean | null;
+  isSchoolOrKindergartenAvailable: boolean | null;
+}>;
 // Variable: queryCamps
 // Query: *[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]
 export type QueryCampsResult = Array<{

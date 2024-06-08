@@ -1,4 +1,8 @@
-import { SwimmingVariantTranslation, TransformedKidsCourse } from '~/types';
+import {
+  SwimmingVariant,
+  SwimmingVariantTranslation,
+  TransformedKidsCourse,
+} from '~/types';
 import { ServiceCard } from '~/ui/components/molecules';
 
 import * as S from './CoursesWithTitle.style';
@@ -31,21 +35,30 @@ export function CoursesWithTitle({ courses, title }: CoursesWithTitleProps) {
 function getChipsForCourse(course: TransformedKidsCourse): string[] {
   const chips: string[] = [];
 
-  if (course.basic) {
-    chips.push(SwimmingVariantTranslation.BASIC);
-  }
+  course?.categories?.forEach((category) => {
+    if (category === SwimmingVariant.BASIC) {
+      chips.push(SwimmingVariantTranslation.BASIC);
+    }
 
-  if (course.advanced) {
-    chips.push(SwimmingVariantTranslation.ADVANCED);
-  }
+    if (category === SwimmingVariant.ADVANCED) {
+      chips.push(SwimmingVariantTranslation.ADVANCED);
+    }
 
-  if (course.condition) {
-    chips.push(SwimmingVariantTranslation.CONDITION);
-  }
+    if (category === SwimmingVariant.CONDITION) {
+      chips.push(SwimmingVariantTranslation.CONDITION);
+    }
+  });
 
   if (course.isSchoolOrKindergartenAvailable) {
     chips.push('Školy a školky');
   }
 
-  return chips;
+  const order = [
+    SwimmingVariantTranslation.BASIC,
+    SwimmingVariantTranslation.ADVANCED,
+    SwimmingVariantTranslation.CONDITION,
+    'Školy a školky',
+  ];
+
+  return chips.sort((a, b) => order.indexOf(a) - order.indexOf(b));
 }

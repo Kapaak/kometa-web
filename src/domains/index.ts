@@ -1,3 +1,7 @@
+import {
+  QueryAvailableCoursesResult,
+  QueryKidsCoursesResult,
+} from '~/libs/sanity/types';
 import { SwimmingVariant } from '~/types';
 
 export type SanityKidsCourseVariant = {
@@ -15,18 +19,9 @@ export type SanityKidsCourseVariant = {
   }[];
 };
 
-export type SanityKidsCourse = {
-  id?: string;
-  name?: string;
-  image?: string;
-  alt?: string;
-  url?: string;
-  privateSwimmingPool?: boolean;
-  isSchoolOrKindergartenAvailable?: boolean;
-  basic?: SanityKidsCourseVariant;
-  advanced?: SanityKidsCourseVariant;
-  condition?: SanityKidsCourseVariant;
-};
+export type SanityKidsCourse = QueryKidsCoursesResult[0];
+
+export type SanityAvailableCourse = QueryAvailableCoursesResult[0];
 
 export type SanityCamps = {
   id?: string;
