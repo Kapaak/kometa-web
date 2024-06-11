@@ -1,5 +1,6 @@
 import { useAvailableCourses } from '~/adapters';
 import {
+  Hidden,
   InfiniteScrollObserver,
   MaxWidth,
   Text,
@@ -7,7 +8,10 @@ import {
 } from '~/ui/components/atoms';
 import { Table } from '~/ui/components/organisms';
 
-import { AvailableCoursesFilter } from '../../components';
+import {
+  AvailableCoursesFilter,
+  MobileAvailableCoursesTable,
+} from '../../components';
 import { useAvailableCoursesFilterContext } from '../../contexts';
 import { useAvailableCoursesTable } from '../../hooks';
 
@@ -26,19 +30,29 @@ export function AvailableCoursesSection() {
     <S.AvailableCoursesSection>
       <MaxWidth>
         <AvailableCoursesFilter />
-        <S.Scrollable>
-          <Table
+        <Hidden down="md">
+          <S.Scrollable>
+            <Table
+              isLoading={isLoading}
+              headerCells={table?.getHeaderGroups()}
+              bodyCells={table?.getRowModel()}
+              showNoData={
+                !isLoading && table?.getRowModel()?.rows?.length === 0
+              }
+              noDataChildren={
+                <VerticalStack>
+                  <Text variant="body2">Dostupné lekce nebyly nalezeny.</Text>
+                </VerticalStack>
+              }
+            />
+          </S.Scrollable>
+        </Hidden>
+        <Hidden up="md">
+          <MobileAvailableCoursesTable
+            availableCourses={data}
             isLoading={isLoading}
-            headerCells={table?.getHeaderGroups()}
-            bodyCells={table?.getRowModel()}
-            showNoData={!isLoading && table?.getRowModel()?.rows?.length === 0}
-            noDataChildren={
-              <VerticalStack>
-                <Text variant="body2">Nenalezeno.</Text>
-              </VerticalStack>
-            }
           />
-        </S.Scrollable>
+        </Hidden>
       </MaxWidth>
       <InfiniteScrollObserver
         hasNextPage={hasNextPage}

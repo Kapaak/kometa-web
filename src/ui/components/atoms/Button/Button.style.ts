@@ -6,7 +6,7 @@ import { ButtonProps } from './Button.type';
 
 const ButtonInitial = styled.button.withConfig({
   shouldForwardProp: (prop) =>
-    !['color', 'size', 'variant', 'customColor'].includes(prop),
+    !['color', 'size', 'variant', 'customColor', 'fullWidth'].includes(prop),
 })<ButtonProps>(({ theme: { typography }, size }) => ({
   ...(size === 'small' ? { ...typography.body6 } : { ...typography.body3 }),
 }));
@@ -23,6 +23,7 @@ export const Button = styled(ButtonInitial)`
   white-space: nowrap;
   font-size: 1.4rem;
   letter-spacing: 0.04rem;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
 
   &:hover {
     transition: all 0.2s ease-in-out;

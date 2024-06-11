@@ -6,4 +6,5 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'filled' | 'plain' | 'outlined';
   customColor?: string;
   loading?: boolean;
+  fullWidth?: boolean;
 }

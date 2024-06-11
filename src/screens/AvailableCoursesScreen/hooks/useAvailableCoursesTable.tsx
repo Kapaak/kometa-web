@@ -9,20 +9,20 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { GetAPICourse } from '~/domains';
+import { GetAvailableCourse } from '~/domains';
 import { Button, Text } from '~/ui/components/atoms';
 import { joinValues } from '~/utils/format';
 
 //prevents infinite loop for react-table when courses is empty (on load)
-const EMPTY_ARRAY: GetAPICourse[] = [];
+const EMPTY_ARRAY: GetAvailableCourse[] = [];
 
 export function useAvailableCoursesTable(
-  courses: GetAPICourse[] = EMPTY_ARRAY
+  courses: GetAvailableCourse[] = EMPTY_ARRAY
 ) {
   const [sortBy, setSortBy] = useState<SortingState>([]);
 
   const columns = useMemo(() => {
-    const columnHelper = createColumnHelper<GetAPICourse>();
+    const columnHelper = createColumnHelper<GetAvailableCourse>();
 
     return [
       columnHelper.accessor('name', {
@@ -67,7 +67,7 @@ export function useAvailableCoursesTable(
           const { ageTo } = info.row.original ?? {};
 
           return (
-            <Text variant="body2">
+            <Text variant="body2" style={{ whiteSpace: 'nowrap' }}>
               {joinValues([info.getValue(), ageTo], { separator: ' - ' })} let
             </Text>
           );
@@ -84,7 +84,9 @@ export function useAvailableCoursesTable(
               customColor="#000"
               style={{ display: 'inline-flex' }}
             >
-              <NextLink href={info.row.original?.url}>Zobrazit kurz</NextLink>
+              <NextLink href={info.row.original?.url ?? ''}>
+                Zobrazit kurz
+              </NextLink>
             </Button>
           );
         },

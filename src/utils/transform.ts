@@ -1,6 +1,14 @@
-import { SanityCamps, SanityKidsCourse } from '~/domains';
-import { QueryAvailableCoursesResult } from '~/libs/sanity/types';
-import { SwimmingVariantTranslation, TransformedKidsCourse } from '~/types';
+import {
+  GetAvailableCourse,
+  SanityAvailableCourse,
+  SanityCamps,
+  SanityKidsCourse,
+} from '~/domains';
+import {
+  SwimmingVariant,
+  SwimmingVariantTranslation,
+  TransformedKidsCourse,
+} from '~/types';
 
 import { urlForImage } from './sanity';
 
@@ -55,8 +63,8 @@ export function transformCamp(course: SanityCamps): SanityCamps {
 }
 
 export function transformAvailableCourse(
-  course: QueryAvailableCoursesResult[0]
-) {
+  course: SanityAvailableCourse
+): GetAvailableCourse {
   const variantTranslation = {
     basic: SwimmingVariantTranslation.BASIC,
     advanced: SwimmingVariantTranslation.ADVANCED,
@@ -72,16 +80,16 @@ export function transformAvailableCourse(
 
   return {
     id: course?.id,
-    dayId: course?.dayId,
+    dayId: Number(course?.dayId),
     day: course?.dayId ? dayTranslation[course.dayId] : '-',
-    isFull: course?.isFull,
-    priceYear: course?.priceYear,
-    priceSemester: course?.priceSemester,
-    timeFrom: course?.timeFrom,
-    timeTo: course?.timeTo,
-    ageFrom: course?.ageFrom,
-    ageTo: course?.ageTo,
-    skillLevelId: course?.categoryId,
+    isFull: course?.isFull ?? false,
+    priceYear: course?.priceYear ?? 0,
+    priceSemester: course?.priceSemester ?? 0,
+    timeFrom: course?.timeFrom ?? '-',
+    timeTo: course?.timeTo ?? '-',
+    ageFrom: course?.ageFrom ?? 0,
+    ageTo: course?.ageTo ?? 0,
+    skillLevelId: course?.categoryId as SwimmingVariant,
     skillLevelName: course?.categoryId
       ? variantTranslation[course.categoryId]
       : '-',

@@ -32,22 +32,23 @@ export type SanityCamps = {
   tags?: string[];
 };
 
-export type GetAPICourse = {
-  ageFrom: number;
-  ageTo: number;
-  alt: string;
-  day: string;
-  dayId: number;
-  id: string;
-  isFull: boolean;
-  isSchoolOrKindergartenAvailable: boolean;
-  name: string;
-  priceSemester: number;
-  priceYear: number;
-  privateSwimmingPool: boolean;
-  timeFrom: string;
-  timeTo: string;
-  url: string;
-  skillLevel: SwimmingVariant;
-  skillLevelName: string;
+export type GetAvailableCourse = {
+  id?: string;
+  ageFrom?: number;
+  ageTo?: number;
+  alt?: string;
+  day?: string;
+  dayId?: number;
+  isFull?: boolean;
+  isSchoolOrKindergartenAvailable?: boolean;
+  name?: string;
+  priceSemester?: number;
+  priceYear?: number;
+  privateSwimmingPool?: boolean;
+  timeFrom?: string;
+  timeTo?: string;
+  url?: string;
+  skillLevelId?: SwimmingVariant;
+  skillLevel?: SwimmingVariant;
+  skillLevelName?: string;
 };

@@ -14,6 +14,7 @@ export const ControlledItems = styled.form`
   display: grid;
   gap: 1.6rem;
   grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  margin-bottom: 2rem;
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {

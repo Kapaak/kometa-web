@@ -36,8 +36,6 @@ export function InfiniteScrollObserver({
       if (!isIntersecting || !hasNextPage) {
         return;
       }
-      console.log('yolo');
-
       void onLoadNextPage();
     };
 
