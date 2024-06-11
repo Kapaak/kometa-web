@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -22,19 +23,35 @@ import {
   ControlledMultiSelect,
   ControlledSelect,
 } from '~/ui/components/molecules';
+import { filterEmptyValuesFromObject } from '~/utils/filter';
 
 import * as S from './QuestionnaireSection.style';
+
+type QuestionaireFormData = {
+  gender?: string;
+  day?: string;
+  time?: string[] | string;
+  place?: string[] | string;
+  age?: string;
+  skillLevel?: string;
+};
 
 export function QuestionnaireSection() {
   //this will be used when switching between swimming courses and summer camps
   const [open, setOpen] = useState(true);
 
-  const form = useForm({
-    defaultValues: {
-      childrenGender: [],
-      seleSingle: 'M',
-    },
-  });
+  const router = useRouter();
+
+  const form = useForm<QuestionaireFormData>();
+
+  const { handleSubmit } = form;
+
+  const onSubmit = (formData: QuestionaireFormData) => {
+    router.push({
+      pathname: '/dostupne-lekce',
+      query: filterEmptyValuesFromObject(formData),
+    });
+  };
 
   return (
     <MaxWidth variant="small" as="section">
@@ -43,7 +60,7 @@ export function QuestionnaireSection() {
         collapsible
         value={open ? 'questionnaire' : ''}
       >
-        <RadixAccordion.Item value="questionnaire" key="xx">
+        <RadixAccordion.Item value="questionnaire">
           <RadixAccordion.Header>
             <Flex>
               <VerticalStack>
@@ -60,7 +77,7 @@ export function QuestionnaireSection() {
 
           <S.QuestionnaireContent>
             <FormProvider {...form}>
-              <S.FormContent>
+              <S.FormContent onSubmit={handleSubmit(onSubmit)}>
                 <S.ControlledItems>
                   <ControlledSelect
                     name="gender"
