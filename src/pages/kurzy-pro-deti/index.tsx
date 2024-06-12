@@ -1,7 +1,7 @@
 import type { InferGetStaticPropsType } from 'next';
 
 import { getKidsCourses } from '~/libs/sanity';
-import { KidsCoursesScreen } from '~/screens/KidsCoursesScreen';
+import { KidsCoursesScreen } from '~/screens/kids-courses-page';
 import { transformKidsCourses } from '~/utils/transform';
 
 interface KidsCoursesPageProps

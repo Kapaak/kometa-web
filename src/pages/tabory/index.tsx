@@ -2,7 +2,7 @@ import type { InferGetStaticPropsType } from 'next';
 
 import { SanityCamps } from '~/domains';
 import { getCamps } from '~/libs/sanity';
-import { CampsScreen } from '~/screens/CampsScreen';
+import { CampsScreen } from '~/screens/camps-page';
 import { transformCamp } from '~/utils/transform';
 
 interface KidsCoursesPageProps

@@ -8,7 +8,7 @@ export const navigationData = [
     href: '/#kurzy',
   },
   {
-    label: 'Kontakt',
-    href: '/',
+    label: 'Dostupné lekce',
+    href: '/dostupne-lekce',
   },
 ];
