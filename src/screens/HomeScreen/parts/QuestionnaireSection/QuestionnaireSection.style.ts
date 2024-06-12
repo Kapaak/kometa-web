@@ -23,6 +23,10 @@ export const QuestionnaireRoot = styled(RadixAccordion.Root)`
   padding: 2.4rem;
   box-shadow: ${({ theme }) => theme.shadows.dark};
 
+  [data-state='open'] {
+    overflow: initial;
+  }
+
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {
       padding: 4.8rem 4.8rem 2.4rem;
