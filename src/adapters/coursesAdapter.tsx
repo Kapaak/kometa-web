@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+
+import { SanitySwimmingPool } from '~/domains';
 
 type AvailableCoursesProps = {
   filter?: {
@@ -17,7 +19,7 @@ type AvailableCoursesProps = {
 //must be the same as in the API
 const DEFAULT_PAGE_SIZE = 20;
 
-export function useAvailableCourses({
+export function useGetAvailableCourses({
   filter,
   pageSize = DEFAULT_PAGE_SIZE,
 }: AvailableCoursesProps) {
@@ -55,6 +57,26 @@ export function useAvailableCourses({
     hasNextPage,
     isError,
     isFetching,
+    isLoading,
+  };
+}
+
+export function useGetSwimmingPool() {
+  const { data, isError, isLoading, isSuccess } = useQuery<
+    SanitySwimmingPool[]
+  >({
+    queryKey: ['swimmingPool'],
+    queryFn: async () => {
+      const response = await fetch('/api/swimming-pool');
+      const data = await response.json();
+      return data;
+    },
+  });
+
+  return {
+    data,
+    isError,
+    isSuccess,
     isLoading,
   };
 }

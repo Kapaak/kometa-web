@@ -9,10 +9,10 @@ import {
   ageOptions,
   childrenGenderOptions,
   dayOptions,
-  placeOptions,
   skillLevelOptions,
   timeOptions,
 } from '~/constants/options';
+import { useGetSwimmingPoolOptions } from '~/hooks';
 import {
   Flex,
   IconButton,
@@ -45,6 +45,9 @@ export function QuestionnaireSection() {
   const form = useForm<QuestionaireFormData>();
 
   const { handleSubmit } = form;
+
+  const { data: swimmingPoolOptions, isLoading: isSwimmingPoolLoading } =
+    useGetSwimmingPoolOptions();
 
   const onSubmit = (formData: QuestionaireFormData) => {
     router.push({
@@ -92,7 +95,7 @@ export function QuestionnaireSection() {
                   <ControlledMultiSelect
                     name="place"
                     placeholder="Preferovaná místa"
-                    options={placeOptions}
+                    options={swimmingPoolOptions}
                   />
                   <ControlledSelect
                     name="age"

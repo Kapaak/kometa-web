@@ -404,7 +404,7 @@ export type Slug = {
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../../websites/kometa-web/src/libs/sanity/api.ts
 // Variable: queryAvailableCourses
-// Query: *[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[][0...20]
+// Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,"alt":image.alt,"image":image{asset->{...,metadata}},"url":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
 export type QueryAvailableCoursesResult = Array<{
   id: string;
   priceYear: number | null;
@@ -445,7 +445,6 @@ export type QueryAvailableCoursesResult = Array<{
     | null;
   ageFrom: number | null;
   ageTo: number | null;
-  swimmingPoolId: string | null;
   name: string | null;
   alt: string | null;
   image: {
@@ -581,4 +580,37 @@ export type QueryCampsResult = Array<{
   } | null;
   url: string | null;
   tags: Array<string> | null;
+}>;
+// Variable: querySwimmingPools
+// Query: *[_type == "swimmingPool"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]
+export type QuerySwimmingPoolsResult = Array<{
+  id: string;
+  name: string | null;
+  alt: string | null;
+  image: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata: SanityImageMetadata | null;
+      source?: SanityAssetSourceData;
+    } | null;
+  } | null;
+  url: string | null;
+  privateSwimmingPool: boolean | null;
 }>;

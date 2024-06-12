@@ -4,6 +4,7 @@ import {
   SanityAvailableCourse,
   SanityCamps,
   SanityKidsCourse,
+  SanitySwimmingPool,
 } from '~/domains';
 import { Gender, SwimmingVariant } from '~/types';
 
@@ -54,6 +55,7 @@ export async function getAvailableCourses(
     filterQuery.push(`["${filters.skillLevel}"] match categoryId`);
   }
 
+  //TODO: need to comment out mergedFilter to generate FE sanity types
   const mergedFilter = filterQuery.join(' && ');
 
   const queryAvailableCourses = groq`*[_type == "kidsCourse" && _id > $lastId][${mergedFilter}]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,
@@ -80,6 +82,14 @@ export async function getCamps(): Promise<SanityCamps[]> {
   const queryCamps = groq`*[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]`;
 
   const course: SanityCamps[] = await client.fetch(queryCamps);
+
+  return course;
+}
+
+export async function getSwimmingPools(): Promise<SanitySwimmingPool[]> {
+  const querySwimmingPools = groq`*[_type == "swimmingPool"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]`;
+
+  const course = await client.fetch(querySwimmingPools);
 
   return course;
 }

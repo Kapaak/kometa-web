@@ -6,10 +6,10 @@ import {
   ageOptions,
   childrenGenderOptions,
   dayOptions,
-  placeOptions,
   skillLevelOptions,
   timeOptions,
 } from '~/constants/options';
+import { useGetSwimmingPoolOptions } from '~/hooks';
 import {
   ControlledMultiSelect,
   ControlledSelect,
@@ -35,6 +35,9 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
   const router = useRouter();
 
   const { filter, setFilter } = useAvailableCoursesFilterContext();
+
+  const { data: swimmingPoolOptions, isLoading: isSwimmingPoolLoading } =
+    useGetSwimmingPoolOptions();
 
   const form = useForm<FormData>({
     values: {
@@ -104,7 +107,7 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
           <ControlledMultiSelect
             name="place"
             placeholder="Preferovaná místa"
-            options={placeOptions}
+            options={swimmingPoolOptions}
           />
           <ControlledSelect
             name="age"

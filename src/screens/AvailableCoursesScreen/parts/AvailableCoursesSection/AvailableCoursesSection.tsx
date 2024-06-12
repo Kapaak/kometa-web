@@ -1,4 +1,4 @@
-import { useAvailableCourses } from '~/adapters';
+import { useGetAvailableCourses } from '~/adapters';
 import {
   Hidden,
   InfiniteScrollObserver,
@@ -20,9 +20,10 @@ import * as S from './AvailableCoursesSection.style';
 export function AvailableCoursesSection() {
   const { filter } = useAvailableCoursesFilterContext();
 
-  const { data, fetchNextPage, hasNextPage, isLoading } = useAvailableCourses({
-    filter,
-  });
+  const { data, fetchNextPage, hasNextPage, isLoading } =
+    useGetAvailableCourses({
+      filter,
+    });
 
   const { table } = useAvailableCoursesTable(data);
 

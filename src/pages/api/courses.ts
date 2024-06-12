@@ -23,16 +23,20 @@ export default async function handler(
   const { age, gender, skillLevel, day, time, lastId, pageSize } =
     req.query ?? {};
 
-  const courses = await getAvailableCourses({
-    age: Number(age),
-    gender,
-    skillLevel,
-    day,
-    time,
-    lastId,
-    pageSize: Number(pageSize),
-  });
+  try {
+    const courses = await getAvailableCourses({
+      age: Number(age),
+      gender,
+      skillLevel,
+      day,
+      time,
+      lastId,
+      pageSize: Number(pageSize),
+    });
+    const transformedCourses = courses?.map(transformAvailableCourse);
 
-  const transformedCourses = courses?.map(transformAvailableCourse);
-  res.json(transformedCourses);
+    res.json(transformedCourses);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
 }
