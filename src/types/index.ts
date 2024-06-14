@@ -34,3 +34,5 @@ export enum SwimmingVariantTranslation {
   ADVANCED = 'Zdokonalovací',
   CONDITION = 'Kondiční',
 }
+
+export type LatLng = google.maps.LatLngLiteral;

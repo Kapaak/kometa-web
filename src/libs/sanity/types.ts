@@ -61,13 +61,6 @@ export type SanityFileAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type Geopoint = {
-  _type: 'geopoint';
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
 export type Course = {
   _type: 'course';
   dayId?: 1 | 2 | 3 | 4 | 5;
@@ -372,6 +365,14 @@ export type SwimmingPool = {
   };
   privateSwimmingPool?: boolean;
   isSchoolOrKindergartenAvailable?: boolean;
+  location?: Geopoint;
+};
+
+export type Geopoint = {
+  _type: 'geopoint';
+  lat?: number;
+  lng?: number;
+  alt?: number;
 };
 
 export type ImageAlt = {
@@ -582,10 +583,11 @@ export type QueryCampsResult = Array<{
   tags: Array<string> | null;
 }>;
 // Variable: querySwimmingPools
-// Query: *[_type == "swimmingPool"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]
+// Query: *[_type == "swimmingPool"]{"id":_id,name,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]
 export type QuerySwimmingPoolsResult = Array<{
   id: string;
   name: string | null;
+  location: Geopoint | null;
   alt: string | null;
   image: {
     asset: {

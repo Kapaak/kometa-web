@@ -3,7 +3,7 @@ import type { InferGetStaticPropsType } from 'next';
 import { SanityCamps } from '~/domains';
 import { getCamps } from '~/libs/sanity';
 import { CampsScreen } from '~/screens/camps-page';
-import { transformCamp } from '~/utils/transform';
+import { transformCamp } from '~/utils/transform-sanity-model';
 
 interface KidsCoursesPageProps
   extends InferGetStaticPropsType<typeof getStaticProps> {}

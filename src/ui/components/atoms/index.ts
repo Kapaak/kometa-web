@@ -7,6 +7,7 @@ export * from './Divider';
 export * from './Flex';
 export * from './H1';
 export * from './Hamburger';
+export * from './Headline';
 export * from './Hidden';
 export * from './IconButton';
 export * from './InfiniteScrollObserver';

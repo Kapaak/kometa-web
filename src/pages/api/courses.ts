@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { getAvailableCourses } from '~/libs/sanity';
 import { Gender, SwimmingVariant } from '~/types';
-import { transformAvailableCourse } from '~/utils/transform';
+import { transformAvailableCourse } from '~/utils/transform-sanity-model';
 
 interface ExtendedNextApiRequest extends NextApiRequest {
   query: {

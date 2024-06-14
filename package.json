@@ -12,6 +12,7 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.6",
     "@phosphor-icons/react": "^2.1.5",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-navigation-menu": "^1.1.4",
@@ -27,7 +28,7 @@
     "react-aria-components": "^1.2.1",
     "react-burger-menu": "^3.0.9",
     "react-device-detect": "^2.2.3",
-    "react-dom": "^18",
+    "react-dom": "^18.3.1",
     "react-fast-marquee": "^1.6.4",
     "react-hook-form": "^7.51.4",
     "react-spinners": "^0.13.8",
@@ -38,6 +39,8 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",
+    "@types/google-map-react": "^2.1.10",
+    "@types/googlemaps": "^3.43.3",
     "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/react": "^18",

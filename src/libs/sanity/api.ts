@@ -87,7 +87,7 @@ export async function getCamps(): Promise<SanityCamps[]> {
 }
 
 export async function getSwimmingPools(): Promise<SanitySwimmingPool[]> {
-  const querySwimmingPools = groq`*[_type == "swimmingPool"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]`;
+  const querySwimmingPools = groq`*[_type == "swimmingPool"]{"id":_id,name,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]`;
 
   const course = await client.fetch(querySwimmingPools);
 

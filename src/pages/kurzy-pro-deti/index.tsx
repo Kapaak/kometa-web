@@ -2,7 +2,7 @@ import type { InferGetStaticPropsType } from 'next';
 
 import { getKidsCourses } from '~/libs/sanity';
 import { KidsCoursesScreen } from '~/screens/kids-courses-page';
-import { transformKidsCourses } from '~/utils/transform';
+import { transformKidsCourses } from '~/utils/transform-sanity-model';
 
 interface KidsCoursesPageProps
   extends InferGetStaticPropsType<typeof getStaticProps> {}

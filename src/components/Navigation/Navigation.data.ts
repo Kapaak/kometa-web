@@ -11,4 +11,8 @@ export const navigationData = [
     label: 'Dostupné lekce',
     href: '/dostupne-lekce',
   },
+  {
+    label: 'Kontakt',
+    href: '/#kontakt',
+  },
 ];
