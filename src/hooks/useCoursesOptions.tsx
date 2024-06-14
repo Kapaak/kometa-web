@@ -9,7 +9,7 @@ export function useGetSwimmingPoolOptions() {
     () =>
       data?.map((pool) => ({
         label: pool.name ?? '',
-        value: pool.slug ?? '',
+        value: String(pool.slug) ?? '',
       })),
     [data]
   );
