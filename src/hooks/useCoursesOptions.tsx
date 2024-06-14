@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
 import { useGetSwimmingPool } from '~/adapters';
-import { formatStringToOption } from '~/utils/format';
 
 export function useGetSwimmingPoolOptions() {
   const { data, isLoading, isError, isSuccess } = useGetSwimmingPool();
@@ -10,7 +9,7 @@ export function useGetSwimmingPoolOptions() {
     () =>
       data?.map((pool) => ({
         label: pool.name ?? '',
-        value: formatStringToOption(pool?.name ?? ''),
+        value: pool.slug ?? '',
       })),
     [data]
   );

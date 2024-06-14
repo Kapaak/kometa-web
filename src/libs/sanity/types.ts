@@ -350,6 +350,7 @@ export type SwimmingPool = {
   _updatedAt: string;
   _rev: string;
   name?: string;
+  slug?: Slug;
   url?: string;
   image?: {
     asset?: {
@@ -405,7 +406,7 @@ export type Slug = {
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../../websites/kometa-web/src/libs/sanity/api.ts
 // Variable: queryAvailableCourses
-// Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,"alt":image.alt,"image":image{asset->{...,metadata}},"url":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
+// Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,slug,"alt":image.alt,"image":image{asset->{...,metadata}},"url":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
 export type QueryAvailableCoursesResult = Array<{
   id: string;
   priceYear: number | null;
@@ -447,6 +448,7 @@ export type QueryAvailableCoursesResult = Array<{
   ageFrom: number | null;
   ageTo: number | null;
   name: string | null;
+  slug: Slug | null;
   alt: string | null;
   image: {
     asset: {
@@ -583,10 +585,11 @@ export type QueryCampsResult = Array<{
   tags: Array<string> | null;
 }>;
 // Variable: querySwimmingPools
-// Query: *[_type == "swimmingPool"]{"id":_id,name,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]
+// Query: *[_type == "swimmingPool"]{"id":_id,name,slug,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]
 export type QuerySwimmingPoolsResult = Array<{
   id: string;
   name: string | null;
+  slug: Slug | null;
   location: Geopoint | null;
   alt: string | null;
   image: {

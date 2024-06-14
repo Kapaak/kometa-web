@@ -6,13 +6,12 @@ import {
   SanityKidsCourse,
   SanitySwimmingPool,
 } from '~/domains';
-import { Gender, SwimmingVariant } from '~/types';
+import { SwimmingVariant } from '~/types';
 
 import { client } from './config';
 
 interface Filters {
   age?: number;
-  gender?: Gender;
   skillLevel?: SwimmingVariant;
   day?: string;
   time?: string;
@@ -32,12 +31,13 @@ export async function getAvailableCourses(
     );
   }
 
-  //TODO: not specified in SANITY yet
-  // if (filters?.gender) {
-  //   filterQuery += `[gender == "${filters.gender}"]`;
-  // }
+  if (filters?.place) {
+    const places = Array.isArray(filters.place.split(','))
+      ? filters.place.split(',').map((place) => `"${place}"`)
+      : [`"${filters.place}"`];
 
-  //TODO: preferovana mista
+    filterQuery.push(`[${places}] match swimmingPool->slug.current`);
+  }
 
   if (filters?.day) {
     filterQuery.push(`dayId in [${filters?.day}]`);
@@ -59,7 +59,7 @@ export async function getAvailableCourses(
   const mergedFilter = filterQuery.join(' && ');
 
   const queryAvailableCourses = groq`*[_type == "kidsCourse" && _id > $lastId][${mergedFilter}]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,
-  ...(swimmingPool->{"name":name,"alt":image.alt,"image":image{asset->{...,metadata}},"url":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})
+  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"url":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})
   }[] [0...$pageSize]`;
 
   const course = await client.fetch(queryAvailableCourses, {
@@ -87,7 +87,7 @@ export async function getCamps(): Promise<SanityCamps[]> {
 }
 
 export async function getSwimmingPools(): Promise<SanitySwimmingPool[]> {
-  const querySwimmingPools = groq`*[_type == "swimmingPool"]{"id":_id,name,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]`;
+  const querySwimmingPools = groq`*[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]`;
 
   const course = await client.fetch(querySwimmingPools);
 
