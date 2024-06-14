@@ -44,11 +44,13 @@ export async function getAvailableCourses(
   }
 
   if (filters?.time) {
-    const hours = Array.isArray(filters.time.split(','))
-      ? filters.time.split(',').map((time) => `"${time.concat(':00')}"`)
-      : [`"${filters.time.concat(':00')}"`];
+    const minutes = ['00', '15', '30', '45'];
+    const hours = filters.time.split(',');
+    const times = hours.flatMap((hour) =>
+      minutes.map((minute) => `"${hour}:${minute}"`)
+    );
 
-    filterQuery.push(`[${hours}] match timeFrom`);
+    filterQuery.push(`[${times.join(',')}] match timeFrom`);
   }
 
   if (filters?.skillLevel) {
