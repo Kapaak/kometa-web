@@ -64,7 +64,7 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
       router.push(
         {
           pathname: router.pathname,
-          query: { ...router.query, ...newParams },
+          query: newParams,
         },
         undefined,
         { shallow: true }
@@ -75,11 +75,14 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
 
   useEffect(() => {
     const subscription = watch((values, { name }) => {
-      const filteredValues = filterEmptyValuesFromObject(values);
+      //make sure that we are updating only when controlled value is changed and not on rerender
+      if (name) {
+        const filteredValues = filterEmptyValuesFromObject(values);
 
-      updateQueryParams(filteredValues);
+        updateQueryParams(filteredValues);
 
-      setFilter(filteredValues);
+        setFilter(filteredValues);
+      }
     });
     return () => subscription.unsubscribe();
   }, [setFilter, updateQueryParams, watch]);

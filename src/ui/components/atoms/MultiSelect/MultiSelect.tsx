@@ -40,6 +40,14 @@ export const MultiSelect = ({
   }, [placeholder, selectedValues.length]);
 
   const handleValueChange = (val: string) => {
+    //in some edge cases the value is string
+    //@ts-ignore
+    if (selectedValues === val) {
+      onChange?.([]);
+      setSelectedValues([]);
+      return;
+    }
+
     const newSelectedValues = selectedValues.includes(val)
       ? selectedValues?.filter((v) => v !== val)
       : [...selectedValues, val];
