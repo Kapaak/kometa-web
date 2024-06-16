@@ -33,8 +33,12 @@ export const Select = ({
 
   const handleValueChange = (value: string) => {
     onChange?.(value);
-    setOpen(false);
     setSelectedValue(value);
+    setOpen(false);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const displayValue = useMemo(() => {
@@ -50,7 +54,8 @@ export const Select = ({
   return (
     <S.Select
       open={open}
-      onValueChange={handleValueChange}
+      //cant use onValueChange, because it wasnt working on mobile - first tap only highlighted the item and second tap triggered onClick event
+      // onValueChange={handleValueChange}
       value={selectedValue}
     >
       <S.SelectTrigger onClick={() => setOpen(true)}>
@@ -62,27 +67,21 @@ export const Select = ({
       <RadixUiSelect.Portal>
         <S.SelectContent
           position="popper"
-          onPointerDownOutside={() => {
-            setOpen(false);
-          }}
+          onPointerDownOutside={handleClose}
+          onEscapeKeyDown={handleClose}
         >
           <Scrollable maxHeight="25rem">
             <S.SelectViewport>
-              <RadixUiSelect.Group
-                ref={(ref) =>
-                  ref?.addEventListener('touchend', (e) => e.preventDefault())
-                }
-              >
-                {options?.map((option) => (
-                  <SelectItem
-                    key={option.value}
-                    value={option.value}
-                    checked={selectedValue === option.value}
-                  >
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </RadixUiSelect.Group>
+              {options?.map((option) => (
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  checked={selectedValue === option.value}
+                  onClick={() => handleValueChange(option.value)}
+                >
+                  {option.label}
+                </SelectItem>
+              ))}
             </S.SelectViewport>
           </Scrollable>
         </S.SelectContent>

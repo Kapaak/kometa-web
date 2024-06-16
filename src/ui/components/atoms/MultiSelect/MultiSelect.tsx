@@ -56,6 +56,10 @@ export const MultiSelect = ({
     setSelectedValues(newSelectedValues);
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     setSelectedValues(value ?? []);
   }, [value]);
@@ -74,9 +78,8 @@ export const MultiSelect = ({
       <RadixUiSelect.Portal>
         <S.MultiSelectContent
           position="popper"
-          onPointerDownOutside={() => {
-            setOpen(false);
-          }}
+          onPointerDownOutside={handleClose}
+          onEscapeKeyDown={handleClose}
         >
           <Scrollable>
             <S.MultiSelectViewport>
