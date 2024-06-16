@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { CaretDown } from '@phosphor-icons/react';
 import * as RadixUiSelect from '@radix-ui/react-select';
@@ -28,56 +28,37 @@ export const Select = ({
   onChange,
   value,
 }: SelectProps) => {
-  const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(value ?? '');
-
-  const handleValueChange = (value: string) => {
-    onChange?.(value);
-    setSelectedValue(value);
-    setOpen(false);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const displayValue = useMemo(() => {
-    const foundItem = options?.find((option) => option.value === selectedValue);
+    const foundItem = options?.find((option) => option.value === value);
 
     return foundItem?.label ?? '';
-  }, [options, selectedValue]);
-
-  useEffect(() => {
-    setSelectedValue(value ?? '');
-  }, [value]);
+  }, [options, value]);
 
   return (
     <S.Select
-      open={open}
-      //cant use onValueChange, because it wasnt working on mobile - first tap only highlighted the item and second tap triggered onClick event
-      // onValueChange={handleValueChange}
-      value={selectedValue}
+      onValueChange={(val) => {
+        //value is for some reason triggered twice (once with empty string)
+        if (val) {
+          onChange?.(val);
+        }
+      }}
+      value={value}
     >
-      <S.SelectTrigger onClick={() => setOpen(true)}>
+      <S.SelectTrigger>
         <S.SelectValue placeholder={<Text variant="body5">{placeholder}</Text>}>
           <Text variant="body5">{displayValue}</Text>
         </S.SelectValue>
         <CaretDown />
       </S.SelectTrigger>
       <RadixUiSelect.Portal>
-        <S.SelectContent
-          position="popper"
-          onPointerDownOutside={handleClose}
-          onEscapeKeyDown={handleClose}
-        >
+        <S.SelectContent position="popper">
           <Scrollable maxHeight="25rem">
             <S.SelectViewport>
               {options?.map((option) => (
                 <SelectItem
                   key={option.value}
                   value={option.value}
-                  checked={selectedValue === option.value}
-                  onClick={() => handleValueChange(option.value)}
+                  checked={value === option.value}
                 >
                   {option.label}
                 </SelectItem>
