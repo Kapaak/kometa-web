@@ -1,7 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { CaretDown } from '@phosphor-icons/react';
 import * as RadixUiSelect from '@radix-ui/react-select';
+
+import { joinValues } from '~/utils/format';
+
+import { Scrollable } from '../Scrollable';
+import { Text } from '../Text';
+
+import { MultiSelectItem } from './parts';
+
+import * as S from './MultiSelect.style';
 
 type Option = {
   label: string;
@@ -15,13 +24,6 @@ export interface MultiSelectProps {
   onChange?: (value: string[]) => void;
 }
 
-import { Scrollable } from '../Scrollable';
-import { Text } from '../Text';
-
-import { MultiSelectItem } from './parts';
-
-import * as S from './MultiSelect.style';
-
 export const MultiSelect = ({
   placeholder,
   options,
@@ -29,46 +31,34 @@ export const MultiSelect = ({
   value,
 }: MultiSelectProps) => {
   const [open, setOpen] = useState(false);
-  const [selectedValues, setSelectedValues] = useState<string[]>(value ?? []);
 
   const displayValue = useMemo(() => {
-    if (selectedValues.length === 0) {
+    if (value?.length === 0) {
       return placeholder;
     }
 
-    return `${placeholder} (${selectedValues.length})`;
-  }, [placeholder, selectedValues.length]);
+    return joinValues([placeholder, value?.length && `(${value?.length})`]);
+  }, [placeholder, value?.length]);
 
   const handleValueChange = (val: string) => {
-    //in some edge cases the value is string
-    //@ts-ignore
-    if (selectedValues === val) {
-      onChange?.([]);
-      setSelectedValues([]);
+    if (!Array.isArray(value)) {
+      onChange?.(value === val ? [] : [val]);
       return;
     }
 
-    const newSelectedValues = selectedValues.includes(val)
-      ? selectedValues?.filter((v) => v !== val)
-      : [...selectedValues, val];
-
-    onChange?.(newSelectedValues);
-    setSelectedValues(newSelectedValues);
+    onChange?.(
+      value.includes(val) ? value.filter((v) => v !== val) : [...value, val]
+    );
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    setSelectedValues(value ?? []);
-  }, [value]);
-
   return (
     <S.MultiSelect
-      // value is empty, because if it was cantrolled by the component it would disallow clicking twice (select and deselect) on the same item
-      //therefore this component wont have default value from controller
-      value=""
+      //@ts-ignore This will output error, because it expects string, but I want multiple string elements
+      value={value}
       open={open}
     >
       <S.MultiSelectTrigger onClick={() => setOpen(true)}>
@@ -87,14 +77,7 @@ export const MultiSelect = ({
                 <MultiSelectItem
                   key={option.value}
                   value={option.value}
-                  checked={selectedValues?.includes(option.value)}
-                  // onTouchEnd={() => {
-                  //   //on mobile the onClick is sometimes ignored when clicking too fast
-                  //   (isMobile || isTablet) && handleValueChange(option.value);
-                  // }}
-                  // onClick={() => {
-                  //   !isMobile && !isTablet && handleValueChange(option.value);
-                  // }}
+                  checked={value?.includes(option.value)}
                   onClick={() => handleValueChange(option.value)}
                 >
                   {option.label}

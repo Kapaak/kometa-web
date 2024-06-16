@@ -49,12 +49,12 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
         ? Array.isArray(filter?.time)
           ? filter?.time
           : [filter?.time]
-        : [],
+        : '',
       place: Boolean(filter?.place)
         ? Array.isArray(filter?.place)
           ? filter?.place
           : [filter?.place]
-        : [],
+        : '',
     },
   });
   const { watch } = form;

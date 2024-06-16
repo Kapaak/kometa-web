@@ -1,7 +1,14 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { CaretDown } from '@phosphor-icons/react';
 import * as RadixUiSelect from '@radix-ui/react-select';
+
+import { Scrollable } from '../Scrollable';
+import { Text } from '../Text';
+
+import { SelectItem } from './parts';
+
+import * as S from './Select.style';
 
 type Option = {
   label: string;
@@ -15,43 +22,47 @@ export interface SelectProps {
   onChange?: (value: string) => void;
 }
 
-import { Scrollable } from '../Scrollable';
-import { Text } from '../Text';
-
-import { SelectItem } from './parts';
-
-import * as S from './Select.style';
-
 export const Select = ({
   placeholder,
   options,
   onChange,
   value,
 }: SelectProps) => {
+  // I need to set open and setOpen, without it the onClick on SelectItem wouldnt work
+  // I want to use onClick because Select onChange wasnt triggering on click to selected item
+  const [open, setOpen] = useState(false);
+
   const displayValue = useMemo(() => {
     const foundItem = options?.find((option) => option.value === value);
 
-    return foundItem?.label ?? '';
-  }, [options, value]);
+    return foundItem?.label ?? placeholder ?? '';
+  }, [options, placeholder, value]);
+
+  const handleValueChange = (newValue: string) => {
+    if (newValue === value) {
+      return onChange?.('');
+    }
+    onChange?.(newValue);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <S.Select
-      onValueChange={(val) => {
-        //value is for some reason triggered twice (once with empty string)
-        if (val) {
-          onChange?.(val);
-        }
-      }}
-      value={value}
-    >
-      <S.SelectTrigger>
+    <S.Select value={value} open={open}>
+      <S.SelectTrigger onClick={() => setOpen(true)}>
         <S.SelectValue placeholder={<Text variant="body5">{placeholder}</Text>}>
           <Text variant="body5">{displayValue}</Text>
         </S.SelectValue>
         <CaretDown />
       </S.SelectTrigger>
       <RadixUiSelect.Portal>
-        <S.SelectContent position="popper">
+        <S.SelectContent
+          position="popper"
+          onPointerDownOutside={handleClose}
+          onEscapeKeyDown={handleClose}
+        >
           <Scrollable maxHeight="25rem">
             <S.SelectViewport>
               {options?.map((option) => (
@@ -59,6 +70,7 @@ export const Select = ({
                   key={option.value}
                   value={option.value}
                   checked={value === option.value}
+                  onClick={() => handleValueChange(option.value)}
                 >
                   {option.label}
                 </SelectItem>
