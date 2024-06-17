@@ -37,7 +37,7 @@ export function TableBody<T>({
       ))}
       {showNoData && (rows?.rows?.length ?? 0) === 0 && (
         <TableRow>
-          <TableCell variant="body" colSpan={10000}>
+          <TableCell variant="body" colSpan={10}>
             {noDataChildren}
           </TableCell>
         </TableRow>

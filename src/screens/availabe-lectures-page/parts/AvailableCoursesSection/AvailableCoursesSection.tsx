@@ -3,13 +3,13 @@ import {
   Hidden,
   InfiniteScrollObserver,
   MaxWidth,
-  Text,
-  VerticalStack,
 } from '~/ui/components/atoms';
 import { Table } from '~/ui/components/organisms';
 
 import {
   AvailableCoursesFilter,
+  AvailableCoursesTableEmpty,
+  AvailableCoursesTableError,
   MobileAvailableCoursesTable,
 } from '../../components';
 import { useAvailableCoursesFilterContext } from '../../contexts';
@@ -20,7 +20,7 @@ import * as S from './AvailableCoursesSection.style';
 export function AvailableCoursesSection() {
   const { filter } = useAvailableCoursesFilterContext();
 
-  const { data, fetchNextPage, hasNextPage, isLoading } =
+  const { data, fetchNextPage, hasNextPage, isLoading, isError } =
     useGetAvailableCourses({
       filter,
     });
@@ -41,9 +41,10 @@ export function AvailableCoursesSection() {
                 !isLoading && table?.getRowModel()?.rows?.length === 0
               }
               noDataChildren={
-                <VerticalStack>
-                  <Text variant="body2">Dostupné lekce nebyly nalezeny.</Text>
-                </VerticalStack>
+                <>
+                  {isError && <AvailableCoursesTableError />}
+                  {!isError && <AvailableCoursesTableEmpty />}
+                </>
               }
             />
           </S.Scrollable>
@@ -52,6 +53,7 @@ export function AvailableCoursesSection() {
           <MobileAvailableCoursesTable
             availableCourses={data}
             isLoading={isLoading}
+            isError={isError}
           />
         </Hidden>
       </MaxWidth>
