@@ -24,7 +24,7 @@ interface AvailableCoursesFilterProps {}
 
 type FormData = {
   gender?: string;
-  day?: string;
+  day?: string[] | string;
   time?: string[] | string;
   place?: string[] | string;
   age?: string;
@@ -42,7 +42,11 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
   const form = useForm<FormData>({
     values: {
       gender: filter?.gender,
-      day: filter?.day,
+      day: Boolean(filter?.day)
+        ? Array.isArray(filter?.day)
+          ? filter?.day
+          : [filter?.day]
+        : '',
       age: filter?.age,
       skillLevel: filter?.skillLevel,
       time: Boolean(filter?.time)
