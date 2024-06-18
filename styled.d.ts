@@ -36,7 +36,7 @@ declare module 'styled-components' {
         500: string;
         600: string;
         700: string;
-        // 800: string
+        800: string;
         900: string;
       };
     };

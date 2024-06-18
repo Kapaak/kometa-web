@@ -8,6 +8,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useTheme } from 'styled-components';
 
 import { GetAvailableCourse } from '~/domains';
 import { Button, Text } from '~/ui/components/atoms';
@@ -19,7 +20,13 @@ const EMPTY_ARRAY: GetAvailableCourse[] = [];
 export function useAvailableCoursesTable(
   courses: GetAvailableCourse[] = EMPTY_ARRAY
 ) {
+  console.log('🚀 ~ courses:', courses);
   const [sortBy, setSortBy] = useState<SortingState>([]);
+  const theme = useTheme();
+  const { grey } = theme.colors;
+
+  const getAvailabilityColor = (isFull?: boolean) =>
+    isFull ? grey['600'] : grey['900'];
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<GetAvailableCourse>();
@@ -27,21 +34,44 @@ export function useAvailableCoursesTable(
     return [
       columnHelper.accessor('name', {
         header: 'Bazén',
-        cell: (info) => <Text variant="body3">{info.getValue()}</Text>,
+        cell: (info) => {
+          const { isFull } = info.row.original ?? {};
+
+          return (
+            <Text variant="body3" color={getAvailabilityColor(isFull)}>
+              {info.getValue()}
+            </Text>
+          );
+        },
       }),
       columnHelper.accessor('skillLevelName', {
         header: 'Úroveň',
         meta: {
           align: 'center',
         },
-        cell: (info) => <Text variant="body2">{info.getValue()}</Text>,
+        cell: (info) => {
+          const { isFull } = info.row.original ?? {};
+          return (
+            <Text variant="body2" color={getAvailabilityColor(isFull)}>
+              {info.getValue()}
+            </Text>
+          );
+        },
       }),
       columnHelper.accessor('day', {
         header: 'Den',
         meta: {
           align: 'center',
         },
-        cell: (info) => <Text variant="body2">{info.getValue()}</Text>,
+        cell: (info) => {
+          const { isFull } = info.row.original ?? {};
+
+          return (
+            <Text variant="body2" color={getAvailabilityColor(isFull)}>
+              {info.getValue()}
+            </Text>
+          );
+        },
       }),
       columnHelper.accessor('timeFrom', {
         header: 'Čas',
@@ -49,10 +79,10 @@ export function useAvailableCoursesTable(
           align: 'center',
         },
         cell: (info) => {
-          const { timeTo } = info.row.original ?? {};
+          const { timeTo, isFull } = info.row.original ?? {};
 
           return (
-            <Text variant="body2">
+            <Text variant="body2" color={getAvailabilityColor(isFull)}>
               {joinValues([info.getValue(), timeTo], { separator: ' - ' })}
             </Text>
           );
@@ -64,10 +94,14 @@ export function useAvailableCoursesTable(
           align: 'center',
         },
         cell: (info) => {
-          const { ageTo } = info.row.original ?? {};
+          const { ageTo, isFull } = info.row.original ?? {};
 
           return (
-            <Text variant="body2" style={{ whiteSpace: 'nowrap' }}>
+            <Text
+              variant="body2"
+              color={getAvailabilityColor(isFull)}
+              style={{ whiteSpace: 'nowrap' }}
+            >
               {joinValues([info.getValue(), ageTo], { separator: ' - ' })} let
             </Text>
           );
@@ -77,16 +111,18 @@ export function useAvailableCoursesTable(
         id: 'actions',
         header: 'Možnosti',
         cell: (info) => {
+          const { isFull, url } = info.row.original ?? {};
+
           return (
             <Button
               size="small"
-              color="tetriary"
-              customColor="#000"
+              color={isFull ? 'grey' : 'tetriary'}
+              disabled={isFull}
+              customColor={isFull ? grey['800'] : grey['900']}
               style={{ display: 'inline-flex' }}
             >
-              <NextLink href={info.row.original?.url ?? ''}>
-                Zobrazit kurz
-              </NextLink>
+              {isFull && <span>Obsazeno</span>}
+              {!isFull && <NextLink href={url ?? ''}>Zobrazit kurz</NextLink>}
             </Button>
           );
         },

@@ -64,7 +64,7 @@ export const Select = ({
         </S.SelectValue>
         {!isLoading && <CaretDown />}
         {isLoading && (
-          <ClipLoader size="18" speedMultiplier={0.5} color={grey['700']} />
+          <ClipLoader size="18" speedMultiplier={0.5} color={grey['800']} />
         )}
       </S.SelectTrigger>
       <RadixUiSelect.Portal>

@@ -45,7 +45,7 @@ export const Button = styled(ButtonInitial)`
     }
   }}
 
-  ${({ color = 'primary', theme: { colors } }) => {
+  ${({ color = 'primary', disabled, theme: { colors } }) => {
     switch (color) {
       case 'primary':
         return css`
@@ -85,9 +85,9 @@ export const Button = styled(ButtonInitial)`
       case 'grey':
         return css`
           color: ${colors.grey[900]};
-          background-color: ${colors.grey[200]};
+          background-color: ${colors.grey[600]};
           &:hover {
-            background-color: ${colors.grey[200]};
+            background-color: ${disabled ? colors.grey[600] : colors.grey[700]};
           }
         `;
     }
