@@ -14,6 +14,7 @@ export type ControlledSelectProps<T extends FieldValues> = ContainerProps<T> &
 export function ControlledSelect<T extends FieldValues>({
   options,
   placeholder,
+  isLoading,
   ...props
 }: ControlledSelectProps<T>) {
   return (
@@ -25,6 +26,7 @@ export function ControlledSelect<T extends FieldValues>({
           options={options}
           value={field.value}
           onChange={field.onChange}
+          isLoading={isLoading}
         />
       )}
     />

@@ -14,6 +14,7 @@ export type ControlledMultiSelectProps<T extends FieldValues> =
 export function ControlledMultiSelect<T extends FieldValues>({
   options,
   placeholder,
+  isLoading,
   ...props
 }: ControlledMultiSelectProps<T>) {
   return (
@@ -25,6 +26,7 @@ export function ControlledMultiSelect<T extends FieldValues>({
           options={options}
           onChange={field.onChange}
           value={field.value}
+          isLoading={isLoading}
         />
       )}
     />

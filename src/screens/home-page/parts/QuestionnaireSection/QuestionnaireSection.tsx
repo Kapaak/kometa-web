@@ -96,6 +96,7 @@ export function QuestionnaireSection() {
                     name="place"
                     placeholder="Preferovaná místa"
                     options={swimmingPoolOptions}
+                    isLoading={isSwimmingPoolLoading}
                   />
                   <ControlledSelect
                     name="age"

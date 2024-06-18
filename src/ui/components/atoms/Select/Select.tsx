@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 import { CaretDown } from '@phosphor-icons/react';
 import * as RadixUiSelect from '@radix-ui/react-select';
+import { useTheme } from 'styled-components';
 
 import { Scrollable } from '../Scrollable';
 import { Text } from '../Text';
@@ -19,18 +21,23 @@ export interface SelectProps {
   placeholder?: string;
   value?: string;
   options?: Option[];
+  isLoading?: boolean;
   onChange?: (value: string) => void;
 }
 
 export const Select = ({
   placeholder,
   options,
+  isLoading,
   onChange,
   value,
 }: SelectProps) => {
   // I need to set open and setOpen, without it the onClick on SelectItem wouldnt work
   // I want to use onClick because Select onChange wasnt triggering on click to selected item
   const [open, setOpen] = useState(false);
+
+  const theme = useTheme();
+  const { grey } = theme.colors;
 
   const displayValue = useMemo(() => {
     const foundItem = options?.find((option) => option.value === value);
@@ -55,7 +62,10 @@ export const Select = ({
         <S.SelectValue placeholder={<Text variant="body5">{placeholder}</Text>}>
           <Text variant="body5">{displayValue}</Text>
         </S.SelectValue>
-        <CaretDown />
+        {!isLoading && <CaretDown />}
+        {isLoading && (
+          <ClipLoader size="18" speedMultiplier={0.5} color={grey['700']} />
+        )}
       </S.SelectTrigger>
       <RadixUiSelect.Portal>
         <S.SelectContent

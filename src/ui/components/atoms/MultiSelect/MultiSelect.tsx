@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 import { CaretDown } from '@phosphor-icons/react';
 import * as RadixUiSelect from '@radix-ui/react-select';
+import { useTheme } from 'styled-components';
 
 import { joinValues } from '~/utils/format';
 
@@ -21,16 +23,21 @@ export interface MultiSelectProps {
   placeholder?: string;
   value?: string[];
   options?: Option[];
+  isLoading?: boolean;
   onChange?: (value: string[]) => void;
 }
 
 export const MultiSelect = ({
   placeholder,
   options,
+  isLoading,
   onChange,
   value,
 }: MultiSelectProps) => {
   const [open, setOpen] = useState(false);
+
+  const theme = useTheme();
+  const { grey } = theme.colors;
 
   const displayValue = useMemo(() => {
     if (value?.length === 0) {
@@ -63,7 +70,10 @@ export const MultiSelect = ({
     >
       <S.MultiSelectTrigger onClick={() => setOpen(true)}>
         <Text variant="body5">{displayValue}</Text>
-        <CaretDown />
+        {!isLoading && <CaretDown />}
+        {isLoading && (
+          <ClipLoader size="18" speedMultiplier={0.5} color={grey['700']} />
+        )}
       </S.MultiSelectTrigger>
       <RadixUiSelect.Portal>
         <S.MultiSelectContent
