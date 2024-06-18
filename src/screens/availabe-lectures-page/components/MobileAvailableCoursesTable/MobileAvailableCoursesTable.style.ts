@@ -12,3 +12,10 @@ export const MobileAvailableCoursesTable = styled.div`
   gap: 1.6rem;
   grid-template-columns: repeat(auto-fill, minmax(29rem, 1fr));
 `;
+
+export const MobileAvailableCoursesTableLoadingWrapper = styled.div`
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 30rem;
+`;

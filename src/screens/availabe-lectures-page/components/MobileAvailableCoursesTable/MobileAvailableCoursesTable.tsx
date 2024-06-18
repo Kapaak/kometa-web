@@ -1,4 +1,7 @@
+import { useTheme } from 'styled-components';
+
 import { GetAvailableCourse } from '~/domains';
+import { Loader } from '~/ui/components/atoms';
 
 import { AvailableCoursesTableEmpty } from '../AvailableCoursesTableEmpty';
 import { AvailableCoursesTableError } from '../AvailableCoursesTableError';
@@ -17,6 +20,17 @@ export function MobileAvailableCoursesTable({
   isLoading,
   isError,
 }: MobileAvailableCoursesTableProps) {
+  const theme = useTheme();
+  const { primary } = theme.colors;
+
+  if (isLoading) {
+    return (
+      <S.MobileAvailableCoursesTableLoadingWrapper>
+        <Loader color={primary.main} />
+      </S.MobileAvailableCoursesTableLoadingWrapper>
+    );
+  }
+
   if (isError && !isLoading) {
     return <AvailableCoursesTableError />;
   }
