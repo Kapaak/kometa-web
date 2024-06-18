@@ -33,7 +33,7 @@ export function HeroSection() {
                 customColor="#fff"
                 icon={<ArrowRight size={20} />}
               >
-                Zobrazit více
+                Dostupné lekce
               </IconButton>
             </NextLink>
           </S.HeroSectionBannerDescription>
