@@ -21,7 +21,7 @@ export function MobileAvailableCoursesTable({
     return <AvailableCoursesTableError />;
   }
 
-  if (!isLoading && !isError) {
+  if (!isLoading && !isError && !isLoading && availableCourses?.length === 0) {
     return <AvailableCoursesTableEmpty />;
   }
 
