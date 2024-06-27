@@ -13,6 +13,7 @@ export const MultiSelectTrigger = styled(RadixUiSelect.Trigger)`
   border-radius: 0.4rem;
   cursor: pointer;
   min-width: 24rem;
+  background-color: ${({ theme }) => theme.colors.grey['100']};
 
   &:focus-within {
     border: 1px solid ${({ theme }) => theme.colors.primary.main};

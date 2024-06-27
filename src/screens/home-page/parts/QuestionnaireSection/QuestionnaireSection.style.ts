@@ -20,8 +20,11 @@ export const Title = styled(Text).attrs({ variant: 'h3' })`
 `;
 
 export const QuestionnaireRoot = styled(RadixAccordion.Root)`
+  background-color: ${({ theme }) => theme.colors.grey['100']};
   padding: 2.4rem;
-  box-shadow: ${({ theme }) => theme.shadows.dark};
+  box-shadow: ${({ theme }) => theme.shadows.main};
+  border-radius: 1rem;
+  border: 1px solid ${({ theme }) => theme.colors.grey['200']};
 
   [data-state='open'] {
     overflow: initial;

@@ -82,7 +82,11 @@ export function useAvailableCoursesTable(
           const { timeTo, isFull } = info.row.original ?? {};
 
           return (
-            <Text variant="body2" color={getAvailabilityColor(isFull)}>
+            <Text
+              style={{ whiteSpace: 'nowrap' }}
+              variant="body2"
+              color={getAvailabilityColor(isFull)}
+            >
               {joinValues([info.getValue(), timeTo], { separator: ' - ' })}
             </Text>
           );
@@ -133,7 +137,7 @@ export function useAvailableCoursesTable(
         },
       }),
     ];
-  }, []);
+  }, [getAvailabilityColor, grey]);
 
   const table = useReactTable({
     data: courses,

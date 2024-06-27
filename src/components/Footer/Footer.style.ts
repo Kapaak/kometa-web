@@ -4,7 +4,7 @@ import { MaxWidth } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const Footer = styled.footer`
-  padding: 4rem 1rem;
+  padding: 4rem 2rem;
   background-color: ${({ theme }) => theme.colors.primary.main};
 
   ${({ theme }) => css`
@@ -20,7 +20,7 @@ export const MaxWidthContainer = styled(MaxWidth)`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {
       background-color: ${theme.colors.primary.main};
       border-radius: 2rem;
-      padding: 4rem;
+      padding: 7.7rem 6.5rem 4rem;
     }
   `}
 `;

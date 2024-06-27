@@ -9,6 +9,7 @@ export function ServicesSection() {
   return (
     <S.ServicesSection id="kurzy">
       <MaxWidth>
+        <S.ServiceSectionHeadline>Nabídka služeb</S.ServiceSectionHeadline>
         <S.ServicesSectionContainer>
           {servicesData.map((service) => (
             <ServiceCard

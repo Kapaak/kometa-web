@@ -5,6 +5,8 @@ import { useTheme } from 'styled-components';
 import { A, Strong, Text, VerticalStack } from '~/ui/components/atoms';
 import { formatLink } from '~/utils/format';
 
+import * as S from './FooterMainContentItem.style';
+
 interface FooterMainContentItemProps {
   label: string;
   details: {
@@ -30,7 +32,7 @@ export function FooterMainContentItem({
       {details.map((detail, index) => (
         <Fragment key={index}>
           {detail.action === 'download' && (
-            <Text variant="body5" color={grey[100]}>
+            <S.FoooterMainContentText color={grey[100]}>
               <A
                 href={detail?.href}
                 download
@@ -39,27 +41,27 @@ export function FooterMainContentItem({
               >
                 {detail.value}
               </A>
-            </Text>
+            </S.FoooterMainContentText>
           )}
 
           {detail.action === 'contact' && detail?.href && (
-            <Text variant="body5" color={grey[100]}>
+            <S.FoooterMainContentText color={grey[100]}>
               <A href={formatLink(detail.href)}>{detail.value}</A>
-            </Text>
+            </S.FoooterMainContentText>
           )}
 
           {detail.external && detail?.href && (
-            <Text variant="body5" color={grey[100]}>
+            <S.FoooterMainContentText color={grey[100]}>
               <A href={detail.href} target="_blank" rel="noopener noreferrer">
                 {detail.value}
               </A>
-            </Text>
+            </S.FoooterMainContentText>
           )}
 
           {detail.action === undefined && !detail.external && (
-            <Text variant="body5" color={grey[100]}>
+            <S.FoooterMainContentText color={grey[100]}>
               {detail.value}
-            </Text>
+            </S.FoooterMainContentText>
           )}
         </Fragment>
       ))}

@@ -9,7 +9,11 @@ export const Headline = styled(Text).attrs({
 })(({ theme: { breakpoints, typography, colors, fonts } }) => ({
   color: colors.primary.main,
   fontFamily: fonts.secondary,
+  letterSpacing: '0.1rem',
   ...{ ...typography.h3 },
+  [`@media ${minBreakpoint(breakpoints.md)}`]: {
+    fontSize: '4rem',
+  },
   [`@media ${minBreakpoint(breakpoints.xl)}`]: {
     ...{ ...typography.h2 },
   },
