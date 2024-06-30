@@ -12,6 +12,7 @@ const ButtonInitial = styled.button.withConfig({
 }));
 
 export const Button = styled(ButtonInitial)`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react';
+
 import { useGetAvailableCourses } from '~/adapters';
+import { Gender } from '~/types';
 import {
   Hidden,
   InfiniteScrollObserver,
@@ -7,6 +10,7 @@ import {
 import { Table } from '~/ui/components/organisms';
 
 import {
+  AvailableCoursesBanner,
   AvailableCoursesFilter,
   AvailableCoursesTableEmpty,
   AvailableCoursesTableError,
@@ -17,7 +21,10 @@ import { useAvailableCoursesTable } from '../../hooks';
 
 import * as S from './AvailableCoursesSection.style';
 
+import { banner } from './AvailableCoursesSection.data';
+
 export function AvailableCoursesSection() {
+  const [bannerData, setBannerData] = useState(banner.initial);
   const { filter } = useAvailableCoursesFilterContext();
 
   const { data, fetchNextPage, hasNextPage, isLoading, isError } =
@@ -27,9 +34,25 @@ export function AvailableCoursesSection() {
 
   const { table } = useAvailableCoursesTable(data);
 
+  useEffect(() => {
+    if (filter?.gender === Gender.FEMALE) {
+      return setBannerData(banner.synchro);
+    }
+
+    setBannerData(banner.initial);
+  }, [filter?.gender]);
+
   return (
     <S.AvailableCoursesSection>
       <MaxWidth>
+        <AvailableCoursesBanner
+          title={bannerData?.title}
+          description={bannerData?.description}
+          imageUrl={bannerData?.imageUrl}
+          url={bannerData?.url}
+          actionLabel={bannerData?.actionLabel}
+        />
+
         <AvailableCoursesFilter />
         <Hidden down="md">
           <S.Scrollable>

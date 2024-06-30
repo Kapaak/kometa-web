@@ -3,6 +3,10 @@ import styled, { css } from 'styled-components';
 import { Text } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
+export const AvailableCoursesFilter = styled.section`
+  margin-block: 4rem;
+`;
+
 export const AvailableCoursesFilterTitle = styled(Text).attrs({
   variant: 'h3',
   as: 'h2',

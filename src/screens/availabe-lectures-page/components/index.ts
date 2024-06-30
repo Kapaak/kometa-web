@@ -1,3 +1,4 @@
+export * from './AvailableCoursesBanner';
 export * from './AvailableCoursesFilter';
 export * from './AvailableCoursesLayout';
 export * from './AvailableCoursesTableEmpty';

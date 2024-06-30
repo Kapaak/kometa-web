@@ -92,7 +92,7 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
   }, [setFilter, updateQueryParams, watch]);
 
   return (
-    <div>
+    <S.AvailableCoursesFilter>
       <S.AvailableCoursesFilterTitle>Filtr</S.AvailableCoursesFilterTitle>
       <FormProvider {...form}>
         <S.ControlledItems>
@@ -129,6 +129,6 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
           />
         </S.ControlledItems>
       </FormProvider>
-    </div>
+    </S.AvailableCoursesFilter>
   );
 }

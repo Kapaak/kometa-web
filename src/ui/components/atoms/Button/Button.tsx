@@ -1,12 +1,12 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react';
 
-import { useTheme } from 'styled-components'
+import { useTheme } from 'styled-components';
 
-import { Loader } from '../Loader'
+import { Loader } from '../Loader';
 
-import * as S from './Button.style'
+import * as S from './Button.style';
 
-import { ButtonProps } from './Button.type'
+import { ButtonProps } from './Button.type';
 
 export function Button({
   children,
@@ -15,8 +15,8 @@ export function Button({
   disabled,
   ...rest
 }: PropsWithChildren<ButtonProps>) {
-  const theme = useTheme()
-  const { grey } = theme.colors
+  const theme = useTheme();
+  const { grey } = theme.colors;
   return (
     <S.Button size={size} disabled={disabled} {...rest}>
       {loading && (
@@ -29,5 +29,5 @@ export function Button({
         {children}
       </S.ChildrenContainer>
     </S.Button>
-  )
+  );
 }
