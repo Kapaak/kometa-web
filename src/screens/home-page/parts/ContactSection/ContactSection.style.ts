@@ -1,7 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-import { Text } from '~/ui/components/atoms';
-import { minBreakpoint } from '~/utils/dimensions';
+import { Text, VerticalStack } from '~/ui/components/atoms';
 
 export const ContactSection = styled.section`
   padding: 2rem 2rem 0;
@@ -15,28 +14,16 @@ export const SwimmingPoolTitle = styled(Text).attrs({
   font-family: ${({ theme }) => theme.fonts.secondary};
   letter-spacing: 0.1rem;
 `;
-export const ContactSectionDescription = styled(Text).attrs({
-  variant: 'body2',
-})`
-  max-width: 60rem;
-`;
-
 export const SwimmingPoolContent = styled.div`
   margin-left: 1rem;
 `;
 
-export const ContactSectionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+export const ContactSectionContainer = styled(VerticalStack)`
   gap: 1.6rem;
 
   .google-map {
     min-height: 40rem;
+    border-radius: 1rem;
+    box-shadow: ${({ theme }) => theme.shadows.main};
   }
-
-  ${({ theme }) => css`
-    @media (${minBreakpoint(theme.breakpoints.sm)}) {
-      flex-direction: row;
-    }
-  `}
 `;

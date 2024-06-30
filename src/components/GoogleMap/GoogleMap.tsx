@@ -6,7 +6,7 @@ import { useGetSwimmingPool } from '~/adapters';
 import { LatLng } from '~/types';
 import { convertComponentToNode } from '~/utils/transform';
 
-import { Marker } from './parts';
+import { Marker, MarkerInfo } from './parts';
 
 import * as S from './GoogleMap.style';
 
@@ -58,13 +58,21 @@ export function GoogleMap({ onClick }: GoogleMapProps) {
 
         if (data && data?.length > 0) {
           data?.forEach(async (pool) => {
-            const markerNode = convertComponentToNode(<Marker />);
-            const infoWindowNode = '<div>This is a dialog content!</div>';
+            const geocoder = new Geocoder();
 
             const swimmingPoolLocation = {
               lat: pool?.location?.lat ?? 0,
               lng: pool.location?.lng ?? 0,
             };
+
+            const address = pool?.location
+              ? await getAddressFromGeocode(swimmingPoolLocation, geocoder)
+              : '';
+
+            const markerNode = convertComponentToNode(<Marker />);
+            const infoWindowNode = convertComponentToNode(
+              <MarkerInfo address={address} url={pool?.url} />
+            );
 
             const advancedMarker = new AdvancedMarkerElement({
               id: pool.id,
@@ -75,41 +83,19 @@ export function GoogleMap({ onClick }: GoogleMapProps) {
 
             const infoWindow = new InfoWindow({
               content: infoWindowNode,
+              headerContent: pool?.name,
+              minWidth: '20rem',
             });
 
-            const geocoder = new Geocoder();
-
-            const address = pool?.location
-              ? await getAddressFromGeocode(swimmingPoolLocation, geocoder)
-              : '';
-
-            // Add click listener to the marker
             advancedMarker.addListener('click', () => {
               if (lastOpenedInfoWindow) {
-                console.log('close', lastOpenedInfoWindow);
-
                 lastOpenedInfoWindow.close();
               }
 
-              // Open the dialog above the marker
               infoWindow.open(map, advancedMarker);
-              // infoWindow.open({
-              //   map,
-              //   anchor: advancedMarker,
-              // });
 
               lastOpenedInfoWindow = infoWindow;
             });
-
-            // google.maps.event.addListener(advancedMarker, 'click', function () {
-            //   onClick?.({
-            //     id: pool?.id,
-            //     name: pool?.name,
-            //     address,
-            //     url: pool?.url,
-            //     isPrivate: pool?.privateSwimmingPool ?? false,
-            //   });
-            // });
           });
         }
       } catch (e: any) {

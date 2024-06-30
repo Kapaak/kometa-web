@@ -37,15 +37,7 @@ export function ContactSection({}: ContactSectionProps) {
       <MaxWidth>
         <S.ContactSectionContainer>
           <VerticalStack justify="space-between">
-            <VerticalStack gap="1.6rem">
-              <Headline>Podívejte se kde plaveme</Headline>
-              <S.ContactSectionDescription variant="body2">
-                Vyberte si bazén, kliknutím na ikonu v mapě, a zjistěte o něm
-                více informací. Na mapě jsou označeny všechny dostupné
-                koupaliště v oblasti Brna, takže si můžete snadno vybrat ten,
-                který je pro vás nejvhodnější.
-              </S.ContactSectionDescription>
-            </VerticalStack>
+            <Headline>Podívejte se kde plaveme</Headline>
 
             {selectedSwimmingPool && (
               <VerticalStack gap="1rem" align="flex-start">
