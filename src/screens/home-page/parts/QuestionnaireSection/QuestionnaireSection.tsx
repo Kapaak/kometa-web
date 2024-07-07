@@ -13,12 +13,7 @@ import {
   timeOptions,
 } from '~/constants/options';
 import { useGetSwimmingPoolOptions } from '~/hooks';
-import {
-  Flex,
-  IconButton,
-  MaxWidth,
-  VerticalStack,
-} from '~/ui/components/atoms';
+import { Flex, MaxWidth, VerticalStack } from '~/ui/components/atoms';
 import {
   ControlledMultiSelect,
   ControlledSelect,
@@ -115,9 +110,9 @@ export function QuestionnaireSection() {
                   />
                 </S.ControlledItems>
 
-                <IconButton icon={<ArrowRight size={20} />}>
+                <S.SubmitButton icon={<ArrowRight size={20} />}>
                   Zobrazit výsledky
-                </IconButton>
+                </S.SubmitButton>
               </S.FormContent>
             </FormProvider>
           </S.QuestionnaireContent>

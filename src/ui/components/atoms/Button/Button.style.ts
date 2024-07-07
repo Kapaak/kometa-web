@@ -16,7 +16,6 @@ export const Button = styled(ButtonInitial)`
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: center;
   border: none;
   border-radius: 3rem;
   cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};

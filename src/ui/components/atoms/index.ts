@@ -19,6 +19,7 @@ export * from './Scrollable';
 export * from './Select';
 export * from './Sponsor';
 export * from './Strong';
+export * from './Switch';
 export * from './TableCell';
 export * from './TableRow';
 export * from './Tag';

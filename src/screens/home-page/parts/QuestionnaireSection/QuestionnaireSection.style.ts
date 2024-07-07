@@ -1,7 +1,7 @@
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import styled, { css, keyframes } from 'styled-components';
 
-import { Text, VerticalStack } from '~/ui/components/atoms';
+import { IconButton, Text, VerticalStack } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 const slideDown = keyframes`
@@ -75,4 +75,8 @@ export const ControlledItems = styled.div`
       gap: 2.4rem;
     }
   `}
+`;
+
+export const SubmitButton = styled(IconButton)`
+  align-self: center;
 `;

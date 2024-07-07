@@ -1,4 +1,4 @@
-import { css, styled } from 'styled-components'
+import { css, styled } from 'styled-components';
 
 type justifyOptions =
   | 'space-between'
@@ -9,34 +9,34 @@ type justifyOptions =
   | 'flex-end'
   | 'flex-start'
   | 'left'
-  | 'right'
+  | 'right';
 
-type alignOptions = 'center' | 'flex-end' | 'flex-start' | 'stretch'
+type alignOptions = 'center' | 'flex-end' | 'flex-start' | 'stretch';
 
-type positionOptions = 'absolute' | 'relative' | 'fixed'
+type positionOptions = 'absolute' | 'relative' | 'fixed';
 
-type directionOptions = 'row' | 'column' | 'row-reverse' | 'column-reverse'
+type directionOptions = 'row' | 'column' | 'row-reverse' | 'column-reverse';
 
-type textAlignOptions = 'left' | 'center' | 'right'
+type textAlignOptions = 'left' | 'center' | 'right';
 
-type wrapOptions = 'nowrap' | 'wrap' | 'wrap-reverse'
+type wrapOptions = 'nowrap' | 'wrap' | 'wrap-reverse';
 
 type FlexProps = {
-  justify?: justifyOptions
-  align?: alignOptions
-  direction?: directionOptions
-  gap?: string
-  textAlign?: textAlignOptions
-  width?: string
-  height?: string
-  position?: positionOptions
-  wrap?: wrapOptions
-  padding?: string
-  flex?: string
-  minWidth?: string
-  maxWidth?: string
-  order?: number
-}
+  justify?: justifyOptions;
+  align?: alignOptions;
+  direction?: directionOptions;
+  gap?: string;
+  textAlign?: textAlignOptions;
+  width?: string;
+  height?: string;
+  position?: positionOptions;
+  wrap?: wrapOptions;
+  padding?: string;
+  flex?: string;
+  minWidth?: string;
+  maxWidth?: string;
+  order?: number;
+};
 
 export const Flex = styled.div.withConfig({
   shouldForwardProp: (prop) =>
@@ -68,7 +68,7 @@ export const Flex = styled.div.withConfig({
     wrap = 'nowrap',
     padding = '0',
     flex = '0 1 auto',
-    minWidth = '0',
+    minWidth = 'auto',
     maxWidth = '100%',
     order = 'initial',
   }) => {
@@ -88,6 +88,6 @@ export const Flex = styled.div.withConfig({
       min-width: ${minWidth};
       max-width: ${maxWidth};
       order: ${order};
-    `
+    `;
   }}
-`
+`;
