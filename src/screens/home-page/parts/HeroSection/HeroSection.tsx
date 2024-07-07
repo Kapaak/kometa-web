@@ -12,7 +12,9 @@ export function HeroSection() {
       <MaxWidth>
         <S.HeroSectionBanner>
           <S.HeroSectionBannerImage
-            src="/images/place/banner.jpeg"
+            src="/images/banner/hero-img.jpg"
+            blurDataURL="/images/banner/hero-img.jpg"
+            placeholder="blur"
             fill
             alt="Plavecký bazén Kraví hora, kde se pořádají kurzy pod záštitou Kometa Brno"
           />

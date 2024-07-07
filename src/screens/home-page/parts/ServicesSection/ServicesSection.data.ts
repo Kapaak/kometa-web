@@ -40,7 +40,7 @@ export const servicesData: ServicesData[] = [
   {
     title: 'Plavecké kurzy pro dospělé',
     imageAlt: 'Dospělý mužna v bazénu na plaveckém kurzu',
-    imageUrl: '/images/service/adult-swimming.png',
+    imageUrl: '/images/service/adult-swimming.jpg',
     url: 'https://www.plavani-luzanky.cz/',
   },
 ];

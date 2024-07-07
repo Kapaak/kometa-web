@@ -8,6 +8,10 @@ export const navigationData = [
     href: '/#kurzy',
   },
   {
+    label: 'Sponzoři',
+    href: '/#sponzori',
+  },
+  {
     label: 'Dostupné lekce',
     href: '/dostupne-lekce',
   },

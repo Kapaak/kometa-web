@@ -11,6 +11,7 @@ export const Sponsors = styled.section`
   display: flex;
   padding: 4rem;
   z-index: 0;
+  scroll-margin-top: 10rem;
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {

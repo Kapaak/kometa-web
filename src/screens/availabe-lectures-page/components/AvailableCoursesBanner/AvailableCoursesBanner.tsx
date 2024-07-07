@@ -48,6 +48,8 @@ export function AvailableCoursesBanner({
         {imageUrl && (
           <S.AvailableCoursesBannerImage
             src={imageUrl}
+            placeholder="blur"
+            blurDataURL={imageUrl}
             fill
             alt="Ženy ve vodě při synchronizovaném plavání na bazéně Komety."
           />
