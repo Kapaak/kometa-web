@@ -1,3 +1,5 @@
+import HeroImage from '~/public/images/banner/hero-img.jpg';
+
 import NextLink from 'next/link';
 
 import { ArrowRight } from '@phosphor-icons/react';
@@ -12,8 +14,7 @@ export function HeroSection() {
       <MaxWidth>
         <S.HeroSectionBanner>
           <S.HeroSectionBannerImage
-            src="/images/banner/hero-img.jpg"
-            blurDataURL="/images/banner/hero-img.jpg"
+            src={HeroImage}
             placeholder="blur"
             fill
             alt="Plavecký bazén Kraví hora, kde se pořádají kurzy pod záštitou Kometa Brno"
@@ -24,7 +25,7 @@ export function HeroSection() {
             </S.HeroSectionBannerDescriptionTitle>
             <Text>
               Patříme k největším a nejúspěšnějším plaveckým klubům v ČR.
-              Tradice, profesionalita, zkušenost a radost to je KOMETA BRNO.
+              Tradice, profesionalita, zkušenost a radost. To je KOMETA BRNO!
             </Text>
 
             <NextLink href="/dostupne-lekce">
