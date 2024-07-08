@@ -1,0 +1,7 @@
+user-agent: *
+Sitemap: https://kometa-web.vercel.app/sitemap.xml
+Disallow: /api/*
+
+user-agent: Googlebot
+Sitemap: https://kometa-web.vercel.app/sitemap.xml
+Allow: /
