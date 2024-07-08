@@ -8,10 +8,10 @@ import { PostHogProvider } from 'posthog-js/react';
 
 //Posthog must be defined outside component !
 // //disable posthog in development
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY ?? '', {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-    // Enable debug mode in development
+    api_host:
+      process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com',
     loaded: (posthog) => {
       if (process.env.NODE_ENV === 'development') posthog.debug();
     },
