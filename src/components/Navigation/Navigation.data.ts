@@ -4,6 +4,10 @@ export const navigationData = [
     href: '/',
   },
   {
+    label: 'Klub',
+    href: 'https://klubova-zona.kometaplavani.cz/',
+  },
+  {
     label: 'Kurzy',
     href: '/#kurzy',
   },
