@@ -81,7 +81,7 @@ export const MultiSelect = ({
           onPointerDownOutside={handleClose}
           onEscapeKeyDown={handleClose}
         >
-          <Scrollable>
+          <Scrollable maxHeight="25rem">
             <S.MultiSelectViewport>
               {options?.map((option) => (
                 <MultiSelectItem
