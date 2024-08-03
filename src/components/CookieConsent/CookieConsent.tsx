@@ -1,8 +1,7 @@
 import { consent } from 'nextjs-google-analytics';
 import { useEffect, useState } from 'react';
 
-import posthog from 'posthog-js';
-
+import { cookieConsentGiven, updatePostHogConsent } from '~/libs/posthog';
 import { Button, MaxWidth } from '~/ui/components/atoms';
 
 import { CookieSettingsModal } from './parts';
@@ -13,23 +12,26 @@ export const CookieConsent = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [showConsent, setShowConsent] = useState(false);
 
+  const consentGiven = cookieConsentGiven();
+
   useEffect(() => {
-    if (
-      !posthog.has_opted_in_capturing() &&
-      !posthog.has_opted_out_capturing()
-    ) {
+    if (typeof window !== 'undefined' && !consentGiven) {
       setShowConsent(true);
     }
-  }, []);
+  }, [consentGiven]);
 
   const handleAcceptAll = () => {
-    posthog.opt_in_capturing();
+    updatePostHogConsent(true);
+    consent({
+      arg: 'update',
+      params: { ad_storage: 'allowed', analytics_storage: 'allowed' },
+    });
 
     setShowConsent(false);
   };
 
   const handleRejectAll = () => {
-    posthog.opt_out_capturing();
+    updatePostHogConsent(false);
     consent({
       arg: 'update',
       params: { ad_storage: 'denied', analytics_storage: 'denied' },
@@ -40,15 +42,19 @@ export const CookieConsent = () => {
 
   const handleSave = (hasAcceptedConsents: boolean) => {
     if (hasAcceptedConsents) {
-      posthog.opt_in_capturing();
+      updatePostHogConsent(true);
+      consent({
+        arg: 'update',
+        params: { ad_storage: 'allowed', analytics_storage: 'allowed' },
+      });
     } else {
-      posthog.opt_out_capturing();
-
+      updatePostHogConsent(false);
       consent({
         arg: 'update',
         params: { ad_storage: 'denied', analytics_storage: 'denied' },
       });
     }
+
     setShowConsent(false);
   };
 
