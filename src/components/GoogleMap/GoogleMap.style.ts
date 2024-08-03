@@ -15,6 +15,10 @@ export const GoogleMap = styled.div`
     }
   }
 
+  //adjust style of close button
+  .gm-style-iw.gm-ui-hover-effect {
+    margin-right: -1rem !important;
+  }
   //adjust style of info window content
   .gm-style-iw.gm-style-iw-c {
     ${({ theme }) => css`

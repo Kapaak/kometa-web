@@ -16,7 +16,7 @@ export function MarkerInfo({ title, address, url }: MarkerInfoProps) {
   return (
     <VerticalStack gap="1.7rem" align="flex-start">
       <S.MarkerInfoText variant="h3">{title}</S.MarkerInfoText>
-      <S.MarkerInfoText variant="body2">{address}</S.MarkerInfoText>
+      <S.MarkerInfoText variant="body4">{address}</S.MarkerInfoText>
       {url && (
         <NextLink href={url}>
           <IconButton variant="outlined" icon={<ArrowRight size={20} />}>
