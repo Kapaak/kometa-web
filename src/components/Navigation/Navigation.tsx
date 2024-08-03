@@ -16,8 +16,8 @@ export function Navigation() {
     <S.Navigation>
       <MaxWidth>
         <S.NavigationMenuList>
-          <S.Logo>
-            <S.NavigationMenuItem>
+          <S.Logo as="li">
+            <S.NavigationMenuItem as="div">
               <NextLink href="/">
                 <NextImage
                   width={97}

@@ -1,7 +1,7 @@
 user-agent: *
-Sitemap: https://kometa-web.vercel.app/sitemap.xml
+Sitemap: https://kometaplavani.cz/sitemap.xml
 Disallow: /api/*
 
 user-agent: Googlebot
-Sitemap: https://kometa-web.vercel.app/sitemap.xml
+Sitemap: https://kometaplavani.cz/sitemap.xml
 Allow: /
