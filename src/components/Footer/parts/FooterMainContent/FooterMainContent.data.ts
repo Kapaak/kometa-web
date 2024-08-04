@@ -19,7 +19,7 @@ export const footerMainContentData: FooterContentData[] = [
         label: 'Bazén Lužánky',
         details: [
           {
-            value: 'Bc. Anna Matušová',
+            value: 'Ing. Anna Matušová',
           },
           {
             value: '+420 773 708 287',
@@ -89,7 +89,7 @@ export const footerMainContentData: FooterContentData[] = [
           },
           {
             value: 'Bazénky',
-            href: 'https://kometaplavani.cz/plavani-bazenky/bazenky/',
+            href: 'https://www.plavanikometa.cz/skolni-bazenky/',
             external: true,
           },
         ],
