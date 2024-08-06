@@ -56,6 +56,18 @@ export const placeOptions = [
 
 export const ageOptions = [
   {
+    label: '4',
+    value: '4',
+  },
+  {
+    label: '5',
+    value: '5',
+  },
+  {
+    label: '6',
+    value: '6',
+  },
+  {
     label: '6',
     value: '6',
   },
@@ -94,6 +106,14 @@ export const ageOptions = [
   {
     label: '15',
     value: '15',
+  },
+  {
+    label: '16',
+    value: '16',
+  },
+  {
+    label: '17',
+    value: '17',
   },
 ];
 

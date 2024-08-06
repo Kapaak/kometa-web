@@ -10,7 +10,6 @@ export function PageLayout({ children }: PageLayoutProps) {
   return (
     <S.PageLayout>
       <Navigation />
-      {/* Navigation */}
       {children}
       <Footer />
     </S.PageLayout>
