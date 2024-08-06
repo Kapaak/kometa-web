@@ -108,7 +108,7 @@ export const footerMainContentData: FooterContentData[] = [
             external: true,
           },
           {
-            value: 'Lužánka',
+            value: 'Lužánky',
             href: 'https://www.primestak-brno.cz/',
             external: true,
           },

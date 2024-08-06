@@ -20,7 +20,7 @@ export const banner: Record<string, BannerData> = {
   initial: {
     title: 'Učíme malé neplavce od úplných základů až po šikovné závodníky.',
     description:
-      'Patříme k největším a nejúspěšnějším plaveckým klubům v ČR. Tradice, profesionalita, zkušenost a radost to je KOMETA BRNO.',
+      'Patříme k největším a nejúspěšnějším plaveckým klubům v ČR. Tradice, profesionalita, zkušenost a radost, to je KOMETA BRNO.',
     imageUrl: '/images/place/banner.jpeg',
     imageAlt: 'Plavecký bazén Komety Brno.',
   },
