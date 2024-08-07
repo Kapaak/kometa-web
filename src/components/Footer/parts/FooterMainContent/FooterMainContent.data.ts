@@ -92,6 +92,11 @@ export const footerMainContentData: FooterContentData[] = [
             href: 'https://www.plavanikometa.cz/skolni-bazenky/',
             external: true,
           },
+          {
+            value: 'Lužánky',
+            href: 'https://www.plavani-luzanky.cz/',
+            external: true,
+          },
         ],
       },
       {
