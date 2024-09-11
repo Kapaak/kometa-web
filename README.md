@@ -1,5 +1,8 @@
 # Main page for swimming school in Brno
 
+## Connected to Sanity.io - Headless CMS
+https://github.com/Kapaak/kometa-sanity
+
 ## Code structure
 
 public
