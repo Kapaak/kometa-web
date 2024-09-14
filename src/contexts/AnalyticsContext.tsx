@@ -10,8 +10,10 @@ import { PostHogProvider } from 'posthog-js/react';
 // //disable posthog in development
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY ?? '', {
-    opt_out_capturing_by_default:
-      localStorage.getItem('cookie_consent') !== 'true',
+    persistence:
+      localStorage.getItem('cookie_consent') === 'true'
+        ? 'localStorage+cookie'
+        : 'memory',
     api_host:
       process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com',
     loaded: (posthog) => {
