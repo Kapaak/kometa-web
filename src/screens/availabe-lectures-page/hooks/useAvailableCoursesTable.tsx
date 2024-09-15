@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import {
   SortingState,
@@ -20,13 +20,14 @@ const EMPTY_ARRAY: GetAvailableCourse[] = [];
 export function useAvailableCoursesTable(
   courses: GetAvailableCourse[] = EMPTY_ARRAY
 ) {
-  console.log('🚀 ~ courses:', courses);
   const [sortBy, setSortBy] = useState<SortingState>([]);
   const theme = useTheme();
   const { grey } = theme.colors;
 
-  const getAvailabilityColor = (isFull?: boolean) =>
-    isFull ? grey['600'] : grey['900'];
+  const getAvailabilityColor = useCallback(
+    (isFull?: boolean) => (isFull ? grey['600'] : grey['900']),
+    [grey]
+  );
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<GetAvailableCourse>();

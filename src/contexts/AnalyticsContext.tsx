@@ -24,10 +24,6 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
 
 export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
   const [defaultCookieConsent, setDefaultCookieConsent] = useState(false);
-  console.log(
-    '🚀 ~ AnalyticsProvider ~ defaultCookieConsent:',
-    defaultCookieConsent
-  );
 
   const router = useRouter();
 
