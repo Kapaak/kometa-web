@@ -121,22 +121,4 @@ export const footerMainContentData: FooterContentData[] = [
       },
     ],
   },
-  {
-    title: 'Informace',
-    data: [
-      {
-        label: '',
-        details: [
-          {
-            value: 'GDPR',
-            href: '/files/VSEOBECNE-PODMINKY.pdf',
-            action: 'download',
-          },
-          {
-            value: 'IČO: 44992432',
-          },
-        ],
-      },
-    ],
-  },
 ];

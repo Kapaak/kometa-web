@@ -16,6 +16,13 @@ export const FooterCompanyInformation = () => {
         </S.Description>
         <S.Description>Sportovní 486/4</S.Description>
         <S.Description>602 00 Brno - Královo Pole</S.Description>
+        <S.Description>IČO: 44992432</S.Description>
+      </VerticalStack>
+      <VerticalStack>
+        <S.Description>Sportovní Klub policie KOMETA BRNO z.s.</S.Description>
+        <S.Description>Bauerova 321/5</S.Description>
+        <S.Description>603 00 Brno</S.Description>
+        <S.Description>IČO: 41604164</S.Description>
       </VerticalStack>
     </S.FooterCompanyInformation>
   );
