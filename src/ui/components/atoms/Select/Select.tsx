@@ -45,15 +45,17 @@ export const Select = ({
     return foundItem?.label ?? placeholder ?? '';
   }, [options, placeholder, value]);
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleValueChange = (newValue: string) => {
     if (newValue === value) {
       return onChange?.('');
     }
     onChange?.(newValue);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
+    handleClose();
   };
 
   return (
