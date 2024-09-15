@@ -24,7 +24,7 @@ export const CookieConsent = () => {
     updatePostHogConsent(true);
     consent({
       arg: 'update',
-      params: { ad_storage: 'allowed', analytics_storage: 'allowed' },
+      params: { ad_storage: 'granted', analytics_storage: 'granted' },
     });
 
     setShowConsent(false);
@@ -45,7 +45,7 @@ export const CookieConsent = () => {
       updatePostHogConsent(true);
       consent({
         arg: 'update',
-        params: { ad_storage: 'allowed', analytics_storage: 'allowed' },
+        params: { ad_storage: 'granted', analytics_storage: 'granted' },
       });
     } else {
       updatePostHogConsent(false);

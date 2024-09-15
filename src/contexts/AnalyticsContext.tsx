@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { GoogleAnalytics } from 'nextjs-google-analytics';
-import { PropsWithChildren, useEffect } from 'react';
+import { consent, GoogleAnalytics } from 'nextjs-google-analytics';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 import { Analytics } from '@vercel/analytics/react';
 import posthog from 'posthog-js';
@@ -23,6 +23,12 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
 }
 
 export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
+  const [defaultCookieConsent, setDefaultCookieConsent] = useState(false);
+  console.log(
+    '🚀 ~ AnalyticsProvider ~ defaultCookieConsent:',
+    defaultCookieConsent
+  );
+
   const router = useRouter();
 
   useEffect(() => {
@@ -35,12 +41,31 @@ export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
     };
   }, [router.events]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setDefaultCookieConsent(
+        localStorage.getItem('cookie_consent') === 'true' ? true : false
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    consent({
+      arg: 'update',
+      params: {
+        ad_storage: defaultCookieConsent ? 'granted' : 'denied',
+        analytics_storage: defaultCookieConsent ? 'granted' : 'denied',
+      },
+    });
+  }, [defaultCookieConsent]);
+
   return (
     <PostHogProvider client={posthog}>
       <Analytics />
       <GoogleAnalytics
+        debugMode={process.env.NODE_ENV === 'development'}
         trackPageViews
-        defaultConsent="denied"
+        defaultConsent={defaultCookieConsent ? 'granted' : 'denied'}
         gaMeasurementId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}
       />
       {children}
