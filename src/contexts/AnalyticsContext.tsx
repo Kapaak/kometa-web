@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import { consent, GoogleAnalytics } from 'nextjs-google-analytics';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
@@ -58,6 +59,11 @@ export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
   return (
     <PostHogProvider client={posthog}>
       <Analytics />
+      <Script
+        src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER}`}
+        strategy="afterInteractive"
+      />
+
       <GoogleAnalytics
         debugMode={process.env.NODE_ENV === 'development'}
         trackPageViews
