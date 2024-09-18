@@ -1,9 +1,12 @@
+import { SanityImageObject } from '@sanity/image-url/lib/types/types';
+
 import {
   QueryAvailableCoursesResult,
+  QueryBlogPostsResult,
   QueryKidsCoursesResult,
   QuerySwimmingPoolsResult,
 } from '~/libs/sanity/types';
-import { SwimmingVariant } from '~/types';
+import { Category, SwimmingVariant } from '~/types';
 
 export type SanityKidsCourseVariant = {
   url?: string;
@@ -25,6 +28,22 @@ export type SanityKidsCourse = QueryKidsCoursesResult[0];
 export type SanityAvailableCourse = QueryAvailableCoursesResult[0];
 
 export type SanitySwimmingPool = QuerySwimmingPoolsResult[0];
+
+export type SanityBlogPost = QueryBlogPostsResult[0];
+
+export type SanityImage = SanityImageObject & {
+  alt: string;
+  asset: {
+    metadata: {
+      lqip: string;
+      dimensions: {
+        width: number;
+        height: number;
+        aspectRatio: number;
+      };
+    };
+  };
+};
 
 export type SanityCamps = {
   id?: string;
@@ -54,4 +73,19 @@ export type GetAvailableCourse = {
   skillLevelId?: SwimmingVariant;
   skillLevel?: SwimmingVariant;
   skillLevelName?: string;
+};
+
+export type TransformedBlogPost = {
+  id?: string;
+  title?: string;
+  shortDescription?: string;
+  description: any; //TODO -> is wysiwyg type from sanity
+  createdAt?: string;
+  author?: string;
+  readTime?: number;
+  image?: string;
+  alt?: string;
+  tags?: Category[];
+  url?: string;
+  blurDataURL?: string;
 };

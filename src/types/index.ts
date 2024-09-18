@@ -35,4 +35,24 @@ export enum SwimmingVariantTranslation {
   CONDITION = 'Kondiční',
 }
 
+export enum Category {
+  EQUIPMENT = 'equipment',
+  TRAINING = 'training',
+  TIPS = 'tips',
+  FUN_FACT = 'funFact',
+}
+
+export const categoryTranslation = (category: Category) => {
+  switch (category) {
+    case Category.EQUIPMENT:
+      return 'Vybavení';
+    case Category.TRAINING:
+      return 'Trénink';
+    case Category.TIPS:
+      return 'Tipy';
+    case Category.FUN_FACT:
+      return 'Zajímavosti';
+  }
+};
+
 export type LatLng = google.maps.LatLngLiteral;

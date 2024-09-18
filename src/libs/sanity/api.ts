@@ -2,6 +2,7 @@ import { groq } from 'next-sanity';
 
 import {
   SanityAvailableCourse,
+  SanityBlogPost,
   SanityCamps,
   SanityKidsCourse,
   SanitySwimmingPool,
@@ -10,14 +11,17 @@ import { SwimmingVariant } from '~/types';
 
 import { client } from './config';
 
-interface Filters {
+interface Pagination {
+  lastId?: string;
+  pageSize?: number;
+}
+
+interface Filters extends Pagination {
   age?: number;
   skillLevel?: SwimmingVariant;
   day?: string;
   time?: string;
   place?: string;
-  lastId?: string;
-  pageSize?: number;
 }
 
 export async function getAvailableCourses(
@@ -78,6 +82,36 @@ export async function getKidsCourses(): Promise<SanityKidsCourse[]> {
   const course = await client.fetch(queryKidsCourses);
 
   return course;
+}
+
+interface BlogPostFilters extends Pagination {
+  categories?: string[];
+}
+
+export async function getBlogPosts(
+  filters: BlogPostFilters
+): Promise<SanityBlogPost[]> {
+  let filterQuery: string[] = [];
+
+  if (filters?.categories) {
+    console.log(filters.categories, 'ka', typeof filters.categories);
+
+    filters?.categories?.forEach((category) => {
+      filterQuery.push(`"${category}" in tags`);
+    });
+  }
+
+  //TODO: need to comment out mergedFilter to generate FE sanity types
+  const mergedFilter = filterQuery.join(' || ');
+
+  const queryBlogPosts = groq`*[_type == "blog"  && _id > $lastId][${mergedFilter}]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize]`;
+
+  const blogPosts = await client.fetch(queryBlogPosts, {
+    lastId: filters.lastId,
+    pageSize: filters.pageSize,
+  });
+
+  return blogPosts;
 }
 
 export async function getCamps(): Promise<SanityCamps[]> {

@@ -10,7 +10,7 @@ export const Navigation = styled(NavigationMenu.Root)`
   padding: 0 2rem;
   background-color: ${({ theme }) => theme.colors.grey['100']};
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey['400']};
-  z-index: 1;
+  z-index: 11;
 
   & > div {
     width: inherit;

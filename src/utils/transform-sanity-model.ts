@@ -1,8 +1,10 @@
 import {
   GetAvailableCourse,
   SanityAvailableCourse,
+  SanityBlogPost,
   SanityCamps,
   SanityKidsCourse,
+  TransformedBlogPost,
 } from '~/domains';
 import {
   SwimmingVariant,
@@ -102,5 +104,26 @@ export function transformAvailableCourse(
     isSchoolOrKindergartenAvailable:
       course.isSchoolOrKindergartenAvailable ?? false,
     privateSwimmingPool: course.privateSwimmingPool ?? false,
+  };
+}
+
+export function transformBlogPost(
+  blogPost: SanityBlogPost
+): TransformedBlogPost {
+  return {
+    id: blogPost?.id,
+    title: blogPost?.title ?? '',
+    shortDescription: blogPost?.shortDescription ?? '',
+    description: blogPost?.description,
+    createdAt: blogPost?.createdAt ?? '',
+    author: blogPost?.author ?? '',
+    readTime: blogPost?.readTime ?? NaN,
+    image: blogPost?.image
+      ? urlForImage(blogPost.image)?.url()
+      : '/images/place/generic-swimming-pool.jpeg',
+    alt: blogPost?.alt ?? '',
+    tags: blogPost?.tags ?? [],
+    url: blogPost?.slug ?? '',
+    blurDataURL: blogPost?.image?.asset?.metadata?.lqip,
   };
 }

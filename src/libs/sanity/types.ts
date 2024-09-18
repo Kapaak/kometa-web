@@ -39,28 +39,6 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityFileAsset = {
-  _id: string;
-  _type: 'sanity.fileAsset';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
 export type Course = {
   _type: 'course';
   dayId?: 1 | 2 | 3 | 4 | 5;
@@ -170,13 +148,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData';
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type SanityImageMetadata = {
   _type: 'sanity.imageMetadata';
   location?: Geopoint;
@@ -186,6 +157,104 @@ export type SanityImageMetadata = {
   blurHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
+};
+
+export type Blog = {
+  _id: string;
+  _type: 'blog';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  shortDescription?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'imageAlt';
+  };
+  video?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
+    };
+    _type: 'file';
+  };
+  description?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'h2' | 'h3' | 'normal';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'imageAlt';
+        _key: string;
+      }
+  >;
+  createdAt?: string;
+  author?: string;
+  readTime?: number;
+  tags?: Array<'equipment' | 'training' | 'tips' | 'funFact'>;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: 'sanity.fileAsset';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: 'sanity.assetSourceData';
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type KidsCourse = {
@@ -243,6 +312,12 @@ export type Price = {
   priceYear?: number;
 };
 
+export type AgeCategory = {
+  _type: 'ageCategory';
+  ageFrom?: number;
+  ageTo?: number;
+};
+
 export type Navigation = {
   _id: string;
   _type: 'navigation';
@@ -271,76 +346,6 @@ export type SiteSettings = {
   _rev: string;
   title?: string;
   description?: string;
-};
-
-export type Camp = {
-  _id: string;
-  _type: 'camp';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: 'imageAlt';
-  };
-  tag?: Array<string>;
-  url?: string;
-};
-
-export type KidCourse = {
-  _id: string;
-  _type: 'kidCourse';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  swimmingPoolDetail?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'swimmingPool';
-  };
-  basic?: {
-    age?: AgeCategory;
-    url?: string;
-    availableCourses?: Array<
-      {
-        _key: string;
-      } & Course
-    >;
-  };
-  advanced?: {
-    age?: AgeCategory;
-    url?: string;
-    availableCourses?: Array<
-      {
-        _key: string;
-      } & Course
-    >;
-  };
-  condition?: {
-    age?: AgeCategory;
-    url?: string;
-    availableCourses?: Array<
-      {
-        _key: string;
-      } & Course
-    >;
-  };
-};
-
-export type AgeCategory = {
-  _type: 'ageCategory';
-  ageFrom?: number;
-  ageTo?: number;
 };
 
 export type SwimmingPool = {
@@ -376,6 +381,29 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Camp = {
+  _id: string;
+  _type: 'camp';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'imageAlt';
+  };
+  tag?: Array<string>;
+  url?: string;
+};
+
 export type ImageAlt = {
   _type: 'imageAlt';
   asset?: {
@@ -406,7 +434,7 @@ export type Slug = {
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../../websites/kometa-web/src/libs/sanity/api.ts
 // Variable: queryAvailableCourses
-// Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,slug,"alt":image.alt,"image":image{asset->{...,metadata}},"url":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
+// Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"url":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
 export type QueryAvailableCoursesResult = Array<{
   id: string;
   priceYear: number | null;
@@ -448,7 +476,7 @@ export type QueryAvailableCoursesResult = Array<{
   ageFrom: number | null;
   ageTo: number | null;
   name: string | null;
-  slug: Slug | null;
+  slug: string | null;
   alt: string | null;
   image: {
     asset: {
@@ -551,6 +579,76 @@ export type QueryKidsCoursesResult = Array<{
   privateSwimmingPool: boolean | null;
   isSchoolOrKindergartenAvailable: boolean | null;
 }>;
+// Variable: queryBlogPosts
+// Query: *[_type == "blog"]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize]
+export type QueryBlogPostsResult = Array<{
+  id: string;
+  title: string | null;
+  shortDescription: string | null;
+  description: Array<
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'imageAlt';
+        _key: string;
+      }
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'h2' | 'h3' | 'normal';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+  > | null;
+  createdAt: string | null;
+  author: string | null;
+  readTime: number | null;
+  alt: string | null;
+  image: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata: SanityImageMetadata | null;
+      source?: SanityAssetSourceData;
+    } | null;
+  } | null;
+  tags: Array<'equipment' | 'funFact' | 'tips' | 'training'> | null;
+  slug: string | null;
+}>;
 // Variable: queryCamps
 // Query: *[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]
 export type QueryCampsResult = Array<{
@@ -585,11 +683,11 @@ export type QueryCampsResult = Array<{
   tags: Array<string> | null;
 }>;
 // Variable: querySwimmingPools
-// Query: *[_type == "swimmingPool"]{"id":_id,name,slug,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]
+// Query: *[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]
 export type QuerySwimmingPoolsResult = Array<{
   id: string;
   name: string | null;
-  slug: Slug | null;
+  slug: string | null;
   location: Geopoint | null;
   alt: string | null;
   image: {
@@ -618,4 +716,10 @@ export type QuerySwimmingPoolsResult = Array<{
   } | null;
   url: string | null;
   privateSwimmingPool: boolean | null;
+}>;
+// Source: ../../websites/kometa-web/src/pages/blog/[blogId].tsx
+// Variable: queryBlog
+// Query: *[_type == "blog"]{slug}
+export type QueryBlogResult = Array<{
+  slug: Slug | null;
 }>;

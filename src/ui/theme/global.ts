@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle(
       min-height: 100%;
       height: 100%;
       scroll-behavior: smooth;
+      box-sizing: inherit;
     }
 
     body {
