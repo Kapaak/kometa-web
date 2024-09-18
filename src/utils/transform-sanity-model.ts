@@ -7,6 +7,7 @@ import {
   TransformedBlogPost,
 } from '~/domains';
 import {
+  Category,
   SwimmingVariant,
   SwimmingVariantTranslation,
   TransformedKidsCourse,
@@ -122,7 +123,7 @@ export function transformBlogPost(
       ? urlForImage(blogPost.image)?.url()
       : '/images/place/generic-swimming-pool.jpeg',
     alt: blogPost?.alt ?? '',
-    tags: blogPost?.tags ?? [],
+    tags: (blogPost?.tags as Category[]) ?? [],
     url: blogPost?.slug ?? '',
     blurDataURL: blogPost?.image?.asset?.metadata?.lqip,
   };
