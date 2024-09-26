@@ -114,6 +114,20 @@ export async function getBlogPosts(
   return blogPosts;
 }
 
+export async function getBlogById(blogId: string): Promise<SanityBlogPost> {
+  const query = groq`*[_type == "blog" && slug.current == "${blogId}"][0]{"id":_id,title,shortDescription, description[]{
+    ...,
+    _type == "imageAlt" => {
+      ...,
+      asset->
+    },
+  },createdAt,author,readTime,image{asset->{...,metadata},alt},tags,slug}`;
+
+  const blog: SanityBlogPost = await client.fetch(query);
+
+  return blog;
+}
+
 export async function getCamps(): Promise<SanityCamps[]> {
   const queryCamps = groq`*[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]`;
 

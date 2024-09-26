@@ -1,10 +1,6 @@
-// import { BLOG_CATEGORIES } from "~/constants/category";
-// import { useSanityBlogContext } from "~/contexts";
-// import { Category, SanityBlog } from "~/domains";
-
 import { useState } from 'react';
 
-import { useGetBlogPosts } from '~/adapters';
+import { useGetBlogPosts } from '~/adapters/blogAdapter';
 import { Category } from '~/types';
 import { Headline, MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
 

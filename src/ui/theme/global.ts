@@ -33,9 +33,17 @@ export const GlobalStyle = createGlobalStyle(
       background-color: ${colors.grey['200']};
     }
 
+    strong {
+      font-weight: 600;
+    }
+
     #__next {
       min-height: 100%;
       height: 100%;
+    }
+
+    ::selection {
+      background: ${colors.secondary.main};
     }
 
     a,

@@ -86,6 +86,8 @@ export type TransformedBlogPost = {
   image?: string;
   alt?: string;
   tags?: Category[];
+  slug?: string;
   url?: string;
+  aspectRatio?: number;
   blurDataURL?: string;
 };

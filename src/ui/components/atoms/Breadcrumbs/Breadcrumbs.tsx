@@ -15,7 +15,7 @@ export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
   const router = useRouter();
 
   const isPathActive = (href: string) => {
-    if (router.pathname === href) {
+    if (router.asPath === href) {
       return true;
     }
 

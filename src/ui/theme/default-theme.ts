@@ -49,12 +49,12 @@ export const theme: DefaultTheme = {
     h2: {
       fontSize: '5.6rem',
       fontWeight: 400,
-      lineHeight: '4.8rem',
+      lineHeight: '3.5rem',
     },
     h3: {
       fontSize: '3rem',
       fontWeight: 400,
-      lineHeight: '4.8rem',
+      lineHeight: '3rem',
     },
     body1: {
       fontSize: '1.8rem',

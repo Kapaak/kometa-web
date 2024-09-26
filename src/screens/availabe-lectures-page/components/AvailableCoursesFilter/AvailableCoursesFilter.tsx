@@ -9,7 +9,7 @@ import {
   skillLevelOptions,
   timeOptions,
 } from '~/constants/options';
-import { useGetSwimmingPoolOptions } from '~/hooks';
+import { useGetSwimmingPoolOptions } from '~/hooks/useCoursesOptions';
 import {
   ControlledMultiSelect,
   ControlledSelect,

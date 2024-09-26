@@ -7,3 +7,4 @@ export * from './Modal';
 export * from './ServiceCard';
 export * from './TableBody';
 export * from './TableHead';
+export * from './TextBuilder';

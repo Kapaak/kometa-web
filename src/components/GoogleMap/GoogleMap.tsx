@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import { Loader } from '@googlemaps/js-api-loader';
 
-import { useGetSwimmingPool } from '~/adapters';
+import { useGetSwimmingPool } from '~/adapters/coursesAdapter';
 import { LatLng } from '~/types';
 import { convertComponentToNode } from '~/utils/transform';
 

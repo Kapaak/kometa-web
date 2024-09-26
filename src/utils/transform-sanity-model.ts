@@ -122,9 +122,11 @@ export function transformBlogPost(
     image: blogPost?.image
       ? urlForImage(blogPost.image)?.url()
       : '/images/place/generic-swimming-pool.jpeg',
+    aspectRatio: blogPost?.image?.asset?.metadata?.dimensions?.aspectRatio,
     alt: blogPost?.alt ?? '',
     tags: (blogPost?.tags as Category[]) ?? [],
     url: blogPost?.slug ?? '',
+    slug: blogPost?.slug ?? '',
     blurDataURL: blogPost?.image?.asset?.metadata?.lqip,
   };
 }
