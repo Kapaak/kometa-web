@@ -122,7 +122,8 @@ export function transformBlogPost(
     image: blogPost?.image
       ? urlForImage(blogPost.image)?.url()
       : '/images/place/generic-swimming-pool.jpeg',
-    aspectRatio: blogPost?.image?.asset?.metadata?.dimensions?.aspectRatio,
+    aspectRatio:
+      blogPost?.image?.asset?.metadata?.dimensions?.aspectRatio ?? NaN,
     alt: blogPost?.alt ?? '',
     tags: (blogPost?.tags as Category[]) ?? [],
     url: blogPost?.slug ?? '',

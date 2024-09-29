@@ -94,8 +94,6 @@ export async function getBlogPosts(
   let filterQuery: string[] = [];
 
   if (filters?.categories) {
-    console.log(filters.categories, 'ka', typeof filters.categories);
-
     filters?.categories?.forEach((category) => {
       filterQuery.push(`"${category}" in tags`);
     });

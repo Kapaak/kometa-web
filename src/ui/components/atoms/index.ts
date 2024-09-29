@@ -17,6 +17,7 @@ export * from './MainDescription';
 export * from './MaxWidth';
 export * from './MultiSelect';
 export * from './NextSanityImage';
+export * from './Popover';
 export * from './Scrollable';
 export * from './Select';
 export * from './Sponsor';

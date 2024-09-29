@@ -1,8 +1,18 @@
 import { useState } from 'react';
 
+import { SlidersHorizontal } from '@phosphor-icons/react';
+
 import { useGetBlogPosts } from '~/adapters/blogAdapter';
 import { Category } from '~/types';
-import { Headline, MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
+import {
+  Flex,
+  Headline,
+  Hidden,
+  MaxWidth,
+  Popover,
+  Text,
+  VerticalStack,
+} from '~/ui/components/atoms';
 
 import { BlogLayout } from './components';
 
@@ -10,9 +20,7 @@ import { BlogArticle, BlogFilter } from './parts';
 
 import * as S from './BlogScreen.style';
 
-interface BlogScreenProps {}
-
-export function BlogScreen({}: BlogScreenProps) {
+export function BlogScreen() {
   const [selectedFilter, setSelectedFilter] = useState<Category[]>(
     Object.values(Category)
   );
@@ -41,12 +49,32 @@ export function BlogScreen({}: BlogScreenProps) {
         <MaxWidth>
           <VerticalStack gap="2rem">
             <Headline>Blog</Headline>
-            <S.Scrollable>
+
+            <Hidden up="md">
+              <Popover
+                title="Nastavení filtru"
+                action={
+                  <S.FilterButton>
+                    <Text variant="body2">Filtr</Text> <SlidersHorizontal />
+                  </S.FilterButton>
+                }
+              >
+                <Flex padding="1.6rem 1.6rem .6rem" direction="column">
+                  <BlogFilter
+                    onChange={handleChange}
+                    getIsCategoryActive={getFilterCategoryActive}
+                  />
+                </Flex>
+              </Popover>
+            </Hidden>
+
+            <Hidden down="md">
               <BlogFilter
                 onChange={handleChange}
                 getIsCategoryActive={getFilterCategoryActive}
               />
-            </S.Scrollable>
+            </Hidden>
+
             {data?.length > 0 &&
               data?.map((blog) => (
                 <BlogArticle

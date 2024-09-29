@@ -1,5 +1,4 @@
 import { Category, categoryTranslation } from '~/types';
-import { Flex } from '~/ui/components/atoms';
 
 import * as S from './BlogFilter.style';
 
@@ -14,7 +13,7 @@ export function BlogFilter({ getIsCategoryActive, onChange }: BlogFilterProps) {
   };
 
   return (
-    <Flex gap="2rem">
+    <S.BlogFilter>
       {Object.values(Category).map((category) => {
         return (
           <S.FilterCategory
@@ -26,6 +25,6 @@ export function BlogFilter({ getIsCategoryActive, onChange }: BlogFilterProps) {
           </S.FilterCategory>
         );
       })}
-    </Flex>
+    </S.BlogFilter>
   );
 }
