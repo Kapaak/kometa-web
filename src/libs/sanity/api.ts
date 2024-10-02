@@ -102,7 +102,7 @@ export async function getBlogPosts(
   //TODO: need to comment out mergedFilter to generate FE sanity types
   const mergedFilter = filterQuery.join(' || ');
 
-  const queryBlogPosts = groq`*[_type == "blog"  && _id > $lastId][${mergedFilter}]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize]`;
+  const queryBlogPosts = groq`*[_type == "blog"  && _id > $lastId][${mergedFilter}]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)`;
 
   const blogPosts = await client.fetch(queryBlogPosts, {
     lastId: filters.lastId,
