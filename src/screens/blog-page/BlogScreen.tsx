@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { SlidersHorizontal } from '@phosphor-icons/react';
 
 import { useGetBlogPosts } from '~/adapters/blogAdapter';
-import { Category } from '~/types';
+import { Category, categoryTranslation } from '~/types';
 import {
+  Checkbox,
   Flex,
   Headline,
   Hidden,
@@ -59,11 +60,19 @@ export function BlogScreen() {
                   </S.FilterButton>
                 }
               >
-                <Flex padding="1.6rem 1.6rem .6rem" direction="column">
-                  <BlogFilter
-                    onChange={handleChange}
-                    getIsCategoryActive={getFilterCategoryActive}
-                  />
+                <Flex
+                  padding="1.6rem 2rem .6rem"
+                  direction="column"
+                  gap=".8rem"
+                >
+                  {Object.values(Category).map((category) => (
+                    <Checkbox
+                      key={category}
+                      label={categoryTranslation(category)}
+                      checked={getFilterCategoryActive(category)}
+                      onChange={() => handleChange(category)}
+                    />
+                  ))}
                 </Flex>
               </Popover>
             </Hidden>
