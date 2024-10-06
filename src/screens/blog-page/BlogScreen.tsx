@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { SlidersHorizontal } from '@phosphor-icons/react';
+import { useTheme } from 'styled-components';
 
 import { useGetBlogPosts } from '~/adapters/blogAdapter';
 import { Category, categoryTranslation } from '~/types';
@@ -9,6 +10,7 @@ import {
   Flex,
   Headline,
   Hidden,
+  Loader,
   MaxWidth,
   Popover,
   Text,
@@ -25,6 +27,9 @@ export function BlogScreen() {
   const [selectedFilter, setSelectedFilter] = useState<Category[]>(
     Object.values(Category)
   );
+
+  const theme = useTheme();
+  const { primary } = theme.colors;
 
   const { data, isLoading } = useGetBlogPosts({
     filter: { categories: selectedFilter },
@@ -102,6 +107,12 @@ export function BlogScreen() {
                   />
                 ))}
             </S.BlogPostsContainer>
+
+            {isLoading && (
+              <S.LoadingWrapper>
+                <Loader color={primary.main} />
+              </S.LoadingWrapper>
+            )}
 
             {data.length === 0 && !isLoading && (
               <S.EmptyFilterResults>

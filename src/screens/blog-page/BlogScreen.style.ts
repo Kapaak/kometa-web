@@ -45,6 +45,13 @@ export const EmptyFilterResults = styled.div`
   min-height: 20rem;
 `;
 
+export const LoadingWrapper = styled.div`
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 30rem;
+`;
+
 export const BlogPostsContainer = styled.div`
   display: grid;
   gap: 2rem;
