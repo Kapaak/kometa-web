@@ -84,22 +84,24 @@ export function BlogScreen() {
               />
             </Hidden>
 
-            {data?.length > 0 &&
-              data?.map((blog) => (
-                <BlogArticle
-                  key={blog?.id}
-                  title={blog?.title}
-                  description={blog?.shortDescription}
-                  imageAlt={blog?.alt}
-                  date={blog?.createdAt}
-                  author={blog?.author}
-                  readTime={blog?.readTime}
-                  image={blog?.image}
-                  imageBlurDataURL={blog?.blurDataURL}
-                  href={`/blog/${blog?.url}`}
-                  categories={blog?.tags}
-                />
-              ))}
+            <S.BlogPostsContainer>
+              {data?.length > 0 &&
+                data?.map((blog) => (
+                  <BlogArticle
+                    key={blog?.id}
+                    title={blog?.title}
+                    description={blog?.shortDescription}
+                    imageAlt={blog?.alt}
+                    date={blog?.createdAt}
+                    author={blog?.author}
+                    readTime={blog?.readTime}
+                    image={blog?.image}
+                    imageBlurDataURL={blog?.blurDataURL}
+                    href={`/blog/${blog?.url}`}
+                    categories={blog?.tags}
+                  />
+                ))}
+            </S.BlogPostsContainer>
 
             {data.length === 0 && !isLoading && (
               <S.EmptyFilterResults>

@@ -1,11 +1,9 @@
 import NextLink from 'next/link';
 
-import { CalendarBlank, Timer, User } from '@phosphor-icons/react';
-
 import { Category, categoryTranslation } from '~/types';
-import { NextSanityImage, VerticalStack } from '~/ui/components/atoms';
-import { IconText } from '~/ui/components/molecules';
-import { convertDateToString } from '~/utils/date';
+import { VerticalStack } from '~/ui/components/atoms';
+
+import { BlogInfo } from '../../components';
 
 import * as S from './BlogArticle.style';
 
@@ -47,7 +45,7 @@ export function BlogArticle({
           })}
         </S.CategoryContainer>
         {image && (
-          <NextSanityImage
+          <S.BlogImage
             image={image}
             alt={imageAlt ?? ''}
             blurDataURL={imageBlurDataURL}
@@ -55,7 +53,7 @@ export function BlogArticle({
             loading="eager"
             sizes="(max-width: 768px) 25vw, 20vw"
             fill
-            objectFit="contain"
+            objectFit="cover"
           />
         )}
       </S.ImageContainer>
@@ -66,14 +64,7 @@ export function BlogArticle({
         </S.TextContainer>
         <S.InfoContainer>
           <VerticalStack gap="3rem">
-            <VerticalStack gap="1rem">
-              <IconText icon={User} text={author} />
-              <IconText
-                icon={CalendarBlank}
-                text={convertDateToString(new Date(date ?? ''))}
-              />
-              <IconText icon={Timer} text={`${readTime} min`} />
-            </VerticalStack>
+            <BlogInfo author={author} readTime={readTime} date={date} />
             <NextLink href={href ?? '#'} passHref>
               <S.BlogArticleButton variant="outlined">
                 Číst článek

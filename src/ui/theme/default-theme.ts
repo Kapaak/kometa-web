@@ -56,6 +56,11 @@ export const theme: DefaultTheme = {
       fontWeight: 400,
       lineHeight: '3rem',
     },
+    h4: {
+      fontSize: '2.4rem',
+      fontWeight: 400,
+      lineHeight: '3.6rem',
+    },
     body1: {
       fontSize: '1.8rem',
       fontWeight: 400,

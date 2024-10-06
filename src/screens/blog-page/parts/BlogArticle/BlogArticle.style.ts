@@ -1,6 +1,12 @@
 import styled, { css } from 'styled-components';
 
-import { Button, Tag, Text, VerticalStack } from '~/ui/components/atoms';
+import {
+  Button,
+  NextSanityImage,
+  Tag,
+  Text,
+  VerticalStack,
+} from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const BlogChip = styled(Tag)`
@@ -26,11 +32,12 @@ export const BlogArticle = styled.article`
 `;
 
 export const BlogArticleHeadline = styled(Text).attrs({
-  variant: 'h3',
+  variant: 'h4',
   as: 'h2',
 })`
   font-family: ${({ theme }) => theme.fonts.secondary};
   letter-spacing: 0.1rem;
+  line-height: 2.6rem;
 `;
 
 export const BlogArticleButton = styled(Button)`
@@ -101,11 +108,6 @@ export const ImageContainer = styled.div`
   display: block;
   height: 17.4rem;
 
-  img {
-    object-fit: cover;
-    object-position: top;
-  }
-
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.md)}) {
       display: none;
@@ -127,4 +129,8 @@ export const CategoryContainer = styled(VerticalStack)`
   right: 2rem;
   gap: 1rem;
   z-index: 10;
+`;
+
+export const BlogImage = styled(NextSanityImage)`
+  object-position: center;
 `;
