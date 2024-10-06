@@ -21,6 +21,7 @@ export * from './NextSanityImage';
 export * from './Popover';
 export * from './Scrollable';
 export * from './Select';
+export * from './Skeleton';
 export * from './Sponsor';
 export * from './Strong';
 export * from './Switch';
