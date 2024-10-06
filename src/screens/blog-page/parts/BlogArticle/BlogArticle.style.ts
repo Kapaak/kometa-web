@@ -19,6 +19,7 @@ export const BlogArticle = styled.article`
   box-shadow: ${({ theme }) => theme.shadows.main};
   border-radius: 1rem;
   overflow: hidden;
+  background-color: ${({ theme }) => theme.colors.grey['100']};
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.md)}) {
