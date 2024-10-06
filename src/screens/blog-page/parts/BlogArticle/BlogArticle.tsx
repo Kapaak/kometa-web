@@ -67,19 +67,19 @@ export function BlogArticle({
       </S.ImageContainer>
       <S.Container>
         <S.TextContainer>
-          <NextLink href={href ?? '#'} passHref>
+          <S.BlogArticleLink href={href ?? '#'} passHref>
             <S.BlogArticleHeadline>{title}</S.BlogArticleHeadline>
-          </NextLink>
+          </S.BlogArticleLink>
           <S.BlogArticleDescription>{description}</S.BlogArticleDescription>
         </S.TextContainer>
         <S.InfoContainer>
           <VerticalStack gap="3rem">
             <BlogInfo author={author} readTime={readTime} date={date} />
-            <NextLink href={href ?? '#'} passHref>
+            <S.BlogArticleLink href={href ?? '#'} passHref>
               <S.BlogArticleButton variant="outlined">
                 Číst článek
               </S.BlogArticleButton>
-            </NextLink>
+            </S.BlogArticleLink>
           </VerticalStack>
         </S.InfoContainer>
       </S.Container>

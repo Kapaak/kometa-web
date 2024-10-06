@@ -1,3 +1,5 @@
+import NextLink from 'next/link';
+
 import styled, { css } from 'styled-components';
 
 import {
@@ -50,6 +52,10 @@ export const BlogArticleButton = styled(Button)`
     color: ${({ theme }) => theme.colors.grey['100']};
     background-color: ${({ theme }) => theme.colors.grey['900']};
   }
+`;
+
+export const BlogArticleLink = styled(NextLink)`
+  width: max-content;
 `;
 
 export const BlogArticleDescription = styled(Text).attrs({ variant: 'body2' })`
