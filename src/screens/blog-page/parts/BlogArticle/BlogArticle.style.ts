@@ -55,7 +55,7 @@ export const BlogArticleButton = styled(Button)`
 `;
 
 export const BlogArticleLink = styled(NextLink)`
-  width: max-content;
+  width: fit-content;
 `;
 
 export const BlogArticleDescription = styled(Text).attrs({ variant: 'body2' })`
