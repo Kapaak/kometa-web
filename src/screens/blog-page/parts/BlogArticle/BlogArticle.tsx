@@ -1,7 +1,11 @@
 import NextLink from 'next/link';
+import { useMediaQuery } from 'react-responsive';
+
+import { useTheme } from 'styled-components';
 
 import { Category, categoryTranslation } from '~/types';
 import { VerticalStack } from '~/ui/components/atoms';
+import { maxBreakpoint } from '~/utils/dimensions';
 
 import { BlogInfo } from '../../components';
 
@@ -32,7 +36,11 @@ export function BlogArticle({
   href,
   title,
 }: BlogArticleProps) {
-  return (
+  const { breakpoints } = useTheme();
+
+  const isTouchDevice = useMediaQuery({ query: maxBreakpoint(breakpoints.md) });
+
+  const articleContent = (
     <S.BlogArticle>
       <S.ImageContainer>
         <S.CategoryContainer>
@@ -74,5 +82,13 @@ export function BlogArticle({
         </S.InfoContainer>
       </S.Container>
     </S.BlogArticle>
+  );
+
+  return isTouchDevice ? (
+    <NextLink href={href ?? '#'} passHref>
+      {articleContent}
+    </NextLink>
+  ) : (
+    articleContent
   );
 }
