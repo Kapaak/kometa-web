@@ -67,7 +67,9 @@ export function BlogArticle({
       </S.ImageContainer>
       <S.Container>
         <S.TextContainer>
-          <S.BlogArticleHeadline>{title}</S.BlogArticleHeadline>
+          <NextLink href={href ?? '#'} passHref>
+            <S.BlogArticleHeadline>{title}</S.BlogArticleHeadline>
+          </NextLink>
           <S.BlogArticleDescription>{description}</S.BlogArticleDescription>
         </S.TextContainer>
         <S.InfoContainer>
