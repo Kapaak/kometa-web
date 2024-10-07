@@ -1,6 +1,7 @@
 # Main page for swimming school in Brno
 
 ## Connected to Sanity.io - Headless CMS
+
 https://github.com/Kapaak/kometa-sanity
 
 ## Code structure
@@ -71,3 +72,7 @@ src
 ### Utils
 
 - various functions that are shareable among components
+
+## Things to keep in mind
+
+- dont upgrade `vaul` package version unless 100% sure that it wont break the Drawer component (desired version is `"vaul": "0.9.2"`)

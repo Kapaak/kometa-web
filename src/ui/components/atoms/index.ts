@@ -6,6 +6,7 @@ export * from './Checkbox';
 export * from './Chip';
 export * from './Danger';
 export * from './Divider';
+export * from './Drawer';
 export * from './Flex';
 export * from './H1';
 export * from './Hamburger';
