@@ -10,6 +10,7 @@ export const DrawerContent = styled(Drawer.Content)`
   left: 0;
   right: 0;
   display: flex;
+  z-index: 100;
 `;
 
 export const DrawerContentInner = styled.div`
