@@ -68,6 +68,8 @@ export const MultiSelect = ({
       value={value}
       open={open}
     >
+      {open && <S.SelectOverlay onClick={handleClose} />}
+
       <S.MultiSelectTrigger onClick={() => setOpen(true)}>
         <Text variant="body5">{displayValue}</Text>
         {!isLoading && <CaretDown />}

@@ -60,6 +60,8 @@ export const Select = ({
 
   return (
     <S.Select value={value} open={open}>
+      {open && <S.SelectOverlay onClick={handleClose} />}
+
       <S.SelectTrigger onClick={() => setOpen(true)}>
         <S.SelectValue placeholder={<Text variant="body5">{placeholder}</Text>}>
           <Text variant="body5">{displayValue}</Text>

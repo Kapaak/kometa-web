@@ -44,3 +44,13 @@ export const MultiSelectContent = styled(RadixUiSelect.Content)`
 export const MultiSelectViewport = styled(RadixUiSelect.Viewport)`
   padding: 0.5rem;
 `;
+
+export const SelectOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 5;
+`;
