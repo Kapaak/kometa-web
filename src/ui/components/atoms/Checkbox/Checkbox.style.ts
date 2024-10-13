@@ -18,11 +18,7 @@ export const CheckboxIndicator = styled(RadixUICheckbox.Indicator)`
   justify-content: center;
   width: 1.4rem;
   margin-bottom: 0.1rem;
-  color: ${({ theme }) => theme.colors.primary.main};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.primary.main};
-  }
+  color: ${({ theme }) => theme.colors.grey['100']};
 `;
 export const CheckboxRoot = styled(RadixUICheckbox.Root)`
   width: 2rem;
@@ -36,11 +32,16 @@ export const CheckboxRoot = styled(RadixUICheckbox.Root)`
     disabled
       ? `1px solid ${colors.grey['500']}`
       : `1px solid ${colors.grey['900']}`};
-  background-color: ${({ disabled, theme: { colors } }) =>
-    disabled ? colors.grey['500'] : colors.grey['100']};
+
+  background-color: ${({ theme }) => theme.colors.grey['100']};
   cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.grey['200']};
+  }
+
+  &[data-state='checked'] {
+    border-color: ${({ theme }) => theme.colors.primary.dark};
+    background-color: ${({ theme }) => theme.colors.primary.main};
   }
 `;
