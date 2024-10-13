@@ -1,21 +1,16 @@
 import { useState } from 'react';
 
-import { SlidersHorizontal } from '@phosphor-icons/react';
-
 import { useGetBlogPosts } from '~/adapters/blogAdapter';
-import { Category, categoryTranslation } from '~/types';
+import { Category } from '~/types';
 import {
-  Checkbox,
-  Flex,
   Headline,
   Hidden,
   MaxWidth,
-  Popover,
   Text,
   VerticalStack,
 } from '~/ui/components/atoms';
 
-import { BlogLayout } from './components';
+import { BlogFilterDrawer, BlogLayout } from './components';
 
 import { BlogArticle, BlogFilter, LoadingBlogArticle } from './parts';
 
@@ -40,6 +35,10 @@ export function BlogScreen() {
     setSelectedFilter((prev) => [...prev, filterValue]);
   };
 
+  const handleSubmit = (data: Category[]) => {
+    setSelectedFilter(data);
+  };
+
   const getFilterCategoryActive = (filterCategory: Category) => {
     return selectedFilter.includes(filterCategory);
   };
@@ -52,29 +51,10 @@ export function BlogScreen() {
             <Headline>Blog</Headline>
 
             <Hidden up="md">
-              <Popover
-                title="Nastavení filtru"
-                action={
-                  <S.FilterButton>
-                    <Text variant="body2">Filtr</Text> <SlidersHorizontal />
-                  </S.FilterButton>
-                }
-              >
-                <Flex
-                  padding="1.6rem 2rem .6rem"
-                  direction="column"
-                  gap=".8rem"
-                >
-                  {Object.values(Category).map((category) => (
-                    <Checkbox
-                      key={category}
-                      label={categoryTranslation(category)}
-                      checked={getFilterCategoryActive(category)}
-                      onChange={() => handleChange(category)}
-                    />
-                  ))}
-                </Flex>
-              </Popover>
+              <BlogFilterDrawer
+                onSubmit={handleSubmit}
+                defaultSelectedFilter={selectedFilter}
+              />
             </Hidden>
 
             <Hidden down="md">

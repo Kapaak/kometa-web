@@ -27,7 +27,7 @@ export function ControlledCheckbox({
         <Checkbox
           label={label}
           onChange={() => field.onChange(!field.value)}
-          checked={field.value}
+          checked={Boolean(field?.value)}
           disabled={disabled}
         />
       )}
