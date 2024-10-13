@@ -2,8 +2,6 @@ import { PropsWithChildren, ReactNode, useEffect } from 'react';
 
 import { Drawer as VaulDrawer } from 'vaul';
 
-// import { useScrollBehavior } from './useScrollBehavior';
-
 import * as S from './Drawer.style';
 
 export interface DrawerProps extends PropsWithChildren {
@@ -37,10 +35,9 @@ export function Drawer({
         <S.DrawerContent>
           <S.DrawerContentInner>
             <S.DrawerTip />
-            <div className="max-w-md mx-auto">
-              <S.DrawerTitle>{title}</S.DrawerTitle>
-              {children}
-            </div>
+            <S.DrawerTitle>{title}</S.DrawerTitle>
+            <VaulDrawer.Description />
+            {children}
           </S.DrawerContentInner>
         </S.DrawerContent>
         <VaulDrawer.Overlay />

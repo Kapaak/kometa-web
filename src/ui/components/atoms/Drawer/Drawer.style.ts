@@ -21,7 +21,7 @@ export const DrawerContentInner = styled.div`
 `;
 
 export const DrawerOverlay = styled(Drawer.Overlay)`
-  background-color: ${({ theme }) => theme.colors.grey['100']};
+  background-color: ${({ theme }) => theme.colors.grey['900']};
 `;
 
 export const DrawerTip = styled.div`
