@@ -21,7 +21,15 @@ export const DrawerContentInner = styled.div`
 `;
 
 export const DrawerOverlay = styled(Drawer.Overlay)`
-  background-color: ${({ theme }) => theme.colors.grey['900']};
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  opacity: 0.5;
+  background-color: ${({ theme }) => theme.colors.grey['500']};
+
+  &&&&[vaul-drawer-visible='true'] {
+    opacity: 0.6;
+  }
 `;
 
 export const DrawerTip = styled.div`

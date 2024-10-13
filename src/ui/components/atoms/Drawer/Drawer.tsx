@@ -40,7 +40,6 @@ export function Drawer({
             {children}
           </S.DrawerContentInner>
         </S.DrawerContent>
-        <VaulDrawer.Overlay />
       </VaulDrawer.Portal>
     </VaulDrawer.Root>
   );
