@@ -54,6 +54,7 @@ export function AvailableCoursesFilterDrawer({
 
     handleClose();
   };
+  console.log('🚀 ~ childrenGenderOptions:', childrenGenderOptions);
 
   return (
     <Drawer title="Filtr dostupných kurzů" onClose={handleClose} {...props}>

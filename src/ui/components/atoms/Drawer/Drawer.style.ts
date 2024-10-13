@@ -26,9 +26,10 @@ export const DrawerOverlay = styled(Drawer.Overlay)`
   z-index: 99;
   opacity: 0.5;
   background-color: ${({ theme }) => theme.colors.grey['500']};
+  opacity: 0.6 !important;
 
-  &&&&[vaul-drawer-visible='true'] {
-    opacity: 0.6;
+  [vaul-drawer-visible='false'] {
+    display: none;
   }
 `;
 
