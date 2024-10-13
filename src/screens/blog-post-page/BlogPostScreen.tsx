@@ -1,12 +1,7 @@
 import { CalendarBlank, Timer, User } from '@phosphor-icons/react';
 
 import { TransformedBlogPost } from '~/domains';
-import {
-  Button,
-  Headline,
-  NextSanityImage,
-  VerticalStack,
-} from '~/ui/components/atoms';
+import { Button, Headline, NextSanityImage } from '~/ui/components/atoms';
 import { IconText, TextBuilder } from '~/ui/components/molecules';
 import { convertDateToString } from '~/utils/date';
 
@@ -23,9 +18,9 @@ export function BlogPostScreen({ blog }: BlogPostScreenProps) {
     <BlogPostsLayout label={blog?.title ?? 'Neuvedeno'}>
       <S.BlogPostSection>
         <S.BlogPostMaxWidth>
-          <S.BlogPostContainer gap="2rem">
+          <S.BlogPostContainer gap="1rem">
             <Headline>{blog?.title}</Headline>
-            <VerticalStack gap="1rem">
+            <S.BlogPostMeta>
               <IconText icon={User} text={blog?.author ?? '-'} />
               <IconText icon={Timer} text={`${blog?.readTime ?? '-'} min`} />
               <IconText
@@ -36,7 +31,7 @@ export function BlogPostScreen({ blog }: BlogPostScreenProps) {
                     : '-'
                 }
               />
-            </VerticalStack>
+            </S.BlogPostMeta>
 
             <S.BlogItemImageContainer aspectRatio={blog?.aspectRatio}>
               {blog?.image && (

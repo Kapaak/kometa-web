@@ -26,6 +26,18 @@ export const BlogPostContainer = styled(VerticalStack).attrs({
   `}
 `;
 
+export const BlogPostMeta = styled(VerticalStack)`
+  gap: 0.5rem;
+  margin-block: 1rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      gap: 1rem;
+      margin-block: 2rem;
+    }
+  `}
+`;
+
 export const Title = styled(Text).attrs({
   as: 'h1',
 })`
