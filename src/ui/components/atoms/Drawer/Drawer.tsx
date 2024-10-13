@@ -31,7 +31,7 @@ export function Drawer({
     <VaulDrawer.Root open={open} onClose={onClose}>
       <VaulDrawer.Trigger asChild>{action}</VaulDrawer.Trigger>
       <VaulDrawer.Portal>
-        <S.DrawerOverlay />
+        <S.DrawerOverlay onClick={onClose} />
         <S.DrawerContent>
           <S.DrawerContentInner>
             <S.DrawerTip />
