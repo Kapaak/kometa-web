@@ -42,7 +42,10 @@ export const MultiSelectContent = styled(RadixUiSelect.Content)`
 `;
 
 export const MultiSelectViewport = styled(RadixUiSelect.Viewport)`
+  display: flex;
+  flex-direction: column;
   padding: 0.5rem;
+  gap: 0.5rem;
 `;
 
 export const SelectOverlay = styled.div`

@@ -18,4 +18,8 @@ export const MultiSelectItem = styled(RadixUiSelect.Item)`
     outline: none;
     background-color: ${({ theme }) => theme.colors.grey['200']};
   }
+
+  &[data-state='checked'] {
+    background-color: ${({ theme }) => theme.colors.grey['400']};
+  }
 `;
