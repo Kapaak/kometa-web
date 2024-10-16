@@ -12,6 +12,7 @@ import {
   timeOptions,
 } from '~/constants/options';
 import { useGetSwimmingPoolOptions } from '~/hooks/useCoursesOptions';
+import { AvailableCoursesFilterFormData } from '~/types';
 import { Flex, Hidden, Text } from '~/ui/components/atoms';
 import {
   ControlledMultiSelect,
@@ -24,15 +25,6 @@ import { AvailableCoursesFilterDrawer } from '../AvailableCoursesFilterDrawer';
 
 import * as S from './AvailableCoursesFilter.style';
 
-type FormData = {
-  gender?: string;
-  day?: string[] | string;
-  time?: string[] | string;
-  place?: string[] | string;
-  age?: string;
-  skillLevel?: string;
-};
-
 export function AvailableCoursesFilter() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const router = useRouter();
@@ -42,7 +34,7 @@ export function AvailableCoursesFilter() {
   const { data: swimmingPoolOptions, isLoading: isSwimmingPoolLoading } =
     useGetSwimmingPoolOptions();
 
-  const form = useForm<FormData>({
+  const form = useForm<AvailableCoursesFilterFormData>({
     values: {
       gender: filter?.gender,
       day: Boolean(filter?.day)
@@ -80,7 +72,7 @@ export function AvailableCoursesFilter() {
     [router]
   );
 
-  const handleDrawerSubmit = (data: FormData) => {
+  const handleDrawerSubmit = (data: AvailableCoursesFilterFormData) => {
     const filteredValues = filterEmptyValuesFromObject(data);
 
     updateQueryParams(filteredValues);
@@ -113,6 +105,7 @@ export function AvailableCoursesFilter() {
             swimmingPoolOptions={swimmingPoolOptions}
             onClose={() => setDrawerOpen(false)}
             onSubmit={handleDrawerSubmit}
+            initialValues={filter}
             action={
               <S.FilterButton onClick={() => setDrawerOpen(true)}>
                 <Text variant="body2">Nastavení</Text> <SlidersHorizontal />

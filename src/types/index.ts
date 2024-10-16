@@ -56,3 +56,12 @@ export const categoryTranslation = (category: Category) => {
 };
 
 export type LatLng = google.maps.LatLngLiteral;
+
+export type AvailableCoursesFilterFormData = {
+  gender?: string;
+  day?: string[] | string;
+  time?: string[] | string;
+  place?: string[] | string;
+  age?: string;
+  skillLevel?: string;
+};

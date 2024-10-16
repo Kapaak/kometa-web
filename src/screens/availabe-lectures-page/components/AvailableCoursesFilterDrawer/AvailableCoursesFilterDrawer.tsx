@@ -7,6 +7,7 @@ import {
   skillLevelOptions,
   timeOptions,
 } from '~/constants/options';
+import { AvailableCoursesFilterFormData } from '~/types';
 import {
   Button,
   Drawer,
@@ -20,28 +21,23 @@ import {
 
 interface AvailableCoursesFilterDrawerProps extends DrawerProps {
   isSwimmingPoolLoading?: boolean;
+  initialValues?: AvailableCoursesFilterFormData;
   swimmingPoolOptions?: { label: string; value: string }[];
-  onSubmit?: (data: FormData) => void;
+  onSubmit?: (data: AvailableCoursesFilterFormData) => void;
 }
 
-type FormData = {
-  gender?: string;
-  day?: string[] | string;
-  time?: string[] | string;
-  place?: string[] | string;
-  age?: string;
-  skillLevel?: string;
-};
-
 export function AvailableCoursesFilterDrawer({
-  children,
+  initialValues,
   isSwimmingPoolLoading,
   swimmingPoolOptions,
   onSubmit,
   onClose,
+  children,
   ...props
 }: AvailableCoursesFilterDrawerProps) {
-  const form = useForm<FormData>();
+  const form = useForm<AvailableCoursesFilterFormData>({
+    values: initialValues,
+  });
   const { handleSubmit, reset } = form;
 
   const handleClose = () => {
@@ -49,12 +45,11 @@ export function AvailableCoursesFilterDrawer({
     onClose();
   };
 
-  const handleFormSubmit = (data: FormData) => {
+  const handleFormSubmit = (data: AvailableCoursesFilterFormData) => {
     onSubmit?.(data);
 
     handleClose();
   };
-  console.log('🚀 ~ childrenGenderOptions:', childrenGenderOptions);
 
   return (
     <Drawer title="Filtr dostupných kurzů" onClose={handleClose} {...props}>
