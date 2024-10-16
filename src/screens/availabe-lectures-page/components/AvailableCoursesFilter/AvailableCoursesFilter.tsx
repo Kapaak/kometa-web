@@ -13,7 +13,7 @@ import {
 } from '~/constants/options';
 import { useGetSwimmingPoolOptions } from '~/hooks/useCoursesOptions';
 import { AvailableCoursesFilterFormData } from '~/types';
-import { Flex, Hidden, Text } from '~/ui/components/atoms';
+import { Flex, Hidden, Text, VerticalStack } from '~/ui/components/atoms';
 import {
   ControlledMultiSelect,
   ControlledSelect,
@@ -96,62 +96,64 @@ export function AvailableCoursesFilter() {
 
   return (
     <S.AvailableCoursesFilter>
-      <Flex justify="space-between" align="center">
-        <S.AvailableCoursesFilterTitle>Filtr</S.AvailableCoursesFilterTitle>
-        <Hidden up="md">
-          <AvailableCoursesFilterDrawer
-            open={drawerOpen}
-            isSwimmingPoolLoading={isSwimmingPoolLoading}
-            swimmingPoolOptions={swimmingPoolOptions}
-            onClose={() => setDrawerOpen(false)}
-            onSubmit={handleDrawerSubmit}
-            initialValues={filter}
-            action={
-              <S.FilterButton onClick={() => setDrawerOpen(true)}>
-                <Text variant="body2">Nastavení</Text> <SlidersHorizontal />
-              </S.FilterButton>
-            }
-          />
-        </Hidden>
-      </Flex>
+      <VerticalStack gap="2rem">
+        <Flex justify="space-between" align="center">
+          <S.AvailableCoursesFilterTitle>Filtr</S.AvailableCoursesFilterTitle>
+          <Hidden up="md">
+            <AvailableCoursesFilterDrawer
+              open={drawerOpen}
+              isSwimmingPoolLoading={isSwimmingPoolLoading}
+              swimmingPoolOptions={swimmingPoolOptions}
+              onClose={() => setDrawerOpen(false)}
+              onSubmit={handleDrawerSubmit}
+              initialValues={filter}
+              action={
+                <S.FilterButton onClick={() => setDrawerOpen(true)}>
+                  <Text variant="body2">Nastavení</Text> <SlidersHorizontal />
+                </S.FilterButton>
+              }
+            />
+          </Hidden>
+        </Flex>
 
-      <Hidden down="md">
-        <FormProvider {...form}>
-          <S.ControlledItems>
-            <ControlledSelect
-              name="gender"
-              placeholder="Pohlaví dítěte"
-              options={childrenGenderOptions}
-            />
-            <ControlledMultiSelect
-              name="day"
-              placeholder="Preferované dny"
-              options={dayOptions}
-            />
-            <ControlledMultiSelect
-              name="time"
-              placeholder="Preferované časy"
-              options={timeOptions}
-            />
-            <ControlledMultiSelect
-              name="place"
-              placeholder="Preferovaná místa"
-              options={swimmingPoolOptions}
-              isLoading={isSwimmingPoolLoading}
-            />
-            <ControlledSelect
-              name="age"
-              placeholder="Věk dítěte"
-              options={ageOptions}
-            />
-            <ControlledSelect
-              name="skillLevel"
-              placeholder="Aktuální plavecká úroveň"
-              options={skillLevelOptions}
-            />
-          </S.ControlledItems>
-        </FormProvider>
-      </Hidden>
+        <Hidden down="md">
+          <FormProvider {...form}>
+            <S.ControlledItems>
+              <ControlledSelect
+                name="gender"
+                placeholder="Pohlaví dítěte"
+                options={childrenGenderOptions}
+              />
+              <ControlledMultiSelect
+                name="day"
+                placeholder="Preferované dny"
+                options={dayOptions}
+              />
+              <ControlledMultiSelect
+                name="time"
+                placeholder="Preferované časy"
+                options={timeOptions}
+              />
+              <ControlledMultiSelect
+                name="place"
+                placeholder="Preferovaná místa"
+                options={swimmingPoolOptions}
+                isLoading={isSwimmingPoolLoading}
+              />
+              <ControlledSelect
+                name="age"
+                placeholder="Věk dítěte"
+                options={ageOptions}
+              />
+              <ControlledSelect
+                name="skillLevel"
+                placeholder="Aktuální plavecká úroveň"
+                options={skillLevelOptions}
+              />
+            </S.ControlledItems>
+          </FormProvider>
+        </Hidden>
+      </VerticalStack>
     </S.AvailableCoursesFilter>
   );
 }

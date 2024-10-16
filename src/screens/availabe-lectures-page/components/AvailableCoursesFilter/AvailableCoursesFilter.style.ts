@@ -4,7 +4,13 @@ import { Text } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const AvailableCoursesFilter = styled.section`
-  margin-block: 4rem;
+  margin-block: 2rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      margin-block: 4rem;
+    }
+  `}
 `;
 
 export const AvailableCoursesFilterTitle = styled(Text).attrs({
