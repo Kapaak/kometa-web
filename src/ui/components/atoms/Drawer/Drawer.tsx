@@ -28,10 +28,15 @@ export function Drawer({
   }, []);
 
   return (
-    <VaulDrawer.Root open={open} onClose={onClose}>
+    <VaulDrawer.Root
+      open={open}
+      onClose={onClose}
+      dismissible
+      onOpenChange={(value) => !value && onClose()}
+    >
       <VaulDrawer.Trigger asChild>{action}</VaulDrawer.Trigger>
       <VaulDrawer.Portal>
-        <S.DrawerOverlay onClick={onClose} />
+        <S.DrawerOverlay />
         <S.DrawerContent>
           <S.DrawerContentInner>
             <S.DrawerTip />

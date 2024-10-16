@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Drawer } from 'vaul';
 
 export const DrawerContent = styled(Drawer.Content)`
@@ -20,17 +20,24 @@ export const DrawerContentInner = styled.div`
   flex: 1;
 `;
 
-export const DrawerOverlay = styled(Drawer.Overlay)`
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.6;
+  }
+`;
+
+//For some reason Drawer.Overlay makes children components from RadixUI not to work with scrolling
+export const DrawerOverlay = styled.div`
   position: fixed;
   inset: 0;
   z-index: 99;
-  opacity: 0.5;
+  pointer-events: all;
   background-color: ${({ theme }) => theme.colors.grey['500']};
-  opacity: 0.6 !important;
-
-  [vaul-drawer-visible='false'] {
-    display: none;
-  }
+  opacity: 0.6;
+  animation: ${fadeIn} 0.5s ease-in-out;
 `;
 
 export const DrawerTip = styled.div`
