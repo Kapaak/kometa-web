@@ -33,6 +33,11 @@ export const GlobalStyle = createGlobalStyle(
       background-color: ${colors.grey['200']};
     }
 
+    br {
+      //fixes br height in Firefox to be the same as in Chromium browsers
+      margin-bottom: 2.3rem;
+    }
+
     strong {
       font-weight: 600;
     }
