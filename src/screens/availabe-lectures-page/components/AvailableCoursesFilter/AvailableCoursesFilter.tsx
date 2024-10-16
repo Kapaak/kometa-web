@@ -24,8 +24,6 @@ import { AvailableCoursesFilterDrawer } from '../AvailableCoursesFilterDrawer';
 
 import * as S from './AvailableCoursesFilter.style';
 
-interface AvailableCoursesFilterProps {}
-
 type FormData = {
   gender?: string;
   day?: string[] | string;
@@ -35,7 +33,7 @@ type FormData = {
   skillLevel?: string;
 };
 
-export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
+export function AvailableCoursesFilter() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const router = useRouter();
 
