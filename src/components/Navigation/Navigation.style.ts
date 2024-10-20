@@ -38,17 +38,31 @@ export const NavigationMenuList = styled(NavigationMenu.List)`
 `;
 
 export const NavigationMenuItem = styled(NavigationMenu.Item).withConfig({
-  shouldForwardProp: (prop) => !['hiddenOnSmallDevice'].includes(prop),
+  shouldForwardProp: (prop) =>
+    !['hiddenOnSmallDevice', 'highlighted'].includes(prop),
 })<{
   hiddenOnSmallDevice?: boolean;
+  highlighted?: boolean;
 }>`
+  p {
+    font-weight: 500;
+  }
+
   &:hover {
     color: ${({ theme }) => theme.colors.primary.main};
   }
 
-  ${({ theme, hiddenOnSmallDevice }) =>
+  ${({ theme, hiddenOnSmallDevice, highlighted }) =>
     hiddenOnSmallDevice &&
     css`
+      ${highlighted &&
+      css`
+        padding: 0.4rem 1rem;
+        background-color: ${theme.colors.grey['200']};
+        border-radius: 0.5rem;
+        border: 1px solid ${theme.colors.grey['500']};
+      `}
+
       @media (${maxBreakpoint(theme.breakpoints.lg)}) {
         display: none;
       }

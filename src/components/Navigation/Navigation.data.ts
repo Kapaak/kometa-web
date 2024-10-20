@@ -26,5 +26,6 @@ export const navigationData = [
   {
     label: 'Blog',
     href: '/blog',
+    highlighted: true,
   },
 ];
