@@ -1,14 +1,20 @@
 import { consent } from 'nextjs-google-analytics';
 import { useEffect, useState } from 'react';
 
-import { cookieConsentGiven, updatePostHogConsent } from '~/libs/posthog';
+import { updatePostHogConsent } from '~/libs/posthog';
+import { CookieConsent } from '~/types';
 import { Button, MaxWidth } from '~/ui/components/atoms';
+import {
+  cookieConsentGiven,
+  initializeCookieConsent,
+  updateCookieConsent,
+} from '~/utils/cookies';
 
 import { CookieSettingsModal } from './parts';
 
 import * as S from './CookieConsent.style';
 
-export const CookieConsent = () => {
+export const CookieConsentBar = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [showConsent, setShowConsent] = useState(false);
 
@@ -21,39 +27,21 @@ export const CookieConsent = () => {
   }, [consentGiven]);
 
   const handleAcceptAll = () => {
-    updatePostHogConsent(true);
-    consent({
-      arg: 'update',
-      params: { ad_storage: 'granted', analytics_storage: 'granted' },
-    });
+    const grantedCookieConsents = initializeCookieConsent('granted');
+    updateAllConsentProviders(grantedCookieConsents);
 
     setShowConsent(false);
   };
 
   const handleRejectAll = () => {
-    updatePostHogConsent(false);
-    consent({
-      arg: 'update',
-      params: { ad_storage: 'denied', analytics_storage: 'denied' },
-    });
+    const deniedCookieConsents = initializeCookieConsent('denied');
+    updateAllConsentProviders(deniedCookieConsents);
 
     setShowConsent(false);
   };
 
-  const handleSave = (hasAcceptedConsents: boolean) => {
-    if (hasAcceptedConsents) {
-      updatePostHogConsent(true);
-      consent({
-        arg: 'update',
-        params: { ad_storage: 'granted', analytics_storage: 'granted' },
-      });
-    } else {
-      updatePostHogConsent(false);
-      consent({
-        arg: 'update',
-        params: { ad_storage: 'denied', analytics_storage: 'denied' },
-      });
-    }
+  const handleSave = (acceptedConsent: CookieConsent) => {
+    updateAllConsentProviders(acceptedConsent);
 
     setShowConsent(false);
   };
@@ -98,3 +86,13 @@ export const CookieConsent = () => {
     </>
   );
 };
+
+function updateAllConsentProviders(acceptedConsent: CookieConsent) {
+  updatePostHogConsent(acceptedConsent);
+  updateCookieConsent(acceptedConsent);
+
+  consent({
+    arg: 'update',
+    params: acceptedConsent,
+  });
+}

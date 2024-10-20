@@ -65,3 +65,14 @@ export type AvailableCoursesFilterFormData = {
   age?: string;
   skillLevel?: string;
 };
+
+export enum CookieConsentType {
+  AD_STORAGE = 'ad_storage',
+  AD_PERSONALIZATION = 'ad_personalization',
+  AD_USER_DATA = 'ad_user_data',
+  ANALYTICS_STORAGE = 'analytics_storage',
+}
+
+export type CookieConsentState = 'granted' | 'denied';
+
+export type CookieConsent = Record<string, CookieConsentState>;
