@@ -1,7 +1,7 @@
 import { CalendarBlank, Timer, User } from '@phosphor-icons/react';
 
 import { TransformedBlogPost } from '~/domains';
-import { Button, Headline, NextSanityImage } from '~/ui/components/atoms';
+import { Headline, NextSanityImage } from '~/ui/components/atoms';
 import { IconText, TextBuilder } from '~/ui/components/molecules';
 import { convertDateToString } from '~/utils/date';
 
@@ -47,9 +47,6 @@ export function BlogPostScreen({ blog }: BlogPostScreenProps) {
               )}
             </S.BlogItemImageContainer>
             <TextBuilder value={blog?.description} />
-            <S.PreviousPageLink href="/blog">
-              <Button>Vrátit na předchozí stránku</Button>
-            </S.PreviousPageLink>
           </S.BlogPostContainer>
         </S.BlogPostMaxWidth>
       </S.BlogPostSection>

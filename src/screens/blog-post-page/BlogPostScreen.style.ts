@@ -1,5 +1,3 @@
-import NextLink from 'next/link';
-
 import styled, { css } from 'styled-components';
 
 import { MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
@@ -55,14 +53,4 @@ export const BlogItemImageContainer = styled.div.withConfig({
   width: 100%;
   max-height: 40rem;
   aspect-ratio: ${(props) => props.aspectRatio};
-`;
-
-export const PreviousPageLink = styled(NextLink)`
-  margin-top: 2rem;
-
-  ${({ theme }) => css`
-    @media (${minBreakpoint(theme.breakpoints.lg)}) {
-      margin-top: 10rem;
-    }
-  `}
 `;
