@@ -68,11 +68,13 @@ export const MultiSelect = ({
       value={value}
       open={open}
     >
+      {open && <S.SelectOverlay onClick={handleClose} />}
+
       <S.MultiSelectTrigger onClick={() => setOpen(true)}>
         <Text variant="body5">{displayValue}</Text>
         {!isLoading && <CaretDown />}
         {isLoading && (
-          <ClipLoader size="18" speedMultiplier={0.5} color={grey['800']} />
+          <ClipLoader size="1.8rem" speedMultiplier={0.5} color={grey['800']} />
         )}
       </S.MultiSelectTrigger>
       <RadixUiSelect.Portal>

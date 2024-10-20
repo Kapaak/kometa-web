@@ -60,13 +60,15 @@ export const Select = ({
 
   return (
     <S.Select value={value} open={open}>
+      {open && <S.SelectOverlay onClick={handleClose} />}
+
       <S.SelectTrigger onClick={() => setOpen(true)}>
         <S.SelectValue placeholder={<Text variant="body5">{placeholder}</Text>}>
           <Text variant="body5">{displayValue}</Text>
         </S.SelectValue>
         {!isLoading && <CaretDown />}
         {isLoading && (
-          <ClipLoader size="18" speedMultiplier={0.5} color={grey['800']} />
+          <ClipLoader size="1.8rem" speedMultiplier={0.5} color={grey['800']} />
         )}
       </S.SelectTrigger>
       <RadixUiSelect.Portal>

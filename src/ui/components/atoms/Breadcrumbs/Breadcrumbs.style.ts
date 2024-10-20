@@ -4,7 +4,9 @@ import {
   Breadcrumbs as ReactAriaBreadcrumbs,
 } from 'react-aria-components';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import { maxBreakpoint } from '~/utils/dimensions';
 
 export const BreadcrumbLink = styled(NextLink)`
   font-size: 1.2rem;
@@ -29,6 +31,15 @@ export const Breadcrumb = styled(ReactAriaBreadcrumb)`
   outline: none;
   position: relative;
   text-decoration: none;
+
+  ${({ theme }) => css`
+    @media (${maxBreakpoint(theme.breakpoints.md)}) {
+      max-width: 20rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  `}
 `;
 
 export const Breadcrumbs = styled(ReactAriaBreadcrumbs)`
@@ -42,4 +53,12 @@ export const Breadcrumbs = styled(ReactAriaBreadcrumbs)`
     font-size: 1.2rem;
     padding: 0 1.2rem;
   }
+
+  ${({ theme }) => css`
+    @media (${maxBreakpoint(theme.breakpoints.md)}) {
+      ${Breadcrumb}:not(:last-child)::after {
+        padding: 0 0.8rem;
+      }
+    }
+  `}
 `;

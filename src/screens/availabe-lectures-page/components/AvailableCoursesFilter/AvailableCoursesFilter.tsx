@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+
+import { SlidersHorizontal } from '@phosphor-icons/react';
 
 import {
   ageOptions,
@@ -9,7 +11,9 @@ import {
   skillLevelOptions,
   timeOptions,
 } from '~/constants/options';
-import { useGetSwimmingPoolOptions } from '~/hooks';
+import { useGetSwimmingPoolOptions } from '~/hooks/useCoursesOptions';
+import { AvailableCoursesFilterFormData } from '~/types';
+import { Flex, Hidden, Text, VerticalStack } from '~/ui/components/atoms';
 import {
   ControlledMultiSelect,
   ControlledSelect,
@@ -17,21 +21,12 @@ import {
 import { filterEmptyValuesFromObject } from '~/utils/filter';
 
 import { useAvailableCoursesFilterContext } from '../../contexts';
+import { AvailableCoursesFilterDrawer } from '../AvailableCoursesFilterDrawer';
 
 import * as S from './AvailableCoursesFilter.style';
 
-interface AvailableCoursesFilterProps {}
-
-type FormData = {
-  gender?: string;
-  day?: string[] | string;
-  time?: string[] | string;
-  place?: string[] | string;
-  age?: string;
-  skillLevel?: string;
-};
-
-export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
+export function AvailableCoursesFilter() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const router = useRouter();
 
   const { filter, setFilter } = useAvailableCoursesFilterContext();
@@ -39,7 +34,7 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
   const { data: swimmingPoolOptions, isLoading: isSwimmingPoolLoading } =
     useGetSwimmingPoolOptions();
 
-  const form = useForm<FormData>({
+  const form = useForm<AvailableCoursesFilterFormData>({
     values: {
       gender: filter?.gender,
       day: Boolean(filter?.day)
@@ -77,6 +72,14 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
     [router]
   );
 
+  const handleDrawerSubmit = (data: AvailableCoursesFilterFormData) => {
+    const filteredValues = filterEmptyValuesFromObject(data);
+
+    updateQueryParams(filteredValues);
+
+    setFilter(filteredValues);
+  };
+
   useEffect(() => {
     const subscription = watch((values, { name }) => {
       //make sure that we are updating only when controlled value is changed and not on rerender
@@ -93,42 +96,64 @@ export function AvailableCoursesFilter({}: AvailableCoursesFilterProps) {
 
   return (
     <S.AvailableCoursesFilter>
-      <S.AvailableCoursesFilterTitle>Filtr</S.AvailableCoursesFilterTitle>
-      <FormProvider {...form}>
-        <S.ControlledItems>
-          <ControlledSelect
-            name="gender"
-            placeholder="Pohlaví dítěte"
-            options={childrenGenderOptions}
-          />
-          <ControlledMultiSelect
-            name="day"
-            placeholder="Preferované dny"
-            options={dayOptions}
-          />
-          <ControlledMultiSelect
-            name="time"
-            placeholder="Preferované časy"
-            options={timeOptions}
-          />
-          <ControlledMultiSelect
-            name="place"
-            placeholder="Preferovaná místa"
-            options={swimmingPoolOptions}
-            isLoading={isSwimmingPoolLoading}
-          />
-          <ControlledSelect
-            name="age"
-            placeholder="Věk dítěte"
-            options={ageOptions}
-          />
-          <ControlledSelect
-            name="skillLevel"
-            placeholder="Aktuální plavecká úroveň"
-            options={skillLevelOptions}
-          />
-        </S.ControlledItems>
-      </FormProvider>
+      <VerticalStack gap="2rem">
+        <Flex justify="space-between" align="center">
+          <S.AvailableCoursesFilterTitle>Filtr</S.AvailableCoursesFilterTitle>
+          <Hidden up="md">
+            <AvailableCoursesFilterDrawer
+              open={drawerOpen}
+              isSwimmingPoolLoading={isSwimmingPoolLoading}
+              swimmingPoolOptions={swimmingPoolOptions}
+              onClose={() => setDrawerOpen(false)}
+              onSubmit={handleDrawerSubmit}
+              initialValues={filter}
+              action={
+                <S.FilterButton onClick={() => setDrawerOpen(true)}>
+                  <Text variant="body2">Nastavení</Text> <SlidersHorizontal />
+                </S.FilterButton>
+              }
+            />
+          </Hidden>
+        </Flex>
+
+        <Hidden down="md">
+          <FormProvider {...form}>
+            <S.ControlledItems>
+              <ControlledSelect
+                name="gender"
+                placeholder="Pohlaví dítěte"
+                options={childrenGenderOptions}
+              />
+              <ControlledMultiSelect
+                name="day"
+                placeholder="Preferované dny"
+                options={dayOptions}
+              />
+              <ControlledMultiSelect
+                name="time"
+                placeholder="Preferované časy"
+                options={timeOptions}
+              />
+              <ControlledMultiSelect
+                name="place"
+                placeholder="Preferovaná místa"
+                options={swimmingPoolOptions}
+                isLoading={isSwimmingPoolLoading}
+              />
+              <ControlledSelect
+                name="age"
+                placeholder="Věk dítěte"
+                options={ageOptions}
+              />
+              <ControlledSelect
+                name="skillLevel"
+                placeholder="Aktuální plavecká úroveň"
+                options={skillLevelOptions}
+              />
+            </S.ControlledItems>
+          </FormProvider>
+        </Hidden>
+      </VerticalStack>
     </S.AvailableCoursesFilter>
   );
 }

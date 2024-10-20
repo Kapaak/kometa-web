@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle(
       min-height: 100%;
       height: 100%;
       scroll-behavior: smooth;
+      box-sizing: inherit;
     }
 
     body {
@@ -32,9 +33,22 @@ export const GlobalStyle = createGlobalStyle(
       background-color: ${colors.grey['200']};
     }
 
+    br {
+      //fixes br height in Firefox to be the same as in Chromium browsers
+      margin-bottom: 2.3rem;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
     #__next {
       min-height: 100%;
       height: 100%;
+    }
+
+    ::selection {
+      background: ${colors.secondary.main};
     }
 
     a,

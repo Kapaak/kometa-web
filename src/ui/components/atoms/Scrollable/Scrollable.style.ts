@@ -13,7 +13,7 @@ export const ScrollAreaScrollbar = styled(ScrollArea.Scrollbar)`
   display: flex;
   user-select: none;
   touch-action: none;
-  padding: 2px;
+  padding: 0.2rem;
   background: ${({ theme }) => theme.colors.grey['400']};
   transition: background 160ms ease-out;
 

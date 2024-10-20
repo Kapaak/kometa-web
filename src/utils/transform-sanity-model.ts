@@ -1,10 +1,13 @@
 import {
   GetAvailableCourse,
   SanityAvailableCourse,
+  SanityBlogPost,
   SanityCamps,
   SanityKidsCourse,
+  TransformedBlogPost,
 } from '~/domains';
 import {
+  Category,
   SwimmingVariant,
   SwimmingVariantTranslation,
   TransformedKidsCourse,
@@ -102,5 +105,29 @@ export function transformAvailableCourse(
     isSchoolOrKindergartenAvailable:
       course.isSchoolOrKindergartenAvailable ?? false,
     privateSwimmingPool: course.privateSwimmingPool ?? false,
+  };
+}
+
+export function transformBlogPost(
+  blogPost: SanityBlogPost
+): TransformedBlogPost {
+  return {
+    id: blogPost?.id,
+    title: blogPost?.title ?? '',
+    shortDescription: blogPost?.shortDescription ?? '',
+    description: blogPost?.description,
+    createdAt: blogPost?.createdAt ?? '',
+    author: blogPost?.author ?? '',
+    readTime: blogPost?.readTime ?? NaN,
+    image: blogPost?.image
+      ? urlForImage(blogPost.image)?.url()
+      : '/images/place/generic-swimming-pool.jpeg',
+    aspectRatio:
+      blogPost?.image?.asset?.metadata?.dimensions?.aspectRatio ?? NaN,
+    alt: blogPost?.alt ?? '',
+    tags: (blogPost?.tags as Category[]) ?? [],
+    url: blogPost?.slug ?? '',
+    slug: blogPost?.slug ?? '',
+    blurDataURL: blogPost?.image?.asset?.metadata?.lqip,
   };
 }

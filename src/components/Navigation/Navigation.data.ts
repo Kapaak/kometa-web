@@ -23,4 +23,9 @@ export const navigationData = [
     label: 'Kontakt',
     href: '/#kontakt',
   },
+  {
+    label: 'Blog',
+    href: '/blog',
+    highlighted: true,
+  },
 ];

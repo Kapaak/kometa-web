@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useGetAvailableCourses } from '~/adapters';
+import { useGetAvailableCourses } from '~/adapters/coursesAdapter';
 import { Gender } from '~/types';
 import {
   Hidden,

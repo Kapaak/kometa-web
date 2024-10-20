@@ -56,6 +56,11 @@ declare module 'styled-components' {
         fontWeight: number;
         lineHeight: string;
       };
+      h4: {
+        fontSize: string;
+        fontWeight: number;
+        lineHeight: string;
+      };
       body1: {
         fontSize: string;
         fontWeight: number;

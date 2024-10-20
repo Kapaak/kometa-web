@@ -7,14 +7,18 @@ import { Analytics } from '@vercel/analytics/react';
 import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
 
+import { posthogPersistanceAllowed } from '~/libs/posthog';
+import { CookieConsent } from '~/types';
+import { cookieConsentGiven } from '~/utils/cookies';
+
 //Posthog must be defined outside component !
 // //disable posthog in development
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY ?? '', {
-    persistence:
-      localStorage.getItem('cookie_consent') === 'true'
-        ? 'localStorage+cookie'
-        : 'memory',
+    opt_out_capturing_by_default: true,
+    persistence: posthogPersistanceAllowed(cookieConsentGiven())
+      ? 'localStorage+cookie'
+      : 'memory',
     api_host:
       process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com',
     loaded: (posthog) => {
@@ -24,7 +28,8 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
 }
 
 export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
-  const [defaultCookieConsent, setDefaultCookieConsent] = useState(false);
+  const [defaultCookieConsent, setDefaultCookieConsent] =
+    useState<CookieConsent>();
 
   const router = useRouter();
 
@@ -40,20 +45,20 @@ export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setDefaultCookieConsent(
-        localStorage.getItem('cookie_consent') === 'true' ? true : false
-      );
+      setDefaultCookieConsent(cookieConsentGiven());
     }
   }, []);
 
   useEffect(() => {
-    consent({
-      arg: 'update',
-      params: {
-        ad_storage: defaultCookieConsent ? 'granted' : 'denied',
-        analytics_storage: defaultCookieConsent ? 'granted' : 'denied',
-      },
-    });
+    if (typeof window !== 'undefined' && defaultCookieConsent) {
+      consent({
+        arg: 'update',
+        params: defaultCookieConsent,
+      });
+      posthogPersistanceAllowed(cookieConsentGiven())
+        ? posthog.opt_in_capturing()
+        : posthog.opt_out_capturing();
+    }
   }, [defaultCookieConsent]);
 
   return (

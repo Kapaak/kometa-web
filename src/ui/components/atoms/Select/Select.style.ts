@@ -38,6 +38,7 @@ export const SelectContent = styled(RadixUiSelect.Content)`
     0px 10px 20px -15px rgba(22, 23, 24, 0.2);
   width: var(--radix-select-trigger-width);
   max-height: var(--radix-select-content-available-height);
+  z-index: 100;
 `;
 
 export const SelectViewport = styled(RadixUiSelect.Viewport)`
@@ -47,4 +48,14 @@ export const SelectViewport = styled(RadixUiSelect.Viewport)`
 export const SelectValue = styled(RadixUiSelect.Value)`
   background-color: red;
   font-size: 20rem;
+`;
+
+export const SelectOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 5;
 `;

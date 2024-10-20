@@ -12,7 +12,7 @@ import {
   skillLevelOptions,
   timeOptions,
 } from '~/constants/options';
-import { useGetSwimmingPoolOptions } from '~/hooks';
+import { useGetSwimmingPoolOptions } from '~/hooks/useCoursesOptions';
 import { Flex, MaxWidth, VerticalStack } from '~/ui/components/atoms';
 import {
   ControlledMultiSelect,

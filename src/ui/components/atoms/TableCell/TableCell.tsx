@@ -16,7 +16,7 @@ export const TableCell = styled(
   shouldForwardProp: (prop) => !['variant', 'width'].includes(prop),
 })<{ colSpan?: number }>`
   padding: 2.5rem 2.8rem;
-  width: ${({ width = 0 }) => `${width / 10}rem` ?? 'unset'};
+  width: ${({ width = 0 }) => (width ? `${width / 10}rem` : 'unset')};
   font-weight: ${({ variant }) => (variant === 'head' ? '600' : '400')};
   text-align: ${({ textAlign }) => textAlign ?? 'left'};
 `;

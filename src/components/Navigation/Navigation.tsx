@@ -29,7 +29,11 @@ export function Navigation() {
             </S.NavigationMenuItem>
           </S.Logo>
           {navigationData.map((item) => (
-            <S.NavigationMenuItem key={item.label} hiddenOnSmallDevice>
+            <S.NavigationMenuItem
+              key={item.label}
+              hiddenOnSmallDevice
+              highlighted={item?.highlighted}
+            >
               <NextLink href={item.href}>
                 <Text variant="body2">{item.label}</Text>
               </NextLink>
