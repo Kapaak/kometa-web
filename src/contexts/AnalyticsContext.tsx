@@ -1,11 +1,11 @@
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { consent, GoogleAnalytics } from 'nextjs-google-analytics';
-import { PropsWithChildren, useEffect, useState } from 'react';
-
-import { Analytics } from '@vercel/analytics/react';
 import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 import { posthogPersistanceAllowed } from '~/libs/posthog';
 import { CookieConsent } from '~/types';
@@ -63,6 +63,7 @@ export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <PostHogProvider client={posthog}>
+      <SpeedInsights />
       <Analytics />
       <Script
         src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER}`}
