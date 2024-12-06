@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 import ReactDOMServer from 'react-dom/server';
 
 import { withTheme } from '~/ui/theme';
