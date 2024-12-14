@@ -24,7 +24,8 @@ export const FooterExternalLinks = () => {
         </Link>
       </S.ImageFlexContainer>
       <S.Creator variant="body6">
-        <A href="https://www.pavelzapletal.cz/">© 2024 Pavel Zapletal</A>
+        © 2024 Kometa Brno | Vytvořil{' '}
+        <A href="https://www.pavelzapletal.cz/">Pavel Zapletal</A>
       </S.Creator>
     </S.FooterExternalLinks>
   );

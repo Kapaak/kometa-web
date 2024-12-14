@@ -33,7 +33,7 @@ export function ContactSection({}: ContactSectionProps) {
   }, []);
 
   return (
-    <S.ContactSection id="kontakt">
+    <S.ContactSection>
       <MaxWidth>
         <S.ContactSectionContainer>
           <VerticalStack justify="space-between">

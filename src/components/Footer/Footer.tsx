@@ -2,15 +2,15 @@ import {
   FooterCompanyInformation,
   FooterExternalLinks,
   FooterMainContent,
-} from './parts'
+} from './parts';
 
-import * as S from './Footer.style'
+import * as S from './Footer.style';
 
 interface FooterProps {}
 
 export function Footer({}: FooterProps) {
   return (
-    <S.Footer>
+    <S.Footer id="kontakt">
       <S.MaxWidthContainer variant="wide">
         <S.FlexContainer>
           <FooterCompanyInformation />
@@ -19,5 +19,5 @@ export function Footer({}: FooterProps) {
         </S.FlexContainer>
       </S.MaxWidthContainer>
     </S.Footer>
-  )
+  );
 }
