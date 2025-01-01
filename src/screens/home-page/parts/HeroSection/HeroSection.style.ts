@@ -13,6 +13,10 @@ export const HeroSectionBanner = styled(Flex)`
   padding: 1.2rem;
   min-height: 51rem;
   border-radius: 1rem;
+
+  a {
+    max-width: max-content;
+  }
 `;
 
 export const HeroSectionBannerDescription = styled(VerticalStack)`
