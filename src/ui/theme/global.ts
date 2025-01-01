@@ -47,10 +47,6 @@ export const GlobalStyle = createGlobalStyle(
       height: 100%;
     }
 
-    ::selection {
-      background: ${colors.secondary.main};
-    }
-
     a,
     a[href^='tel'],
     a[href^='mail'] {
