@@ -31,8 +31,7 @@ export function HeroSection() {
             <NextLink href="/dostupne-lekce">
               <IconButton
                 variant="outlined"
-                transparent
-                customColor="#fff"
+                color="white"
                 icon={<ArrowRight size={20} />}
               >
                 Dostupné lekce

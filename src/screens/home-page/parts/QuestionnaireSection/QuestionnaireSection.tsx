@@ -69,7 +69,6 @@ export function QuestionnaireSection() {
                   synchronizované plavání.
                 </S.QuestionaireDescription>
               </VerticalStack>
-              {/* <div>plavecke kurzy, letni tabory</div> */}
             </Flex>
           </RadixAccordion.Header>
 

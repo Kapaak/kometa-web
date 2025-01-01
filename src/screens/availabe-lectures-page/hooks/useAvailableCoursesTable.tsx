@@ -121,9 +121,8 @@ export function useAvailableCoursesTable(
           return (
             <Button
               size="small"
-              color={isFull ? 'grey' : 'tetriary'}
+              color={isFull ? 'disabled' : 'tetriary'}
               disabled={isFull}
-              customColor={isFull ? grey['800'] : grey['900']}
               style={{ display: 'inline-flex' }}
             >
               {isFull && <span>Obsazeno</span>}

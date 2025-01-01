@@ -1,7 +1,5 @@
 import { css, styled } from 'styled-components';
 
-import { mapColorVariantToColor } from '~/utils/colors';
-
 import { ButtonProps } from './Button.type';
 
 const ButtonInitial = styled.button.withConfig({
@@ -45,104 +43,31 @@ export const Button = styled(ButtonInitial)`
     }
   }}
 
-  ${({ color = 'primary', disabled, theme: { colors } }) => {
-    switch (color) {
-      case 'primary':
-        return css`
-          background-color: ${colors.primary.main};
-          &:hover {
-            background-color: ${colors.primary.dark};
-          }
-        `;
-      case 'secondary':
-        return css`
-          background-color: ${colors.secondary.main};
-          &:hover {
-            background-color: ${colors.secondary.dark};
-          }
-        `;
-      case 'tetriary':
-        return css`
-          background-color: ${colors.tetriary.main};
-          &:hover {
-            background-color: ${colors.tetriary.dark};
-          }
-        `;
-      case 'success':
-        return css`
-          background-color: ${colors.success.main};
-          &:hover {
-            background-color: ${colors.success.main};
-          }
-        `;
-      case 'error':
-        return css`
-          background-color: ${colors.error.main};
-          &:hover {
-            background-color: ${colors.error.main};
-          }
-        `;
-      case 'grey':
-        return css`
-          color: ${colors.grey[900]};
-          background-color: ${colors.grey[600]};
-          &:hover {
-            background-color: ${disabled ? colors.grey[600] : colors.grey[700]};
-          }
-        `;
-    }
-  }}
+  ${({ variant = 'filled', color = 'primary', theme: { button } }) => {
+    if (variant === 'plain') {
+      return css`
+        border-radius: 0;
+        min-height: 0;
+        min-width: 0;
+        padding: 0;
+        background-color: initial;
+        text-transform: none;
 
-
-${({
-    disabled,
-    variant = 'filled',
-    color = 'primary',
-    theme: { colors },
-    customColor, // customColor is a prop that can be passed to the component
-  }) => {
-    const selectedColorVariant = mapColorVariantToColor.call(
-      null,
-      colors,
-      disabled ? 'grey' : color
-    );
-
-    switch (variant) {
-      case 'plain':
-        return css`
-          border-radius: 0;
-          min-height: 0;
-          min-width: 0;
-          padding: 0;
+        &:hover {
           background-color: initial;
-          text-transform: none;
-          color: ${customColor ?? selectedColorVariant.main};
-
-          &:hover {
-            background-color: initial;
-          }
-        `;
-      case 'filled':
-        return css`
-          color: ${customColor
-            ? customColor
-            : color === 'grey'
-              ? colors.grey[900]
-              : colors.grey[100]};
-        `;
-
-      case 'outlined':
-        return css`
-          border: 1px solid ${customColor ?? selectedColorVariant.main};
-          color: ${customColor ?? selectedColorVariant.main};
-          background-color: initial;
-          &:hover {
-            background-color: ${disabled
-              ? 'initial'
-              : selectedColorVariant.main};
-            color: ${colors.grey[100]};
-          }
-        `;
+        }
+      `;
+    } else {
+      return css`
+        border: 1px solid ${button[variant][color].border};
+        color: ${button[variant][color].text};
+        background-color: ${button[variant][color].background};
+        &:hover {
+          background-color: ${button[variant][color].hover?.background};
+          border-color: ${button[variant][color].hover?.border};
+          color: ${button[variant][color].hover?.text};
+        }
+      `;
     }
   }}
 `;

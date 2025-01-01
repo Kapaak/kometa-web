@@ -1,5 +1,16 @@
 import 'styled-components';
 
+interface ButtonVariant {
+  background: string;
+  text: string;
+  border?: string;
+  hover?: {
+    border?: string;
+    background?: string;
+    text?: string;
+  };
+}
+
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
@@ -38,6 +49,26 @@ declare module 'styled-components' {
         700: string;
         800: string;
         900: string;
+      };
+    };
+    button: {
+      filled: {
+        primary: ButtonVariant;
+        secondary: ButtonVariant;
+        tetriary: ButtonVariant;
+        success: ButtonVariant;
+        error: ButtonVariant;
+        disabled: ButtonVariant;
+        white: ButtonVariant;
+      };
+      outlined: {
+        primary: ButtonVariant;
+        secondary: ButtonVariant;
+        tetriary: ButtonVariant;
+        success: ButtonVariant;
+        error: ButtonVariant;
+        disabled: ButtonVariant;
+        white: ButtonVariant;
       };
     };
     typography: {
