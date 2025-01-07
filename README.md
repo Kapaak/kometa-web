@@ -1,78 +1,71 @@
-# Main page for swimming school in Brno
+# Kometa Brno - Swimming
+Website for swimming club Kometa Brno. This website consists of frontend created in ```Next.js``` and headless CMS in ```Sanity.io```
 
-## Connected to Sanity.io - Headless CMS
+> Repository for the CMS is located [here](https://github.com/Kapaak/kometa-sanity)
 
-https://github.com/Kapaak/kometa-sanity
+## 🚀 Project Structure
 
-## Code structure
+```text
+├── public/
+│   └── files
+│   └── icons
+│   └── images
+│   └── sponsors
+├── src/
+│   ├── adapters
+│   ├── components
+│   ├── constants
+│   ├── contexts
+│   ├── domains
+│   ├── hooks
+│   ├── libs
+│       └── posthog
+│       └── sanity
+│   ├── pages
+│   ├── screens
+│   ├── types
+│   ├── ui/
+│       └── components
+│           └── atoms
+│           └── molecules
+│           └── organisms
+│           └── templates
+│       └── theme
+│   ├── utils
+└── package.json
+```
 
-public
-|
-src
-&nbsp;&nbsp;|
-&nbsp;&nbsp;adapters
-&nbsp;&nbsp;|
-&nbsp;&nbsp;components
-&nbsp;&nbsp;|
-&nbsp;&nbsp;constants
-&nbsp;&nbsp;|
-&nbsp;&nbsp;contexts
-&nbsp;&nbsp;|
-&nbsp;&nbsp;domains
-&nbsp;&nbsp;|
-&nbsp;&nbsp;hooks
-&nbsp;&nbsp;|
-&nbsp;&nbsp;libs
-&nbsp;&nbsp;|
-&nbsp;&nbsp;pages
-&nbsp;&nbsp;|
-&nbsp;&nbsp;screens
-&nbsp;&nbsp;|
-&nbsp;&nbsp;ui
-&nbsp;&nbsp;|
-&nbsp;&nbsp;utils
+## 🔌 Adapters
+Hooks, that are used for direct communication with API. These hooks usually use ```@tanstack/react-query``` for fetching and caching the data.
 
-### Adapters
+## 🧱 Components
+There are 2 types of components, first of them are without logic (located in ```src/ui/components/...```) and the rest are some reusable components with logic 
+that are usually using some external libraries (located in ```src/components/...```).
 
-- for direct communication with API
+Each item in components folder can be made of multiple parts, where these parts are used only in this particular place. For such subcomponents there is a ```parts``` folder.
 
-### Components
+## 📬 Contexts
+Global state handled by ```Context API```.
 
-- building blocks that are not reusable (e.g. contain hardcoded data, bound with specific screen)
+## 📦 Domains and Types
+```Domains``` folder holds all of the types, that are referencing APIs or external libraries. Whereas the ```Types``` folder keeps custom types and interfaces.
 
-### Contexts
 
-- global state components
+## 🖥️ Screens
+Every page is made of multiple sections. In this folder we combine all of the necessary parts for the page, so that we can have cleaner page declarations.
 
-### Domains
+## 🎉 UI
+Containing dumb reusable components separated in [Atomic methodology](https://atomicdesign.bradfrost.com/chapter-2/). Styling is done using css-in-js library ```styled-components```. Most of the simplest components are just made from a single ```styled-components``` element.
 
-- types for all components for the application
+Inside ```src/ui/theme``` we have initial setup for styles, fonts and style-reset. We also use ```font-size: 62.5%;``` so that ```1rem equals 10px```.
 
-### Hooks
+## 🖇️ Utils
+Various functions that are shareable among components.
 
-- combining or altering functionality of Adapter
+## 💡 Start the development
+- Use yarn package manager.
+- Development is in port 3000 and start it by typing ```yarn dev```.
 
-### Libs
+## ❗️ Things to keep in mind
+- Dont upgrade `vaul` package version unless 100% sure that it wont break the Drawer component (desired version is `"vaul": "0.9.2"`). Greater versions disables scroll animation due to some styles not disappearing from html / body component.
 
-- similar to Adapter but for working with various libraries that are fetching data
-
-### Pages
-
-- folder structure containing page urls
-
-### Screens
-
-- each page has its own screen
-
-### UI
-
-- containing UI shareable components in Atomic methodology
-- setup files for styling via styled-components
-
-### Utils
-
-- various functions that are shareable among components
-
-## Things to keep in mind
-
-- dont upgrade `vaul` package version unless 100% sure that it wont break the Drawer component (desired version is `"vaul": "0.9.2"`)
