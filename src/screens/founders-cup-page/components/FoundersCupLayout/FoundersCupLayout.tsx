@@ -10,7 +10,7 @@ interface FoundersCupLayoutProps extends PropsWithChildren {}
 export function FoundersCupLayout({ children }: FoundersCupLayoutProps) {
   const breadcrumbs = [
     { label: 'Domů', href: '/' },
-    { label: 'Pohár zakladatelů', href: '/zavody/pohar-zakladatelu' },
+    { label: 'Pohár zakladatelů', href: '/souteze/pohar-zakladatelu' },
   ];
 
   return (
