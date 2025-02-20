@@ -14,6 +14,7 @@ export const SelectTrigger = styled(RadixUiSelect.Trigger)`
   cursor: pointer;
   min-width: 24rem;
   background-color: ${({ theme }) => theme.colors.grey['100']};
+  text-align: left;
 
   &:focus-within {
     border: 1px solid ${({ theme }) => theme.colors.primary.main};
