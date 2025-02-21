@@ -47,8 +47,8 @@ export function FoundersCupSection({}: FoundersCupSectionProps) {
           description="Klub plaveckých sportů policie Kometa Brno vás vítá na nejstarším plaveckém závodě
 na území České republiky - 77. ročníku „O ceny zakladatelů brněnského plavání“."
           imageUrl="/images/banner/cup.jpg"
-          url="https://vysledky.czechswimming.cz/souteze/9745"
-          actionLabel="Stránky soutěže"
+          url="#history"
+          actionLabel="Historie výsledků"
         />
         <MaxWidth variant="small">
           <VerticalStack gap="2.4rem">
@@ -111,7 +111,7 @@ na území České republiky - 77. ročníku „O ceny zakladatelů brněnského
           <Flex>
             <S.CzechSwimmingLink href="https://vysledky.czechswimming.cz/souteze/9745">
               <IconButton icon={<ArrowRight size={20} />}>
-                Český svaz plaveckých sportů
+                Stránky závodu v IS ČSPS
               </IconButton>
             </S.CzechSwimmingLink>
           </Flex>
@@ -142,8 +142,8 @@ na území České republiky - 77. ročníku „O ceny zakladatelů brněnského
                   Odhlášky po termínu je vysílající oddíl povinen uhradit.
                 </Text>
                 <Text color={primary.main}>
-                  <Strong>Startovné:</Strong> 100 Kč za každý přijatý start
-                  uhradí vedoucí družstva během závodů.
+                  <Strong>Startovné:</Strong> 100 Kč za každý přijatý start.
+                  Platba převodem na účet na základě vystavené faktury.
                 </Text>
                 <Text color={primary.main}>
                   <Strong>Informace:</Strong> Roman Havrlant, email:
@@ -204,7 +204,7 @@ na území České republiky - 77. ročníku „O ceny zakladatelů brněnského
             </S.TimeTableContainer>
           </S.Content>
 
-          <S.Content>
+          <S.Content id="history">
             <S.Subheadline>Historie výsledků</S.Subheadline>
 
             <Select

@@ -8,23 +8,6 @@ export const FoundersCupSection = styled.section`
   margin-bottom: 4rem;
 `;
 
-export const ImageContainer = styled.div<{
-  aspectRatio: string;
-  removeMargin?: boolean;
-}>`
-  position: relative;
-  margin-top: ${({ removeMargin }) => (removeMargin ? '0' : '2rem')};
-  aspect-ratio: ${({ aspectRatio }) => aspectRatio};
-  width: 100%;
-  height: auto;
-
-  ${({ theme, removeMargin }) => css`
-    @media (${minBreakpoint(theme.breakpoints.md)}) {
-      margin-top: ${removeMargin ? '0' : '6rem'};
-    }
-  `}
-`;
-
 export const CzechSwimmingLink = styled(NextLink)`
   margin-inline: auto;
   margin-block: 4rem;
@@ -55,6 +38,7 @@ export const Content = styled(Flex)`
   margin-block: 2rem 6rem;
   gap: 2rem;
   flex-direction: column;
+  scroll-margin: 10rem;
 `;
 
 export const TimeTableContainer = styled(Flex)`
@@ -76,4 +60,22 @@ export const TimeTableGrid = styled.div`
   max-width: 100%;
   grid-template-columns: 2.2rem 1fr 9.7rem;
   gap: 1.6rem;
+`;
+
+export const ImageContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['aspectRatio', 'removeMargin'].includes(prop),
+})<{
+  aspectRatio: string;
+  removeMargin?: boolean;
+}>`
+  position: relative;
+  margin-top: ${({ removeMargin }) => (removeMargin ? '0' : '2rem')};
+  aspect-ratio: ${({ aspectRatio }) => aspectRatio};
+  width: 100%;
+  height: auto;
+  ${({ theme, removeMargin }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      margin-top: ${removeMargin ? '0' : '6rem'};
+    }
+  `}
 `;
