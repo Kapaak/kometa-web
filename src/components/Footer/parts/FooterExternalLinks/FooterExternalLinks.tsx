@@ -7,9 +7,12 @@ import Link from 'next/link';
 
 import { A } from '~/ui/components/atoms';
 
+import dayjs from 'dayjs';
 import * as S from './FooterExternalLinks.style';
 
 export const FooterExternalLinks = () => {
+  const currentYear = dayjs().year();
+
   return (
     <S.FooterExternalLinks>
       <S.ImageFlexContainer gap="1rem" direction="row">
@@ -24,7 +27,7 @@ export const FooterExternalLinks = () => {
         </Link>
       </S.ImageFlexContainer>
       <S.Creator variant="body6">
-        © 2024 Kometa Brno | Vytvořil{' '}
+        © {currentYear} Kometa Brno | Vytvořil{' '}
         <A href="https://www.pavelzapletal.cz/">Pavel Zapletal</A>
       </S.Creator>
     </S.FooterExternalLinks>
