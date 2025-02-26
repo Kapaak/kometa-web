@@ -9,6 +9,26 @@ export const initializeCookieConsent = (
   );
 };
 
+/**
+ * Checks if the user has given consent to all essential cookies.
+ * These consents are required in order to use some analytics and tracking services.
+ * @param cookieConsent
+ * @returns boolean
+ */
+export function hasEssentialAnalyticsConsents(cookieConsent?: CookieConsent) {
+  if (!cookieConsent) {
+    return false;
+  }
+
+  const storageConsentGranted =
+    cookieConsent[CookieConsentType.AD_STORAGE] === 'granted';
+
+  const analyticsConsentGranted =
+    cookieConsent[CookieConsentType.ANALYTICS_STORAGE] === 'granted';
+
+  return storageConsentGranted && analyticsConsentGranted;
+}
+
 export const transformCookieConsent = (
   cookieConsent: Record<string, boolean>
 ): CookieConsent => {
