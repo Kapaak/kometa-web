@@ -1,11 +1,11 @@
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { consent, GoogleAnalytics } from 'nextjs-google-analytics';
 import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
 import { PropsWithChildren, useEffect, useState } from 'react';
+import { MetaPixel } from '~/components/MetaPixel';
 import { PostHog } from '~/components/PostHog';
 
 import { CookieConsent } from '~/types';
@@ -14,13 +14,6 @@ import {
   hasEssentialAnalyticsConsents,
 } from '~/utils/cookies';
 import { MetaPixelManager } from '~/utils/meta-pixel';
-
-const ReactMetaPixel = dynamic(
-  () => import('../components/MetaPixel').then((mod) => mod.MetaPixel),
-  {
-    ssr: false,
-  }
-);
 
 export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
   const [defaultCookieConsent, setDefaultCookieConsent] =
@@ -56,7 +49,7 @@ export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
     <PostHogProvider client={posthog}>
       <SpeedInsights />
       <Analytics />
-      <ReactMetaPixel />
+      <MetaPixel />
       <PostHog />
 
       <Script
