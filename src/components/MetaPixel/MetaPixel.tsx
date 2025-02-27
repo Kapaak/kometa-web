@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
+import { MetaPixelManager } from '~/utils/meta-pixel';
 
 const pageview = () => {
-  window.fbq('track', 'PageView');
+  MetaPixelManager.pageView();
 };
 
 export function MetaPixel() {
@@ -32,7 +33,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', ${process.env.NEXT_PUBLIC_METAPIXEL_KEY});
   fbq('track', 'PageView');
-`,
+  `,
       }}
     />
   );
