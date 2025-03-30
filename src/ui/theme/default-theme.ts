@@ -175,6 +175,11 @@ export const theme: DefaultTheme = {
       fontWeight: 400,
       lineHeight: '3.6rem',
     },
+    h5: {
+      fontSize: '2.2rem',
+      fontWeight: 500,
+      lineHeight: '2.2rem',
+    },
     body1: {
       fontSize: '1.8rem',
       fontWeight: 400,
