@@ -1,9 +1,10 @@
+import { StaticImageData } from 'next/image';
 import { Button, Tag, Text } from '../../atoms';
 import * as S from './ServiceCardDescription.style';
 
 interface ServiceCardProps {
   title: string;
-  image: string;
+  image: StaticImageData;
   imageAlt: string;
   tags?: string[];
   url?: string;
