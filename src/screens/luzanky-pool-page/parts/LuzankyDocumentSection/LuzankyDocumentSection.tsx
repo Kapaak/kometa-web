@@ -1,12 +1,12 @@
-// import { useSanityHomeContext } from '~/contexts';
-
 import { Headline, MaxWidth, Text } from '~/ui/components/atoms';
 
+import { useGetDocumentsBySwimmingPoolId } from '~/adapters/documentsAdapter';
 import { Document } from '../../components/Document';
 import * as S from './LuzankyDocumentSection.style';
 
 export const LuzankyDocumentSection = () => {
-  // const { documents } = useSanityHomeContext();
+  const { data } = useGetDocumentsBySwimmingPoolId('luzanky');
+
   return (
     <S.DocumentSection id="documents">
       <MaxWidth>
@@ -16,17 +16,13 @@ export const LuzankyDocumentSection = () => {
             <Text>Důležité dokumenty pro stáhnutí ve formě PDF.</Text>
           </S.TextContainer>
           <S.GridContainer>
-            <Document label="Bara je nej" filePath="/" />
-            <Document label="Bara je nej" filePath="/" />
-            <Document label="Bara je nej" filePath="/" />
-            <Document label="Bara je nej" filePath="/" />
-            {/* {documents?.map((doc, index) => (
+            {data?.map((uploadedFile) => (
               <Document
-                key={`${doc?.title}_${index}`}
-                title={doc?.title}
-                filePath={doc?.file?.asset?.url}
+                key={uploadedFile?.id}
+                label={uploadedFile?.title}
+                filePath={uploadedFile?.file?.asset?.url}
               />
-            ))} */}
+            ))}
           </S.GridContainer>
         </S.FlexContainer>
       </MaxWidth>
