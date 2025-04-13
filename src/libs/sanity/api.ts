@@ -6,6 +6,7 @@ import {
   SanityCamps,
   SanityKidsCourse,
   SanitySwimmingPool,
+  SanityUploadedFile,
 } from '~/domains';
 import { SwimmingVariant } from '~/types';
 
@@ -113,7 +114,7 @@ export async function getBlogPosts(
 }
 
 export async function getBlogById(blogId: string): Promise<SanityBlogPost> {
-  const query = groq`*[_type == "blog" && slug.current == "${blogId}"][0]{"id":_id,title,shortDescription, description[]{
+  const query = groq`*[_type == "blog" && slug.current == $blogId][0]{"id":_id,title,shortDescription, description[]{
     ...,
     _type == "imageAlt" => {
       ...,
@@ -121,7 +122,7 @@ export async function getBlogById(blogId: string): Promise<SanityBlogPost> {
     },
   },createdAt,author,readTime,image{asset->{...,metadata},alt},tags,slug}`;
 
-  const blog: SanityBlogPost = await client.fetch(query);
+  const blog: SanityBlogPost = await client.fetch(query, { blogId });
 
   return blog;
 }
@@ -138,6 +139,20 @@ export async function getSwimmingPools(): Promise<SanitySwimmingPool[]> {
   const querySwimmingPools = groq`*[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]`;
 
   const course = await client.fetch(querySwimmingPools);
+
+  return course;
+}
+
+export async function getDocumentsBySwimmingPoolId(
+  swimmingPoolId: string
+): Promise<SanityUploadedFile[]> {
+  const queryDocuments = groq`*[_type == "fileUpload"  &&  swimmingPool->slug.current == $swimmingPoolId]{"id":_id,title,file{
+    asset->{...,metadata}
+  },order,
+    swimmingPool -> {"slug":slug.current}
+  }[] | order(order)`;
+
+  const course = await client.fetch(queryDocuments, { swimmingPoolId });
 
   return course;
 }

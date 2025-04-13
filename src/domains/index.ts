@@ -29,6 +29,8 @@ export type SanityAvailableCourse = QueryAvailableCoursesResult[0];
 
 export type SanitySwimmingPool = QuerySwimmingPoolsResult[0];
 
+export type SanityUploadedFile = any[0];
+
 export type SanityBlogPost = QueryBlogPostsResult[0];
 
 export type SanityImage = SanityImageObject & {

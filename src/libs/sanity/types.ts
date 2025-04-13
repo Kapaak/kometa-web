@@ -39,42 +39,47 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type Course = {
-  _type: 'course';
-  dayId?: 1 | 2 | 3 | 4 | 5;
-  timeFrom?:
-    | '15:00'
-    | '15:15'
-    | '15:30'
-    | '15:45'
-    | '16:00'
-    | '16:15'
-    | '16:30'
-    | '16:45'
-    | '17:00'
-    | '17:15'
-    | '17:30'
-    | '17:45'
-    | '18:00';
-  timeTo?:
-    | '15:45'
-    | '16:00'
-    | '16:15'
-    | '16:30'
-    | '16:45'
-    | '17:00'
-    | '17:15'
-    | '17:30'
-    | '17:45'
-    | '18:00'
-    | '18:15'
-    | '18:30'
-    | '18:45'
-    | '19:00';
-  isFull?: boolean;
-  price?: Price;
-  discount?: number;
+export type AvailableIconType = string;
+
+export type FaqObjectType = {
+  _type: 'faqObjectType';
+  title?: string;
+  icon?: AvailableIconType;
+  text?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote';
+        listItem?: 'bullet';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: 'image';
+        _key: string;
+      }
+  >;
 };
+
+export type Rating = number;
 
 export type BlockContent = Array<
   | {
@@ -108,6 +113,63 @@ export type BlockContent = Array<
       _key: string;
     }
 >;
+
+export type InfoBar = {
+  _id: string;
+  _type: 'infoBar';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  text?: string;
+  visibility?: boolean;
+};
+
+export type Faq = {
+  _id: string;
+  _type: 'faq';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  faqItems?: Array<
+    {
+      _key: string;
+    } & FaqObjectType
+  >;
+  order?: Rating;
+};
+
+export type FileUpload = {
+  _id: string;
+  _type: 'fileUpload';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  file?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
+    };
+    _type: 'file';
+  };
+  order?: Rating;
+};
+
+export type Home = {
+  _id: string;
+  _type: 'home';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  visibility?: boolean;
+  order?: Rating;
+  text?: BlockContent;
+};
 
 export type SanityImageCrop = {
   _type: 'sanity.imageCrop';
@@ -348,6 +410,29 @@ export type SiteSettings = {
   description?: string;
 };
 
+export type Camp = {
+  _id: string;
+  _type: 'camp';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'imageAlt';
+  };
+  tag?: Array<string>;
+  url?: string;
+};
+
 export type SwimmingPool = {
   _id: string;
   _type: 'swimmingPool';
@@ -379,29 +464,6 @@ export type Geopoint = {
   lat?: number;
   lng?: number;
   alt?: number;
-};
-
-export type Camp = {
-  _id: string;
-  _type: 'camp';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: 'imageAlt';
-  };
-  tag?: Array<string>;
-  url?: string;
 };
 
 export type ImageAlt = {
@@ -580,7 +642,7 @@ export type QueryKidsCoursesResult = Array<{
   isSchoolOrKindergartenAvailable: boolean | null;
 }>;
 // Variable: queryBlogPosts
-// Query: *[_type == "blog"]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize]
+// Query: *[_type == "blog"  && _id > $lastId]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)
 export type QueryBlogPostsResult = Array<{
   id: string;
   title: string | null;
@@ -649,6 +711,90 @@ export type QueryBlogPostsResult = Array<{
   tags: Array<'equipment' | 'funFact' | 'tips' | 'training'> | null;
   slug: string | null;
 }>;
+// Variable: query
+// Query: *[_type == "blog" && slug.current == $blogId][0]{"id":_id,title,shortDescription, description[]{    ...,    _type == "imageAlt" => {      ...,      asset->    },  },createdAt,author,readTime,image{asset->{...,metadata},alt},tags,slug}
+export type QueryResult = {
+  id: string;
+  title: string | null;
+  shortDescription: string | null;
+  description: Array<
+    | {
+        asset: {
+          _id: string;
+          _type: 'sanity.imageAsset';
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'imageAlt';
+      }
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'h2' | 'h3' | 'normal';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+      }
+  > | null;
+  createdAt: string | null;
+  author: string | null;
+  readTime: number | null;
+  image: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata: SanityImageMetadata | null;
+      source?: SanityAssetSourceData;
+    } | null;
+    alt: string | null;
+  } | null;
+  tags: Array<'equipment' | 'funFact' | 'tips' | 'training'> | null;
+  slug: Slug | null;
+} | null;
 // Variable: queryCamps
 // Query: *[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]
 export type QueryCampsResult = Array<{
@@ -719,7 +865,7 @@ export type QuerySwimmingPoolsResult = Array<{
 }>;
 // Source: ../../websites/kometa-web/src/pages/blog/[blogId].tsx
 // Variable: queryBlog
-// Query: *[_type == "blog"]{slug}
+// Query: *[_type == "blog"]{"slug": slug.current}
 export type QueryBlogResult = Array<{
-  slug: Slug | null;
+  slug: string | null;
 }>;

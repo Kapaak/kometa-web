@@ -7,8 +7,10 @@ export const DocumentSection = styled.section`
   background-color: #dce9fa;
 `;
 
-export const TextContainer = styled.div`
+export const TextContainer = styled(Flex)`
   flex: 1 1 40%;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 export const FlexContainer = styled(Flex)`
