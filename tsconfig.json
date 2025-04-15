@@ -20,6 +20,12 @@
       "~/public/*": ["public/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/_document.jsx",
+    "src/pages/bazeny/luzanky/[...category]"
+  ],
   "exclude": ["node_modules"]
 }
