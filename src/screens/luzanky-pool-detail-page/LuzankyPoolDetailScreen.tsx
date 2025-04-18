@@ -1,5 +1,8 @@
 import { LuzankyPoolDetailLayout } from './components';
-import { LuzankyDetailHeroSection } from './parts';
+import {
+  LuzankyDetailHeroSection,
+  LuzankyDetailSkillLevelSection,
+} from './parts';
 
 interface LuzankyPoolDetailScreenProps {}
 
@@ -7,6 +10,7 @@ export function LuzankyPoolDetailScreen({}: LuzankyPoolDetailScreenProps) {
   return (
     <LuzankyPoolDetailLayout>
       <LuzankyDetailHeroSection />
+      <LuzankyDetailSkillLevelSection />
     </LuzankyPoolDetailLayout>
   );
 }
