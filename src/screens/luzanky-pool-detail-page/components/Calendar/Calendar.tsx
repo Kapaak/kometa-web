@@ -75,9 +75,11 @@ const getTimeByDayIdAndTime = (dayId: number, time: number) => {
   return lecturesInDays.find((day) => day.day === dayId && day.time === time);
 };
 
-interface CalendarProps {}
+interface CalendarProps {
+  onClick?: (dayId: number, time: number) => void;
+}
 
-export function Calendar({}: CalendarProps) {
+export function Calendar({ onClick }: CalendarProps) {
   const theme = useTheme();
   const { grey } = theme.colors;
 
@@ -115,8 +117,11 @@ export function Calendar({}: CalendarProps) {
               <S.CalendarDay
                 key={`${columnItem.day}_${columnItem.time}`}
                 discount={columnItem?.discount}
+                as="button"
+                type="button"
+                onClick={() => onClick?.(day.dayId, columnItem.time)}
               >
-                <UserPlus size={24} color={grey['800']} />
+                <UserPlus size={24} />
               </S.CalendarDay>
             );
           })}

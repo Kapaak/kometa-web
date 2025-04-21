@@ -1,16 +1,18 @@
 import { LuzankyPoolDetailLayout } from './components';
 import {
+  LuzankyDetailAboutSection,
+  LuzankyDetailFirstLectureSection,
   LuzankyDetailHeroSection,
   LuzankyDetailSkillLevelSection,
 } from './parts';
 
-interface LuzankyPoolDetailScreenProps {}
-
-export function LuzankyPoolDetailScreen({}: LuzankyPoolDetailScreenProps) {
+export function LuzankyPoolDetailScreen() {
   return (
     <LuzankyPoolDetailLayout>
       <LuzankyDetailHeroSection />
       <LuzankyDetailSkillLevelSection />
+      <LuzankyDetailAboutSection />
+      <LuzankyDetailFirstLectureSection />
     </LuzankyPoolDetailLayout>
   );
 }

@@ -1,6 +1,7 @@
 import { LuzankyPoolLayout } from './components';
 import {
   LuzankyAboutSection,
+  LuzankyBasicInfoSection,
   LuzankyDocumentSection,
   LuzankyHeroSection,
   LuzankyServiceSection,
@@ -15,6 +16,7 @@ export function LuzankyPoolScreen({}: LuzankyPoolScreenProps) {
       <LuzankyAboutSection />
       <LuzankyServiceSection />
       <LuzankyDocumentSection />
+      <LuzankyBasicInfoSection />
     </LuzankyPoolLayout>
   );
 }

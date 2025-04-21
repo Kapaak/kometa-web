@@ -1,9 +1,31 @@
-import { Flex, Headline, MaxWidth, Text } from '~/ui/components/atoms';
+import {
+  ArrowsHorizontal,
+  Baby,
+  CheckCircle,
+  SwimmingPool,
+  Thermometer,
+  Timer,
+} from '@phosphor-icons/react';
+import { useRouter } from 'next/router';
+import { useTheme } from 'styled-components';
+import {
+  Button,
+  Headline,
+  MaxWidth,
+  Text,
+  VerticalStack,
+} from '~/ui/components/atoms';
+import { IconText } from '~/ui/components/molecules';
 import { Calendar } from '../../components';
-import { luzankyPoolDetailInformations } from '../../constants';
+import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailHeroSection.style';
 
 export function LuzankyDetailHeroSection() {
+  const theme = useTheme();
+  const { primary } = theme.colors;
+
+  const router = useRouter();
+
   return (
     <S.Section>
       <MaxWidth>
@@ -17,40 +39,85 @@ export function LuzankyDetailHeroSection() {
                   plavecké styly a chtějí se zaměřit na zlepšení své techniky a
                   vytrvalosti.
                 </Text>
+
+                <S.SectionPriceContainer>
+                  <Text variant="body3">
+                    Cena kurzu je od{' '}
+                    {luzankyPoolDetailInformation.approximatePrice}
+                  </Text>
+                </S.SectionPriceContainer>
+
+                <Text variant="body2">
+                  Součástí ceny je vždy pronájem bazénu, profesionální trenéři a
+                  kvalitní pomůcky, které pomohou zefektivnit výuku plavání.
+                </Text>
               </S.SectionTextContainer>
 
               <S.SectionInformationContainer>
-                {luzankyPoolDetailInformations.map((information) => (
-                  <Flex direction="column" gap="1rem" key={information.label}>
-                    <Text variant="body3" as="h2">
-                      {information.label}
-                    </Text>
+                <VerticalStack gap="1rem">
+                  <Text variant="body3" as="h2">
+                    Základní informace
+                  </Text>
 
-                    <ul>
-                      {information.items.map((item) => (
-                        <Flex gap="1rem" align="center" key={item.label}>
-                          <p>icon</p>
-                          <Text variant="body2">{item.label}</Text>
-                        </Flex>
-                      ))}
-                    </ul>
-                  </Flex>
-                ))}
+                  <IconText
+                    icon={Baby}
+                    iconColor={primary.main}
+                    text={luzankyPoolDetailInformation.approximateAge}
+                  />
+                  <IconText
+                    icon={Timer}
+                    iconColor={primary.main}
+                    text={luzankyPoolDetailInformation.duration}
+                  />
+                  <IconText
+                    icon={ArrowsHorizontal}
+                    iconColor={primary.main}
+                    text={`Délka bazénu: ${luzankyPoolDetailInformation.swimmingPool.length}`}
+                  />
+                  <IconText
+                    icon={SwimmingPool}
+                    iconColor={primary.main}
+                    text={`Maximální hloubka: ${luzankyPoolDetailInformation.swimmingPool.depth}`}
+                  />
+                  <IconText
+                    icon={Thermometer}
+                    iconColor={primary.main}
+                    text={`Teplota vody: ${luzankyPoolDetailInformation.swimmingPool.temperature}`}
+                  />
+                </VerticalStack>
+
+                <VerticalStack gap="1rem">
+                  <Text variant="body3" as="h2">
+                    Potřebné dovednosti dítěte před nástupem do kurzu
+                  </Text>
+
+                  {luzankyPoolDetailInformation.skillsNeeded.map((skill) => (
+                    <IconText
+                      key={skill}
+                      icon={CheckCircle}
+                      text={skill}
+                      iconColor={primary.main}
+                    />
+                  ))}
+                </VerticalStack>
               </S.SectionInformationContainer>
             </S.SectionDescriptionContainer>
-            <div
-              style={{
-                flex: '0 0 30%',
-                border: '1px solid green',
-                display: 'grid',
-                placeContent: 'center',
-                backgroundColor: '#fff',
-                paddingBlock: '2rem',
-                borderRadius: '.7rem',
-              }}
-            >
-              <Calendar />
-            </div>
+
+            <S.SectionActionsContainer>
+              <S.SectionCalendarContainer>
+                <Calendar
+                  onClick={(dayId, time) =>
+                    router.push(
+                      `/bazeny/luzanky/zakladni-plavani/prihlasky?day=${dayId}&time=${time}`
+                    )
+                  }
+                />
+              </S.SectionCalendarContainer>
+
+              <S.SectionActionLink href="/bazeny/luzanky/zakladni-plavani/prihlasky">
+                <Button color="secondary">Přihlásit se</Button>
+              </S.SectionActionLink>
+            </S.SectionActionsContainer>
           </S.SectionContainer>
         </S.SectionCard>
       </MaxWidth>

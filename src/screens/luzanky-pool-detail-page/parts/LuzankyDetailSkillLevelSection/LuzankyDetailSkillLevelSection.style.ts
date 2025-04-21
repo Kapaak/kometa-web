@@ -1,20 +1,27 @@
 import styled, { css } from 'styled-components';
-import { Text } from '~/ui/components/atoms';
+import { VerticalStack } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const Section = styled.section`
-  padding: 2rem 4rem;
+  padding: 2rem;
 `;
 
-export const Title = styled(Text).attrs({ variant: 'h3' })`
-  color: ${({ theme }) => theme.colors.primary.main};
-  font-family: ${({ theme }) => theme.fonts.secondary};
+export const SectionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      flex-direction: row;
+    }
+  `}
 `;
 
 export const ImageGaleryGrid = styled.div`
   display: grid;
-  grid-template-rows: 1fr 14.5rem;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 20rem 10rem;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
   flex: 1 1 50%;
 
@@ -24,8 +31,27 @@ export const ImageGaleryGrid = styled.div`
   }
 
   ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      grid-template-rows: 30rem 15rem;
+    }
+  `}
+
+  ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {
       gap: 2.4rem;
+      grid-template-rows: 1fr 14.5rem;
+    }
+  `}
+`;
+
+export const SectionDescriptionContainer = styled(VerticalStack)`
+  gap: 2rem;
+  flex: 1 1 50%;
+  justify-content: space-between;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      gap: 4rem;
     }
   `}
 `;
@@ -46,12 +72,10 @@ export const ClickableImageContainer = styled.button.withConfig({
     position: absolute;
     display: ${({ hiddenImagesCount }) =>
       hiddenImagesCount ? 'block' : 'none'};
-    height: 2rem;
-    width: 2rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 1.6rem;
+    font-size: 3rem;
     font-weight: 500;
   }
 `;
