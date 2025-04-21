@@ -1,4 +1,5 @@
 import { Flex, Headline, MaxWidth, Text } from '~/ui/components/atoms';
+import { Calendar } from '../../components';
 import { luzankyPoolDetailInformations } from '../../constants';
 import * as S from './LuzankyDetailHeroSection.style';
 
@@ -37,8 +38,18 @@ export function LuzankyDetailHeroSection() {
                 ))}
               </S.SectionInformationContainer>
             </S.SectionDescriptionContainer>
-            <div class="calendar" style={{ flex: '0 0 30%' }}>
-              TODO KALENDAR
+            <div
+              style={{
+                flex: '0 0 30%',
+                border: '1px solid green',
+                display: 'grid',
+                placeContent: 'center',
+                backgroundColor: '#fff',
+                paddingBlock: '2rem',
+                borderRadius: '.7rem',
+              }}
+            >
+              <Calendar />
             </div>
           </S.SectionContainer>
         </S.SectionCard>
