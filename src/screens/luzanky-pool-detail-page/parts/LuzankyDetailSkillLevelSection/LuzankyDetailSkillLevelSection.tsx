@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button, Flex, MaxWidth, Text } from '~/ui/components/atoms';
+import { Button, Flex, Headline, MaxWidth, Text } from '~/ui/components/atoms';
 import * as S from './LuzankyDetailSkillLevelSection.style';
 
 const about = [
@@ -31,7 +31,7 @@ export function LuzankyDetailSkillLevelSection() {
   return (
     <S.Section>
       <MaxWidth>
-        <Flex gap="2rem">
+        <S.SectionContainer>
           <S.ImageGaleryGrid>
             <S.ClickableImageContainer />
             <S.ClickableImageContainer />
@@ -39,17 +39,14 @@ export function LuzankyDetailSkillLevelSection() {
             <S.ClickableImageContainer hiddenImagesCount={2} />
           </S.ImageGaleryGrid>
 
-          <Flex
-            direction="column"
-            justify="space-between"
-            gap="4rem"
-            flex="1 1 50%"
-          >
+          <S.SectionDescriptionContainer>
             {about?.map((data) => (
               <Flex direction="column" gap=".5rem" key={data.title}>
-                <S.Title>{data.title}</S.Title>
+                <Headline size="small" as="h3">
+                  {data.title}
+                </Headline>
 
-                <Flex>
+                <Flex gap="2rem">
                   {data.descriptions.map((description) => (
                     <div key={description.text}>
                       <Flex gap=".5rem" direction="column">
@@ -67,8 +64,8 @@ export function LuzankyDetailSkillLevelSection() {
             <Link href="/" download style={{ alignSelf: 'flex-start' }}>
               <Button>Stáhnout vzorový trénink</Button>
             </Link>
-          </Flex>
-        </Flex>
+          </S.SectionDescriptionContainer>
+        </S.SectionContainer>
       </MaxWidth>
     </S.Section>
   );

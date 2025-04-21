@@ -53,9 +53,11 @@ export const theme: DefaultTheme = {
       },
       secondary: {
         background: colors.secondary.main,
-        text: colors.grey[200],
+        text: colors.primary.main,
+        border: colors.secondary.main,
         hover: {
           background: colors.secondary.dark,
+          border: colors.secondary.dark,
         },
       },
       tetriary: {
@@ -187,7 +189,7 @@ export const theme: DefaultTheme = {
     },
     body2: {
       fontSize: '1.6rem',
-      fontWeight: 400,
+      fontWeight: 300,
       lineHeight: '2.4rem',
     },
     body3: {

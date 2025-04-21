@@ -1,42 +1,108 @@
+import NextLink from 'next/link';
 import styled, { css } from 'styled-components';
-import { Card, Flex } from '~/ui/components/atoms';
+import { Card, Flex, VerticalStack } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const Section = styled.section`
-  padding: 2rem 4rem;
+  padding: 2rem;
 `;
 
 export const SectionCard = styled(Card)`
-  padding: 5rem 4rem;
+  padding: 3rem 2rem;
   background-color: ${({ theme }) => theme.colors.primary.light};
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      padding: 5rem 4rem;
+    }
+  `}
 `;
 
-export const SectionContainer = styled(Flex)`
-  gap: 2rem;
+export const SectionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
   justify-content: space-between;
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {
-      gap: 4rem;
+      flex-direction: row;
     }
   `}
 `;
 
 export const SectionTextContainer = styled(Flex)`
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      gap: 2rem;
+    }
+  `}
 `;
 
 export const SectionDescriptionContainer = styled(Flex)`
   flex-direction: column;
 `;
 
-export const SectionInformationContainer = styled(Flex)`
+export const SectionInformationContainer = styled.div`
+  display: grid;
   gap: 2rem;
   margin-top: 4rem;
-  justify-content: space-between;
 
   li {
     list-style: none;
   }
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      grid-template-columns: 1.5fr 2fr;
+    }
+  `}
+`;
+
+export const SectionPriceContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.primary.main};
+  width: fit-content;
+  padding: 0.4rem 1.4rem;
+  border-radius: 0.5rem;
+  color: ${({ theme }) => theme.colors.grey['100']};
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      padding: 0.9rem 1.8rem;
+    }
+  `}
+`;
+
+export const SectionCalendarContainer = styled.div`
+  flex: 0 0 30%;
+  display: grid;
+  place-content: center;
+  background-color: ${({ theme }) => theme.colors.grey['100']};
+  padding-block: 2rem;
+  border-radius: 0.7rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      align-self: flex-end;
+    }
+  `}
+`;
+
+export const SectionActionsContainer = styled(VerticalStack)`
+  width: auto;
+  gap: 3.5rem;
+  align-items: center;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      min-width: 41rem;
+    }
+  `}
+`;
+
+export const SectionActionLink = styled(NextLink)`
+  align-self: flex-end;
 `;

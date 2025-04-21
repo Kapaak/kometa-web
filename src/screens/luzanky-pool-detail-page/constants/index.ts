@@ -1,53 +1,17 @@
-export const luzankyPoolDetailInformations = [
-  {
-    label: 'Základní informace',
-    items: [
-      {
-        label: 'Přibližná cena',
-        icon: 'https://example.com/icon1.png',
-      },
-      {
-        label: 'Přibližný věk',
-        icon: 'https://example.com/icon1.png',
-      },
-      {
-        label: 'Čas',
-        icon: 'https://example.com/icon1.png',
-      },
-    ],
+export const luzankyPoolDetailInformation = {
+  approximatePrice: 'od 4 400 Kč za pololetí',
+  approximateAge: 'pro děti od 6 let',
+  duration: '55 min',
+  swimmingPool: {
+    length: '16 m',
+    depth: '90 cm',
+    temperature: '28 °C',
   },
-  {
-    label: 'Parametry bazénu',
-    items: [
-      {
-        label: 'Přibližná cena',
-        icon: 'https://example.com/icon1.png',
-      },
-      {
-        label: 'Přibližný věk',
-        icon: 'https://example.com/icon1.png',
-      },
-      {
-        label: 'Čas',
-        icon: 'https://example.com/icon1.png',
-      },
-    ],
-  },
-  {
-    label: 'Co by dítě už mělo umět před kurzem',
-    items: [
-      {
-        label: 'Přibližná cena',
-        icon: 'https://example.com/icon1.png',
-      },
-      {
-        label: 'Přibližný věk',
-        icon: 'https://example.com/icon1.png',
-      },
-      {
-        label: 'Čas',
-        icon: 'https://example.com/icon1.png',
-      },
-    ],
-  },
-];
+  skillsNeeded: [
+    'správně dýchat',
+    'uplavat 25 m bez pomůcek',
+    'potápět se',
+    'orientovat se ve vodě',
+    'základy plaveckých stylů (znak a kraul)',
+  ],
+};
