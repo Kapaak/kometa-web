@@ -1,8 +1,6 @@
 import { useMemo } from 'react';
 
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-
-import { SanitySwimmingPool } from '~/domains';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 type AvailableCoursesProps = {
   filter?: {
@@ -61,22 +59,7 @@ export function useGetAvailableCourses({
   };
 }
 
-export function useGetSwimmingPool() {
-  const { data, isError, isLoading, isSuccess } = useQuery<
-    SanitySwimmingPool[]
-  >({
-    queryKey: ['swimmingPool'],
-    queryFn: async () => {
-      const response = await fetch('/api/swimming-pool');
-      const data = await response.json();
-      return data;
-    },
-  });
-
-  return {
-    data,
-    isError,
-    isSuccess,
-    isLoading,
-  };
+export function useGetAvailableCoursesByCategory() {
+  //TODO
+  return [];
 }

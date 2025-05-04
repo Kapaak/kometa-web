@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import { Loader } from '@googlemaps/js-api-loader';
 
-import { useGetSwimmingPool } from '~/adapters/coursesAdapter';
+import { useGetSwimmingPools } from '~/adapters/swimmingPoolAdapter';
 import { LatLng } from '~/types';
 import { convertComponentToNode } from '~/utils/transform';
 
@@ -24,7 +24,7 @@ interface GoogleMapProps {
 export function GoogleMap({ onClick }: GoogleMapProps) {
   const mapRef = useRef(null);
 
-  const { data } = useGetSwimmingPool();
+  const { data } = useGetSwimmingPools();
 
   useEffect(() => {
     const initMap = async () => {

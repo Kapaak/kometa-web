@@ -136,11 +136,23 @@ export async function getCamps(): Promise<SanityCamps[]> {
 }
 
 export async function getSwimmingPools(): Promise<SanitySwimmingPool[]> {
-  const querySwimmingPools = groq`*[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]`;
+  const querySwimmingPools = groq`*[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,totalLength,depth,temperature}[]`;
 
-  const course = await client.fetch(querySwimmingPools);
+  const swimmingPools = await client.fetch(querySwimmingPools);
 
-  return course;
+  return swimmingPools;
+}
+
+export async function getSwimmingPoolById(
+  swimmingPoolId: string
+): Promise<SanitySwimmingPool> {
+  const querySwimmingPool = groq`*[_type == "swimmingPool" && slug.current == $swimmingPoolId][0]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,totalLength,depth,temperature}`;
+
+  const swimmingPoolById = await client.fetch(querySwimmingPool, {
+    swimmingPoolId,
+  });
+
+  return swimmingPoolById;
 }
 
 export async function getDocumentsBySwimmingPoolId(

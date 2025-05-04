@@ -8,6 +8,7 @@ import {
 } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
+import { useGetSwimmingPoolById } from '~/adapters/swimmingPoolAdapter';
 import {
   Button,
   Headline,
@@ -25,6 +26,10 @@ export function LuzankyDetailHeroSection() {
   const { primary } = theme.colors;
 
   const router = useRouter();
+
+  //TODO
+  // const {} = useGetAvailableCoursesByCategory();
+  const { data: swimmingPool } = useGetSwimmingPoolById('luzanky');
 
   return (
     <S.Section>
@@ -69,21 +74,27 @@ export function LuzankyDetailHeroSection() {
                     iconColor={primary.main}
                     text={luzankyPoolDetailInformation.duration}
                   />
-                  <IconText
-                    icon={ArrowsHorizontal}
-                    iconColor={primary.main}
-                    text={`Délka bazénu: ${luzankyPoolDetailInformation.swimmingPool.length}`}
-                  />
-                  <IconText
-                    icon={SwimmingPool}
-                    iconColor={primary.main}
-                    text={`Maximální hloubka: ${luzankyPoolDetailInformation.swimmingPool.depth}`}
-                  />
-                  <IconText
-                    icon={Thermometer}
-                    iconColor={primary.main}
-                    text={`Teplota vody: ${luzankyPoolDetailInformation.swimmingPool.temperature}`}
-                  />
+                  {swimmingPool?.totalLength && (
+                    <IconText
+                      icon={ArrowsHorizontal}
+                      iconColor={primary.main}
+                      text={`Délka bazénu: ${swimmingPool.totalLength} m`}
+                    />
+                  )}
+                  {swimmingPool?.depth && (
+                    <IconText
+                      icon={SwimmingPool}
+                      iconColor={primary.main}
+                      text={`Maximální hloubka: ${swimmingPool.depth} m`}
+                    />
+                  )}
+                  {swimmingPool?.temperature && (
+                    <IconText
+                      icon={Thermometer}
+                      iconColor={primary.main}
+                      text={`Teplota vody: ${swimmingPool.temperature} m`}
+                    />
+                  )}
                 </VerticalStack>
 
                 <VerticalStack gap="1rem">
