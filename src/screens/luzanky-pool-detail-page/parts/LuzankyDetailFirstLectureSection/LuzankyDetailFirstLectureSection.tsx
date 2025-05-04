@@ -1,13 +1,7 @@
 import { CheckCircle } from '@phosphor-icons/react';
 import { useTheme } from 'styled-components';
 import FirstLectureImage from '~/public/images/swimming-pool/luzanky/service/service-advanced.png';
-import {
-  Flex,
-  Headline,
-  MaxWidth,
-  Text,
-  VerticalStack,
-} from '~/ui/components/atoms';
+import { Headline, MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
 import { IconText } from '~/ui/components/molecules';
 import * as S from './LuzankyDetailFirstLectureSection.style';
 
@@ -29,7 +23,7 @@ export function LuzankyDetailFirstLectureSection({}: LuzankyDetailFirstLectureSe
             </Text>
           </VerticalStack>
 
-          <Flex gap="4.8rem">
+          <S.SectionWrapper>
             <S.ImageContainer>
               <S.Image
                 src={FirstLectureImage}
@@ -110,7 +104,7 @@ export function LuzankyDetailFirstLectureSection({}: LuzankyDetailFirstLectureSe
                 </VerticalStack>
               </S.DescriptionContainer>
             </VerticalStack>
-          </Flex>
+          </S.SectionWrapper>
         </S.FirstLectureContainer>
       </MaxWidth>
     </S.Section>
