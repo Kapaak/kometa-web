@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity';
-import { SanityAvailableCourse, SanityKidsCourse } from '~/domains';
-import { SwimmingVariant } from '~/types';
+import { SanityAvailableLecture, SanityLecture } from '~/domains';
+import { SwimmingCategoryId } from '~/types';
 import { client } from '../config';
 
 interface Pagination {
@@ -10,15 +10,15 @@ interface Pagination {
 
 interface Filters extends Pagination {
   age?: number;
-  skillLevel?: SwimmingVariant;
+  skillLevel?: SwimmingCategoryId;
   day?: string;
   time?: string;
   place?: string;
 }
 
-export async function getAvailableCourses(
+export async function getAvailableLectures(
   filters: Filters = {}
-): Promise<SanityAvailableCourse[]> {
+): Promise<SanityAvailableLecture[]> {
   let filterQuery = [];
 
   if (filters?.age) {
@@ -68,10 +68,26 @@ export async function getAvailableCourses(
   return course;
 }
 
-export async function getKidsCourses(): Promise<SanityKidsCourse[]> {
-  const queryKidsCourses = groq`*[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]`;
+export async function getLectures(): Promise<SanityLecture[]> {
+  const queryLectures = groq`*[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]`;
 
-  const course = await client.fetch(queryKidsCourses);
+  const course = await client.fetch(queryLectures);
+
+  return course;
+}
+
+export async function getLecturesForSwimmingPoolAndCategory(
+  categoryId: string,
+  swimmingPoolId: string
+) {
+  const queryLecturesByPoolAndCategory = groq`*[_type == "kidsCourse" && categoryId == $categoryId &&
+   swimmingPool->slug.current == $swimmingPoolId
+  ]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]`;
+
+  const course = await client.fetch(queryLecturesByPoolAndCategory, {
+    categoryId,
+    swimmingPoolId,
+  });
 
   return course;
 }

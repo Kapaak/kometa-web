@@ -1,6 +1,6 @@
 import type { InferGetStaticPropsType } from 'next';
 
-import { getKidsCourses } from '~/libs/sanity';
+import { getLectures } from '~/libs/sanity/api/lecture';
 import { KidsCoursesScreen } from '~/screens/kids-courses-page';
 import { transformKidsCourses } from '~/utils/transform-sanity-model';
 
@@ -12,7 +12,7 @@ export default function KidsCoursesPage({ kidsCourses }: KidsCoursesPageProps) {
 }
 
 export async function getStaticProps() {
-  const kidsCourses = await getKidsCourses();
+  const kidsCourses = await getLectures();
 
   const transformedKidsCourses = transformKidsCourses(kidsCourses);
 

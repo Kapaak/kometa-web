@@ -23,13 +23,25 @@ export type TransformedKidsCourse = {
   categories: string[];
 };
 
-export enum SwimmingVariant {
+export enum SwimmingCategoryId {
   BASIC = 'basic',
   ADVANCED = 'advanced',
   CONDITION = 'condition',
+  ADULT = 'adult',
+  KINDERGARTEN = 'kindergarten',
+  SCHOOL = 'school',
 }
 
-export enum SwimmingVariantTranslation {
+export enum SwimmingCategorySlug {
+  BASIC = 'zakladni-plavani',
+  ADVANCED = 'zdokonalovaci-plavani',
+  CONDITION = 'kondicni-plavani',
+  ADULT = 'plavani-pro-dospele',
+  KINDERGARTEN = 'skolky',
+  SCHOOL = 'skoly',
+}
+
+export enum SwimmingCategoryTranslation {
   BASIC = 'Základní',
   ADVANCED = 'Zdokonalovací',
   CONDITION = 'Kondiční',
@@ -76,3 +88,7 @@ export enum CookieConsentType {
 export type CookieConsentState = 'granted' | 'denied';
 
 export type CookieConsent = Record<string, CookieConsentState>;
+
+export enum SwimmingPoolId {
+  LUZANKY = 'luzanky',
+}

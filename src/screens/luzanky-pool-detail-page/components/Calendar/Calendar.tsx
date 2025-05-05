@@ -1,92 +1,29 @@
 import { Prohibit, UserPlus } from '@phosphor-icons/react';
-import { useMemo } from 'react';
 import { useTheme } from 'styled-components';
+import { getDayAbbreviation } from '~/utils/day';
 import * as S from './Calendar.style';
-
-const lecturesInDays = [
-  {
-    day: 1,
-    time: 15,
-    discount: 20,
-    full: false,
-  },
-  {
-    day: 1,
-    time: 16,
-    discount: 20,
-    full: false,
-  },
-  {
-    day: 1,
-    time: 17,
-    discount: 35,
-    full: false,
-  },
-  {
-    day: 1,
-    time: 19,
-    discount: 35,
-    full: true,
-  },
-  {
-    day: 2,
-    time: 16,
-    discount: 20,
-    full: false,
-  },
-  {
-    day: 3,
-    time: 17,
-    discount: 20,
-    full: true,
-  },
-  {
-    day: 4,
-    time: 19,
-    discount: 20,
-    full: false,
-  },
-];
-
-const days = [
-  {
-    label: 'PO',
-    dayId: 1,
-  },
-  {
-    label: 'ÚT',
-    dayId: 2,
-  },
-  {
-    label: 'ST',
-    dayId: 3,
-  },
-  {
-    label: 'ČT',
-    dayId: 4,
-  },
-  {
-    label: 'PÁ',
-    dayId: 5,
-  },
-];
-
-const getTimeByDayIdAndTime = (dayId: number, time: number) => {
-  return lecturesInDays.find((day) => day.day === dayId && day.time === time);
-};
 
 interface CalendarProps {
   onClick?: (dayId: number, time: number) => void;
+  days: number[];
+  times: number[];
+  data: {
+    day: number;
+    time: number;
+    full?: boolean;
+    discount?: number;
+  }[];
 }
 
-export function Calendar({ onClick }: CalendarProps) {
+export function Calendar({ data, days, times, onClick }: CalendarProps) {
   const theme = useTheme();
   const { grey } = theme.colors;
 
-  const times = useMemo(() => {
-    const times = lecturesInDays.map((day) => day.time).sort((a, b) => a - b);
-    return Array.from(new Set(times));
-  }, []);
+  const getTimeByDayIdAndTime = (dayId: number, time: number) => {
+    return data.find(
+      (lecture) => lecture.day === dayId && lecture.time === time
+    );
+  };
 
   return (
     <S.Calendar columns={times.length}>
@@ -97,12 +34,12 @@ export function Calendar({ onClick }: CalendarProps) {
       </S.CalendarRowContainer>
 
       {days.map((day) => (
-        <S.CalendarRowContainer label={day.label} key={day.dayId}>
+        <S.CalendarRowContainer label={getDayAbbreviation(day)} key={day}>
           {times.map((time, index) => {
-            const columnItem = getTimeByDayIdAndTime(day.dayId, time);
+            const columnItem = getTimeByDayIdAndTime(day, time);
 
             if (!columnItem) {
-              return <div key={`${day.dayId}_${index}`} />;
+              return <div key={`${day}_${index}`} />;
             }
 
             if (columnItem?.full) {
@@ -119,7 +56,7 @@ export function Calendar({ onClick }: CalendarProps) {
                 discount={columnItem?.discount}
                 as="button"
                 type="button"
-                onClick={() => onClick?.(day.dayId, columnItem.time)}
+                onClick={() => onClick?.(day, columnItem.time)}
               >
                 <UserPlus size={24} />
               </S.CalendarDay>
