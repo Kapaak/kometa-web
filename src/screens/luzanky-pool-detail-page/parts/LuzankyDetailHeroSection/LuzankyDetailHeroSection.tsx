@@ -8,7 +8,10 @@ import {
 } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
+import { useGetLecturesForSwimmingPoolAndCategory } from '~/adapters/coursesAdapter';
 import { useGetSwimmingPoolById } from '~/adapters/swimmingPoolAdapter';
+import { SanityLecture } from '~/domains';
+import { SwimmingPoolId } from '~/types';
 import {
   Button,
   Headline,
@@ -17,19 +20,62 @@ import {
   VerticalStack,
 } from '~/ui/components/atoms';
 import { IconText } from '~/ui/components/molecules';
+import { getCategoryIdBySlug } from '~/utils/category';
 import { Calendar } from '../../components';
 import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailHeroSection.style';
+
+const LECTURE_DURATION = 55;
+
+function getUniqueSortedDayIds(lectures?: SanityLecture[]): number[] {
+  const uniqueDays = Array.from(
+    new Set(lectures?.map((lecture) => Number(lecture.dayId)))
+  );
+
+  return uniqueDays.sort((a, b) => a - b);
+}
+
+function getUniqueSortedTimes(lectures?: SanityLecture[]): number[] {
+  const uniqueTimes = Array.from(
+    new Set(lectures?.map((lecture) => Number(lecture.timeFrom?.split(':')[0])))
+  );
+
+  return uniqueTimes.sort((a, b) => a - b);
+}
 
 export function LuzankyDetailHeroSection() {
   const theme = useTheme();
   const { primary } = theme.colors;
 
   const router = useRouter();
+  console.log('🚀 ~ LuzankyDetailHeroSection ~ router:', router);
 
-  //TODO
-  // const {} = useGetAvailableCoursesByCategory();
+  const { data: lectures } = useGetLecturesForSwimmingPoolAndCategory(
+    getCategoryIdBySlug(router.query.categoryId as string),
+    SwimmingPoolId.LUZANKY
+  );
   const { data: swimmingPool } = useGetSwimmingPoolById('luzanky');
+
+  const minimumLecturePrice = Math.min(
+    ...(lectures
+      ?.map((lecture) => lecture?.priceSemester)
+      .filter((price): price is number => price != null) || [])
+  );
+
+  const minimumAge = Math.min(
+    ...(lectures
+      ?.map((lecture) => lecture?.ageFrom)
+      .filter((age): age is number => age != null) || [])
+  );
+
+  const calendarData = lectures
+    ?.filter((lecture) => lecture?.dayId)
+    .map((lecture) => ({
+      day: lecture.dayId as number,
+      time: lecture.timeFrom ? Number(lecture.timeFrom.split(':')[0]) : 0,
+      full: lecture?.isFull ?? false,
+      discount: lecture?.discount,
+    }));
 
   return (
     <S.Section>
@@ -47,8 +93,7 @@ export function LuzankyDetailHeroSection() {
 
                 <S.SectionPriceContainer>
                   <Text variant="body3">
-                    Cena kurzu je od{' '}
-                    {luzankyPoolDetailInformation.approximatePrice}
+                    Cena kurzu je od {minimumLecturePrice || '-'} Kč za pololetí
                   </Text>
                 </S.SectionPriceContainer>
 
@@ -67,12 +112,12 @@ export function LuzankyDetailHeroSection() {
                   <IconText
                     icon={Baby}
                     iconColor={primary.main}
-                    text={luzankyPoolDetailInformation.approximateAge}
+                    text={`pro děti od ${minimumAge} let`}
                   />
                   <IconText
                     icon={Timer}
                     iconColor={primary.main}
-                    text={luzankyPoolDetailInformation.duration}
+                    text={`${LECTURE_DURATION} min`}
                   />
                   {swimmingPool?.totalLength && (
                     <IconText
@@ -92,7 +137,7 @@ export function LuzankyDetailHeroSection() {
                     <IconText
                       icon={Thermometer}
                       iconColor={primary.main}
-                      text={`Teplota vody: ${swimmingPool.temperature} m`}
+                      text={`Teplota vody: ${swimmingPool.temperature} °C`}
                     />
                   )}
                 </VerticalStack>
@@ -117,6 +162,9 @@ export function LuzankyDetailHeroSection() {
             <S.SectionActionsContainer>
               <S.SectionCalendarContainer>
                 <Calendar
+                  days={getUniqueSortedDayIds(lectures)}
+                  times={getUniqueSortedTimes(lectures)}
+                  data={calendarData ?? []}
                   onClick={(dayId, time) =>
                     router.push(
                       `/bazeny/luzanky/zakladni-plavani/prihlasky?day=${dayId}&time=${time}`

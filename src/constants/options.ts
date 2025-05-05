@@ -1,8 +1,8 @@
 import {
   DayInWeek,
   Gender,
-  SwimmingVariant,
-  SwimmingVariantTranslation,
+  SwimmingCategoryId,
+  SwimmingCategoryTranslation,
 } from '~/types';
 
 export const childrenGenderOptions = [
@@ -134,15 +134,15 @@ export const timeOptions = [
 
 export const skillLevelOptions = [
   {
-    label: SwimmingVariantTranslation.BASIC,
-    value: SwimmingVariant.BASIC,
+    label: SwimmingCategoryTranslation.BASIC,
+    value: SwimmingCategoryId.BASIC,
   },
   {
-    label: SwimmingVariantTranslation.ADVANCED,
-    value: SwimmingVariant.ADVANCED,
+    label: SwimmingCategoryTranslation.ADVANCED,
+    value: SwimmingCategoryId.ADVANCED,
   },
   {
-    label: SwimmingVariantTranslation.CONDITION,
-    value: SwimmingVariant.CONDITION,
+    label: SwimmingCategoryTranslation.CONDITION,
+    value: SwimmingCategoryId.CONDITION,
   },
 ];

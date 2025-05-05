@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { SanityLecture } from '~/domains';
 
 type AvailableCoursesProps = {
   filter?: {
@@ -24,13 +25,15 @@ export function useGetAvailableCourses({
   const { data, isError, isLoading, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
       initialPageParam: '',
-      queryKey: ['availableCourses', filter],
+      queryKey: ['available-courses', filter],
       queryFn: async ({ pageParam = '' }) => {
         const params = new URLSearchParams(filter as Record<string, string>);
         params.append('lastId', pageParam);
         params.append('pageSize', pageSize.toString());
 
-        const response = await fetch(`/api/courses?${params.toString()}`);
+        const response = await fetch(
+          `/api/available-courses?${params.toString()}`
+        );
         const data = await response.json();
         return data;
       },
@@ -59,7 +62,30 @@ export function useGetAvailableCourses({
   };
 }
 
-export function useGetAvailableCoursesByCategory() {
-  //TODO
-  return [];
+export function useGetLecturesForSwimmingPoolAndCategory(
+  category?: string,
+  swimmingPool?: string
+) {
+  const { data, isError, isLoading, isSuccess } = useQuery<SanityLecture[]>({
+    queryKey: ['lectures-by-category'],
+    enabled: Boolean(category && swimmingPool),
+    queryFn: async () => {
+      const params = new URLSearchParams({
+        categoryId: category as string,
+        swimmingPoolId: swimmingPool as string,
+      });
+
+      const response = await fetch(`/api/lectures?${params.toString()}`);
+
+      const data = await response.json();
+      return data;
+    },
+  });
+
+  return {
+    data,
+    isError,
+    isSuccess,
+    isLoading,
+  };
 }

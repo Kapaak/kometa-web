@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getAvailableCourses } from '~/libs/sanity/api/course';
-import { SwimmingVariant } from '~/types';
+import { getAvailableLectures } from '~/libs/sanity/api/lecture';
+import { SwimmingCategoryId } from '~/types';
 import { transformAvailableCourse } from '~/utils/transform-sanity-model';
 
 interface ExtendedNextApiRequest extends NextApiRequest {
   query: {
     age?: string;
-    skillLevel?: SwimmingVariant;
+    skillLevel?: SwimmingCategoryId;
     day?: string;
     time?: string;
     place?: string;
@@ -24,7 +24,7 @@ export default async function handler(
     req.query ?? {};
 
   try {
-    const courses = await getAvailableCourses({
+    const courses = await getAvailableLectures({
       age: Number(age),
       skillLevel,
       day,
