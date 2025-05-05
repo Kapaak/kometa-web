@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getDocumentsBySwimmingPoolId } from '~/libs/sanity';
+import { getDocumentsBySwimmingPoolId } from '~/libs/sanity/api/document';
 
 interface ExtendedNextApiRequest extends NextApiRequest {
   query: {

@@ -628,7 +628,202 @@ export type Slug = {
   source?: string;
 };
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ../../websites/kometa-web/src/libs/sanity/api.ts
+// Source: ../../websites/kometa-web/src/pages/blog/[blogId].tsx
+// Variable: queryBlog
+// Query: *[_type == "blog"]{"slug": slug.current}
+export type QueryBlogResult = Array<{
+  slug: string | null;
+}>;
+// Source: ../../websites/kometa-web/src/libs/sanity/api/blog.ts
+// Variable: queryBlogPosts
+// Query: *[_type == "blog"  && _id > $lastId]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)
+export type QueryBlogPostsResult = Array<{
+  id: string;
+  title: string | null;
+  shortDescription: string | null;
+  description: Array<
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'imageAlt';
+        _key: string;
+      }
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'h2' | 'h3' | 'normal';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+  > | null;
+  createdAt: string | null;
+  author: string | null;
+  readTime: number | null;
+  alt: string | null;
+  image: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata: SanityImageMetadata | null;
+      source?: SanityAssetSourceData;
+    } | null;
+  } | null;
+  tags: Array<'equipment' | 'funFact' | 'tips' | 'training'> | null;
+  slug: string | null;
+}>;
+// Variable: query
+// Query: *[_type == "blog" && slug.current == $blogId][0]{"id":_id,title,shortDescription, description[]{    ...,    _type == "imageAlt" => {      ...,      asset->    },  },createdAt,author,readTime,image{asset->{...,metadata},alt},tags,slug}
+export type QueryResult = {
+  id: string;
+  title: string | null;
+  shortDescription: string | null;
+  description: Array<
+    | {
+        asset: {
+          _id: string;
+          _type: 'sanity.imageAsset';
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'imageAlt';
+      }
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'h2' | 'h3' | 'normal';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+      }
+  > | null;
+  createdAt: string | null;
+  author: string | null;
+  readTime: number | null;
+  image: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata: SanityImageMetadata | null;
+      source?: SanityAssetSourceData;
+    } | null;
+    alt: string | null;
+  } | null;
+  tags: Array<'equipment' | 'funFact' | 'tips' | 'training'> | null;
+  slug: Slug | null;
+} | null;
+// Source: ../../websites/kometa-web/src/libs/sanity/api/camp.ts
+// Variable: queryCamps
+// Query: *[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]
+export type QueryCampsResult = Array<{
+  id: string;
+  name: string | null;
+  alt: string | null;
+  image: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata: SanityImageMetadata | null;
+      source?: SanityAssetSourceData;
+    } | null;
+  } | null;
+  url: string | null;
+  tags: Array<string> | null;
+}>;
+// Source: ../../websites/kometa-web/src/libs/sanity/api/course.ts
 // Variable: queryAvailableCourses
 // Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"url":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
 export type QueryAvailableCoursesResult = Array<{
@@ -789,53 +984,16 @@ export type QueryKidsCoursesResult = Array<{
   privateSwimmingPool: boolean | null;
   isSchoolOrKindergartenAvailable: boolean | null;
 }>;
-// Variable: queryBlogPosts
-// Query: *[_type == "blog"  && _id > $lastId]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)
-export type QueryBlogPostsResult = Array<{
+// Source: ../../websites/kometa-web/src/libs/sanity/api/document.ts
+// Variable: queryDocuments
+// Query: *[_type == "fileUpload"  &&  swimmingPool->slug.current == $swimmingPoolId]{"id":_id,title,file{    asset->{...,metadata}  },order,    swimmingPool -> {"slug":slug.current}  }[] | order(order)
+export type QueryDocumentsResult = Array<{
   id: string;
   title: string | null;
-  shortDescription: string | null;
-  description: Array<
-    | {
-        asset?: {
-          _ref: string;
-          _type: 'reference';
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-        };
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        _type: 'imageAlt';
-        _key: string;
-      }
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: 'span';
-          _key: string;
-        }>;
-        style?: 'h2' | 'h3' | 'normal';
-        listItem?: 'bullet' | 'number';
-        markDefs?: Array<{
-          href?: string;
-          _type: 'link';
-          _key: string;
-        }>;
-        level?: number;
-        _type: 'block';
-        _key: string;
-      }
-  > | null;
-  createdAt: string | null;
-  author: string | null;
-  readTime: number | null;
-  alt: string | null;
-  image: {
+  file: {
     asset: {
       _id: string;
-      _type: 'sanity.imageAsset';
+      _type: 'sanity.fileAsset';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
@@ -852,130 +1010,16 @@ export type QueryBlogPostsResult = Array<{
       uploadId?: string;
       path?: string;
       url?: string;
-      metadata: SanityImageMetadata | null;
       source?: SanityAssetSourceData;
+      metadata: null;
     } | null;
   } | null;
-  tags: Array<'equipment' | 'funFact' | 'tips' | 'training'> | null;
-  slug: string | null;
+  order: Rating | null;
+  swimmingPool: {
+    slug: string | null;
+  } | null;
 }>;
-// Variable: query
-// Query: *[_type == "blog" && slug.current == $blogId][0]{"id":_id,title,shortDescription, description[]{    ...,    _type == "imageAlt" => {      ...,      asset->    },  },createdAt,author,readTime,image{asset->{...,metadata},alt},tags,slug}
-export type QueryResult = {
-  id: string;
-  title: string | null;
-  shortDescription: string | null;
-  description: Array<
-    | {
-        asset: {
-          _id: string;
-          _type: 'sanity.imageAsset';
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          originalFilename?: string;
-          label?: string;
-          title?: string;
-          description?: string;
-          altText?: string;
-          sha1hash?: string;
-          extension?: string;
-          mimeType?: string;
-          size?: number;
-          assetId?: string;
-          uploadId?: string;
-          path?: string;
-          url?: string;
-          metadata?: SanityImageMetadata;
-          source?: SanityAssetSourceData;
-        } | null;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        _type: 'imageAlt';
-      }
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: 'span';
-          _key: string;
-        }>;
-        style?: 'h2' | 'h3' | 'normal';
-        listItem?: 'bullet' | 'number';
-        markDefs?: Array<{
-          href?: string;
-          _type: 'link';
-          _key: string;
-        }>;
-        level?: number;
-        _type: 'block';
-      }
-  > | null;
-  createdAt: string | null;
-  author: string | null;
-  readTime: number | null;
-  image: {
-    asset: {
-      _id: string;
-      _type: 'sanity.imageAsset';
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata: SanityImageMetadata | null;
-      source?: SanityAssetSourceData;
-    } | null;
-    alt: string | null;
-  } | null;
-  tags: Array<'equipment' | 'funFact' | 'tips' | 'training'> | null;
-  slug: Slug | null;
-} | null;
-// Variable: queryCamps
-// Query: *[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]
-export type QueryCampsResult = Array<{
-  id: string;
-  name: string | null;
-  alt: string | null;
-  image: {
-    asset: {
-      _id: string;
-      _type: 'sanity.imageAsset';
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata: SanityImageMetadata | null;
-      source?: SanityAssetSourceData;
-    } | null;
-  } | null;
-  url: string | null;
-  tags: Array<string> | null;
-}>;
+// Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool.ts
 // Variable: querySwimmingPools
 // Query: *[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,totalLength,depth,temperature}[]
 export type QuerySwimmingPoolsResult = Array<{
@@ -1052,43 +1096,3 @@ export type QuerySwimmingPoolResult = {
   depth: number | null;
   temperature: number | null;
 } | null;
-// Variable: queryDocuments
-// Query: *[_type == "fileUpload"  &&  swimmingPool->slug.current == $swimmingPoolId]{"id":_id,title,file{    asset->{...,metadata}  },order,    swimmingPool -> {"slug":slug.current}  }[] | order(order)
-export type QueryDocumentsResult = Array<{
-  id: string;
-  title: string | null;
-  file: {
-    asset: {
-      _id: string;
-      _type: 'sanity.fileAsset';
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      source?: SanityAssetSourceData;
-      metadata: null;
-    } | null;
-  } | null;
-  order: Rating | null;
-  swimmingPool: {
-    slug: string | null;
-  } | null;
-}>;
-// Source: ../../websites/kometa-web/src/pages/blog/[blogId].tsx
-// Variable: queryBlog
-// Query: *[_type == "blog"]{"slug": slug.current}
-export type QueryBlogResult = Array<{
-  slug: string | null;
-}>;
