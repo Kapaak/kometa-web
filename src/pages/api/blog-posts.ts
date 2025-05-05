@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getBlogPosts } from '~/libs/sanity';
+import { getBlogPosts } from '~/libs/sanity/api/blog';
 import { transformBlogPost } from '~/utils/transform-sanity-model';
 
 interface ExtendedNextApiRequest extends NextApiRequest {
