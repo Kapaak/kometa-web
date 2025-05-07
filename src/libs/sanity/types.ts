@@ -133,28 +133,6 @@ export type BlockContent = Array<
     }
 >;
 
-export type CategorySkillRequirement = {
-  _id: string;
-  _type: 'categorySkillRequirement';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  skillRequirement?: Array<string>;
-  swimmingPool?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'swimmingPool';
-  };
-  categoryId?:
-    | 'basic'
-    | 'advanced'
-    | 'condition'
-    | 'adult'
-    | 'kindergarten'
-    | 'school';
-};
-
 export type PreliminaryCourse = {
   _id: string;
   _type: 'preliminaryCourse';
@@ -215,52 +193,20 @@ export type PreliminaryCourse = {
     | 'school';
 };
 
-export type InfoBar = {
+export type SwimmingPoolDetail = {
   _id: string;
-  _type: 'infoBar';
+  _type: 'swimmingPoolDetail';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  text?: string;
-  visibility?: boolean;
-  swimmingPool?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'swimmingPool';
-  };
-};
-
-export type Faq = {
-  _id: string;
-  _type: 'faq';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  faqItems?: Array<
-    {
-      _key: string;
-    } & FaqObjectType
-  >;
-  order?: Rating;
-  swimmingPool?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'swimmingPool';
-  };
-};
-
-export type FileUpload = {
-  _id: string;
-  _type: 'fileUpload';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  file?: {
+  skillRequirement?: Array<string>;
+  announcements?: Array<{
+    title?: string;
+    visible?: boolean;
+    text?: BlockContent;
+    _key: string;
+  }>;
+  sampleTraining?: {
     asset?: {
       _ref: string;
       _type: 'reference';
@@ -269,31 +215,41 @@ export type FileUpload = {
     };
     _type: 'file';
   };
-  order?: Rating;
+  fileUploads?: Array<{
+    title?: string;
+    file?: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
+      };
+      _type: 'file';
+    };
+    _key: string;
+  }>;
+  faq?: Array<{
+    columnTitle?: string;
+    questions?: Array<
+      {
+        _key: string;
+      } & FaqObjectType
+    >;
+    _key: string;
+  }>;
   swimmingPool?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'swimmingPool';
   };
-};
-
-export type Home = {
-  _id: string;
-  _type: 'home';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  visibility?: boolean;
-  order?: Rating;
-  swimmingPool?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'swimmingPool';
-  };
-  text?: BlockContent;
+  categoryId?:
+    | 'basic'
+    | 'advanced'
+    | 'condition'
+    | 'adult'
+    | 'kindergarten'
+    | 'school';
 };
 
 export type SanityImageCrop = {
@@ -344,6 +300,23 @@ export type SanityImageMetadata = {
   blurHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
+};
+
+export type InfoBar = {
+  _id: string;
+  _type: 'infoBar';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  text?: string;
+  visibility?: boolean;
+  swimmingPool?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'swimmingPool';
+  };
 };
 
 export type Blog = {
@@ -826,38 +799,7 @@ export type QueryCampsResult = Array<{
 // Source: ../../websites/kometa-web/src/libs/sanity/api/document.ts
 // Variable: queryDocuments
 // Query: *[_type == "fileUpload"  &&  swimmingPool->slug.current == $swimmingPoolId]{"id":_id,title,file{    asset->{...,metadata}  },order,    swimmingPool -> {"slug":slug.current}  }[] | order(order)
-export type QueryDocumentsResult = Array<{
-  id: string;
-  title: string | null;
-  file: {
-    asset: {
-      _id: string;
-      _type: 'sanity.fileAsset';
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      source?: SanityAssetSourceData;
-      metadata: null;
-    } | null;
-  } | null;
-  order: Rating | null;
-  swimmingPool: {
-    slug: string | null;
-  } | null;
-}>;
+export type QueryDocumentsResult = Array<never>;
 // Source: ../../websites/kometa-web/src/libs/sanity/api/lecture.ts
 // Variable: queryAvailableCourses
 // Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"url":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
