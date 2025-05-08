@@ -4,7 +4,9 @@ import {
   SanityBlogPost,
   SanityCamps,
   SanityLecture,
+  SanitySwimmingPoolDetail,
   TransformedBlogPost,
+  TransformedSwimmingPoolDetail,
 } from '~/domains';
 import {
   Category,
@@ -123,5 +125,23 @@ export function transformBlogPost(
     url: blogPost?.slug ?? '',
     slug: blogPost?.slug ?? '',
     blurDataURL: blogPost?.image?.asset?.metadata?.lqip,
+  };
+}
+
+export function transformSwimmingPoolDetail(
+  swimmingPoolDetail: SanitySwimmingPoolDetail
+): TransformedSwimmingPoolDetail {
+  return {
+    id: swimmingPoolDetail?.id ?? '',
+    faq: swimmingPoolDetail?.faq ?? [],
+    fileUploads: swimmingPoolDetail?.fileUploads ?? [],
+    imageGallery:
+      swimmingPoolDetail?.imageGallery?.map((image) => ({
+        url: urlForImage(image)?.url(),
+        alt: image?.asset?.altText,
+      })) ?? [],
+    sampleTraining: swimmingPoolDetail?.sampleTraining ?? '',
+    skillRequirement: swimmingPoolDetail?.skillRequirement ?? [],
+    announcements: swimmingPoolDetail?.announcements ?? [],
   };
 }

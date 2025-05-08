@@ -1056,7 +1056,7 @@ export type QueryLecturesByPoolAndCategoryResult = Array<{
 }>;
 // Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool-detail.ts
 // Variable: querySwimmingPoolDetail
-// Query: *[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,announcements,"sampleTraining": sampleTraining.asset->url,imageGallery,fileUploads,faq}
+// Query: *[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,announcements,"sampleTraining": sampleTraining.asset->url,imageGallery[]{asset->{...,metadata}},fileUploads,faq}
 export type QuerySwimmingPoolDetailResult = {
   id: string;
   skillRequirement: Array<string> | null;
@@ -1068,16 +1068,28 @@ export type QuerySwimmingPoolDetailResult = {
   }> | null;
   sampleTraining: string | null;
   imageGallery: Array<{
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
-    _key: string;
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata: SanityImageMetadata | null;
+      source?: SanityAssetSourceData;
+    } | null;
   }> | null;
   fileUploads: Array<{
     title?: string;

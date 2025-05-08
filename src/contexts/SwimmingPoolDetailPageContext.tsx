@@ -1,11 +1,11 @@
 import { createContext, PropsWithChildren, useContext } from 'react';
 import { useGetSwimmingPoolById } from '~/adapters/swimmingPoolAdapter';
 import { useGetSwimmingPoolDetailPageById } from '~/adapters/swimmingPoolDetailAdapter';
-import { SanitySwimmingPool, SanitySwimmingPoolDetail } from '~/domains';
+import { SanitySwimmingPool, TransformedSwimmingPoolDetail } from '~/domains';
 
 type SwimmingPoolDetailPageContextType = {
   swimmingPool?: SanitySwimmingPool;
-  swimmingPoolDetail?: SanitySwimmingPoolDetail;
+  swimmingPoolDetail?: TransformedSwimmingPoolDetail;
   isLoading?: boolean;
 };
 

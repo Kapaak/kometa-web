@@ -95,3 +95,13 @@ export type TransformedBlogPost = {
   aspectRatio?: number;
   blurDataURL?: string;
 };
+
+export type TransformedSwimmingPoolDetail = Omit<
+  NonNullable<SanitySwimmingPoolDetail>,
+  'imageGallery'
+> & {
+  imageGallery?: {
+    url?: string;
+    alt?: string;
+  }[];
+};

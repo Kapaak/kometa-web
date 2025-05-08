@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { SanitySwimmingPoolDetail } from '~/domains';
+import { TransformedSwimmingPoolDetail } from '~/domains';
 
 export function useGetSwimmingPoolDetailPageById(
   swimmingPoolId: string,
   categoryId?: string
 ) {
   const { data, isError, isLoading, isSuccess } =
-    useQuery<SanitySwimmingPoolDetail>({
+    useQuery<TransformedSwimmingPoolDetail>({
       enabled: Boolean(swimmingPoolId && categoryId),
       queryKey: ['swimming-pool-detail'],
       queryFn: async () => {
