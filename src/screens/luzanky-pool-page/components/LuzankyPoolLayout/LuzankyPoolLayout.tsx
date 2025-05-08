@@ -11,7 +11,7 @@ export function LuzankyPoolLayout({ children }: LuzankyPoolLayoutProps) {
   const breadcrumbs = [
     { label: 'Domů', href: '/' },
     { label: 'Bazény', href: '/kurzy-pro-deti' },
-    { label: 'Bazén za Lužánkami', href: '/bazeny/luzanky' },
+    { label: 'Lužánky', href: '/bazeny/luzanky' },
   ];
 
   return (
