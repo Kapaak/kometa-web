@@ -4,6 +4,7 @@ import { useGetSwimmingPoolDetailPageById } from '~/adapters/swimmingPoolDetailA
 import { SanitySwimmingPool, TransformedSwimmingPoolDetail } from '~/domains';
 
 type SwimmingPoolDetailPageContextType = {
+  categoryId: string;
   swimmingPool?: SanitySwimmingPool;
   swimmingPoolDetail?: TransformedSwimmingPoolDetail;
   isLoading?: boolean;
@@ -11,6 +12,7 @@ type SwimmingPoolDetailPageContextType = {
 
 const SwimmingPoolDetailPageContext =
   createContext<SwimmingPoolDetailPageContextType>({
+    categoryId: '',
     swimmingPool: undefined,
     swimmingPoolDetail: undefined,
     isLoading: false,
@@ -26,6 +28,7 @@ export function SwimmingPoolDetailPageContextProvider({
   categoryId,
   children,
 }: Props) {
+  //TODO: swimmingPool se mozna nepouziva nikde, jeste potreba zjistit
   const { data: swimmingPool } = useGetSwimmingPoolById(swimmingPoolId);
   const { data: swimmingPoolDetail, isLoading } =
     useGetSwimmingPoolDetailPageById(swimmingPoolId, categoryId);
@@ -33,6 +36,7 @@ export function SwimmingPoolDetailPageContextProvider({
   return (
     <SwimmingPoolDetailPageContext.Provider
       value={{
+        categoryId,
         swimmingPool,
         swimmingPoolDetail,
         isLoading,
