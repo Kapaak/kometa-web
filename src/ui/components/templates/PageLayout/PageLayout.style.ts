@@ -5,4 +5,5 @@ export const PageLayout = styled.div`
   grid-template-rows: auto 1fr auto;
   height: auto;
   min-height: inherit;
+  overflow: auto;
 `;
