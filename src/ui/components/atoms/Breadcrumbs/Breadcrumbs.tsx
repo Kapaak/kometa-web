@@ -16,13 +16,20 @@ export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
 
   const isPathActive = (href: string) => {
     const pathWithoutQuery = router.asPath.split('?')[0];
+    const [currentPath, currentHash] = pathWithoutQuery.split('#');
+    const [hrefPath, hrefHash] = href.split('#');
 
-    if (pathWithoutQuery === href) {
+    // Check if the base path matches
+    if (currentPath === hrefPath) {
+      // If both have hash fragments, check if they match
+      if (hrefHash && currentHash) {
+        return hrefHash === currentHash;
+      }
+      // If no hash fragment is present, consider it active
       return true;
     }
 
-    //cant be false, it would still be selected
-    return undefined;
+    return undefined; // Return undefined if not active
   };
 
   return (
