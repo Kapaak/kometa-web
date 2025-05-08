@@ -30,7 +30,7 @@ export function Gallery({ images }: GalleryProps) {
   };
   return (
     <>
-      <S.ImageGaleryGrid>
+      <S.ImageGaleryGrid hasImages={(images?.length ?? 0) > 0}>
         {images?.map(
           (image, index) =>
             image?.url && (

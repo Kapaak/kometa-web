@@ -14,9 +14,11 @@ export function LuzankyDetailSkillLevelSection() {
   const { data, actionButtonLabel = 'Stáhnout vzorový trénink' } =
     swimmingPoolDetailInformation?.skillLevelSection ?? {};
 
+  const hasImages = swimmingPoolDetail?.imageGallery?.length ?? 0;
+
   return (
     <S.Section>
-      <MaxWidth>
+      <MaxWidth variant={hasImages ? 'main' : 'small'}>
         <S.SectionContainer>
           <Gallery images={swimmingPoolDetail?.imageGallery} />
 

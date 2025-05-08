@@ -20,7 +20,7 @@ import {
   VerticalStack,
 } from '~/ui/components/atoms';
 import { IconText } from '~/ui/components/molecules';
-import { getCategoryIdBySlug, getCategoryNameBySlug } from '~/utils/category';
+import { getCategoryNameBySlug } from '~/utils/category';
 import { dayTranslationAbbr } from '~/utils/day';
 import { Calendar } from '../../components';
 import { luzankyPoolDetailInformation } from '../../constants';
@@ -41,8 +41,6 @@ export function LuzankyDetailHeroSection() {
   const router = useRouter();
 
   const { swimmingPoolDetail, categoryId } = useSwimmingPoolDetailPageContext();
-
-  const categoryBySlug = getCategoryIdBySlug(categoryId);
 
   const { poolParameters, description, duration } =
     luzankyPoolDetailInformation?.[categoryId]?.heroSection ?? {};

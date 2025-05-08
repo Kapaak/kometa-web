@@ -2,8 +2,10 @@ import NextImage from 'next/image';
 import styled, { css } from 'styled-components';
 import { minBreakpoint } from '~/utils/dimensions';
 
-export const ImageGaleryGrid = styled.div`
-  display: grid;
+export const ImageGaleryGrid = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['hasImages'].includes(prop),
+})<{ hasImages: boolean }>`
+  display: ${({ hasImages }) => (hasImages ? 'grid' : 'none')};
   grid-template-rows: 20rem 10rem;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
