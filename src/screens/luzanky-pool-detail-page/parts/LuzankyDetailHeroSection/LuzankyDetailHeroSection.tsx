@@ -20,11 +20,10 @@ import {
   VerticalStack,
 } from '~/ui/components/atoms';
 import { IconText } from '~/ui/components/molecules';
-import { getCategoryIdBySlug } from '~/utils/category';
+import { getCategoryIdBySlug, getCategoryNameBySlug } from '~/utils/category';
 import { Calendar } from '../../components';
+import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailHeroSection.style';
-
-const LECTURE_DURATION = 55;
 
 function getUniqueSortedDayIds(lectures?: SanityLecture[]): number[] {
   const uniqueDays = Array.from(
@@ -48,12 +47,17 @@ export function LuzankyDetailHeroSection() {
 
   const router = useRouter();
 
+  const { swimmingPoolDetail, categoryId } = useSwimmingPoolDetailPageContext();
+
+  const categoryBySlug = getCategoryIdBySlug(categoryId);
+
+  const { poolParameters, description, duration } =
+    luzankyPoolDetailInformation?.[categoryId]?.heroSection ?? {};
+
   const { data: lectures } = useGetLecturesForSwimmingPoolAndCategory(
-    getCategoryIdBySlug(router.query.categoryId as string),
+    categoryBySlug,
     SwimmingPoolId.LUZANKY
   );
-  const { swimmingPool, swimmingPoolDetail, isLoading } =
-    useSwimmingPoolDetailPageContext();
 
   const minimumLecturePrice = Math.min(
     ...(lectures
@@ -83,12 +87,10 @@ export function LuzankyDetailHeroSection() {
           <S.SectionContainer>
             <S.SectionDescriptionContainer>
               <S.SectionTextContainer>
-                <Headline variant="h1">Kondiční plavání</Headline>
-                <Text variant="body2">
-                  Tento kurz je určen pro děti, které již zvládají základní
-                  plavecké styly a chtějí se zaměřit na zlepšení své techniky a
-                  vytrvalosti.
-                </Text>
+                <Headline variant="h1">
+                  {getCategoryNameBySlug(router.query.categoryId as string)}
+                </Headline>
+                <Text variant="body2">{description}</Text>
 
                 <S.SectionPriceContainer>
                   <Text variant="body3">
@@ -116,45 +118,47 @@ export function LuzankyDetailHeroSection() {
                   <IconText
                     icon={Timer}
                     iconColor={primary.main}
-                    text={`${LECTURE_DURATION} min`}
+                    text={`${duration} min`}
                   />
-                  {swimmingPool?.totalLength && (
+                  {poolParameters?.poolLength && (
                     <IconText
                       icon={ArrowsHorizontal}
                       iconColor={primary.main}
-                      text={`Délka bazénu: ${swimmingPool.totalLength} m`}
+                      text={`Délka bazénu: ${poolParameters.poolLength}`}
                     />
                   )}
-                  {swimmingPool?.depth && (
+                  {poolParameters?.depth && (
                     <IconText
                       icon={SwimmingPool}
                       iconColor={primary.main}
-                      text={`Maximální hloubka: ${swimmingPool.depth} m`}
+                      text={`Maximální hloubka: ${poolParameters.depth}`}
                     />
                   )}
-                  {swimmingPool?.temperature && (
+                  {poolParameters?.waterTemperature && (
                     <IconText
                       icon={Thermometer}
                       iconColor={primary.main}
-                      text={`Teplota vody: ${swimmingPool.temperature} °C`}
+                      text={`Teplota vody: ${poolParameters.waterTemperature}`}
                     />
                   )}
                 </VerticalStack>
 
-                <VerticalStack gap="1rem">
-                  <Text variant="body3" as="h2">
-                    Potřebné dovednosti dítěte před nástupem do kurzu
-                  </Text>
+                {(swimmingPoolDetail?.skillRequirement?.length ?? 0) > 0 && (
+                  <VerticalStack gap="1rem">
+                    <Text variant="body3" as="h2">
+                      Potřebné dovednosti před nástupem do kurzu
+                    </Text>
 
-                  {swimmingPoolDetail?.skillRequirement?.map((skill) => (
-                    <IconText
-                      key={skill}
-                      icon={CheckCircle}
-                      text={skill}
-                      iconColor={primary.main}
-                    />
-                  ))}
-                </VerticalStack>
+                    {swimmingPoolDetail?.skillRequirement?.map((skill) => (
+                      <IconText
+                        key={skill}
+                        icon={CheckCircle}
+                        text={skill}
+                        iconColor={primary.main}
+                      />
+                    ))}
+                  </VerticalStack>
+                )}
               </S.SectionInformationContainer>
             </S.SectionDescriptionContainer>
 

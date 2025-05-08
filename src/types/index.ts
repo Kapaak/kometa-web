@@ -42,9 +42,12 @@ export enum SwimmingCategorySlug {
 }
 
 export enum SwimmingCategoryTranslation {
-  BASIC = 'Základní',
-  ADVANCED = 'Zdokonalovací',
-  CONDITION = 'Kondiční',
+  BASIC = 'Základní plavání',
+  ADVANCED = 'Zdokonalovací plavání',
+  CONDITION = 'Kondiční plavání',
+  ADULT = 'Plavání pro dospělé',
+  KINDERGARTEN = 'Školky',
+  SCHOOL = 'Školy',
 }
 
 export enum Category {
