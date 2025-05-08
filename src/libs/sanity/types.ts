@@ -215,6 +215,18 @@ export type SwimmingPoolDetail = {
     };
     _type: 'file';
   };
+  imageGallery?: Array<{
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+    _key: string;
+  }>;
   fileUploads?: Array<{
     title?: string;
     file?: {
@@ -1042,6 +1054,62 @@ export type QueryLecturesByPoolAndCategoryResult = Array<{
   privateSwimmingPool: boolean | null;
   isSchoolOrKindergartenAvailable: boolean | null;
 }>;
+// Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool-detail.ts
+// Variable: querySwimmingPoolDetail
+// Query: *[_type == "swimmingPoolDetail" && slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,announcements,sampleTraining,imageGallery,fileUploads,faq}
+export type QuerySwimmingPoolDetailResult = {
+  id: string;
+  skillRequirement: Array<string> | null;
+  announcements: Array<{
+    title?: string;
+    visible?: boolean;
+    text?: BlockContent;
+    _key: string;
+  }> | null;
+  sampleTraining: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
+    };
+    _type: 'file';
+  } | null;
+  imageGallery: Array<{
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+    _key: string;
+  }> | null;
+  fileUploads: Array<{
+    title?: string;
+    file?: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
+      };
+      _type: 'file';
+    };
+    _key: string;
+  }> | null;
+  faq: Array<{
+    columnTitle?: string;
+    questions?: Array<
+      {
+        _key: string;
+      } & FaqObjectType
+    >;
+    _key: string;
+  }> | null;
+} | null;
 // Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool.ts
 // Variable: querySwimmingPools
 // Query: *[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,totalLength,depth,temperature}[]

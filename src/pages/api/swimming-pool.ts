@@ -20,7 +20,6 @@ export default async function handler(
 
     if (id) {
       const swimmingPool = await getSwimmingPoolById(id as string);
-      console.log('🚀 ~ swimmingPool:', swimmingPool);
       return res.json(swimmingPool);
     }
 
