@@ -31,7 +31,7 @@ export function LuzankyHeroSection() {
               záštitou nejúspěšnějšího plaveckého klubu v České republice.
             </Text>
 
-            <NextLink href="/dostupne-lekce">
+            <NextLink href="#service">
               <IconButton
                 variant="outlined"
                 color="white"
