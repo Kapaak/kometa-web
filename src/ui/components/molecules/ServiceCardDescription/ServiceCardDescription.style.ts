@@ -40,10 +40,12 @@ export const ServiceChipContainer = styled(VerticalStack)`
 
 export const ServiceCardTextContainer = styled(Flex)`
   flex-direction: column;
-  padding: 1.4rem 2.4rem 2.4rem;
+  padding: 1.4rem 2.4rem 0.4rem;
+  flex: 1;
 `;
 
 export const ServiceCardLink = styled(Link)`
   align-self: flex-start;
-  margin-top: 1rem;
+  margin-top: auto;
+  padding: 0 2.4rem 2.4rem;
 `;

@@ -40,11 +40,11 @@ export function ServiceCardDescription({
       <S.ServiceCardTextContainer>
         <S.ServiceCardTitle>{title}</S.ServiceCardTitle>
         <Text>{description}</Text>
-
-        <S.ServiceCardLink href={url ?? ''} passHref>
-          <Button variant="outlined">Více informací</Button>
-        </S.ServiceCardLink>
       </S.ServiceCardTextContainer>
+
+      <S.ServiceCardLink href={url ?? ''} passHref>
+        <Button variant="outlined">Více informací</Button>
+      </S.ServiceCardLink>
     </S.ServiceCardDescription>
   );
 }
