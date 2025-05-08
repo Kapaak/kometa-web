@@ -63,13 +63,15 @@ export function LuzankyDetailSkillLevelSection() {
               </Flex>
             ))}
 
-            <Link
-              href={swimmingPoolDetail?.sampleTraining ?? ''}
-              download
-              style={{ alignSelf: 'flex-start' }}
-            >
-              <Button>Stáhnout vzorový trénink</Button>
-            </Link>
+            {swimmingPoolDetail?.sampleTraining && (
+              <Link
+                href={swimmingPoolDetail?.sampleTraining}
+                download
+                style={{ alignSelf: 'flex-start' }}
+              >
+                <Button>Stáhnout vzorový trénink</Button>
+              </Link>
+            )}
           </S.SectionDescriptionContainer>
         </S.SectionContainer>
       </MaxWidth>
