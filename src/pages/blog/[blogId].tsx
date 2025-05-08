@@ -2,7 +2,8 @@ import { GetStaticPropsContext } from 'next';
 import { groq } from 'next-sanity';
 
 import { SanityBlogPost, TransformedBlogPost } from '~/domains';
-import { client, getBlogById } from '~/libs/sanity';
+import { client } from '~/libs/sanity';
+import { getBlogById } from '~/libs/sanity/api/blog';
 import { BlogPostScreen } from '~/screens/blog-post-page';
 import { transformBlogPost } from '~/utils/transform-sanity-model';
 
