@@ -103,5 +103,11 @@ export type TransformedSwimmingPoolDetail = Omit<
   imageGallery?: {
     url?: string;
     alt?: string;
+    dimensions: {
+      width: number;
+      height: number;
+      aspectRatio: number;
+    };
+    blurDataURL?: string;
   }[];
 };

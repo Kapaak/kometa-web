@@ -1,3 +1,4 @@
+import { GetStaticPropsContext } from 'next';
 import { SwimmingPoolDetailPageContextProvider } from '~/contexts/SwimmingPoolDetailPageContext';
 import { LuzankyPoolScreen } from '~/screens/luzanky-pool-page';
 import { SwimmingPoolId } from '~/types';
@@ -14,3 +15,15 @@ export default function LuzankyPoolPage() {
     </SwimmingPoolDetailPageContextProvider>
   );
 }
+
+export const getStaticProps = async (
+  ctx: GetStaticPropsContext<{ categoryId: string }>
+) => {
+  const { categoryId } = ctx.params ?? {};
+
+  return {
+    props: {
+      categoryId,
+    },
+  };
+};

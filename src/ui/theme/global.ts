@@ -33,6 +33,11 @@ export const GlobalStyle = createGlobalStyle(
       background-color: ${colors.grey['200']};
     }
 
+    //this class puts padding on body and it moves the whole page
+    .yarl__no_scroll {
+      padding-right: 0 !important;
+    }
+
     br {
       //fixes br height in Firefox to be the same as in Chromium browsers
       margin-bottom: 2.3rem;

@@ -139,6 +139,12 @@ export function transformSwimmingPoolDetail(
       swimmingPoolDetail?.imageGallery?.map((image) => ({
         url: urlForImage(image)?.url(),
         alt: image?.asset?.altText,
+        dimensions: {
+          width: image?.asset?.metadata?.dimensions?.width ?? 0,
+          height: image?.asset?.metadata?.dimensions?.height ?? 0,
+          aspectRatio: image?.asset?.metadata?.dimensions?.aspectRatio ?? 0,
+        },
+        blurDataURL: image?.asset?.metadata?.blurHash,
       })) ?? [],
     sampleTraining: swimmingPoolDetail?.sampleTraining ?? '',
     skillRequirement: swimmingPoolDetail?.skillRequirement ?? [],
