@@ -1,13 +1,33 @@
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { swimmingCategories } from '~/constants/categories';
+import { SwimmingPoolDetailPageContextProvider } from '~/contexts/SwimmingPoolDetailPageContext';
 import { LuzankyPoolDetailScreen } from '~/screens/luzanky-pool-detail-page';
+import { SwimmingPoolId } from '~/types';
+import { getCategoryIdBySlug } from '~/utils/category';
 
-export default function BlogItemPage() {
-  return <LuzankyPoolDetailScreen />;
+interface LuzankyPageProps
+  extends InferGetStaticPropsType<typeof getStaticProps> {}
+
+export default function LuzankyPage({ categoryId }: LuzankyPageProps) {
+  return (
+    <SwimmingPoolDetailPageContextProvider
+      swimmingPoolId={SwimmingPoolId.LUZANKY}
+      categoryId={categoryId}
+    >
+      <LuzankyPoolDetailScreen />
+    </SwimmingPoolDetailPageContextProvider>
+  );
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps = async (
+  ctx: GetStaticPropsContext<{ categoryId: string }>
+) => {
+  const { categoryId } = ctx.params ?? {};
+
   return {
-    props: {},
+    props: {
+      categoryId: getCategoryIdBySlug(categoryId as string),
+    },
   };
 };
 

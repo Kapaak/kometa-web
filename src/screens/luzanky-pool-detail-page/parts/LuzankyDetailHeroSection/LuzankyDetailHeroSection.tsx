@@ -9,7 +9,7 @@ import {
 import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
 import { useGetLecturesForSwimmingPoolAndCategory } from '~/adapters/coursesAdapter';
-import { useGetSwimmingPoolById } from '~/adapters/swimmingPoolAdapter';
+import { useSwimmingPoolDetailPageContext } from '~/contexts/SwimmingPoolDetailPageContext';
 import { SanityLecture } from '~/domains';
 import { SwimmingPoolId } from '~/types';
 import {
@@ -22,7 +22,6 @@ import {
 import { IconText } from '~/ui/components/molecules';
 import { getCategoryIdBySlug } from '~/utils/category';
 import { Calendar } from '../../components';
-import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailHeroSection.style';
 
 const LECTURE_DURATION = 55;
@@ -48,13 +47,13 @@ export function LuzankyDetailHeroSection() {
   const { primary } = theme.colors;
 
   const router = useRouter();
-  console.log('🚀 ~ LuzankyDetailHeroSection ~ router:', router);
 
   const { data: lectures } = useGetLecturesForSwimmingPoolAndCategory(
     getCategoryIdBySlug(router.query.categoryId as string),
     SwimmingPoolId.LUZANKY
   );
-  const { data: swimmingPool } = useGetSwimmingPoolById('luzanky');
+  const { swimmingPool, swimmingPoolDetail, isLoading } =
+    useSwimmingPoolDetailPageContext();
 
   const minimumLecturePrice = Math.min(
     ...(lectures
@@ -147,7 +146,7 @@ export function LuzankyDetailHeroSection() {
                     Potřebné dovednosti dítěte před nástupem do kurzu
                   </Text>
 
-                  {luzankyPoolDetailInformation.skillsNeeded.map((skill) => (
+                  {swimmingPoolDetail?.skillRequirement?.map((skill) => (
                     <IconText
                       key={skill}
                       icon={CheckCircle}
