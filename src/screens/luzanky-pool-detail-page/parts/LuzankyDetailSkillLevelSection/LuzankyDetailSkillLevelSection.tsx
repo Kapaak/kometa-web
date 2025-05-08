@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useSwimmingPoolDetailPageContext } from '~/contexts/SwimmingPoolDetailPageContext';
 import { Button, Flex, Headline, MaxWidth, Text } from '~/ui/components/atoms';
 import * as S from './LuzankyDetailSkillLevelSection.style';
 
@@ -28,6 +29,7 @@ const about = [
 ];
 
 export function LuzankyDetailSkillLevelSection() {
+  const { swimmingPoolDetail } = useSwimmingPoolDetailPageContext();
   return (
     <S.Section>
       <MaxWidth>
@@ -61,7 +63,11 @@ export function LuzankyDetailSkillLevelSection() {
               </Flex>
             ))}
 
-            <Link href="/" download style={{ alignSelf: 'flex-start' }}>
+            <Link
+              href={swimmingPoolDetail?.sampleTraining ?? ''}
+              download
+              style={{ alignSelf: 'flex-start' }}
+            >
               <Button>Stáhnout vzorový trénink</Button>
             </Link>
           </S.SectionDescriptionContainer>

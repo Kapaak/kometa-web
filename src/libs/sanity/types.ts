@@ -1056,7 +1056,7 @@ export type QueryLecturesByPoolAndCategoryResult = Array<{
 }>;
 // Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool-detail.ts
 // Variable: querySwimmingPoolDetail
-// Query: *[_type == "swimmingPoolDetail" && slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,announcements,sampleTraining,imageGallery,fileUploads,faq}
+// Query: *[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,announcements,"sampleTraining": sampleTraining.asset->url,imageGallery,fileUploads,faq}
 export type QuerySwimmingPoolDetailResult = {
   id: string;
   skillRequirement: Array<string> | null;
@@ -1066,15 +1066,7 @@ export type QuerySwimmingPoolDetailResult = {
     text?: BlockContent;
     _key: string;
   }> | null;
-  sampleTraining: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
-    };
-    _type: 'file';
-  } | null;
+  sampleTraining: string | null;
   imageGallery: Array<{
     asset?: {
       _ref: string;
