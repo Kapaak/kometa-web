@@ -142,6 +142,24 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         'Jak zlepšit svou fyzickou kondici a vytrvalost.',
       ],
     },
+    skillLevelSection: {
+      data: [
+        //TODO: potrebuju doplnit
+        // {
+        //   title: 'Rozdělení do skupin',
+        //   descriptions: [
+        //     {
+        //       label: 'Rybička',
+        //       text: 'Tento level je určen pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
+        //     },
+        //     {
+        //       label: 'Delfínek',
+        //       text: 'Pro děti, které už zvládají potápění, kopání a bublání. Zaměřujeme se na výuku základů plaveckých stylů, zejména znaku a kraula, s cílem zlepšit techniku a koordinaci.',
+        //     },
+        //   ],
+        // },
+      ],
+    },
   },
   [SwimmingCategoryId.KINDERGARTEN]: {
     heroSection: {
