@@ -1,4 +1,4 @@
-const dayTranslationAbbr: Record<number, string> = {
+export const dayTranslationAbbr: Record<number, string> = {
   1: 'Po',
   2: 'Út',
   3: 'St',

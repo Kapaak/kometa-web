@@ -21,17 +21,10 @@ import {
 } from '~/ui/components/atoms';
 import { IconText } from '~/ui/components/molecules';
 import { getCategoryIdBySlug, getCategoryNameBySlug } from '~/utils/category';
+import { dayTranslationAbbr } from '~/utils/day';
 import { Calendar } from '../../components';
 import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailHeroSection.style';
-
-function getUniqueSortedDayIds(lectures?: SanityLecture[]): number[] {
-  const uniqueDays = Array.from(
-    new Set(lectures?.map((lecture) => Number(lecture.dayId)))
-  );
-
-  return uniqueDays.sort((a, b) => a - b);
-}
 
 function getUniqueSortedTimes(lectures?: SanityLecture[]): number[] {
   const uniqueTimes = Array.from(
@@ -165,7 +158,9 @@ export function LuzankyDetailHeroSection() {
             <S.SectionActionsContainer>
               <S.SectionCalendarContainer>
                 <Calendar
-                  days={getUniqueSortedDayIds(lectures)}
+                  days={Object.values(dayTranslationAbbr).map(
+                    (_, index) => index + 1
+                  )}
                   times={getUniqueSortedTimes(lectures)}
                   data={calendarData ?? []}
                   onClick={(dayId, time) =>
