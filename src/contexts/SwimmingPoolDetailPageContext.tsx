@@ -20,7 +20,7 @@ const SwimmingPoolDetailPageContext =
 
 interface Props extends PropsWithChildren {
   swimmingPoolId: string;
-  categoryId?: string;
+  categoryId: string;
 }
 
 export function SwimmingPoolDetailPageContextProvider({

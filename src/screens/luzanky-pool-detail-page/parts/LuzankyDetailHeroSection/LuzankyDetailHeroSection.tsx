@@ -55,7 +55,7 @@ export function LuzankyDetailHeroSection() {
     luzankyPoolDetailInformation?.[categoryId]?.heroSection ?? {};
 
   const { data: lectures } = useGetLecturesForSwimmingPoolAndCategory(
-    categoryBySlug,
+    categoryId,
     SwimmingPoolId.LUZANKY
   );
 
@@ -88,7 +88,7 @@ export function LuzankyDetailHeroSection() {
             <S.SectionDescriptionContainer>
               <S.SectionTextContainer>
                 <Headline variant="h1">
-                  {getCategoryNameBySlug(router.query.categoryId as string)}
+                  {getCategoryNameBySlug(categoryId)}
                 </Headline>
                 <Text variant="body2">{description}</Text>
 
