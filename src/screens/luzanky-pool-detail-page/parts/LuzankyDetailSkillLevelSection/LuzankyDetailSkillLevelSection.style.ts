@@ -1,3 +1,4 @@
+import NextImage from 'next/image';
 import styled, { css } from 'styled-components';
 import { VerticalStack } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
@@ -56,6 +57,11 @@ export const SectionDescriptionContainer = styled(VerticalStack)`
   `}
 `;
 
+export const GalleryImage = styled(NextImage)`
+  object-fit: cover;
+  border-radius: inherit;
+`;
+
 export const ClickableImageContainer = styled.button.withConfig({
   shouldForwardProp: (prop) => !['hiddenImagesCount'].includes(prop),
 })<{ hiddenImagesCount?: number }>`
@@ -69,6 +75,7 @@ export const ClickableImageContainer = styled.button.withConfig({
   &::before {
     content: ${({ hiddenImagesCount }) =>
       hiddenImagesCount ? `'+${hiddenImagesCount}'` : "''"};
+    color: ${({ theme }) => theme.colors.grey['100']};
     position: absolute;
     display: ${({ hiddenImagesCount }) =>
       hiddenImagesCount ? 'block' : 'none'};
@@ -77,5 +84,6 @@ export const ClickableImageContainer = styled.button.withConfig({
     transform: translate(-50%, -50%);
     font-size: 3rem;
     font-weight: 500;
+    z-index: 1;
   }
 `;
