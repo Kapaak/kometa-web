@@ -3,6 +3,7 @@ import { Flex } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const ServiceSection = styled.section`
+  scroll-margin-top: 10rem;
   padding: 1.5rem 2rem;
 `;
 
