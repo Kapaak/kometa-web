@@ -1,7 +1,7 @@
 import type { InferGetStaticPropsType } from 'next';
 
 import { SanityCamps } from '~/domains';
-import { getCamps } from '~/libs/sanity';
+import { getCamps } from '~/libs/sanity/api/camp';
 import { CampsScreen } from '~/screens/camps-page';
 import { transformCamp } from '~/utils/transform-sanity-model';
 
