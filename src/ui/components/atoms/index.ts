@@ -14,6 +14,7 @@ export * from './Headline';
 export * from './Hidden';
 export * from './IconButton';
 export * from './InfiniteScrollObserver';
+export * from './Input';
 export * from './Loader';
 export * from './MainDescription';
 export * from './MaxWidth';
