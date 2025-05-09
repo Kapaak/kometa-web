@@ -5,6 +5,7 @@ export function formatToCurrency(
 ): string {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
+    minimumFractionDigits: 0,
     currency,
   }).format(value);
 }

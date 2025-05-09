@@ -1,7 +1,7 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { swimmingCategories } from '~/constants/categories';
-import { SwimmingPoolDetailPageContextProvider } from '~/contexts/SwimmingPoolDetailPageContext';
 import { LuzankyPoolDetailScreen } from '~/screens/luzanky-pool-detail-page';
+import { SwimmingPoolDetailPageContextProvider } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import { SwimmingPoolId } from '~/types';
 import { getCategoryIdBySlug } from '~/utils/category';
 

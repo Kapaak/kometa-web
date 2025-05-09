@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useSwimmingPoolDetailPageContext } from '~/contexts/SwimmingPoolDetailPageContext';
+import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import { Button, Flex, Headline, MaxWidth, Text } from '~/ui/components/atoms';
 import { Gallery } from '../../components/Gallery';
 import { luzankyPoolDetailInformation } from '../../constants';
@@ -11,10 +11,15 @@ export function LuzankyDetailSkillLevelSection() {
   const swimmingPoolDetailInformation =
     luzankyPoolDetailInformation?.[categoryId];
 
-  const { data, actionButtonLabel = 'Stáhnout vzorový trénink' } =
-    swimmingPoolDetailInformation?.skillLevelSection ?? {};
+  const {
+    data,
+    visible = true,
+    actionButtonLabel = 'Stáhnout vzorový trénink',
+  } = swimmingPoolDetailInformation?.skillLevelSection ?? {};
 
   const hasImages = swimmingPoolDetail?.imageGallery?.length ?? 0;
+
+  if (!visible) return;
 
   return (
     <S.Section>

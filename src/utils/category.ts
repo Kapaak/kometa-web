@@ -9,6 +9,8 @@ const categoryIdMap: Record<string, string> = {
   [SwimmingCategoryId.ADVANCED]: SwimmingCategoryTranslation.ADVANCED,
   [SwimmingCategoryId.CONDITION]: SwimmingCategoryTranslation.CONDITION,
   [SwimmingCategoryId.ADULT]: SwimmingCategoryTranslation.ADULT,
+  [SwimmingCategoryId.KINDERGARTEN]: SwimmingCategoryTranslation.KINDERGARTEN,
+  [SwimmingCategoryId.SCHOOL]: SwimmingCategoryTranslation.SCHOOL,
 };
 
 const categorySlugIdMap: Record<string, string> = {
@@ -16,6 +18,8 @@ const categorySlugIdMap: Record<string, string> = {
   [SwimmingCategorySlug.ADVANCED]: SwimmingCategoryId.ADVANCED,
   [SwimmingCategorySlug.CONDITION]: SwimmingCategoryId.CONDITION,
   [SwimmingCategorySlug.ADULT]: SwimmingCategoryId.ADULT,
+  [SwimmingCategorySlug.KINDERGARTEN]: SwimmingCategoryId.KINDERGARTEN,
+  [SwimmingCategorySlug.SCHOOL]: SwimmingCategoryId.SCHOOL,
 };
 
 const categoryTranslationMap: Record<string, string> = {

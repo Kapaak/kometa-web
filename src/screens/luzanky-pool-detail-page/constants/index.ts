@@ -11,6 +11,7 @@ type PoolInformation = {
     };
   };
   skillLevelSection: {
+    visible: boolean;
     data: {
       title: string;
       descriptions?: { label?: string; text: string }[];
@@ -28,7 +29,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     heroSection: {
       description:
         'Tento kurz je určen pro děti, které teprve začínají s plaváním, nebo pro ty, které už ovládají základy, jako je potápění, kopání a bublání, ale potřebují se naučit správnou techniku plaveckých stylů, zejména znaku a kraula.',
-      duration: 55,
+      duration: 45,
       poolParameters: {
         poolLength: '16 m',
         depth: '90 cm',
@@ -45,6 +46,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       ],
     },
     skillLevelSection: {
+      visible: true,
       data: [
         {
           title: 'Rozdělení do skupin',
@@ -66,7 +68,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     heroSection: {
       description:
         'Tento kurz plavání je ideální pro děti, které již zvládly základní plavecké dovednosti a chtějí je dále rozvíjet.',
-      duration: 55,
+      duration: 45,
       poolParameters: {
         poolLength: '25 m',
         depth: 'mezi 120 a 160 cm',
@@ -74,6 +76,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       },
     },
     skillLevelSection: {
+      visible: true,
       data: [
         {
           title: 'Co když dítě je dovednostmi na pomezí',
@@ -100,7 +103,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     heroSection: {
       description:
         'Tento kurz je určen pro děti, které již zvládají základní plavecké styly a chtějí se zaměřit na zlepšení své techniky a vytrvalosti.',
-      duration: 55,
+      duration: 45,
       poolParameters: {
         poolLength: '25 m',
         depth: 'mezi 120 a 160 cm',
@@ -108,6 +111,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       },
     },
     skillLevelSection: {
+      visible: true,
       data: [
         {
           title: 'Co když dítě je dovednostmi na pomezí',
@@ -133,8 +137,8 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   [SwimmingCategoryId.ADULT]: {
     heroSection: {
       description:
-        'Tento kurz je určen pro děti, které teprve začínají s plaváním, nebo pro ty, které už ovládají základy, jako je potápění, kopání a bublání, ale potřebují se naučit správnou techniku plaveckých stylů, zejména znaku a kraula.',
-      duration: 55,
+        'Plavání i pro dospělé – zlepšíte si techniku, zapracujete na kondici a zrelaxujete ve vodě.',
+      duration: 45,
       poolParameters: {
         poolLength: '25 m',
         depth: 'mezi 120 a 160 cm',
@@ -152,6 +156,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       ],
     },
     skillLevelSection: {
+      visible: false,
       data: [
         //TODO: potrebuju doplnit
         // {
@@ -173,8 +178,8 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   [SwimmingCategoryId.KINDERGARTEN]: {
     heroSection: {
       description:
-        'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů. Díky propojení se školní docházkou šetříme rodičům čas i peníze, a zároveň zajišťujeme, že se děti učí plavat pod vedením zkušených profesionálů.',
-      duration: 55,
+        'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů.',
+      duration: 45,
       poolParameters: {
         poolLength: '16 m',
         depth: '90 cm',
@@ -182,7 +187,8 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       },
     },
     aboutSection: {
-      description: '', //TODO: doplnit
+      description:
+        'Díky propojení se školní docházkou šetříme rodičům čas i peníze, a zároveň zajišťujeme, že se děti učí plavat pod vedením zkušených profesionálů',
       lectureFocus: [
         'Hravou formou se seznamujeme s vodním prostředím.',
         'Děti se naučí základy plaveckých stylů, jako je znak a kraul.',
@@ -190,6 +196,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       ],
     },
     skillLevelSection: {
+      visible: false,
       data: [
         //TODO: potrebuju doplnit
         // {
@@ -211,8 +218,8 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   [SwimmingCategoryId.SCHOOL]: {
     heroSection: {
       description:
-        'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů. Díky propojení se školní docházkou šetříme rodičům čas i peníze, a zároveň zajišťujeme, že se děti učí plavat pod vedením zkušených profesionálů.',
-      duration: 55,
+        'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů.',
+      duration: 45,
       poolParameters: {
         poolLength: '16 m',
         depth: '90 cm',
@@ -220,7 +227,8 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       },
     },
     aboutSection: {
-      description: '', //TODO: doplnit
+      description:
+        'Díky propojení se školní docházkou šetříme rodičům čas i peníze, a zároveň zajišťujeme, že se děti učí plavat pod vedením zkušených profesionálů',
       lectureFocus: [
         'Hravou formou se seznamujeme s vodním prostředím.',
         'Děti se naučí základy plaveckých stylů, jako je znak a kraul.',
@@ -228,6 +236,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       ],
     },
     skillLevelSection: {
+      visible: true,
       data: [
         //TODO: potrebuju doplnit
         // {
