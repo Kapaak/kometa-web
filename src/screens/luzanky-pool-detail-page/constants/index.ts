@@ -182,6 +182,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       },
     },
     aboutSection: {
+      description: '', //TODO: doplnit
       lectureFocus: [
         'Hravou formou se seznamujeme s vodním prostředím.',
         'Děti se naučí základy plaveckých stylů, jako je znak a kraul.',
@@ -219,6 +220,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       },
     },
     aboutSection: {
+      description: '', //TODO: doplnit
       lectureFocus: [
         'Hravou formou se seznamujeme s vodním prostředím.',
         'Děti se naučí základy plaveckých stylů, jako je znak a kraul.',

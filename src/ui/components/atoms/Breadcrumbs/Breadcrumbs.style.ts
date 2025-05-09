@@ -13,6 +13,7 @@ export const BreadcrumbLink = styled(NextLink)`
   font-weight: 500;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
+  white-space: nowrap;
 
   &:hover {
     text-decoration: underline;
