@@ -20,8 +20,9 @@ import {
   VerticalStack,
 } from '~/ui/components/atoms';
 import { IconText } from '~/ui/components/molecules';
-import { getCategoryNameBySlug } from '~/utils/category';
+import { getCategoryNameByCategoryId } from '~/utils/category';
 import { dayTranslationAbbr } from '~/utils/day';
+import { formatToCurrency } from '~/utils/number';
 import { Calendar } from '../../components';
 import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailHeroSection.style';
@@ -79,15 +80,19 @@ export function LuzankyDetailHeroSection() {
             <S.SectionDescriptionContainer>
               <S.SectionTextContainer>
                 <Headline variant="h1">
-                  {getCategoryNameBySlug(categoryId)}
+                  {getCategoryNameByCategoryId(categoryId)}
                 </Headline>
                 <Text variant="body2">{description}</Text>
 
-                <S.SectionPriceContainer>
-                  <Text variant="body3">
-                    Cena kurzu je od {minimumLecturePrice || '-'} Kč za pololetí
-                  </Text>
-                </S.SectionPriceContainer>
+                {Number.isFinite(minimumLecturePrice) &&
+                  minimumLecturePrice > 0 && (
+                    <S.SectionPriceContainer>
+                      <Text variant="body3">
+                        Cena kurzu je od {formatToCurrency(minimumLecturePrice)}{' '}
+                        za pololetí
+                      </Text>
+                    </S.SectionPriceContainer>
+                  )}
 
                 <Text variant="body2">
                   Součástí ceny je vždy pronájem bazénu, profesionální trenéři a

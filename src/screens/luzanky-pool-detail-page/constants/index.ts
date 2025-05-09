@@ -18,6 +18,7 @@ type PoolInformation = {
     actionButtonLabel?: string;
   };
   aboutSection?: {
+    description: string;
     lectureFocus: string[];
   };
 };
@@ -35,6 +36,8 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       },
     },
     aboutSection: {
+      description:
+        'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde děti nejen zdokonalují své plavecké dovednosti, ale zároveň si užívají cestu k vlastním cílům a mají z plavání radost. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost z vody.',
       lectureFocus: [
         'Hravou formou se seznamujeme s vodním prostředím.',
         'Děti se naučí základy plaveckých stylů, jako je znak a kraul.',
@@ -60,6 +63,16 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     },
   },
   [SwimmingCategoryId.ADVANCED]: {
+    heroSection: {
+      description:
+        'Tento kurz plavání je ideální pro děti, které již zvládly základní plavecké dovednosti a chtějí je dále rozvíjet.',
+      duration: 55,
+      poolParameters: {
+        poolLength: '25 m',
+        depth: 'mezi 120 a 160 cm',
+        waterTemperature: '27 °C',
+      },
+    },
     skillLevelSection: {
       data: [
         {
@@ -72,26 +85,28 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         },
       ],
     },
-    heroSection: {
-      description:
-        'Tento kurz je určen pro děti, které teprve začínají s plaváním, nebo pro ty, které už ovládají základy, jako je potápění, kopání a bublání, ale potřebují se naučit správnou techniku plaveckých stylů, zejména znaku a kraula.',
-      duration: 55,
-      poolParameters: {
-        poolLength: '25 m',
-        depth: 'mezi 120 a 160 cm',
-        waterTemperature: '27 °C',
-      },
-    },
     aboutSection: {
+      description:
+        'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde děti nejen zdokonalují své plavecké dovednosti, ale zároveň si užívají cestu k vlastním cílům a mají z plavání radost. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost z vody.',
       lectureFocus: [
         'Zdokonalování techniky plaveckých stylů (znak, kraul, prsa a základy motýla).',
-        'Rozvíjíme výdrž, koordinaci a rychlost.',
-        'Učíme děti správnou techniku obratek startů a závodních dovedností.',
+        'Rozvíjíme výdrž, koodrinaci a rychlosti.',
+        'Učíme děti správnou techniku obrátek startů a závodních dovedností.',
         'Hravou formou motivujeme děti k překonávání vlastních hranic.',
       ],
     },
   },
   [SwimmingCategoryId.CONDITION]: {
+    heroSection: {
+      description:
+        'Tento kurz je určen pro děti, které již zvládají základní plavecké styly a chtějí se zaměřit na zlepšení své techniky a vytrvalosti.',
+      duration: 55,
+      poolParameters: {
+        poolLength: '25 m',
+        depth: 'mezi 120 a 160 cm',
+        waterTemperature: '27 °C',
+      },
+    },
     skillLevelSection: {
       data: [
         {
@@ -104,22 +119,14 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         },
       ],
     },
-    heroSection: {
-      description:
-        'Tento kurz je určen pro děti, které teprve začínají s plaváním, nebo pro ty, které už ovládají základy, jako je potápění, kopání a bublání, ale potřebují se naučit správnou techniku plaveckých stylů, zejména znaku a kraula.',
-      duration: 55,
-      poolParameters: {
-        poolLength: '25 m',
-        depth: 'mezi 120 a 160 cm',
-        waterTemperature: '27 °C',
-      },
-    },
     aboutSection: {
+      description:
+        'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde děti nejen zdokonalují své plavecké dovednosti, ale zároveň si užívají cestu k vlastním cílům a mají z plavání radost. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost z vody.',
       lectureFocus: [
-        'Zdokonalování techniky plaveckých stylů (znak, kraul, prsa a základy motýla).',
-        'Rozvíjíme výdrž, koordinaci a rychlost.',
-        'Učíme děti správnou techniku obratek startů a závodních dovedností.',
-        'Hravou formou motivujeme děti k překonávání vlastních hranic.',
+        'Zlepšení techniky všech čtyř plaveckých stylů.',
+        'Zvládnutí startovních skoků a obrátek.',
+        'Rozvoj fyzické kondice a koordinace.',
+        'Podpora sebedůvěry a radosti z pohybu.',
       ],
     },
   },
@@ -135,8 +142,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       },
     },
     aboutSection: {
+      description:
+        'Kurzy plavání pro dospělé jsou navrženy tak, aby vám pomohly zlepšit vaši techniku, kondici a radost z pohybu ve vodě. Bez ohledu na to, jestli se chcete naučit základy nebo zdokonalit své plavecké dovednosti, jsme tu pro vás. Věříme, že plavání by mělo být zábavou, výzvou a cestou k celkovému zlepšení kondice.',
       lectureFocus: [
-        'Základy plaveckých stylu: kraul, znak prsa a motýlek.',
+        'Základy plaveckých stylů: kraul, znak, prsa a motýlek.',
         'Šipky a obrátky.',
         'Jak zlepšit techniku plavání a efektivitu pohybu ve vodě.',
         'Jak zlepšit svou fyzickou kondici a vytrvalost.',
@@ -164,8 +173,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   [SwimmingCategoryId.KINDERGARTEN]: {
     heroSection: {
       description:
-        //TODO: tohle zmenit - musi byt jinej popis
-        'Tento kurz je určen pro děti, které teprve začínají s plaváním, nebo pro ty, které už ovládají základy, jako je potápění, kopání a bublání, ale potřebují se naučit správnou techniku plaveckých stylů, zejména znaku a kraula.',
+        'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů. Díky propojení se školní docházkou šetříme rodičům čas i peníze, a zároveň zajišťujeme, že se děti učí plavat pod vedením zkušených profesionálů.',
       duration: 55,
       poolParameters: {
         poolLength: '16 m',
@@ -202,8 +210,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   [SwimmingCategoryId.SCHOOL]: {
     heroSection: {
       description:
-        //TODO: tohle zmenit - musi byt jinej popis
-        'Tento kurz je určen pro děti, které teprve začínají s plaváním, nebo pro ty, které už ovládají základy, jako je potápění, kopání a bublání, ale potřebují se naučit správnou techniku plaveckých stylů, zejména znaku a kraula.',
+        'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů. Díky propojení se školní docházkou šetříme rodičům čas i peníze, a zároveň zajišťujeme, že se děti učí plavat pod vedením zkušených profesionálů.',
       duration: 55,
       poolParameters: {
         poolLength: '16 m',

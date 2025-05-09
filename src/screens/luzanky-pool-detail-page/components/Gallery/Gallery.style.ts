@@ -17,15 +17,20 @@ export const ImageGaleryGrid = styled.div.withConfig({
   }
 
   ${({ theme }) => css`
-    @media (${minBreakpoint(theme.breakpoints.md)}) {
+    @media (${minBreakpoint(theme.breakpoints.sm)}) {
       grid-template-rows: 30rem 15rem;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      grid-template-rows: 35rem 15rem;
     }
   `}
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {
       gap: 2.4rem;
-      grid-template-rows: 1fr 14.5rem;
     }
   `}
 `;
