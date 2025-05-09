@@ -3,10 +3,11 @@ import { SanityImageObject } from '@sanity/image-url/lib/types/types';
 import {
   QueryAvailableCoursesResult,
   QueryBlogPostsResult,
-  QueryKidsCoursesResult,
+  QueryLecturesResult,
+  QuerySwimmingPoolDetailResult,
   QuerySwimmingPoolsResult,
 } from '~/libs/sanity/types';
-import { Category, SwimmingVariant } from '~/types';
+import { Category, SwimmingCategoryId } from '~/types';
 
 export type SanityKidsCourseVariant = {
   url?: string;
@@ -23,11 +24,14 @@ export type SanityKidsCourseVariant = {
   }[];
 };
 
-export type SanityKidsCourse = QueryKidsCoursesResult[0];
+export type SanityLecture = QueryLecturesResult[0] & { discount?: number };
 
-export type SanityAvailableCourse = QueryAvailableCoursesResult[0];
+export type SanityAvailableLecture = QueryAvailableCoursesResult[0];
 
 export type SanitySwimmingPool = QuerySwimmingPoolsResult[0];
+export type SanitySwimmingPoolDetail = QuerySwimmingPoolDetailResult;
+
+export type SanityUploadedFile = any[0];
 
 export type SanityBlogPost = QueryBlogPostsResult[0];
 
@@ -70,8 +74,8 @@ export type GetAvailableCourse = {
   timeFrom?: string;
   timeTo?: string;
   url?: string;
-  skillLevelId?: SwimmingVariant;
-  skillLevel?: SwimmingVariant;
+  skillLevelId?: SwimmingCategoryId;
+  skillLevel?: SwimmingCategoryId;
   skillLevelName?: string;
 };
 
@@ -90,4 +94,20 @@ export type TransformedBlogPost = {
   url?: string;
   aspectRatio?: number;
   blurDataURL?: string;
+};
+
+export type TransformedSwimmingPoolDetail = Omit<
+  NonNullable<SanitySwimmingPoolDetail>,
+  'imageGallery'
+> & {
+  imageGallery?: {
+    url?: string;
+    alt?: string;
+    dimensions: {
+      width: number;
+      height: number;
+      aspectRatio: number;
+    };
+    blurDataURL?: string;
+  }[];
 };

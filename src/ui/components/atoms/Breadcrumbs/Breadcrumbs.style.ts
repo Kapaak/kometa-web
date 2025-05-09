@@ -34,10 +34,12 @@ export const Breadcrumb = styled(ReactAriaBreadcrumb)`
 
   ${({ theme }) => css`
     @media (${maxBreakpoint(theme.breakpoints.md)}) {
-      max-width: 20rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      &:last-child {
+        max-width: 20rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   `}
 `;

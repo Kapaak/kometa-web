@@ -6,6 +6,7 @@ export * from './ControlledSwitch';
 export * from './IconText';
 export * from './Modal';
 export * from './ServiceCard';
+export * from './ServiceCardDescription';
 export * from './TableBody';
 export * from './TableHead';
 export * from './TextBuilder';

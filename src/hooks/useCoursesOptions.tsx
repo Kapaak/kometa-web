@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 
-import { useGetSwimmingPool } from '~/adapters/coursesAdapter';
+import { useGetSwimmingPools } from '~/adapters/swimmingPoolAdapter';
 
 export function useGetSwimmingPoolOptions() {
-  const { data, isLoading, isError, isSuccess } = useGetSwimmingPool();
+  const { data, isLoading, isError, isSuccess } = useGetSwimmingPools();
 
   const options = useMemo(
     () =>

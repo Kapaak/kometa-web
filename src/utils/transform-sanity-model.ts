@@ -1,28 +1,31 @@
 import {
   GetAvailableCourse,
-  SanityAvailableCourse,
+  SanityAvailableLecture,
   SanityBlogPost,
   SanityCamps,
-  SanityKidsCourse,
+  SanityLecture,
+  SanitySwimmingPoolDetail,
   TransformedBlogPost,
+  TransformedSwimmingPoolDetail,
 } from '~/domains';
 import {
   Category,
-  SwimmingVariant,
-  SwimmingVariantTranslation,
+  SwimmingCategoryId,
+  SwimmingCategoryTranslation,
   TransformedKidsCourse,
 } from '~/types';
 
+import { getDayFullName } from './day';
 import { urlForImage } from './sanity';
 
 //Needs to be separated, because I am using here "urlForImage" which is available only on server
 //else I would need to pass env as public, which I dont want to
 
 export function transformKidsCourses(
-  courses: SanityKidsCourse[]
+  courses: SanityLecture[]
 ): TransformedKidsCourse[] {
   return courses.reduce(
-    (acc: TransformedKidsCourse[], course: SanityKidsCourse) => {
+    (acc: TransformedKidsCourse[], course: SanityLecture) => {
       let pool = acc.find(
         (pool) => pool.swimmingPoolId === course.swimmingPoolId
       );
@@ -69,25 +72,18 @@ export function transformCamp(course: SanityCamps): SanityCamps {
 }
 
 export function transformAvailableCourse(
-  course: SanityAvailableCourse
+  course: SanityAvailableLecture
 ): GetAvailableCourse {
   const variantTranslation = {
-    basic: SwimmingVariantTranslation.BASIC,
-    advanced: SwimmingVariantTranslation.ADVANCED,
-    condition: SwimmingVariantTranslation.CONDITION,
-  };
-  const dayTranslation: Record<number, string> = {
-    1: 'Pondělí',
-    2: 'Úterý',
-    3: 'Středa',
-    4: 'Čtvrtek',
-    5: 'Pátek',
+    basic: SwimmingCategoryTranslation.BASIC,
+    advanced: SwimmingCategoryTranslation.ADVANCED,
+    condition: SwimmingCategoryTranslation.CONDITION,
   };
 
   return {
     id: course?.id,
     dayId: Number(course?.dayId),
-    day: course?.dayId ? dayTranslation[course.dayId] : '-',
+    day: course?.dayId ? getDayFullName(course.dayId) : '-',
     isFull: course?.isFull ?? false,
     priceYear: course?.priceYear ?? 0,
     priceSemester: course?.priceSemester ?? 0,
@@ -95,7 +91,7 @@ export function transformAvailableCourse(
     timeTo: course?.timeTo ?? '-',
     ageFrom: course?.ageFrom ?? 0,
     ageTo: course?.ageTo ?? 0,
-    skillLevelId: course?.categoryId as SwimmingVariant,
+    skillLevelId: course?.categoryId as SwimmingCategoryId,
     skillLevelName: course?.categoryId
       ? variantTranslation[course.categoryId]
       : '-',
@@ -129,5 +125,29 @@ export function transformBlogPost(
     url: blogPost?.slug ?? '',
     slug: blogPost?.slug ?? '',
     blurDataURL: blogPost?.image?.asset?.metadata?.lqip,
+  };
+}
+
+export function transformSwimmingPoolDetail(
+  swimmingPoolDetail: SanitySwimmingPoolDetail
+): TransformedSwimmingPoolDetail {
+  return {
+    id: swimmingPoolDetail?.id ?? '',
+    faq: swimmingPoolDetail?.faq ?? [],
+    fileUploads: swimmingPoolDetail?.fileUploads ?? [],
+    imageGallery:
+      swimmingPoolDetail?.imageGallery?.map((image) => ({
+        url: urlForImage(image)?.url(),
+        alt: image?.asset?.altText,
+        dimensions: {
+          width: image?.asset?.metadata?.dimensions?.width ?? 0,
+          height: image?.asset?.metadata?.dimensions?.height ?? 0,
+          aspectRatio: image?.asset?.metadata?.dimensions?.aspectRatio ?? 0,
+        },
+        blurDataURL: image?.asset?.metadata?.blurHash,
+      })) ?? [],
+    sampleTraining: swimmingPoolDetail?.sampleTraining ?? '',
+    skillRequirement: swimmingPoolDetail?.skillRequirement ?? [],
+    announcements: swimmingPoolDetail?.announcements ?? [],
   };
 }
