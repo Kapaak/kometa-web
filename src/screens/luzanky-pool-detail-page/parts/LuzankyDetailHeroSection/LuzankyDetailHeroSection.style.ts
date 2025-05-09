@@ -105,4 +105,5 @@ export const SectionActionsContainer = styled(VerticalStack)`
 
 export const SectionActionLink = styled(NextLink)`
   align-self: flex-end;
+  margin-top: auto;
 `;

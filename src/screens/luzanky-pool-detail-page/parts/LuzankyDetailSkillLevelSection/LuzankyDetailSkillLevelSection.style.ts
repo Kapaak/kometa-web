@@ -21,7 +21,6 @@ export const SectionContainer = styled.div`
 export const SectionDescriptionContainer = styled(VerticalStack)`
   gap: 2rem;
   flex: 1 1 50%;
-  justify-content: space-between;
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.md)}) {

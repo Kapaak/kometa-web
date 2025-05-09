@@ -25,6 +25,10 @@ export function Calendar({ data, days, times, onClick }: CalendarProps) {
     );
   };
 
+  if (!data || data.length === 0) {
+    return;
+  }
+
   return (
     <S.Calendar columns={times.length}>
       <S.CalendarRowContainer>

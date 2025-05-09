@@ -5,6 +5,13 @@ import {
 } from '~/types';
 
 const categoryIdMap: Record<string, string> = {
+  [SwimmingCategoryId.BASIC]: SwimmingCategoryTranslation.BASIC,
+  [SwimmingCategoryId.ADVANCED]: SwimmingCategoryTranslation.ADVANCED,
+  [SwimmingCategoryId.CONDITION]: SwimmingCategoryTranslation.CONDITION,
+  [SwimmingCategoryId.ADULT]: SwimmingCategoryTranslation.ADULT,
+};
+
+const categorySlugIdMap: Record<string, string> = {
   [SwimmingCategorySlug.BASIC]: SwimmingCategoryId.BASIC,
   [SwimmingCategorySlug.ADVANCED]: SwimmingCategoryId.ADVANCED,
   [SwimmingCategorySlug.CONDITION]: SwimmingCategoryId.CONDITION,
@@ -21,9 +28,13 @@ const categoryTranslationMap: Record<string, string> = {
 };
 
 export function getCategoryIdBySlug(slug: string): string {
-  return categoryIdMap[slug] || '';
+  return categorySlugIdMap[slug] || '';
 }
 
 export function getCategoryNameBySlug(slug: string): string {
   return categoryTranslationMap[slug] || '';
+}
+
+export function getCategoryNameByCategoryId(categoryId: string) {
+  return categoryIdMap[categoryId] || '';
 }
