@@ -9,8 +9,8 @@ import {
 import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
 import { useGetLecturesForSwimmingPoolAndCategory } from '~/adapters/coursesAdapter';
-import { useSwimmingPoolDetailPageContext } from '~/contexts/SwimmingPoolDetailPageContext';
 import { SanityLecture } from '~/domains';
+import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import { SwimmingPoolId } from '~/types';
 import {
   Button,
@@ -26,14 +26,6 @@ import { formatToCurrency } from '~/utils/number';
 import { Calendar } from '../../components';
 import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailHeroSection.style';
-
-function getUniqueSortedTimes(lectures?: SanityLecture[]): number[] {
-  const uniqueTimes = Array.from(
-    new Set(lectures?.map((lecture) => Number(lecture.timeFrom?.split(':')[0])))
-  );
-
-  return uniqueTimes.sort((a, b) => a - b);
-}
 
 export function LuzankyDetailHeroSection() {
   const theme = useTheme();
@@ -51,17 +43,8 @@ export function LuzankyDetailHeroSection() {
     SwimmingPoolId.LUZANKY
   );
 
-  const minimumLecturePrice = Math.min(
-    ...(lectures
-      ?.map((lecture) => lecture?.priceSemester)
-      .filter((price): price is number => price != null) || [])
-  );
-
-  const minimumAge = Math.min(
-    ...(lectures
-      ?.map((lecture) => lecture?.ageFrom)
-      .filter((age): age is number => age != null) || [])
-  );
+  const minimumLecturePrice = getMinimumLecturePrice(lectures);
+  const minimumAge = getMinimumAge(lectures);
 
   const calendarData = lectures
     ?.filter((lecture) => lecture?.dayId)
@@ -84,15 +67,14 @@ export function LuzankyDetailHeroSection() {
                 </Headline>
                 <Text variant="body2">{description}</Text>
 
-                {Number.isFinite(minimumLecturePrice) &&
-                  minimumLecturePrice > 0 && (
-                    <S.SectionPriceContainer>
-                      <Text variant="body3">
-                        Cena kurzu je od {formatToCurrency(minimumLecturePrice)}{' '}
-                        za pololetí
-                      </Text>
-                    </S.SectionPriceContainer>
-                  )}
+                {minimumLecturePrice > 0 && (
+                  <S.SectionPriceContainer>
+                    <Text variant="body3">
+                      Cena kurzu je od {formatToCurrency(minimumLecturePrice)}{' '}
+                      za pololetí
+                    </Text>
+                  </S.SectionPriceContainer>
+                )}
 
                 <Text variant="body2">
                   Součástí ceny je vždy pronájem bazénu, profesionální trenéři a
@@ -106,11 +88,13 @@ export function LuzankyDetailHeroSection() {
                     Základní informace
                   </Text>
 
-                  <IconText
-                    icon={Baby}
-                    iconColor={primary.main}
-                    text={`pro děti od ${minimumAge} let`}
-                  />
+                  {minimumAge > 0 && (
+                    <IconText
+                      icon={Baby}
+                      iconColor={primary.main}
+                      text={`pro děti od ${minimumAge} let`}
+                    />
+                  )}
                   <IconText
                     icon={Timer}
                     iconColor={primary.main}
@@ -158,29 +142,65 @@ export function LuzankyDetailHeroSection() {
               </S.SectionInformationContainer>
             </S.SectionDescriptionContainer>
 
-            <S.SectionActionsContainer>
-              <S.SectionCalendarContainer>
-                <Calendar
-                  days={Object.values(dayTranslationAbbr).map(
-                    (_, index) => index + 1
-                  )}
-                  times={getUniqueSortedTimes(lectures)}
-                  data={calendarData ?? []}
-                  onClick={(dayId, time) =>
-                    router.push(
-                      `/bazeny/luzanky/zakladni-plavani/prihlasky?day=${dayId}&time=${time}`
-                    )
-                  }
-                />
-              </S.SectionCalendarContainer>
+            {minimumLecturePrice > 0 && (
+              <S.SectionActionsContainer>
+                <S.SectionCalendarContainer>
+                  <Calendar
+                    days={Object.values(dayTranslationAbbr).map(
+                      (_, index) => index + 1
+                    )}
+                    times={getUniqueSortedTimes(lectures)}
+                    data={calendarData ?? []}
+                    onClick={(dayId, time) =>
+                      router.push(
+                        `/bazeny/luzanky/${router.query.categoryId}/prihlasky?day=${dayId}&time=${time}`
+                      )
+                    }
+                  />
+                </S.SectionCalendarContainer>
 
-              <S.SectionActionLink href="/bazeny/luzanky/zakladni-plavani/prihlasky">
-                <Button color="secondary">Přihlásit se</Button>
-              </S.SectionActionLink>
-            </S.SectionActionsContainer>
+                <S.SectionActionLink
+                  href={`/bazeny/luzanky/${router.query.categoryId}/prihlasky`}
+                >
+                  <Button color="secondary">Přihlásit se</Button>
+                </S.SectionActionLink>
+              </S.SectionActionsContainer>
+            )}
           </S.SectionContainer>
         </S.SectionCard>
       </MaxWidth>
     </S.Section>
   );
+}
+
+function getUniqueSortedTimes(lectures?: SanityLecture[]): number[] {
+  const uniqueTimes = Array.from(
+    new Set(lectures?.map((lecture) => Number(lecture.timeFrom?.split(':')[0])))
+  );
+
+  return uniqueTimes.sort((a, b) => a - b);
+}
+
+function getMinimumLecturePrice(lectures?: SanityLecture[]) {
+  if (!lectures || lectures.length === 0) {
+    return 0;
+  }
+
+  const prices = lectures
+    ?.filter((lecture) => !lecture?.isFull)
+    .map((lecture) => lecture?.priceSemester)
+    .filter((price): price is number => price != null);
+
+  return prices.length > 0 ? Math.min(...prices) : 0;
+}
+
+function getMinimumAge(lectures?: SanityLecture[]) {
+  if (!lectures || lectures.length === 0) {
+    return 0;
+  }
+  const ages = lectures
+    ?.filter((lecture) => !lecture?.isFull)
+    .map((lecture) => lecture?.ageFrom)
+    .filter((age): age is number => age != null);
+  return ages.length > 0 ? Math.min(...ages) : 0;
 }

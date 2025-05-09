@@ -18,6 +18,12 @@ export function getDayAbbreviation(dayId: number): string {
   return dayTranslationAbbr[dayId] || 'Neznámý den';
 }
 
+export function getDayAbbreviationWithoutDiacritics(dayId: number) {
+  const dayAbbr = dayTranslationAbbr[dayId];
+
+  return dayAbbr.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
 export function getDayFullName(dayId: number): string {
   return dayTranslation[dayId] || 'Neznámý den';
 }

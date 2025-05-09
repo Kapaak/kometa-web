@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const CheckboxLabel = styled.label`
   cursor: pointer;
   font-size: 1.4rem;
+  user-select: none;
 `;
 
 export const Checkbox = styled.div`

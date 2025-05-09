@@ -20,7 +20,10 @@ export function PoolApplicationLayout({
       label: getCategoryNameBySlug(router.query.categoryId as string),
       href: `/bazeny/luzanky/${router.query.categoryId}`,
     },
-    { label: 'Přihlášky', href: router.asPath },
+    {
+      label: 'Přihlášky',
+      href: `/bazeny/luzanky/${router.query.categoryId}/prihlasky`,
+    },
   ];
 
   return (

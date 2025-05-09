@@ -4,7 +4,7 @@ import AboutImage from '~/public/images/swimming-pool/luzanky/service/service-ki
 
 import { CheckCircle } from '@phosphor-icons/react';
 import { useTheme } from 'styled-components';
-import { useSwimmingPoolDetailPageContext } from '~/contexts/SwimmingPoolDetailPageContext';
+import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import { IconText } from '~/ui/components/molecules';
 import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailAboutSection.style';

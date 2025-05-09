@@ -1,0 +1,18 @@
+import { Controller } from 'react-hook-form';
+
+import { RadioGroup, RadioGroupProps } from '../../atoms';
+
+interface ControlledRadioProps extends RadioGroupProps {
+  name: string;
+}
+
+export const ControlledRadio = ({ name, ...props }: ControlledRadioProps) => {
+  return (
+    <Controller
+      name={name}
+      render={({ field: { value, ...restField } }) => (
+        <RadioGroup {...props} {...restField} />
+      )}
+    />
+  );
+};
