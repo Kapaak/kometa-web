@@ -15,7 +15,7 @@ export function Input({
 }: InputProps) {
   return (
     <S.InputContainer>
-      <S.Input {...props} />
+      <S.Input hasError={showError} {...props} />
       <S.Label>{label}</S.Label>
       {showError && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
     </S.InputContainer>

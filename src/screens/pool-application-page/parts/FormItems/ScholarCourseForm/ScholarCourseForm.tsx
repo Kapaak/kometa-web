@@ -41,23 +41,21 @@ export function ScholarCourseForm() {
               name="schoolName"
               label="Název školy / školky"
               placeholder="Název školy / školky"
-              // required="Jméno nesmí být prázdné" --> tohle nastavit v useForm
+              errorMessage="Jméno nesmí být prázdné"
+              required="Jméno nesmí být prázdné"
             />
             <ControlledInput
               name="address"
               label="Adresa"
               placeholder="Adresa"
-              // required="Adresa musí být vyplněna."
+              required="Adresa musí být vyplněna."
             />
             <ControlledInput
               name="identifier"
               placeholder="IČ nebo DIČ"
               label="IČ nebo DIČ"
-              // pattern={{
-              //   value: /^\d+$/,
-              //   message: "IČ nebo DIČ musí být číslo.",
-              // }}
-              // required="IČ nebo DIČ musí být vyplněno."
+              type="number"
+              required="IČ nebo DIČ musí být vyplněno."
             />
             <ControlledInput
               name="childrenCount"
@@ -65,15 +63,18 @@ export function ScholarCourseForm() {
               required="Počet dětí musí být vyplněn"
               type="number"
               label="Počet dětí"
-              // pattern={/^(?=.*1)(?=.*[2-9]|30)[1-9]\d?$/}
             />
             <ControlledSelect
               name="midTerm"
               placeholder="Pololetí"
-              // required="Pololetí musí být vyplněno"
+              required="Pololetí musí být vyplněno"
               options={midTermOptions}
             />
-            <ControlledInput name="notes" placeholder="Poznámky" />
+            <ControlledInput
+              name="notes"
+              label="Poznámky"
+              placeholder="Poznámky"
+            />
           </FormItems.FormColumnItems>
         </FormItems.FormColumn>
 
@@ -99,6 +100,11 @@ export function ScholarCourseForm() {
               name="contactPersonEmail"
               label="Email kontaktní osoby"
               placeholder="Email kontaktní osoby"
+              pattern={{
+                value: /\S+@\S+\.\S+/,
+                message:
+                  'Platný email musí obsahovat @ (př. novak.filip@email.cz).',
+              }}
               required="Email kontaktní osoby musí být vyplněn"
             />
           </FormItems.FormColumnItems>
@@ -113,17 +119,15 @@ export function ScholarCourseForm() {
         <FormItems.FormColumnItems>
           <RadioGroup
             name="lessonsPrice"
-            discount={0}
+            discount={selectedLecture?.discount}
             options={[
               {
-                label: '1x týdně',
-                value: 20_000,
-                lectureFrequency: 4,
-              },
-              {
-                label: '2x týdně',
-                value: 30_000,
-                lectureFrequency: 4,
+                label: '1x týdně (cena je za 1 žáka)',
+                value:
+                  selectedLecture?.priceSemester ??
+                  lectures?.[0]?.priceSemester ??
+                  0,
+                lectureFrequency: 1,
               },
             ]}
           />

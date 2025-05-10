@@ -1,30 +1,7 @@
 import styled from 'styled-components';
 
-export const Input = styled.input`
-  box-shadow: ${({ theme }) => theme.shadows.main};
-  border: 1px solid ${({ theme }) => theme.colors.grey['400']};
-  padding: 1.3rem 2rem;
-  width: 100%;
-  font-size: 1.6rem;
-  border-radius: 0.4rem;
-
-  &:focus-within {
-    border: 1px solid ${({ theme }) => theme.colors.primary.main};
-    outline: none;
-  }
-
-  &::placeholder {
-    font-size: 1.3rem;
-  }
-
-  &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.dark};
-  }
-`;
-
 export const InputContainer = styled.div`
   position: relative;
-  background: ${({ theme }) => theme.colors.grey['100']};
 
   input:focus + label {
     opacity: 1;
@@ -47,4 +24,32 @@ export const Label = styled.label`
 export const ErrorMessage = styled.div`
   color: ${({ theme }) => theme.colors.error.main};
   font-size: 1.2rem;
+  padding: 0.2rem 0 0 1rem;
+`;
+
+export const Input = styled.input.withConfig({
+  shouldForwardProp: (prop) => prop !== 'hasError',
+})<{ hasError?: boolean }>`
+  box-shadow: ${({ theme }) => theme.shadows.main};
+  border: 1px solid
+    ${({ theme, hasError }) =>
+      hasError ? theme.colors.error.main : theme.colors.grey['400']};
+  padding: 1.3rem 2rem;
+  width: 100%;
+  font-size: 1.6rem;
+  border-radius: 0.4rem;
+  background: ${({ theme }) => theme.colors.grey['100']};
+
+  &:focus-within {
+    border: 1px solid ${({ theme }) => theme.colors.primary.main};
+    outline: none;
+  }
+
+  &::placeholder {
+    font-size: 1.3rem;
+  }
+
+  &:hover {
+    box-shadow: ${({ theme }) => theme.shadows.dark};
+  }
 `;
