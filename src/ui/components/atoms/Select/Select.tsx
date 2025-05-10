@@ -19,6 +19,8 @@ type Option = {
 
 export interface SelectProps {
   placeholder?: string;
+  errorMessage?: string;
+  showError?: boolean;
   value?: string;
   options?: Option[];
   isLoading?: boolean;
@@ -29,6 +31,8 @@ export const Select = ({
   placeholder,
   options,
   isLoading,
+  errorMessage,
+  showError,
   onChange,
   value,
 }: SelectProps) => {
@@ -62,15 +66,24 @@ export const Select = ({
     <S.Select value={value} open={open}>
       {open && <S.SelectOverlay onClick={handleClose} />}
 
-      <S.SelectTrigger onClick={() => setOpen(true)}>
-        <S.SelectValue placeholder={<Text variant="body5">{placeholder}</Text>}>
-          <Text variant="body5">{displayValue}</Text>
-        </S.SelectValue>
-        {!isLoading && <CaretDown />}
-        {isLoading && (
-          <ClipLoader size="1.8rem" speedMultiplier={0.5} color={grey['800']} />
-        )}
-      </S.SelectTrigger>
+      <S.SelectInputContainer>
+        <S.SelectTrigger hasError={showError} onClick={() => setOpen(true)}>
+          <S.SelectValue
+            placeholder={<Text variant="body5">{placeholder}</Text>}
+          >
+            <Text variant="body5">{displayValue}</Text>
+          </S.SelectValue>
+          {!isLoading && <CaretDown />}
+          {isLoading && (
+            <ClipLoader
+              size="1.8rem"
+              speedMultiplier={0.5}
+              color={grey['800']}
+            />
+          )}
+        </S.SelectTrigger>
+        {showError && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+      </S.SelectInputContainer>
       <RadixUiSelect.Portal>
         <S.SelectContent
           position="popper"
