@@ -59,11 +59,11 @@ export function KidCourseForm() {
               name="personalIdNum"
               label="Rodné číslo dítěte"
               placeholder="Rodné číslo dítěte (př. 045421/1234)"
-              // pattern={{
-              //   value: /\d{4}([.,\/]\d{4})/,
-              //   message:
-              //     "Rodné číslo v nesprávném formátu. Příklad: 045421/1234.",
-              // }}
+              pattern={{
+                value: /\d{4}([.,\/]\d{4})/,
+                message:
+                  'Rodné číslo v nesprávném formátu. Příklad: 045421/1234.',
+              }}
               required="Rodné číslo musí být vyplněno."
             />
             <ControlledInput
@@ -91,11 +91,11 @@ export function KidCourseForm() {
               name="email"
               label="E-mail"
               placeholder="E-mail"
-              // pattern={{
-              //   value: /\S+@\S+\.\S+/,
-              //   message:
-              //     'Platný email musí obsahovat @ (př. novak.filip@email.cz).',
-              // }}
+              pattern={{
+                value: /\S+@\S+\.\S+/,
+                message:
+                  'Platný email musí obsahovat @ (př. novak.filip@email.cz).',
+              }}
               required="Email musí být vyplněn."
             />
             <ControlledInput

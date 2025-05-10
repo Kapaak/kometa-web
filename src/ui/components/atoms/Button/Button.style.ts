@@ -43,7 +43,12 @@ export const Button = styled(ButtonInitial)`
     }
   }}
 
-  ${({ variant = 'filled', color = 'primary', theme: { button } }) => {
+  ${({
+    variant = 'filled',
+    color = 'primary',
+    disabled,
+    theme: { button },
+  }) => {
     if (variant === 'plain') {
       return css`
         border-radius: 0;
@@ -58,14 +63,16 @@ export const Button = styled(ButtonInitial)`
         }
       `;
     } else {
+      const actualColor = disabled ? 'disabled' : color;
+
       return css`
-        border: 1px solid ${button[variant][color].border};
-        color: ${button[variant][color].text};
-        background-color: ${button[variant][color].background};
+        border: 1px solid ${button[variant][actualColor].border};
+        color: ${button[variant][actualColor].text};
+        background-color: ${button[variant][actualColor].background};
         &:hover {
-          background-color: ${button[variant][color].hover?.background};
-          border-color: ${button[variant][color].hover?.border};
-          color: ${button[variant][color].hover?.text};
+          background-color: ${button[variant][actualColor].hover?.background};
+          border-color: ${button[variant][actualColor].hover?.border};
+          color: ${button[variant][actualColor].hover?.text};
         }
       `;
     }

@@ -7,35 +7,70 @@ import {
   ScholarCourseForm,
 } from '../FormItems';
 
+type KidCourseFormFields = {
+  firstName: string;
+  lastName: string;
+  gender: string;
+  personalIdNum: string;
+  dateOfBirth: string;
+  phone: string;
+  email: string;
+  address: string;
+  city: string;
+  postCode: string;
+  alergy?: string;
+  healthIssues?: string;
+  notes?: string;
+  lessonsDayTime: string;
+  lessonsPrice: number;
+  gdprConsent: boolean;
+};
+
+type AdultCourseFormFields = {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  address: string;
+  city: string;
+  postCode: string;
+  alergy?: string;
+  healthIssues?: string;
+  notes?: string;
+  lessonsDayTime: string;
+  lessonsPrice: number;
+  gdprConsent: boolean;
+};
+
+type ScholarCourseFormFields = {
+  schoolName: string;
+  address: string;
+  identifier: string;
+  childrenCount: number;
+  midTerm: string;
+  notes?: string;
+  contactPerson: string;
+  contactPersonPhone: string;
+  contactPersonEmail: string;
+  lessonsPrice: number;
+  lessonsDayTime: string;
+  gdprConsent: boolean;
+};
+
 export type ApplicationFormValues =
-  | {
-      //skolky & skoly
-      schoolName: string;
-      address: string;
-      identifier: string;
-      childrenCount: number;
-      midTerm: string;
-      notes?: string;
-      contactPerson: string;
-      contactPersonPhone: string;
-      contactPersonEmail: string;
-      lessonsPrice: number;
-      lessonsDayTime: string;
-      gdprConsent: boolean;
-    }
-  | {
-      // categoryId: SwimmingCategoryId.OTHER_CATEGORY; // Replace with actual category
-      // Define fields specific to this category
-      otherField1: string;
-      otherField2: number;
-    };
+  | KidCourseFormFields
+  | AdultCourseFormFields
+  | ScholarCourseFormFields;
+
 interface ApplicationFormProps {
   categoryId: string;
 }
 
 export function ApplicationForm({ categoryId }: ApplicationFormProps) {
   const form = useForm<ApplicationFormValues>();
-  const { handleSubmit } = form;
+  const { handleSubmit, watch } = form;
+
+  const gdprConsent = watch('gdprConsent');
 
   const isSchoolOrKindergartenCorse =
     categoryId === SwimmingCategoryId.KINDERGARTEN ||
@@ -61,7 +96,7 @@ export function ApplicationForm({ categoryId }: ApplicationFormProps) {
         {isAdultCourse && <AdultCourseForm />}
 
         <Flex justify="flex-end">
-          <Button>Odeslat</Button>
+          <Button disabled={!gdprConsent}>Odeslat</Button>
         </Flex>
       </form>
     </FormProvider>
