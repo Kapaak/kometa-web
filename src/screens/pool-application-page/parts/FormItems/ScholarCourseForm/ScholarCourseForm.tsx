@@ -148,6 +148,7 @@ export function ScholarCourseForm() {
             placeholder="Vyberte termín a čas"
             name="lessonsDayTime"
             options={availableLecturesOptions}
+            required="Termín musí být vyplněn"
           />
         </FormItems.FormColumnItems>
 

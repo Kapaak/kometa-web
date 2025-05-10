@@ -181,6 +181,7 @@ export function AdultCourseForm() {
             placeholder="Vyberte termín a čas"
             name="lessonsDayTime"
             options={availableLecturesOptions}
+            required="Termín musí být vyplněný"
           />
         </FormItems.FormColumnItems>
 

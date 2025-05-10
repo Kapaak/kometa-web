@@ -180,6 +180,7 @@ export function KidCourseForm() {
           placeholder="Vyberte termín a čas"
           name="lessonsDayTime"
           options={availableLecturesOptions}
+          required="Termín musí být vyplněný"
         />
 
         <VerticalStack gap="2rem" justify="flex-end" align="flex-end">

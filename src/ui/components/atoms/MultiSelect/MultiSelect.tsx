@@ -70,6 +70,7 @@ export const MultiSelect = ({
     >
       {open && <S.SelectOverlay onClick={handleClose} />}
 
+      {/* //TODO: show  error message like in Select.tsx when validation fails */}
       <S.MultiSelectTrigger onClick={() => setOpen(true)}>
         <Text variant="body5">{displayValue}</Text>
         {!isLoading && <CaretDown />}
