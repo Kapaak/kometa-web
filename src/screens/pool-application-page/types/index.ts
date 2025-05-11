@@ -24,7 +24,6 @@ export type AdultCourseFormFields = {
   firstName: string;
   lastName: string;
   gender?: string;
-  personalIdNum?: string;
   dateOfBirth?: string;
   phone: string;
   email: string;
