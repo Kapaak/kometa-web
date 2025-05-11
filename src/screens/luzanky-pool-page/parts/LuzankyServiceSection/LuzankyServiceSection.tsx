@@ -11,7 +11,8 @@ export const LuzankyServiceSection = () => {
         <S.Services gap="4rem">
           {services.map((service) => (
             <ServiceCardDescription
-              key={service.title}
+              key={service.id}
+              categorySlugId={service.id}
               imageAlt={service.alt}
               image={service.src}
               title={service.title}

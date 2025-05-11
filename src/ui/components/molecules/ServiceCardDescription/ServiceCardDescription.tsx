@@ -3,6 +3,7 @@ import { Button, Tag, Text } from '../../atoms';
 import * as S from './ServiceCardDescription.style';
 
 interface ServiceCardProps {
+  categorySlugId: string;
   title: string;
   image: StaticImageData;
   imageAlt: string;
@@ -12,6 +13,7 @@ interface ServiceCardProps {
 }
 
 export function ServiceCardDescription({
+  categorySlugId,
   tags,
   imageAlt,
   image,
@@ -42,9 +44,14 @@ export function ServiceCardDescription({
         <Text>{description}</Text>
       </S.ServiceCardTextContainer>
 
-      <S.ServiceCardLink href={url ?? ''} passHref>
-        <Button variant="outlined">Více informací</Button>
-      </S.ServiceCardLink>
+      <S.ButtonContainer>
+        <S.ServiceCardLink href={url ?? ''} passHref>
+          <Button variant="outlined">Více informací</Button>
+        </S.ServiceCardLink>
+        <S.ServiceCardLink href={`/bazeny/luzanky/${categorySlugId}/prihlasky`}>
+          <Button>Přihlášky</Button>
+        </S.ServiceCardLink>
+      </S.ButtonContainer>
     </S.ServiceCardDescription>
   );
 }

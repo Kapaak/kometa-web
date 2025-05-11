@@ -5,8 +5,10 @@ import BasicLecture from '~/public/images/swimming-pool/luzanky/service/service-
 import ConditionLecture from '~/public/images/swimming-pool/luzanky/service/service-condition.jpg';
 import KindergardenLecture from '~/public/images/swimming-pool/luzanky/service/service-kindergarden.png';
 import SchoolLecture from '~/public/images/swimming-pool/luzanky/service/service-school.png';
+import { SwimmingCategorySlug } from '~/types';
 
 interface Service {
+  id: string;
   title: string;
   description: string;
   href: string;
@@ -17,6 +19,7 @@ interface Service {
 
 export const services: Service[] = [
   {
+    id: SwimmingCategorySlug.BASIC,
     title: 'Základní plavání',
     description:
       'Kurzy jsou určené pro děti, které se potřebují naučit plavat.',
@@ -26,6 +29,7 @@ export const services: Service[] = [
     alt: 'Děti v bazénu pod vodou s brýlemi',
   },
   {
+    id: SwimmingCategorySlug.ADVANCED,
     title: 'Zdokonalovací plavání',
     description:
       'Kurzy jsou určené pro děti, které se v plavání chtějí zdokonalit.',
@@ -35,6 +39,7 @@ export const services: Service[] = [
     alt: 'Dítě na plavecké lekci',
   },
   {
+    id: SwimmingCategorySlug.CONDITION,
     title: 'Kondiční plavání',
     description:
       'Vhodné pro děti, co se nebojí plavat ve velkém bazénu, navíc již ovládají základy plavání.',
@@ -44,6 +49,7 @@ export const services: Service[] = [
     alt: 'Plavkyně uprostřed dráhy na plavecké lekci pro děti',
   },
   {
+    id: SwimmingCategorySlug.ADULT,
     title: 'Plavání pro dospělé',
     description:
       'Určeno všem nadšencům, kterým bylo již 18 let a chtějí si zlepšit své plavecké dovednosti.',
@@ -53,6 +59,7 @@ export const services: Service[] = [
     alt: 'Dospělý plavec u konce dráhy na plavecké lekci pro dospělé',
   },
   {
+    id: SwimmingCategorySlug.KINDERGARTEN,
     title: 'Školky',
     description: 'Cílem naší výuky je adaptovat dítě na vodní prostředí.',
     tags: ['organizace MŠMT'],
@@ -61,6 +68,7 @@ export const services: Service[] = [
     alt: 'Plavkyně ve vodě na bazénu Lužánky, která se nadechuje',
   },
   {
+    id: SwimmingCategorySlug.SCHOOL,
     title: 'Školy',
     description: 'Cílem je naučit plavce základům plavání.',
     tags: ['organizace MŠMT'],

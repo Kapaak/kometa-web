@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
+import { minBreakpoint } from '~/utils/dimensions';
 import { Card, Flex, Text, VerticalStack } from '../../atoms';
 
 export const ServiceCardDescription = styled(Card)`
@@ -39,13 +40,37 @@ export const ServiceChipContainer = styled(VerticalStack)`
 
 export const ServiceCardTextContainer = styled(Flex)`
   flex-direction: column;
-  padding: 1.4rem 2.4rem 0.4rem;
+  padding: 2rem 2.4rem 0.4rem;
   gap: 1rem;
   flex: 1;
 `;
 
-export const ServiceCardLink = styled(Link)`
-  align-self: flex-start;
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2.4rem 2.4rem;
+  gap: 1rem;
+  justify-content: flex-end;
   margin-top: auto;
-  padding: 1rem 2.4rem 2.4rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      flex-direction: row;
+    }
+  `}
+`;
+
+export const ServiceCardLink = styled(Link)`
+  ${({ theme }) => css`
+    width: 100%;
+
+    button {
+      width: 100%;
+    }
+
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      align-self: flex-start;
+      width: auto;
+    }
+  `}
 `;
