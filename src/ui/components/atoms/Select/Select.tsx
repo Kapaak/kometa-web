@@ -67,7 +67,18 @@ export const Select = ({
       {open && <S.SelectOverlay onClick={handleClose} />}
 
       <S.SelectInputContainer>
-        <S.SelectTrigger hasError={showError} onClick={() => setOpen(true)}>
+        <S.SelectTrigger
+          hasError={showError}
+          onClick={() => setOpen(true)}
+          //open select using space
+          onKeyDown={(e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+              // Prevent default scrolling behavior for Space
+              e.preventDefault();
+              setOpen((prev) => !prev);
+            }
+          }}
+        >
           <S.SelectValue
             placeholder={<Text variant="body5">{placeholder}</Text>}
           >
