@@ -21,14 +21,6 @@ export function LuzankyDetailFirstLectureSection({}: LuzankyDetailFirstLectureSe
     <S.Section>
       <MaxWidth>
         <S.FirstLectureContainer>
-          <VerticalStack align="center" gap="1rem">
-            <Headline color="inherit">První hodina</Headline>
-            <Text variant="body2">
-              Základní instrukce toho, co potřebujete vědět, než půjdete na
-              první hodinu.
-            </Text>
-          </VerticalStack>
-
           <S.SectionWrapper>
             <S.ImageContainer>
               <S.Image
@@ -39,6 +31,7 @@ export function LuzankyDetailFirstLectureSection({}: LuzankyDetailFirstLectureSe
             </S.ImageContainer>
 
             <VerticalStack flex="1 1 50%" gap="2.4rem">
+              <Headline color="inherit">První hodina</Headline>
               <S.DescriptionContainer>
                 <Headline size="small" as="h3" color="inherit">
                   Co si mám vzít s sebou

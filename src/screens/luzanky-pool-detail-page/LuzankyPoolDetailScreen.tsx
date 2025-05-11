@@ -10,8 +10,8 @@ export function LuzankyPoolDetailScreen() {
   return (
     <LuzankyPoolDetailLayout>
       <LuzankyDetailHeroSection />
-      <LuzankyDetailSkillLevelSection />
       <LuzankyDetailAboutSection />
+      <LuzankyDetailSkillLevelSection />
       <LuzankyDetailFirstLectureSection />
     </LuzankyPoolDetailLayout>
   );

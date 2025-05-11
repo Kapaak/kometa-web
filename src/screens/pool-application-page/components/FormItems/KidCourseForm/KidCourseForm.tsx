@@ -56,7 +56,7 @@ export function KidCourseForm() {
               label="Rodné číslo dítěte"
               placeholder="Rodné číslo dítěte (př. 045421/1234)"
               pattern={{
-                value: /^\d{2}\d{2}\d{2}\/?\d{3,4}$/,
+                value: /^\d{6}\/\d{3,4}$/,
                 message:
                   'Rodné číslo v nesprávném formátu. Příklad: 045421/1234.',
               }}

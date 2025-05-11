@@ -5,6 +5,18 @@ import { minBreakpoint } from '~/utils/dimensions';
 
 export const Section = styled.section`
   padding: 2rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      padding: 2rem 2rem 4rem;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      padding: 2rem 2rem 6rem;
+    }
+  `}
 `;
 
 export const SectionCard = styled(Card)`
@@ -33,7 +45,7 @@ export const SectionContainer = styled.div`
 
 export const SectionTextContainer = styled(Flex)`
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.md)}) {

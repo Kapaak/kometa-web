@@ -1,7 +1,5 @@
 import { Headline, MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
 
-import AboutImage from '~/public/images/swimming-pool/luzanky/service/service-kindergarden.png';
-
 import { CheckCircle } from '@phosphor-icons/react';
 import { useTheme } from 'styled-components';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
@@ -52,7 +50,7 @@ export function LuzankyDetailAboutSection() {
 
           <S.SectionImageContainer>
             <S.Image
-              src={AboutImage}
+              src={swimmingPoolDetailInformation.image}
               alt="Obrázek s dětmi na bazénu Lužánky"
               fill
             />

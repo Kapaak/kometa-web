@@ -9,5 +9,6 @@ export const IconText = styled(Flex)`
 
   .icon {
     flex-shrink: 0;
+    margin-top: 0.3rem;
   }
 `;

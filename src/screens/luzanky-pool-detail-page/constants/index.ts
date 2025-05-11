@@ -1,6 +1,14 @@
+import { StaticImageData } from 'next/image';
+import AdultLecture from '~/public/images/swimming-pool/luzanky/service/service-adult.jpg';
+import AdvancedLecture from '~/public/images/swimming-pool/luzanky/service/service-advanced.png';
+import BasicLecture from '~/public/images/swimming-pool/luzanky/service/service-basic.png';
+import ConditionLecture from '~/public/images/swimming-pool/luzanky/service/service-condition.jpg';
+import KindergartenLecture from '~/public/images/swimming-pool/luzanky/service/service-kindergarden.png';
+import SchoolLecture from '~/public/images/swimming-pool/luzanky/service/service-school.png';
 import { SwimmingCategoryId } from '~/types';
 
 type PoolInformation = {
+  image: StaticImageData;
   heroSection: {
     description?: string;
     duration?: number;
@@ -37,6 +45,7 @@ type PoolInformation = {
 
 export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   [SwimmingCategoryId.BASIC]: {
+    image: BasicLecture,
     heroSection: {
       description:
         'Tento kurz je určen pro děti, které teprve začínají s plaváním, nebo pro ty, které už ovládají základy, jako je potápění, kopání a bublání, ale potřebují se naučit správnou techniku plaveckých stylů, zejména znaku a kraula.',
@@ -51,9 +60,9 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       description:
         'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde děti nejen zdokonalují své plavecké dovednosti, ale zároveň si užívají cestu k vlastním cílům a mají z plavání radost. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost z vody.',
       lectureFocus: [
-        'Hravou formou se seznamujeme s vodním prostředím.',
-        'Děti se naučí základy plaveckých stylů, jako je znak a kraul.',
-        'Získávají důvěru ve své plavecké dovednosti a zlepšují koordinaci.',
+        'Hravou formou se seznamujeme s vodním prostředím',
+        'Děti se naučí základy plaveckých stylů, jako je znak a kraul',
+        'Získávají důvěru ve své plavecké dovednosti a zlepšují koordinaci',
       ],
     },
     skillLevelSection: {
@@ -97,6 +106,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     },
   },
   [SwimmingCategoryId.ADVANCED]: {
+    image: AdvancedLecture,
     heroSection: {
       description:
         'Tento kurz plavání je ideální pro děti, které již zvládly základní plavecké dovednosti a chtějí je dále rozvíjet.',
@@ -123,10 +133,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       description:
         'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde děti nejen zdokonalují své plavecké dovednosti, ale zároveň si užívají cestu k vlastním cílům a mají z plavání radost. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost z vody.',
       lectureFocus: [
-        'Zdokonalování techniky plaveckých stylů (znak, kraul, prsa a základy motýla).',
-        'Rozvíjíme výdrž, koodrinaci a rychlosti.',
-        'Učíme děti správnou techniku obrátek startů a závodních dovedností.',
-        'Hravou formou motivujeme děti k překonávání vlastních hranic.',
+        'Zdokonalování techniky plaveckých stylů (znak, kraul, prsa a základy motýla)',
+        'Rozvíjíme výdrž, koodrinaci a rychlosti',
+        'Učíme děti správnou techniku obrátek startů a závodních dovedností',
+        'Hravou formou motivujeme děti k překonávání vlastních hranic',
       ],
     },
     initialLectureSection: {
@@ -153,6 +163,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     },
   },
   [SwimmingCategoryId.CONDITION]: {
+    image: ConditionLecture,
     heroSection: {
       description:
         'Tento kurz je určen pro děti, které již zvládají základní plavecké styly a chtějí se zaměřit na zlepšení své techniky a vytrvalosti.',
@@ -179,10 +190,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       description:
         'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde děti nejen zdokonalují své plavecké dovednosti, ale zároveň si užívají cestu k vlastním cílům a mají z plavání radost. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost z vody.',
       lectureFocus: [
-        'Zlepšení techniky všech čtyř plaveckých stylů.',
-        'Zvládnutí startovních skoků a obrátek.',
-        'Rozvoj fyzické kondice a koordinace.',
-        'Podpora sebedůvěry a radosti z pohybu.',
+        'Zlepšení techniky všech čtyř plaveckých stylů',
+        'Zvládnutí startovních skoků a obrátek',
+        'Rozvoj fyzické kondice a koordinace',
+        'Podpora sebedůvěry a radosti z pohybu',
       ],
     },
     initialLectureSection: {
@@ -209,6 +220,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     },
   },
   [SwimmingCategoryId.ADULT]: {
+    image: AdultLecture,
     heroSection: {
       description:
         'Plavání i pro dospělé – zlepšíte si techniku, zapracujete na kondici a zrelaxujete ve vodě.',
@@ -222,18 +234,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     aboutSection: {
       description:
         'Kurzy plavání pro dospělé jsou navrženy tak, aby vám pomohly zlepšit vaši techniku, kondici a radost z pohybu ve vodě. Bez ohledu na to, jestli se chcete naučit základy nebo zdokonalit své plavecké dovednosti, jsme tu pro vás. Věříme, že plavání by mělo být zábavou, výzvou a cestou k celkovému zlepšení kondice.',
-    },
-    skillLevelSection: {
-      data: [
-        {
-          title: 'Co když dítě je dovednostmi na pomezí',
-          descriptions: [
-            {
-              text: 'Pokud dítě není zcela připravené na tuto úroveň, ale již má některé dovednosti, doporučujeme přihlásit ho na termín, kde probíhají jak kurzy základního, tak zdokonalovacího plavání. Díky tomu bude moci dítě střídat malý a velký bazén podle potřeby, což mu pomáhá adaptovat se na nové prostředí vlastním tempem.',
-            },
-          ],
-        },
-      ],
     },
     initialLectureSection: {
       requiredEquipment: {
@@ -254,6 +254,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     },
   },
   [SwimmingCategoryId.KINDERGARTEN]: {
+    image: KindergartenLecture,
     heroSection: {
       description:
         'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů.',
@@ -268,13 +269,14 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       description:
         'Díky propojení se školní docházkou šetříme rodičům čas i peníze, a zároveň zajišťujeme, že se děti učí plavat pod vedením zkušených profesionálů',
       lectureFocus: [
-        'Hravou formou se seznamujeme s vodním prostředím.',
-        'Děti se naučí základy plaveckých stylů, jako je znak a kraul.',
-        'Získávají důvěru ve své plavecké dovednosti a zlepšují koordinaci.',
+        'Hravou formou se seznamujeme s vodním prostředím',
+        'Děti se naučí základy plaveckých stylů, jako je znak a kraul',
+        'Získávají důvěru ve své plavecké dovednosti a zlepšují koordinaci',
       ],
     },
   },
   [SwimmingCategoryId.SCHOOL]: {
+    image: SchoolLecture,
     heroSection: {
       description:
         'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů.',
@@ -289,9 +291,9 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       description:
         'Díky propojení se školní docházkou šetříme rodičům čas i peníze, a zároveň zajišťujeme, že se děti učí plavat pod vedením zkušených profesionálů',
       lectureFocus: [
-        'Hravou formou se seznamujeme s vodním prostředím.',
-        'Děti se naučí základy plaveckých stylů, jako je znak a kraul.',
-        'Získávají důvěru ve své plavecké dovednosti a zlepšují koordinaci.',
+        'Hravou formou se seznamujeme s vodním prostředím',
+        'Děti se naučí základy plaveckých stylů, jako je znak a kraul',
+        'Získávají důvěru ve své plavecké dovednosti a zlepšují koordinaci',
       ],
     },
   },

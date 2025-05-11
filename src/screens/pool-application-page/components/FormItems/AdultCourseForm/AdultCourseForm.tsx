@@ -1,15 +1,10 @@
 import { useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
-import {
-  A,
-  Headline,
-  RadioGroup,
-  Text,
-  VerticalStack,
-} from '~/ui/components/atoms';
+import { A, Headline, Text, VerticalStack } from '~/ui/components/atoms';
 import {
   ControlledCheckbox,
   ControlledInput,
+  ControlledRadio,
   ControlledSelect,
 } from '~/ui/components/molecules';
 import { binaryOptions, genderOptions } from '~/utils/options';
@@ -157,7 +152,7 @@ export function AdultCourseForm() {
         </Headline>
 
         <FormItems.FormColumnItems>
-          <RadioGroup
+          <ControlledRadio
             name="lessonsPrice"
             discount={selectedLecture?.discount}
             options={[

@@ -92,6 +92,11 @@ declare module 'styled-components' {
         fontWeight: number;
         lineHeight: string;
       };
+      h6: {
+        fontSize: string;
+        fontWeight: number;
+        lineHeight: string;
+      };
       h5: {
         fontSize: string;
         fontWeight: number;

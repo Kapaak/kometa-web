@@ -11,7 +11,7 @@ interface LuzankyBasicInfoSectionProps {}
 
 export function LuzankyBasicInfoSection({}: LuzankyBasicInfoSectionProps) {
   return (
-    <S.Section>
+    <S.Section id="basic-information">
       <MaxWidth>
         <S.SectionContainer>
           <S.SectionDescriptionContainer>

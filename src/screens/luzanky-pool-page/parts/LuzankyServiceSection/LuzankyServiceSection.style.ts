@@ -18,8 +18,8 @@ export const Services = styled(Flex)`
   `}
 
   ${({ theme }) => css`
-    @media (${minBreakpoint(theme.breakpoints.lg)}) {
-      grid-template-columns: 1fr 1fr 1fr;
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
       gap: 4rem;
     }
   `}

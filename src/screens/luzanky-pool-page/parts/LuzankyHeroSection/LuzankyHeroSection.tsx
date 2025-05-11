@@ -4,7 +4,12 @@ import NextLink from 'next/link';
 
 import { ArrowRight } from '@phosphor-icons/react';
 
-import { IconButton, MaxWidth, Text } from '~/ui/components/atoms';
+import {
+  IconButton,
+  MaxWidth,
+  Text,
+  VerticalStack,
+} from '~/ui/components/atoms';
 
 import * as S from './LuzankyHeroSection.style';
 
@@ -20,12 +25,15 @@ export function LuzankyHeroSection() {
             alt="Bazén za Lužánkami"
           />
           <S.HeroSectionBannerDescription>
-            <S.HeroSectionBannerDescriptionTitle>
-              Plavecké kurzy
-            </S.HeroSectionBannerDescriptionTitle>
-            <S.HeroSectionBannerDescriptionSubtitle>
-              Bazén za Lužánkami
-            </S.HeroSectionBannerDescriptionSubtitle>
+            <VerticalStack gap=".5rem">
+              <S.HeroSectionBannerDescriptionTitle>
+                Plavecké kurzy
+              </S.HeroSectionBannerDescriptionTitle>
+              <S.HeroSectionBannerDescriptionSubtitle>
+                Bazén za Lužánkami
+              </S.HeroSectionBannerDescriptionSubtitle>
+            </VerticalStack>
+
             <Text>
               Základní plavání pro děti. Svěřte se do rukou profesionálů pod
               záštitou nejúspěšnějšího plaveckého klubu v České republice.

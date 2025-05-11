@@ -158,14 +158,14 @@ export const theme: DefaultTheme = {
   },
   typography: {
     h1: {
-      fontSize: '2.4rem',
+      fontSize: '3.2rem',
       fontWeight: 600,
-      lineHeight: '3.6rem',
+      lineHeight: '3.2rem',
     },
     h2: {
       fontSize: '5.6rem',
       fontWeight: 400,
-      lineHeight: '3.5rem',
+      lineHeight: '5rem',
     },
     h3: {
       fontSize: '3rem',
@@ -181,6 +181,11 @@ export const theme: DefaultTheme = {
       fontSize: '2.2rem',
       fontWeight: 500,
       lineHeight: '2.2rem',
+    },
+    h6: {
+      fontSize: '2rem',
+      fontWeight: 600,
+      lineHeight: '2rem',
     },
     body1: {
       fontSize: '1.8rem',

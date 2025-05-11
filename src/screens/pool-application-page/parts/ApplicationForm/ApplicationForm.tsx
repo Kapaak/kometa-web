@@ -87,15 +87,11 @@ export function ApplicationForm({
     let values: string[] = [];
 
     if (isSchoolOrKindergartenCourse) {
-      values = prepareSchoolSpreadsheetValues(
-        dataUpdated as ScholarCourseFormFields
-      );
+      values = prepareSchoolSpreadsheetValues(dataUpdated);
     } else if (isKidCourse) {
-      values = prepareKidSpreadsheetValues(dataUpdated as KidCourseFormFields);
+      values = prepareKidSpreadsheetValues(dataUpdated);
     } else if (isAdultCourse) {
-      values = prepareAdultSpreadsheetValues(
-        dataUpdated as AdultCourseFormFields
-      );
+      values = prepareAdultSpreadsheetValues(dataUpdated);
     }
 
     try {

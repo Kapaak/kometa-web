@@ -49,7 +49,7 @@ export function ServiceCardDescription({
           <Button variant="outlined">Více informací</Button>
         </S.ServiceCardLink>
         <S.ServiceCardLink href={`/bazeny/luzanky/${categorySlugId}/prihlasky`}>
-          <Button>Přihlášky</Button>
+          <Button>Přihlásit se</Button>
         </S.ServiceCardLink>
       </S.ButtonContainer>
     </S.ServiceCardDescription>

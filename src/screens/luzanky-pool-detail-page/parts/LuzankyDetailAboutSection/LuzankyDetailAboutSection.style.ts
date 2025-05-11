@@ -5,6 +5,18 @@ import { minBreakpoint } from '~/utils/dimensions';
 
 export const Section = styled.section`
   padding: 2rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      padding: 2rem 2rem 4rem;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      padding: 2rem 2rem 6rem;
+    }
+  `}
 `;
 
 export const SectionImageContainer = styled.div`
@@ -13,6 +25,13 @@ export const SectionImageContainer = styled.div`
   flex: 1 1 50%;
   border-radius: 1rem;
   min-height: 30rem;
+  display: none;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      display: block;
+    }
+  `}
 `;
 
 export const SectionDescriptionContainer = styled(VerticalStack)`
@@ -21,6 +40,12 @@ export const SectionDescriptionContainer = styled(VerticalStack)`
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.md)}) {
+      gap: 4rem;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
       gap: 5rem;
     }
   `}
@@ -40,6 +65,7 @@ export const SectionContainer = styled.div`
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.md)}) {
       flex-direction: row;
+      gap: 4rem;
     }
   `};
 `;

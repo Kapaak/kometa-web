@@ -1,6 +1,13 @@
 import Link from 'next/link';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
-import { Button, Flex, Headline, MaxWidth, Text } from '~/ui/components/atoms';
+import {
+  Button,
+  Flex,
+  Headline,
+  MaxWidth,
+  Text,
+  VerticalStack,
+} from '~/ui/components/atoms';
 import { Gallery } from '../../components/Gallery';
 import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailSkillLevelSection.style';
@@ -33,7 +40,7 @@ export function LuzankyDetailSkillLevelSection() {
                   {data.title}
                 </Headline>
 
-                <Flex gap="2rem">
+                <VerticalStack gap="2rem" padding="2rem 0 0">
                   {data?.descriptions?.map((description) => (
                     <div key={description.text}>
                       <Flex gap=".5rem" direction="column">
@@ -44,7 +51,7 @@ export function LuzankyDetailSkillLevelSection() {
                       </Flex>
                     </div>
                   ))}
-                </Flex>
+                </VerticalStack>
               </Flex>
             ))}
 

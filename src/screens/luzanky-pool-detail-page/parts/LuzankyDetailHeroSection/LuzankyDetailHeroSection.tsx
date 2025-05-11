@@ -5,13 +5,14 @@ import {
   SwimmingPool,
   Thermometer,
   Timer,
+  User,
 } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
 import { useGetLecturesForSwimmingPoolAndCategory } from '~/adapters/coursesAdapter';
 import { SanityLecture } from '~/domains';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
-import { SwimmingPoolId } from '~/types';
+import { SwimmingCategoryId, SwimmingPoolId } from '~/types';
 import {
   Button,
   Headline,
@@ -22,6 +23,7 @@ import {
 import { IconText } from '~/ui/components/molecules';
 import { getCategoryNameByCategoryId } from '~/utils/category';
 import { dayTranslationAbbr } from '~/utils/day';
+import { joinValues } from '~/utils/format';
 import { formatToCurrency } from '~/utils/number';
 import { Calendar } from '../../components';
 import { luzankyPoolDetailInformation } from '../../constants';
@@ -70,8 +72,13 @@ export function LuzankyDetailHeroSection() {
                 {minimumLecturePrice > 0 && (
                   <S.SectionPriceContainer>
                     <Text variant="body3">
-                      Cena kurzu je od {formatToCurrency(minimumLecturePrice)}{' '}
-                      za pololetí
+                      {joinValues([
+                        `Cena kurzu je od ${formatToCurrency(minimumLecturePrice)}`,
+                        categoryId === SwimmingCategoryId.KINDERGARTEN ||
+                        categoryId === SwimmingCategoryId.SCHOOL
+                          ? 'za žáka'
+                          : 'za pololetí',
+                      ])}
                     </Text>
                   </S.SectionPriceContainer>
                 )}
@@ -90,9 +97,11 @@ export function LuzankyDetailHeroSection() {
 
                   {minimumAge > 0 && (
                     <IconText
-                      icon={Baby}
+                      icon={
+                        categoryId !== SwimmingCategoryId.ADULT ? Baby : User
+                      }
                       iconColor={primary.main}
-                      text={`pro děti od ${minimumAge} let`}
+                      text={`${categoryId !== SwimmingCategoryId.ADULT ? `pro děti` : ''} od ${minimumAge} let`}
                     />
                   )}
                   <IconText

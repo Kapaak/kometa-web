@@ -5,6 +5,18 @@ import { minBreakpoint } from '~/utils/dimensions';
 
 export const Section = styled.section`
   color: ${({ theme }) => theme.colors.primary.main};
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      padding: 2rem 0rem 6rem;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      padding: 2rem 0rem 6rem;
+    }
+  `}
 `;
 
 export const FirstLectureContainer = styled(VerticalStack)`
@@ -44,11 +56,17 @@ export const DescriptionContainer = styled(VerticalStack)`
 
 export const SectionWrapper = styled.div`
   display: flex;
-  gap: 1.6rem;
+  gap: 2rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      gap: 4rem;
+    }
+  `}
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {
-      gap: 4.8rem;
+      gap: 5rem;
     }
   `}
 `;
