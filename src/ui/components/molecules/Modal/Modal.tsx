@@ -6,7 +6,7 @@ import { Flex } from '../../atoms';
 
 import * as S from './Modal.style';
 
-interface ModalProps {
+export interface ModalProps {
   open: boolean;
   title: string;
   actions?: ReactNode;

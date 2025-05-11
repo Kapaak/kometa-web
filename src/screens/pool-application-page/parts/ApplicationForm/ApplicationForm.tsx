@@ -1,10 +1,19 @@
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { ToastContainer } from 'react-toastify';
 import { useSendEmail } from '~/adapters/emailAdapter';
 import { useAppendGoogleSheetById } from '~/adapters/sheetAdapter';
 import { SwimmingCategoryId } from '~/types';
 import { Button, Flex } from '~/ui/components/atoms';
 import { getDayAbbreviationWithoutDiacritics } from '~/utils/day';
 import { calculatePriceAfterDiscount } from '~/utils/price';
+import { SuccessApplicationDialog } from '../../components';
+import {
+  AdultCourseForm,
+  KidCourseForm,
+  ScholarCourseForm,
+} from '../../components/FormItems';
 import { useApplicationFormContext } from '../../contexts/ApplicationFormContext';
 import {
   AdultCourseFormFields,
@@ -16,11 +25,6 @@ import {
   prepareKidSpreadsheetValues,
   prepareSchoolSpreadsheetValues,
 } from '../../utils/spreadsheet';
-import {
-  AdultCourseForm,
-  KidCourseForm,
-  ScholarCourseForm,
-} from '../FormItems';
 
 export type ApplicationFormValues =
   | KidCourseFormFields
@@ -38,6 +42,10 @@ export function ApplicationForm({
   spreadsheetId,
   templateId,
 }: ApplicationFormProps) {
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+
+  const router = useRouter();
+
   const { lectures, getLectureById } = useApplicationFormContext();
 
   const { appendGoogleSheetById, isLoading } =
@@ -52,10 +60,12 @@ export function ApplicationForm({
       gender: undefined,
     },
   });
-  const { handleSubmit, watch } = form;
+  const { handleSubmit, watch, getValues, reset } = form;
 
   const gdprConsent = watch('gdprConsent');
-  const selectedLecture = watch('lessonsDayTime');
+
+  const lectureId = watch('lessonsDayTime');
+  const lectureById = getLectureById(lectureId ?? '');
 
   const isSchoolOrKindergartenCourse =
     categoryId === SwimmingCategoryId.KINDERGARTEN ||
@@ -69,10 +79,9 @@ export function ApplicationForm({
   const isAdultCourse = categoryId === SwimmingCategoryId.ADULT;
 
   const handleFormSubmit = async (data: ApplicationFormValues) => {
-    const lecture = getLectureById(selectedLecture ?? '');
     const dataUpdated = {
       ...data,
-      lessonsDayTime: `${getDayAbbreviationWithoutDiacritics(Number(lecture?.dayId))}_${lecture?.timeFrom}`,
+      lessonsDayTime: `${getDayAbbreviationWithoutDiacritics(Number(lectureById?.dayId))}_${lectureById?.timeFrom}`,
     } as ScholarCourseFormFields & KidCourseFormFields & AdultCourseFormFields;
 
     let values: string[] = [];
@@ -96,23 +105,63 @@ export function ApplicationForm({
         await sendEmail({
           email: dataUpdated?.email ?? dataUpdated?.contactPersonEmail,
           templateId,
-          dayId: Number(lecture?.dayId),
-          time: String(lecture?.timeFrom),
+          dayId: Number(lectureById?.dayId),
+          time: String(lectureById?.timeFrom),
           priceWithDiscount: Math.floor(
             calculatePriceAfterDiscount(
               dataUpdated.lessonsPrice ?? 0,
-              lecture?.discount ?? 0
+              lectureById?.discount ?? 0
             )
           ),
         });
+
+        setShowSuccessDialog(true);
       }
     } catch (error) {
       console.error('Error sending email or appending to Google Sheet:', error);
     }
   };
 
+  const handleResendEmail = async () => {
+    const { email, contactPersonEmail } =
+      getValues() as ScholarCourseFormFields &
+        KidCourseFormFields &
+        AdultCourseFormFields;
+
+    if (templateId) {
+      await sendEmail({
+        email: email ?? contactPersonEmail,
+        templateId,
+        dayId: Number(lectureById?.dayId),
+        time: String(lectureById?.timeFrom),
+        priceWithDiscount: Math.floor(
+          calculatePriceAfterDiscount(
+            watch('lessonsPrice') ?? 0,
+            lectureById?.discount ?? 0
+          )
+        ),
+      });
+
+      setShowSuccessDialog(true);
+    }
+  };
+
+  const handleCloseSuccessDialog = () => {
+    setShowSuccessDialog(false);
+    reset();
+  };
+
   return (
     <FormProvider {...form}>
+      <ToastContainer />
+      {showSuccessDialog && (
+        <SuccessApplicationDialog
+          open={showSuccessDialog}
+          onClose={handleCloseSuccessDialog}
+          onResendEmail={handleResendEmail}
+          onHomePageReturn={() => router.push('/bazeny/luzanky')}
+        />
+      )}
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         {isSchoolOrKindergartenCourse && <ScholarCourseForm />}
         {isKidCourse && <KidCourseForm />}

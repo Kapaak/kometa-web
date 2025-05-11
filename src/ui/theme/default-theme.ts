@@ -195,7 +195,7 @@ export const theme: DefaultTheme = {
     body3: {
       fontSize: '1.6rem',
       fontWeight: 600,
-      lineHeight: '3.2rem',
+      lineHeight: '2.4rem',
     },
     body4: {
       fontSize: '1.4rem',
