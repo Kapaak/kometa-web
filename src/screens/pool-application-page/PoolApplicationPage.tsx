@@ -4,7 +4,10 @@ import { PoolApplicationLayout } from './components';
 import { ApplicationForm } from './parts';
 
 import { SwimmingPoolId } from '~/types';
-import { getSpreadsheetIdByCategoryId } from '~/utils/sheets';
+import {
+  getSpreadsheetIdByCategoryId,
+  getTemplateIdByCategoryId,
+} from '~/utils/sheets';
 import * as S from './PoolApplicationPage.style';
 import { ApplicationFormContextProvider } from './contexts/ApplicationFormContext';
 
@@ -14,6 +17,7 @@ interface PoolApplicationPageProps {
 
 export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
   const spreadsheetId = getSpreadsheetIdByCategoryId(categoryId);
+  const templateId = getTemplateIdByCategoryId(categoryId);
 
   if (!spreadsheetId) {
     return null;
@@ -31,6 +35,7 @@ export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
             <ApplicationForm
               categoryId={categoryId}
               spreadsheetId={spreadsheetId}
+              templateId={templateId}
             />
           </ApplicationFormContextProvider>
         </S.Section>

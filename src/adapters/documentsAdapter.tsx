@@ -1,21 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { SanityUploadedFile } from '~/domains';
+import { fetchGet } from '~/utils/fetch';
 
 export function useGetDocumentsBySwimmingPoolId(id: string) {
   const { data, isError, isLoading, isSuccess } = useQuery<
     SanityUploadedFile[]
   >({
-    queryKey: ['documents'],
+    queryKey: ['documents', id],
     enabled: Boolean(id),
     queryFn: async () => {
-      const params = new URLSearchParams({
+      return fetchGet<SanityUploadedFile[]>('/api/documents', {
         swimmingPoolId: id,
       });
-
-      const response = await fetch(`/api/documents?${params.toString()}`);
-
-      const data = await response.json();
-      return data;
     },
   });
 

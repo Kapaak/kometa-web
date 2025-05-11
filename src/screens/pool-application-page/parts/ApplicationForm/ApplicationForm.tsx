@@ -1,8 +1,10 @@
 import { FormProvider, useForm } from 'react-hook-form';
+import { useSendEmail } from '~/adapters/emailAdapter';
 import { useAppendGoogleSheetById } from '~/adapters/sheetAdapter';
 import { SwimmingCategoryId } from '~/types';
 import { Button, Flex } from '~/ui/components/atoms';
 import { getDayAbbreviationWithoutDiacritics } from '~/utils/day';
+import { calculatePriceAfterDiscount } from '~/utils/price';
 import { useApplicationFormContext } from '../../contexts/ApplicationFormContext';
 import {
   AdultCourseFormFields,
@@ -28,16 +30,20 @@ export type ApplicationFormValues =
 interface ApplicationFormProps {
   categoryId: string;
   spreadsheetId: number;
+  templateId?: string;
 }
 
 export function ApplicationForm({
   categoryId,
   spreadsheetId,
+  templateId,
 }: ApplicationFormProps) {
   const { lectures, getLectureById } = useApplicationFormContext();
 
   const { appendGoogleSheetById, isLoading } =
     useAppendGoogleSheetById(spreadsheetId);
+
+  const { sendEmail, isLoading: isSendingEmail } = useSendEmail();
 
   const form = useForm<ApplicationFormValues>({
     values: {
@@ -62,35 +68,46 @@ export function ApplicationForm({
 
   const isAdultCourse = categoryId === SwimmingCategoryId.ADULT;
 
-  const handleFormSubmit = (data: ApplicationFormValues) => {
+  const handleFormSubmit = async (data: ApplicationFormValues) => {
     const lecture = getLectureById(selectedLecture ?? '');
     const dataUpdated = {
       ...data,
       lessonsDayTime: `${getDayAbbreviationWithoutDiacritics(Number(lecture?.dayId))}_${lecture?.timeFrom}`,
-    };
+    } as ScholarCourseFormFields & KidCourseFormFields & AdultCourseFormFields;
+
+    let values: string[] = [];
 
     if (isSchoolOrKindergartenCourse) {
-      const values = prepareSchoolSpreadsheetValues(
+      values = prepareSchoolSpreadsheetValues(
         dataUpdated as ScholarCourseFormFields
       );
-
-      return appendGoogleSheetById(values);
-    }
-
-    if (isKidCourse) {
-      const values = prepareKidSpreadsheetValues(
-        dataUpdated as KidCourseFormFields
-      );
-
-      return appendGoogleSheetById(values);
-    }
-
-    if (isAdultCourse) {
-      const values = prepareAdultSpreadsheetValues(
+    } else if (isKidCourse) {
+      values = prepareKidSpreadsheetValues(dataUpdated as KidCourseFormFields);
+    } else if (isAdultCourse) {
+      values = prepareAdultSpreadsheetValues(
         dataUpdated as AdultCourseFormFields
       );
+    }
 
-      return appendGoogleSheetById(values);
+    try {
+      await appendGoogleSheetById(values);
+
+      if (templateId) {
+        await sendEmail({
+          email: dataUpdated?.email ?? dataUpdated?.contactPersonEmail,
+          templateId,
+          dayId: Number(lecture?.dayId),
+          time: String(lecture?.timeFrom),
+          priceWithDiscount: Math.floor(
+            calculatePriceAfterDiscount(
+              dataUpdated.lessonsPrice ?? 0,
+              lecture?.discount ?? 0
+            )
+          ),
+        });
+      }
+    } catch (error) {
+      console.error('Error sending email or appending to Google Sheet:', error);
     }
   };
 
@@ -102,7 +119,10 @@ export function ApplicationForm({
         {isAdultCourse && <AdultCourseForm />}
 
         <Flex justify="flex-end">
-          <Button disabled={!gdprConsent || isLoading} loading={isLoading}>
+          <Button
+            disabled={!gdprConsent || isLoading || isSendingEmail}
+            loading={isLoading || isSendingEmail}
+          >
             Odeslat
           </Button>
         </Flex>

@@ -1,22 +1,12 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { fetchGet, fetchPost } from '~/utils/fetch';
 
 export function useGetGoogleSheetById(sheetId: string) {
   const { data, isError, isLoading, isSuccess } = useQuery<string[]>({
     queryKey: ['googleSheet', sheetId],
     enabled: Boolean(sheetId),
     queryFn: async () => {
-      const params = new URLSearchParams({
-        gid: sheetId,
-      });
-
-      const response = await fetch(`/api/sheets?${params.toString()}`);
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch Google Sheet data');
-      }
-
-      const data = await response.json();
-      return data;
+      return fetchGet<string[]>('/api/sheets', { gid: sheetId });
     },
   });
 
@@ -35,24 +25,15 @@ export function useAppendGoogleSheetById(sheetId: number) {
     mutateAsync,
   } = useMutation({
     mutationFn: async (values: string[]) => {
-      const params = new URLSearchParams({
-        gid: String(sheetId),
-      });
-
-      const response = await fetch(`/api/sheets?${params.toString()}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      return fetchPost(
+        '/api/sheets',
+        {
+          values,
         },
-        body: JSON.stringify({ values }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to post data to Google Sheet');
-      }
-
-      const data = await response.json();
-      return data;
+        {
+          gid: String(sheetId),
+        }
+      );
     },
   });
 

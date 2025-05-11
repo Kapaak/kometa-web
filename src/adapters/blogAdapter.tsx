@@ -1,8 +1,7 @@
-import { useMemo } from 'react';
-
 import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
-
+import { useMemo } from 'react';
 import { TransformedBlogPost } from '~/domains';
+import { fetchGet } from '~/utils/fetch';
 
 type BlogPostsProps = {
   filter?: {
@@ -11,7 +10,7 @@ type BlogPostsProps = {
   pageSize?: number;
 };
 
-//must be the same as in the API
+// Must be the same as in the API
 const DEFAULT_PAGE_SIZE = 20;
 
 export function useGetBlogPosts({
@@ -23,14 +22,17 @@ export function useGetBlogPosts({
       initialPageParam: '',
       queryKey: ['blogPosts', filter],
       queryFn: async ({ pageParam = '' }: QueryFunctionContext) => {
-        const params = new URLSearchParams(filter as Record<string, string>);
-        params.append('lastId', String(pageParam));
-        params.append('pageSize', pageSize.toString());
+        const params = {
+          ...filter,
+          categories: filter?.categories?.join(','),
+          lastId: String(pageParam),
+          pageSize: pageSize.toString(),
+        };
 
-        const response = await fetch(`/api/blog-posts?${params.toString()}`);
-        const data = await response.json();
-
-        return data;
+        return fetchGet<TransformedBlogPost[]>(
+          '/api/blog-posts',
+          params as Record<string, string>
+        );
       },
       getNextPageParam(lastPage) {
         return lastPage.length === pageSize
