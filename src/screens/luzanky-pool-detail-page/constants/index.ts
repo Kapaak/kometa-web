@@ -10,8 +10,7 @@ type PoolInformation = {
       waterTemperature: string;
     };
   };
-  skillLevelSection: {
-    visible: boolean;
+  skillLevelSection?: {
     data: {
       title: string;
       descriptions?: { label?: string; text: string }[];
@@ -19,8 +18,20 @@ type PoolInformation = {
     actionButtonLabel?: string;
   };
   aboutSection?: {
-    description: string;
-    lectureFocus: string[];
+    description?: string;
+    lectureFocus?: string[];
+  };
+  initialLectureSection?: {
+    requiredEquipment: {
+      items: string[];
+      description?: string;
+    };
+    arrivalTime: {
+      descriptions: string[];
+    };
+    childHandoverProcess?: {
+      descriptions: string[];
+    };
   };
 };
 
@@ -46,7 +57,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       ],
     },
     skillLevelSection: {
-      visible: true,
       data: [
         {
           title: 'Rozdělení do skupin',
@@ -63,6 +73,28 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         },
       ],
     },
+    initialLectureSection: {
+      requiredEquipment: {
+        items: [
+          'Plavky, ručník, plavecké brýle (bez zakrytí nosu)',
+          'Plavecká čepice (není povinná, ale pomáhá udržet vlasy z očí)',
+          'Volitelně můžete přibalit mýdlo a pantofle',
+        ],
+        description:
+          'Doporučujeme vybírat plavky, které dobře přiléhají k tělu a neomezují pohyb. U dívek je vhodné vyhnout se volánkům, u chlapců pak dlouhým kraťasovým plavkám, které zvyšují odpor vody a mohou ztěžovat plavání.',
+      },
+      arrivalTime: {
+        descriptions: [
+          'Doporučujeme přijít 15 minut před začátkem lekce. Trenér bude čekat u turniketu poblíž pokladen a rozdá dětem čipy (modré) pro vstup do areálu bazénu. Příchod je možný nejpozději 5 minut před začátkem lekce, aby děti měly dostatek času na převlečení a přípravu. Pozdní příchody mohou narušit časový harmonogram lekce.',
+          'Děti mají k dispozici společné šatny, kde si je převezme trenér. Doprovod má nárok na doprovodný čip (černý), který je platný na 15 minut a slouží k pomoci s převlékáním nebo oblékáním dítěte.',
+        ],
+      },
+      childHandoverProcess: {
+        descriptions: [
+          'Doprovod obdrží první čip při vstupu, který umožní vstup do areálu a následně se při odchodu vloží do turniketu pro opuštění bazénu. Po skončení lekce dostane doprovod druhý čip, opět na 15 minut, aby mohl dítě vyzvednout. Stejně jako u prvního čipu je nutné ho při odchodu vložit do turniketu stejně jako modrý čip dítěte. Černý čip nesmí být použit k uzamčení skříňky, jinak nebude možné opustit areál.',
+        ],
+      },
+    },
   },
   [SwimmingCategoryId.ADVANCED]: {
     heroSection: {
@@ -76,7 +108,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       },
     },
     skillLevelSection: {
-      visible: true,
       data: [
         {
           title: 'Co když dítě je dovednostmi na pomezí',
@@ -98,6 +129,28 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         'Hravou formou motivujeme děti k překonávání vlastních hranic.',
       ],
     },
+    initialLectureSection: {
+      requiredEquipment: {
+        items: [
+          'Plavky, ručník, plavecké brýle (bez zakrytí nosu)',
+          'Plavecká čepice (není povinná, ale pomáhá udržet vlasy z očí)',
+          'Volitelně můžete přibalit mýdlo a pantofle',
+        ],
+        description:
+          'Doporučujeme vybírat plavky, které dobře přiléhají k tělu a neomezují pohyb. U dívek je vhodné vyhnout se volánkům, u chlapců pak dlouhým kraťasovým plavkám, které zvyšují odpor vody a mohou ztěžovat plavání.',
+      },
+      arrivalTime: {
+        descriptions: [
+          'Doporučujeme přijít 15 minut před začátkem lekce. Trenér bude čekat u turniketu poblíž pokladen a rozdá dětem čipy (modré) pro vstup do areálu bazénu. Příchod je možný nejpozději 5 minut před začátkem lekce, aby děti měly dostatek času na převlečení a přípravu. Pozdní příchody mohou narušit časový harmonogram lekce.',
+          'Děti mají k dispozici společné šatny, kde si je převezme trenér. Doprovod má nárok na doprovodný čip (černý), který je platný na 15 minut a slouží k pomoci s převlékáním nebo oblékáním dítěte.',
+        ],
+      },
+      childHandoverProcess: {
+        descriptions: [
+          'Doprovod obdrží první čip při vstupu, který umožní vstup do areálu a následně se při odchodu vloží do turniketu pro opuštění bazénu. Po skončení lekce dostane doprovod druhý čip, opět na 15 minut, aby mohl dítě vyzvednout. Stejně jako u prvního čipu je nutné ho při odchodu vložit do turniketu stejně jako modrý čip dítěte. Černý čip nesmí být použit k uzamčení skříňky, jinak nebude možné opustit areál.',
+        ],
+      },
+    },
   },
   [SwimmingCategoryId.CONDITION]: {
     heroSection: {
@@ -111,7 +164,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       },
     },
     skillLevelSection: {
-      visible: true,
       data: [
         {
           title: 'Co když dítě je dovednostmi na pomezí',
@@ -133,6 +185,28 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         'Podpora sebedůvěry a radosti z pohybu.',
       ],
     },
+    initialLectureSection: {
+      requiredEquipment: {
+        items: [
+          'Plavky, ručník, plavecké brýle (bez zakrytí nosu)',
+          'Plavecká čepice (není povinná, ale pomáhá udržet vlasy z očí)',
+          'Volitelně můžete přibalit mýdlo a pantofle',
+        ],
+        description:
+          'Doporučujeme vybírat plavky, které dobře přiléhají k tělu a neomezují pohyb. U dívek je vhodné vyhnout se volánkům, u chlapců pak dlouhým kraťasovým plavkám, které zvyšují odpor vody a mohou ztěžovat plavání.',
+      },
+      arrivalTime: {
+        descriptions: [
+          'Doporučujeme přijít 15 minut před začátkem lekce. Trenér bude čekat u turniketu poblíž pokladen a rozdá dětem čipy (modré) pro vstup do areálu bazénu. Příchod je možný nejpozději 5 minut před začátkem lekce, aby děti měly dostatek času na převlečení a přípravu. Pozdní příchody mohou narušit časový harmonogram lekce.',
+          'Děti mají k dispozici společné šatny, kde si je převezme trenér. Doprovod má nárok na doprovodný čip (černý), který je platný na 15 minut a slouží k pomoci s převlékáním nebo oblékáním dítěte.',
+        ],
+      },
+      childHandoverProcess: {
+        descriptions: [
+          'Doprovod obdrží první čip při vstupu, který umožní vstup do areálu a následně se při odchodu vloží do turniketu pro opuštění bazénu. Po skončení lekce dostane doprovod druhý čip, opět na 15 minut, aby mohl dítě vyzvednout. Stejně jako u prvního čipu je nutné ho při odchodu vložit do turniketu stejně jako modrý čip dítěte. Černý čip nesmí být použit k uzamčení skříňky, jinak nebude možné opustit areál.',
+        ],
+      },
+    },
   },
   [SwimmingCategoryId.ADULT]: {
     heroSection: {
@@ -148,31 +222,35 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     aboutSection: {
       description:
         'Kurzy plavání pro dospělé jsou navrženy tak, aby vám pomohly zlepšit vaši techniku, kondici a radost z pohybu ve vodě. Bez ohledu na to, jestli se chcete naučit základy nebo zdokonalit své plavecké dovednosti, jsme tu pro vás. Věříme, že plavání by mělo být zábavou, výzvou a cestou k celkovému zlepšení kondice.',
-      lectureFocus: [
-        'Základy plaveckých stylů: kraul, znak, prsa a motýlek.',
-        'Šipky a obrátky.',
-        'Jak zlepšit techniku plavání a efektivitu pohybu ve vodě.',
-        'Jak zlepšit svou fyzickou kondici a vytrvalost.',
-      ],
     },
     skillLevelSection: {
-      visible: false,
       data: [
-        //TODO: potrebuju doplnit
-        // {
-        //   title: 'Rozdělení do skupin',
-        //   descriptions: [
-        //     {
-        //       label: 'Rybička',
-        //       text: 'Tento level je určen pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
-        //     },
-        //     {
-        //       label: 'Delfínek',
-        //       text: 'Pro děti, které už zvládají potápění, kopání a bublání. Zaměřujeme se na výuku základů plaveckých stylů, zejména znaku a kraula, s cílem zlepšit techniku a koordinaci.',
-        //     },
-        //   ],
-        // },
+        {
+          title: 'Co když dítě je dovednostmi na pomezí',
+          descriptions: [
+            {
+              text: 'Pokud dítě není zcela připravené na tuto úroveň, ale již má některé dovednosti, doporučujeme přihlásit ho na termín, kde probíhají jak kurzy základního, tak zdokonalovacího plavání. Díky tomu bude moci dítě střídat malý a velký bazén podle potřeby, což mu pomáhá adaptovat se na nové prostředí vlastním tempem.',
+            },
+          ],
+        },
       ],
+    },
+    initialLectureSection: {
+      requiredEquipment: {
+        items: [
+          'Plavky',
+          'Plavecké brýle',
+          'Ručník',
+          'Případně plaveckou čepici (není podmínkou)',
+        ],
+      },
+      arrivalTime: {
+        descriptions: [
+          'Doporučujeme přijít 15 minut před začátkem lekce. Dospělí mají k dispozici plastové kartičky pro vstup do areálu, které vám umožní vstup 15 min před začátkem lekce.',
+          'Po tréninku máte 30 minut na převlečení, takže si prosím hlídejte čas. Pokud odejdete později karta se zablokuje a za její odblokování je pokuta 50 Kč.',
+          'Na ktartu se vybírá záloha 500 Kč před první lekcí kurzu, proto prosím na první lekci přijďte všas a s přesnou hotovostí na zálohu (500 Kč). Tato záloha vám bude vrácena při vrácení karty na poslední hodině kurzu.',
+        ],
+      },
     },
   },
   [SwimmingCategoryId.KINDERGARTEN]: {
@@ -195,25 +273,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         'Získávají důvěru ve své plavecké dovednosti a zlepšují koordinaci.',
       ],
     },
-    skillLevelSection: {
-      visible: false,
-      data: [
-        //TODO: potrebuju doplnit
-        // {
-        //   title: 'Rozdělení do skupin',
-        //   descriptions: [
-        //     {
-        //       label: 'Rybička',
-        //       text: 'Tento level je určen pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
-        //     },
-        //     {
-        //       label: 'Delfínek',
-        //       text: 'Pro děti, které už zvládají potápění, kopání a bublání. Zaměřujeme se na výuku základů plaveckých stylů, zejména znaku a kraula, s cílem zlepšit techniku a koordinaci.',
-        //     },
-        //   ],
-        // },
-      ],
-    },
   },
   [SwimmingCategoryId.SCHOOL]: {
     heroSection: {
@@ -233,25 +292,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         'Hravou formou se seznamujeme s vodním prostředím.',
         'Děti se naučí základy plaveckých stylů, jako je znak a kraul.',
         'Získávají důvěru ve své plavecké dovednosti a zlepšují koordinaci.',
-      ],
-    },
-    skillLevelSection: {
-      visible: true,
-      data: [
-        //TODO: potrebuju doplnit
-        // {
-        //   title: 'Rozdělení do skupin',
-        //   descriptions: [
-        //     {
-        //       label: 'Rybička',
-        //       text: 'Tento level je určen pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
-        //     },
-        //     {
-        //       label: 'Delfínek',
-        //       text: 'Pro děti, které už zvládají potápění, kopání a bublání. Zaměřujeme se na výuku základů plaveckých stylů, zejména znaku a kraula, s cílem zlepšit techniku a koordinaci.',
-        //     },
-        //   ],
-        // },
       ],
     },
   },

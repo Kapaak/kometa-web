@@ -11,15 +11,14 @@ export function LuzankyDetailSkillLevelSection() {
   const swimmingPoolDetailInformation =
     luzankyPoolDetailInformation?.[categoryId];
 
-  const {
-    data,
-    visible = true,
-    actionButtonLabel = 'Stáhnout vzorový trénink',
-  } = swimmingPoolDetailInformation?.skillLevelSection ?? {};
+  const { data, actionButtonLabel = 'Stáhnout vzorový trénink' } =
+    swimmingPoolDetailInformation?.skillLevelSection ?? {};
 
   const hasImages = swimmingPoolDetail?.imageGallery?.length ?? 0;
 
-  if (!visible) return;
+  if (!data) {
+    return null;
+  }
 
   return (
     <S.Section>

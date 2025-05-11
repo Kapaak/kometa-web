@@ -55,7 +55,7 @@ export const services: Service[] = [
   {
     title: 'Školky',
     description: 'Cílem naší výuky je adaptovat dítě na vodní prostředí.',
-    tags: ['organizace mšmt'],
+    tags: ['organizace MŠMT'],
     href: '/bazeny/luzanky/skolky',
     src: KindergardenLecture,
     alt: 'Plavkyně ve vodě na bazénu Lužánky, která se nadechuje',
@@ -63,7 +63,7 @@ export const services: Service[] = [
   {
     title: 'Školy',
     description: 'Cílem je naučit plavce základům plavání.',
-    tags: ['organizace mšmt'],
+    tags: ['organizace MŠMT'],
     href: '/bazeny/luzanky/skoly',
     src: SchoolLecture,
     alt: 'Plavec s plaveckými brýlemi v mělké vodě na bazénu Lužánky',

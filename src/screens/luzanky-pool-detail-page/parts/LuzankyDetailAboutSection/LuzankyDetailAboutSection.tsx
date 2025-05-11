@@ -9,9 +9,7 @@ import { IconText } from '~/ui/components/molecules';
 import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailAboutSection.style';
 
-interface LuzankyDetailAboutSectionProps {}
-
-export function LuzankyDetailAboutSection({}: LuzankyDetailAboutSectionProps) {
+export function LuzankyDetailAboutSection() {
   const theme = useTheme();
   const { success } = theme.colors;
 
@@ -33,21 +31,23 @@ export function LuzankyDetailAboutSection({}: LuzankyDetailAboutSectionProps) {
               <Text variant="body2">{description}</Text>
             </VerticalStack>
 
-            <VerticalStack gap="1rem">
-              <Headline size="small">Co zde děti učíme</Headline>
-              <VerticalStack as="ul" gap=".5rem">
-                {lectureFocus?.map((focus) => (
-                  <IconText
-                    key={focus}
-                    icon={CheckCircle}
-                    iconColor={success.main}
-                    iconSize={17}
-                    text={focus}
-                    as="li"
-                  />
-                ))}
+            {lectureFocus && (
+              <VerticalStack gap="1rem">
+                <Headline size="small">Co zde děti učíme</Headline>
+                <VerticalStack as="ul" gap=".5rem">
+                  {lectureFocus?.map((focus) => (
+                    <IconText
+                      key={focus}
+                      icon={CheckCircle}
+                      iconColor={success.main}
+                      iconSize={17}
+                      text={focus}
+                      as="li"
+                    />
+                  ))}
+                </VerticalStack>
               </VerticalStack>
-            </VerticalStack>
+            )}
           </S.SectionDescriptionContainer>
 
           <S.SectionImageContainer>
