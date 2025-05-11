@@ -78,6 +78,9 @@ export function transformAvailableCourse(
     basic: SwimmingCategoryTranslation.BASIC,
     advanced: SwimmingCategoryTranslation.ADVANCED,
     condition: SwimmingCategoryTranslation.CONDITION,
+    adult: SwimmingCategoryTranslation.ADULT,
+    kindergarten: SwimmingCategoryTranslation.KINDERGARTEN,
+    school: SwimmingCategoryTranslation.SCHOOL,
   };
 
   return {
