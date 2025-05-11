@@ -4,6 +4,13 @@ import { minBreakpoint } from '~/utils/dimensions';
 
 export const Section = styled.section`
   padding: 2rem;
+  background-color: ${({ theme }) => theme.colors.primary.light};
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      padding: 5rem 2rem;
+    }
+  `}
 `;
 
 export const SectionNotSwimmingList = styled(VerticalStack).attrs({

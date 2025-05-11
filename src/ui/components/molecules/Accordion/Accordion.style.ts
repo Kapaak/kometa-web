@@ -19,15 +19,13 @@ export const StyledTrigger = styled(RadixAccordion.Trigger)`
   justify-content: space-between;
   flex: 1;
   gap: 1rem;
-  padding: 1rem 0rem 2rem;
+  padding: 1rem 0rem;
   cursor: pointer;
 `;
 
 export const Text = styled(SText)``;
 
-export const Headline = styled(Text)`
-  text-transform: uppercase;
-`;
+export const Headline = styled(Text)``;
 
 export const Subheadline = styled(Text)``;
 
@@ -64,6 +62,6 @@ export const StyledContent = styled(RadixAccordion.Content)`
 `;
 
 export const StyledContentText = styled.div`
-  padding: 1.5rem 2rem;
+  padding: 0 1rem 1.5rem;
   font-weight: 300;
 `;

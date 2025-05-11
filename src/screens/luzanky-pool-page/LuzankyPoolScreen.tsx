@@ -1,8 +1,9 @@
+import { VerticalStack } from '~/ui/components/atoms';
 import { LuzankyPoolLayout } from './components';
 import {
   LuzankyAboutSection,
   LuzankyBasicInfoSection,
-  LuzankyDocumentSection,
+  LuzankyFAQSection,
   LuzankyHeroSection,
   LuzankyServiceSection,
 } from './parts';
@@ -12,11 +13,14 @@ interface LuzankyPoolScreenProps {}
 export function LuzankyPoolScreen({}: LuzankyPoolScreenProps) {
   return (
     <LuzankyPoolLayout>
-      <LuzankyHeroSection />
-      <LuzankyAboutSection />
-      <LuzankyServiceSection />
-      <LuzankyDocumentSection />
-      <LuzankyBasicInfoSection />
+      <VerticalStack gap="2rem">
+        <LuzankyHeroSection />
+        <LuzankyAboutSection />
+        <LuzankyServiceSection />
+        {/* <LuzankyDocumentSection /> */}
+        <LuzankyBasicInfoSection />
+        <LuzankyFAQSection />
+      </VerticalStack>
     </LuzankyPoolLayout>
   );
 }

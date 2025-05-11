@@ -32,7 +32,6 @@ export const ServiceCardTitle = styled(Text).attrs({ as: 'h3', variant: 'h3' })`
 
 export const ServiceChipContainer = styled(VerticalStack)`
   position: relative;
-  align-items: flex-end;
   gap: 1.2rem;
   pointer-events: none;
   padding: 1.8rem 2.9rem 0;
@@ -41,11 +40,12 @@ export const ServiceChipContainer = styled(VerticalStack)`
 export const ServiceCardTextContainer = styled(Flex)`
   flex-direction: column;
   padding: 1.4rem 2.4rem 0.4rem;
+  gap: 1rem;
   flex: 1;
 `;
 
 export const ServiceCardLink = styled(Link)`
   align-self: flex-start;
   margin-top: auto;
-  padding: 0 2.4rem 2.4rem;
+  padding: 1rem 2.4rem 2.4rem;
 `;

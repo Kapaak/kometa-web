@@ -34,7 +34,7 @@ export function LuzankyAboutSection() {
           );
         })} */}
 
-        <Text>
+        <Text align="center">
           Naše plavecká škola pracuje pod záštitou plaveckého oddílu KPSP Kometa
           Brno. Naší specializací je výuka plavání dětí předškolního a školního
           věku. V plavecké přípravě dětí jsme nasbírali během řady let mnoho
