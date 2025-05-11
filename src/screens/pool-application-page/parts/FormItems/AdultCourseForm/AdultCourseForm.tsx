@@ -12,7 +12,7 @@ import {
   ControlledInput,
   ControlledSelect,
 } from '~/ui/components/molecules';
-import { genderOptions } from '~/utils/options';
+import { binaryOptions, genderOptions } from '~/utils/options';
 import { useApplicationFormContext } from '../../../contexts/ApplicationFormContext';
 import * as FormItems from '../FormItems.style';
 
@@ -54,16 +54,17 @@ export function AdultCourseForm() {
               name="gender"
               placeholder="Pohlaví"
               options={genderOptions}
+              required="Pohlaví musí být vyplněno"
             />
             <ControlledInput
               name="personalIdNum"
               label="Rodné číslo"
               placeholder="Rodné číslo (př. 045421/1234)"
-              // pattern={{
-              //   value: /\d{4}([.,\/]\d{4})/,
-              //   message:
-              //     "Rodné číslo v nesprávném formátu. Příklad: 045421/1234.",
-              // }}
+              pattern={{
+                value: /^\d{2}\d{2}\d{2}\/?\d{3,4}$/,
+                message:
+                  'Rodné číslo v nesprávném formátu. Příklad: 045421/1234.',
+              }}
               required="Rodné číslo musí být vyplněno."
             />
             <ControlledInput
@@ -71,6 +72,12 @@ export function AdultCourseForm() {
               label="Datum narození"
               placeholder="Datum narození"
               required="Datum narození musí být vyplněno."
+            />
+            <ControlledSelect
+              name="nationality"
+              placeholder="Jste občanem ČR?"
+              required="Občanství musí být vyplněno"
+              options={binaryOptions}
             />
           </FormItems.FormColumnItems>
         </FormItems.FormColumn>
@@ -91,18 +98,12 @@ export function AdultCourseForm() {
               name="email"
               label="E-mail"
               placeholder="E-mail"
-              // pattern={{
-              //   value: /\S+@\S+\.\S+/,
-              //   message:
-              //     'Platný email musí obsahovat @ (př. novak.filip@email.cz).',
-              // }}
+              pattern={{
+                value: /\S+@\S+\.\S+/,
+                message:
+                  'Platný email musí obsahovat @ (př. novak.filip@email.cz).',
+              }}
               required="Email musí být vyplněn."
-            />
-            <ControlledInput
-              name="address"
-              label="Adresa a číslo popisné"
-              placeholder="Adresa a číslo popisné"
-              required="Adresa musí být vyplněna"
             />
             <ControlledInput
               name="city"
@@ -110,6 +111,23 @@ export function AdultCourseForm() {
               placeholder="Město"
               required="Město musí být vyplněno."
             />
+            <ControlledInput
+              name="streetAddress"
+              label="Ulice"
+              placeholder="Ulice"
+            />
+            <ControlledInput
+              name="houseNumber"
+              label="Číslo popisné"
+              placeholder="Číslo popisné"
+              required="Číslo popisné musí být vyplněno"
+            />
+            <ControlledInput
+              name="houseOrientationNumber"
+              label="Orientační číslo"
+              placeholder="Orientační číslo"
+            />
+
             <ControlledInput
               name="postCode"
               label="PSČ"

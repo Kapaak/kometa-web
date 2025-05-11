@@ -4,6 +4,7 @@ import { PoolApplicationLayout } from './components';
 import { ApplicationForm } from './parts';
 
 import { SwimmingPoolId } from '~/types';
+import { getSpreadsheetIdByCategoryId } from '~/utils/sheets';
 import * as S from './PoolApplicationPage.style';
 import { ApplicationFormContextProvider } from './contexts/ApplicationFormContext';
 
@@ -12,6 +13,12 @@ interface PoolApplicationPageProps {
 }
 
 export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
+  const spreadsheetId = getSpreadsheetIdByCategoryId(categoryId);
+
+  if (!spreadsheetId) {
+    return null;
+  }
+
   return (
     <PoolApplicationLayout>
       <MaxWidth>
@@ -21,7 +28,10 @@ export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
             swimmingPoolId={SwimmingPoolId.LUZANKY}
             categoryId={categoryId}
           >
-            <ApplicationForm categoryId={categoryId} />
+            <ApplicationForm
+              categoryId={categoryId}
+              spreadsheetId={spreadsheetId}
+            />
           </ApplicationFormContextProvider>
         </S.Section>
       </MaxWidth>

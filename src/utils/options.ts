@@ -7,3 +7,8 @@ export const genderOptions = [
   { label: 'Muž', value: 'M' },
   { label: 'Žena', value: 'F' },
 ];
+
+export const binaryOptions = [
+  { label: 'Ano', value: '1' },
+  { label: 'Ne', value: '0' },
+];

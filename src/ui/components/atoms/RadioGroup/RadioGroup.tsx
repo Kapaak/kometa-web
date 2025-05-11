@@ -24,11 +24,16 @@ export function RadioGroup({
   options,
   discount,
   onClick,
+  value,
   ...props
 }: RadioGroupProps) {
   const id = useId();
   return (
-    <S.RadioGroupRoot aria-label="View density" {...props}>
+    <S.RadioGroupRoot
+      aria-label="View density"
+      value={String(value)}
+      {...props}
+    >
       {options?.map((option, index) => (
         <Flex key={option.value} direction="row" align="center" gap="2rem">
           <S.RadioGroupItem

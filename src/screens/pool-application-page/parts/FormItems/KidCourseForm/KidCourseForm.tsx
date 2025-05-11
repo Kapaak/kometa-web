@@ -1,18 +1,13 @@
 import { useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
-import {
-  A,
-  Headline,
-  RadioGroup,
-  Text,
-  VerticalStack,
-} from '~/ui/components/atoms';
+import { A, Headline, Text, VerticalStack } from '~/ui/components/atoms';
 import {
   ControlledCheckbox,
   ControlledInput,
+  ControlledRadio,
   ControlledSelect,
 } from '~/ui/components/molecules';
-import { genderOptions } from '~/utils/options';
+import { binaryOptions, genderOptions } from '~/utils/options';
 import { useApplicationFormContext } from '../../../contexts/ApplicationFormContext';
 import * as FormItems from '../FormItems.style';
 
@@ -54,13 +49,14 @@ export function KidCourseForm() {
               name="gender"
               placeholder="Pohlaví"
               options={genderOptions}
+              required="Pohlaví musí být vyplněno"
             />
             <ControlledInput
               name="personalIdNum"
               label="Rodné číslo dítěte"
               placeholder="Rodné číslo dítěte (př. 045421/1234)"
               pattern={{
-                value: /\d{4}([.,\/]\d{4})/,
+                value: /^\d{2}\d{2}\d{2}\/?\d{3,4}$/,
                 message:
                   'Rodné číslo v nesprávném formátu. Příklad: 045421/1234.',
               }}
@@ -71,6 +67,12 @@ export function KidCourseForm() {
               label="Datum narození dítěte"
               placeholder="Datum narození dítěte"
               required="Datum narození musí být vyplněno."
+            />
+            <ControlledSelect
+              name="nationality"
+              placeholder="Je dítě občanem ČR?"
+              required="Občanství musí být vyplněno"
+              options={binaryOptions}
             />
           </FormItems.FormColumnItems>
         </FormItems.FormColumn>
@@ -99,16 +101,26 @@ export function KidCourseForm() {
               required="Email musí být vyplněn."
             />
             <ControlledInput
-              name="address"
-              label="Adresa a číslo popisné"
-              placeholder="Adresa a číslo popisné"
-              required="Adresa musí být vyplněna"
-            />
-            <ControlledInput
               name="city"
               label="Město"
               placeholder="Město"
               required="Město musí být vyplněno."
+            />
+            <ControlledInput
+              name="streetAddress"
+              label="Ulice"
+              placeholder="Ulice"
+            />
+            <ControlledInput
+              name="houseNumber"
+              label="Číslo popisné"
+              placeholder="Číslo popisné"
+              required="Číslo popisné musí být vyplněno"
+            />
+            <ControlledInput
+              name="houseOrientationNumber"
+              label="Orientační číslo"
+              placeholder="Orientační číslo"
             />
             <ControlledInput
               name="postCode"
@@ -150,7 +162,7 @@ export function KidCourseForm() {
         </Headline>
 
         <FormItems.FormColumnItems>
-          <RadioGroup
+          <ControlledRadio
             name="lessonsPrice"
             discount={selectedLecture?.discount}
             options={[

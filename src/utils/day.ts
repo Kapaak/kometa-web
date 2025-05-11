@@ -21,7 +21,10 @@ export function getDayAbbreviation(dayId: number): string {
 export function getDayAbbreviationWithoutDiacritics(dayId: number) {
   const dayAbbr = dayTranslationAbbr[dayId];
 
-  return dayAbbr.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return dayAbbr
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    ?.toLowerCase();
 }
 
 export function getDayFullName(dayId: number): string {

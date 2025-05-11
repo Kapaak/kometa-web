@@ -10,9 +10,7 @@ export const ControlledRadio = ({ name, ...props }: ControlledRadioProps) => {
   return (
     <Controller
       name={name}
-      render={({ field: { value, ...restField } }) => (
-        <RadioGroup {...props} {...restField} />
-      )}
+      render={({ field }) => <RadioGroup {...props} {...field} />}
     />
   );
 };
