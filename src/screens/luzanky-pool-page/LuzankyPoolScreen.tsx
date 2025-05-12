@@ -3,6 +3,7 @@ import { LuzankyPoolLayout } from './components';
 import {
   LuzankyAboutSection,
   LuzankyBasicInfoSection,
+  LuzankyContactSection,
   LuzankyFAQSection,
   LuzankyHeroSection,
   LuzankyServiceSection,
@@ -20,6 +21,7 @@ export function LuzankyPoolScreen({}: LuzankyPoolScreenProps) {
         {/* <LuzankyDocumentSection /> */}
         <LuzankyBasicInfoSection />
         <LuzankyFAQSection />
+        <LuzankyContactSection />
       </VerticalStack>
     </LuzankyPoolLayout>
   );
