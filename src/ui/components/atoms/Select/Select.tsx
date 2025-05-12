@@ -109,6 +109,11 @@ export const Select = ({
                   value={option.value}
                   checked={value === option.value}
                   onClick={() => handleValueChange(option.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                      handleValueChange(option.value);
+                    }
+                  }}
                 >
                   {option.label}
                 </SelectItem>
