@@ -17,6 +17,8 @@ export function LuzankyDetailFirstLectureSection({}: LuzankyDetailFirstLectureSe
   const { arrivalTime, requiredEquipment, childHandoverProcess } =
     swimmingPoolDetailInformation?.initialLectureSection ?? {};
 
+  if (!swimmingPoolDetailInformation?.initialLectureSection) return null;
+
   return (
     <S.Section>
       <MaxWidth>
