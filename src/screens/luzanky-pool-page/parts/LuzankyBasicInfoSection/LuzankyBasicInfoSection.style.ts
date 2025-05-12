@@ -35,4 +35,16 @@ export const SectionContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   gap: 2rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      gap: 4rem;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      gap: 5rem;
+    }
+  `}
 `;
