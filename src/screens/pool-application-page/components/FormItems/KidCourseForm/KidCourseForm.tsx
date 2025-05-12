@@ -185,9 +185,6 @@ export function KidCourseForm() {
         </Headline>
 
         <FormItems.FormColumnItems>
-          <button type="button" onClick={() => console.log(selectedLecture)}>
-            test onclick
-          </button>
           <ControlledRadio
             name="lessonsPrice"
             discount={selectedLecture?.discount}

@@ -36,7 +36,7 @@ export const ImageContainer = styled.div`
   width: 100%;
   flex: 1 1 50%;
   border-radius: 1rem;
-  min-height: 30rem;
+  height: 43rem;
 `;
 
 export const Image = styled(NextImage)`
