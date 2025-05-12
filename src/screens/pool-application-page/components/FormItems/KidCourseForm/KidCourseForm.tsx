@@ -24,6 +24,29 @@ export function KidCourseForm() {
 
   const selectedLecture = getLectureById(selectedLectureId);
 
+  const lessonsPriceOptions = [
+    {
+      label: 'pololetí - 1x týdně',
+      value:
+        selectedLecture?.priceSemester ??
+        (lectures?.[0] ? lectures[0].priceSemester : 0) ??
+        0,
+      lectureFrequency: 1,
+    },
+    ...(selectedLecture?.priceYear || (lectures?.[0] && lectures[0].priceYear)
+      ? [
+          {
+            label: 'celý rok - 1x týdně',
+            value:
+              selectedLecture?.priceYear ??
+              (lectures?.[0] ? lectures[0].priceYear : 0) ??
+              0,
+            lectureFrequency: 1,
+          },
+        ]
+      : []),
+  ].filter((option) => typeof option?.value);
+
   return (
     <VerticalStack gap="1rem">
       <FormItems.FormContainer>
@@ -162,19 +185,13 @@ export function KidCourseForm() {
         </Headline>
 
         <FormItems.FormColumnItems>
+          <button type="button" onClick={() => console.log(selectedLecture)}>
+            test onclick
+          </button>
           <ControlledRadio
             name="lessonsPrice"
             discount={selectedLecture?.discount}
-            options={[
-              {
-                label: '1x týdně',
-                value:
-                  selectedLecture?.priceSemester ??
-                  lectures?.[0]?.priceSemester ??
-                  0,
-                lectureFrequency: 1,
-              },
-            ]}
+            options={lessonsPriceOptions}
           />
           <Text variant="body2">
             V případě individuálních požadavků kontaktujte
