@@ -6,9 +6,7 @@ import { Accordion, TextBuilder } from '~/ui/components/molecules';
 
 import * as S from './LuzankyFAQSection.style';
 
-interface LuzankyFAQSectionProps {}
-
-export function LuzankyFAQSection({}: LuzankyFAQSectionProps) {
+export function LuzankyFAQSection() {
   const { data } = useGetSwimmingPoolMainPageById(SwimmingPoolId.LUZANKY);
 
   //TODO: remove any type
