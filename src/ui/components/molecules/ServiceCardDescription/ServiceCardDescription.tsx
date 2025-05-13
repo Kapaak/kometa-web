@@ -10,6 +10,7 @@ interface ServiceCardProps {
   tags?: string[];
   url?: string;
   description?: string;
+  applicationDisabled?: boolean;
 }
 
 export function ServiceCardDescription({
@@ -20,6 +21,7 @@ export function ServiceCardDescription({
   title,
   description,
   url,
+  applicationDisabled,
 }: ServiceCardProps) {
   return (
     <S.ServiceCardDescription>
@@ -48,9 +50,13 @@ export function ServiceCardDescription({
         <S.ServiceCardLink href={url ?? ''} passHref>
           <Button variant="outlined">Více informací</Button>
         </S.ServiceCardLink>
-        <S.ServiceCardLink href={`/bazeny/luzanky/${categorySlugId}/prihlasky`}>
-          <Button>Přihlásit se</Button>
-        </S.ServiceCardLink>
+        {!applicationDisabled && (
+          <S.ServiceCardLink
+            href={`/bazeny/luzanky/${categorySlugId}/prihlasky`}
+          >
+            <Button>Přihlásit se</Button>
+          </S.ServiceCardLink>
+        )}
       </S.ButtonContainer>
     </S.ServiceCardDescription>
   );

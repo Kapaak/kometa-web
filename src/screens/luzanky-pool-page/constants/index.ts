@@ -1,10 +1,10 @@
 import { StaticImageData } from 'next/image';
+import Camps from '~/public/images/service/camps.png';
 import AdultLecture from '~/public/images/swimming-pool/luzanky/service/service-adult.jpg';
 import AdvancedLecture from '~/public/images/swimming-pool/luzanky/service/service-advanced.png';
 import BasicLecture from '~/public/images/swimming-pool/luzanky/service/service-basic.png';
 import ConditionLecture from '~/public/images/swimming-pool/luzanky/service/service-condition.jpg';
 import KindergardenLecture from '~/public/images/swimming-pool/luzanky/service/service-kindergarden.png';
-import SchoolLecture from '~/public/images/swimming-pool/luzanky/service/service-school.png';
 import { SwimmingCategorySlug } from '~/types';
 
 interface Service {
@@ -15,6 +15,7 @@ interface Service {
   tags: string[];
   src: StaticImageData;
   alt: string;
+  applicationDisabled?: boolean;
 }
 
 export const services: Service[] = [
@@ -60,7 +61,7 @@ export const services: Service[] = [
   },
   {
     id: SwimmingCategorySlug.KINDERGARTEN,
-    title: 'Školky',
+    title: 'Školy a Školky',
     description: 'Cílem naší výuky je adaptovat dítě na vodní prostředí.',
     tags: ['organizace MŠMT'],
     href: '/bazeny/luzanky/skolky',
@@ -68,12 +69,13 @@ export const services: Service[] = [
     alt: 'Plavkyně ve vodě na bazénu Lužánky, která se nadechuje',
   },
   {
-    id: SwimmingCategorySlug.SCHOOL,
-    title: 'Školy',
+    id: 'camps',
+    title: 'Příměstské tábory',
     description: 'Cílem je naučit plavce základům plavání.',
-    tags: ['organizace MŠMT'],
-    href: '/bazeny/luzanky/skoly',
-    src: SchoolLecture,
+    tags: [],
+    href: 'https://www.primestak-brno.cz/',
+    src: Camps,
     alt: 'Plavec s plaveckými brýlemi v mělké vodě na bazénu Lužánky',
+    applicationDisabled: true,
   },
 ];

@@ -19,6 +19,7 @@ export const LuzankyServiceSection = () => {
               description={service.description}
               tags={service.tags}
               url={service.href}
+              applicationDisabled={service?.applicationDisabled}
             />
           ))}
         </S.Services>
