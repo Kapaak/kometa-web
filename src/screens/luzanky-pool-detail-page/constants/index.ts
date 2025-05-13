@@ -76,7 +76,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     heroSection: {
       description:
         'Tento kurz je určen pro děti, které teprve začínají s plaváním, nebo pro ty, které už ovládají základy, jako je potápění, kopání a bublání, ale potřebují se naučit správnou techniku plaveckých stylů, zejména znaku a kraula.',
-      duration: 45,
+      duration: 55,
       poolParameters: {
         poolLength: '16 m',
         depth: '90 cm',
@@ -147,7 +147,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     heroSection: {
       description:
         'Tento kurz plavání je ideální pro děti, které již zvládly základní plavecké dovednosti a chtějí je dále rozvíjet.',
-      duration: 45,
+      duration: 55,
       poolParameters: {
         poolLength: '25 m',
         depth: 'mezi 120 a 160 cm',
@@ -214,7 +214,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     heroSection: {
       description:
         'Tento kurz je určen pro děti, které již zvládají základní plavecké styly a chtějí se zaměřit na zlepšení své techniky a vytrvalosti.',
-      duration: 45,
+      duration: 55,
       poolParameters: {
         poolLength: '25 m',
         depth: 'mezi 120 a 160 cm',
@@ -281,7 +281,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     heroSection: {
       description:
         'Určeno všem nadšencům, kterým bylo již 18 let a chtějí si zlepšit své plavecké dovednosti.',
-      duration: 45,
+      duration: 60,
       poolParameters: {
         poolLength: '25 m',
         depth: 'mezi 120 a 160 cm',
