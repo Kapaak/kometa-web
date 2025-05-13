@@ -314,7 +314,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
           title: 'Nikdy není pozdě začít',
           descriptions: [
             {
-              text: 'Plavání je jednou z nejlepších aktivit, které mohou dospělí zařadit do svého života. Ať už jste nikdy neplavali, nebo se chcete zlepšit ve své technice, je důležité si uvědomit, že nikdy není pozdě začít. Plavání přináší nespočet zdravotních benefitů, je šetrné ke kloubům a je vhodné pro lidi všech věkových kategorií a úrovní fyzické zdatnosti. Mnoho dospělých může mít obavy z toho, že je „pozdě“ začít, nebo že budou mít potíže se zvládnutím základů. Pravda je ale taková, že je normální cítit nervozitu, ale plavání je dovednost, kterou lze rozvíjet v jakémkoli věku.',
+              text: 'Plavání je jednou z nejlepších aktivit, které mohou dospělí zařadit do svého života. Ať už jste nikdy neplavali, nebo se chcete zlepšit ve své technice, je důležité si uvědomit, že nikdy není pozdě začít. Plavání přináší nespočet zdravotních benefitů, je šetrné ke kloubům a je vhodné pro lidi všech věkových kategorií a úrovní fyzické zdatnosti.',
             },
           ],
         },
