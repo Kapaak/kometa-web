@@ -48,4 +48,12 @@ export const HeroSectionBannerDescriptionTitle = styled(Text).attrs({
   variant: 'h1',
 })`
   color: ${({ theme }) => theme.colors.secondary.main};
+  text-transform: uppercase;
+`;
+
+export const HeroSectionBannerDescriptionSubtitle = styled(Text).attrs({
+  as: 'h2',
+  variant: 'h6',
+})`
+  color: ${({ theme }) => theme.colors.secondary.main};
 `;

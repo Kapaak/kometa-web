@@ -4,7 +4,12 @@ import NextLink from 'next/link';
 
 import { ArrowRight } from '@phosphor-icons/react';
 
-import { IconButton, MaxWidth, Text } from '~/ui/components/atoms';
+import {
+  IconButton,
+  MaxWidth,
+  Text,
+  VerticalStack,
+} from '~/ui/components/atoms';
 
 import * as S from './HeroSection.style';
 
@@ -20,9 +25,14 @@ export function HeroSection() {
             alt="Plavecký bazén Kraví hora, kde se pořádají kurzy pod záštitou Kometa Brno"
           />
           <S.HeroSectionBannerDescription>
-            <S.HeroSectionBannerDescriptionTitle>
-              Učíme malé neplavce od úplných základů až po šikovné závodníky.
-            </S.HeroSectionBannerDescriptionTitle>
+            <VerticalStack gap=".5rem">
+              <S.HeroSectionBannerDescriptionTitle>
+                Kometa plavání
+              </S.HeroSectionBannerDescriptionTitle>
+              <S.HeroSectionBannerDescriptionSubtitle>
+                Učíme malé neplavce od úplných základů až po šikovné závodníky.
+              </S.HeroSectionBannerDescriptionSubtitle>
+            </VerticalStack>
             <Text>
               Patříme k největším a nejúspěšnějším plaveckým klubům v ČR.
               Tradice, profesionalita, zkušenost a radost. To je KOMETA BRNO!
