@@ -168,7 +168,7 @@ export function ScholarCourseForm() {
               Potvrzuji, že jsem se seznámil(a) s{' '}
               <Text as="span" color={primary.main}>
                 <A
-                  href="/files/VSEOBECNE-PODMINKY.pdf"
+                  href="/files/VSEOBECNE_PODMINKY.pdf"
                   rel="noopener noreferrer"
                   target="_blank"
                 >
