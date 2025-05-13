@@ -52,7 +52,7 @@ export function KidCourseForm() {
       <FormItems.FormContainer>
         <FormItems.FormColumn>
           <Headline size="small" color="inherit">
-            Údaje
+            Osobní údaje
           </Headline>
 
           <FormItems.FormColumnItems>
