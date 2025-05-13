@@ -9,7 +9,7 @@ import { SwimmingCategoryId } from '~/types';
 
 const DOCUMENT_ADULT_GDPR = '/files/adult/GDPR_DOSPELI.pdf';
 const DOCUMENT_CHILDREN_GDPR = '/files/adult/GDPR_DETI.pdf';
-const DOCUMENT_ADULT_CONDITIONS = '/files/adult/PODMINKY_PRIJETI_DETI.pdf';
+const DOCUMENT_ADULT_CONDITIONS = '/files/adult/PODMINKY_PRIJETI_DOSPELI.pdf';
 const DOCUMENT_CHILDREN_CONDITIONS =
   '/files/adult/PODMINKY_PRIJETI_DOSPELI.pdf';
 const DOCUMENT_SCHOOL_ACCEPT_CONDITIONS = '/files/school/PODMINKY_PRIJETI.pdf';
