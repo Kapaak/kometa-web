@@ -62,7 +62,7 @@ export function LuzankyDetailSkillLevelSection() {
                           (document) => (
                             <NextLink
                               key={document.title}
-                              href="/files/GDPR.pdf"
+                              href={document.url}
                               download
                             >
                               <Button variant="outlined">
