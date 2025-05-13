@@ -7,10 +7,11 @@ import KindergartenLecture from '~/public/images/swimming-pool/luzanky/service/s
 import SchoolLecture from '~/public/images/swimming-pool/luzanky/service/service-school.png';
 import { SwimmingCategoryId } from '~/types';
 
-const DOCUMENT_GDPR = '/files/GDPR.pdf';
-const DOCUMENT_ADULT_CONDITIONS = '/files/adult/VSEOBECNE_PODMINKY_DOSPELI.pdf';
+const DOCUMENT_ADULT_GDPR = '/files/adult/GDPR_DOSPELI.pdf';
+const DOCUMENT_CHILDREN_GDPR = '/files/adult/GDPR_DETI.pdf';
+const DOCUMENT_ADULT_CONDITIONS = '/files/adult/PODMINKY_PRIJETI_DETI.pdf';
 const DOCUMENT_CHILDREN_CONDITIONS =
-  '/files/children/VSEOBECNE_PODMINKY_DETI.pdf';
+  '/files/adult/PODMINKY_PRIJETI_DOSPELI.pdf';
 const DOCUMENT_SCHOOL_ACCEPT_CONDITIONS = '/files/school/PODMINKY_PRIJETI.pdf';
 const DOCUMENT_SCHOOL_DECLARATION_INFECT_FREE =
   '/files/school/PROHLASENI_O_BEZINFEKCNOSTI.pdf';
@@ -65,7 +66,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     documents: [
       {
         title: 'GDPR',
-        url: DOCUMENT_GDPR,
+        url: DOCUMENT_CHILDREN_GDPR,
       },
       {
         title: 'Podmínky přijetí',
@@ -136,7 +137,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     documents: [
       {
         title: 'GDPR',
-        url: DOCUMENT_GDPR,
+        url: DOCUMENT_CHILDREN_GDPR,
       },
       {
         title: 'Podmínky přijetí',
@@ -203,7 +204,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     documents: [
       {
         title: 'GDPR',
-        url: DOCUMENT_GDPR,
+        url: DOCUMENT_CHILDREN_GDPR,
       },
       {
         title: 'Podmínky přijetí',
@@ -270,10 +271,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     documents: [
       {
         title: 'GDPR',
-        url: DOCUMENT_GDPR,
+        url: DOCUMENT_ADULT_GDPR,
       },
       {
-        title: 'Všeobecné podmínky přijetí',
+        title: 'Podmínky přijetí',
         url: DOCUMENT_ADULT_CONDITIONS,
       },
     ],
@@ -326,7 +327,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     documents: [
       {
         title: 'GDPR',
-        url: DOCUMENT_GDPR,
+        url: DOCUMENT_CHILDREN_GDPR,
       },
       {
         title: 'Podmínky přijetí',
@@ -387,7 +388,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     documents: [
       {
         title: 'GDPR',
-        url: DOCUMENT_GDPR,
+        url: DOCUMENT_CHILDREN_GDPR,
       },
       {
         title: 'Podmínky přijetí',
