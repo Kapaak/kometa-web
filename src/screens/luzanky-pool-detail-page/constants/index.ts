@@ -7,8 +7,24 @@ import KindergartenLecture from '~/public/images/swimming-pool/luzanky/service/s
 import SchoolLecture from '~/public/images/swimming-pool/luzanky/service/service-school.png';
 import { SwimmingCategoryId } from '~/types';
 
+const DOCUMENT_GDPR = '/files/GDPR.pdf';
+const DOCUMENT_ADULT_CONDITIONS = '/files/adult/VSEOBECNE_PODMINKY_DOSPELI.pdf';
+const DOCUMENT_CHILDREN_CONDITIONS =
+  '/files/children/VSEOBECNE_PODMINKY_DETI.pdf';
+const DOCUMENT_SCHOOL_ACCEPT_CONDITIONS = '/files/school/PODMINKY_PRIJETI.pdf';
+const DOCUMENT_SCHOOL_DECLARATION_INFECT_FREE =
+  '/files/school/PROHLASENI_O_BEZINFEKCNOSTI.pdf';
+const DOCUMENT_SCHOOL_DECLARATION_CHILDREN_LIST =
+  '/files/school/SEZNAM_DETI.pdf';
+const DOCUMENT_SCHOOL_DECLARATION_KINDERGARTEN_CONTRACT =
+  '/files/school/SMLOUVA_PRO_SKOLKY.pdf';
+
 type PoolInformation = {
   image: StaticImageData;
+  documents: {
+    title: string;
+    url: string;
+  }[];
   heroSection: {
     description?: string;
     duration?: number;
@@ -46,6 +62,16 @@ type PoolInformation = {
 export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   [SwimmingCategoryId.BASIC]: {
     image: BasicLecture,
+    documents: [
+      {
+        title: 'GDPR',
+        url: DOCUMENT_GDPR,
+      },
+      {
+        title: 'Podmínky přijetí',
+        url: DOCUMENT_CHILDREN_CONDITIONS,
+      },
+    ],
     heroSection: {
       description:
         'Tento kurz je určen pro děti, které teprve začínají s plaváním, nebo pro ty, které už ovládají základy, jako je potápění, kopání a bublání, ale potřebují se naučit správnou techniku plaveckých stylů, zejména znaku a kraula.',
@@ -107,6 +133,16 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   },
   [SwimmingCategoryId.ADVANCED]: {
     image: AdvancedLecture,
+    documents: [
+      {
+        title: 'GDPR',
+        url: DOCUMENT_GDPR,
+      },
+      {
+        title: 'Podmínky přijetí',
+        url: DOCUMENT_CHILDREN_CONDITIONS,
+      },
+    ],
     heroSection: {
       description:
         'Tento kurz plavání je ideální pro děti, které již zvládly základní plavecké dovednosti a chtějí je dále rozvíjet.',
@@ -164,6 +200,16 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   },
   [SwimmingCategoryId.CONDITION]: {
     image: ConditionLecture,
+    documents: [
+      {
+        title: 'GDPR',
+        url: DOCUMENT_GDPR,
+      },
+      {
+        title: 'Podmínky přijetí',
+        url: DOCUMENT_CHILDREN_CONDITIONS,
+      },
+    ],
     heroSection: {
       description:
         'Tento kurz je určen pro děti, které již zvládají základní plavecké styly a chtějí se zaměřit na zlepšení své techniky a vytrvalosti.',
@@ -221,9 +267,19 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   },
   [SwimmingCategoryId.ADULT]: {
     image: AdultLecture,
+    documents: [
+      {
+        title: 'GDPR',
+        url: DOCUMENT_GDPR,
+      },
+      {
+        title: 'Všeobecné podmínky přijetí',
+        url: DOCUMENT_ADULT_CONDITIONS,
+      },
+    ],
     heroSection: {
       description:
-        'Plavání i pro dospělé – zlepšíte si techniku, zapracujete na kondici a zrelaxujete ve vodě.',
+        'Určeno všem nadšencům, kterým bylo již 18 let a chtějí si zlepšit své plavecké dovednosti.',
       duration: 45,
       poolParameters: {
         poolLength: '25 m',
@@ -252,9 +308,43 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         ],
       },
     },
+    skillLevelSection: {
+      data: [
+        {
+          title: 'Nikdy není pozdě začít',
+          descriptions: [
+            {
+              text: 'Plavání je jednou z nejlepších aktivit, které mohou dospělí zařadit do svého života. Ať už jste nikdy neplavali, nebo se chcete zlepšit ve své technice, je důležité si uvědomit, že nikdy není pozdě začít. Plavání přináší nespočet zdravotních benefitů, je šetrné ke kloubům a je vhodné pro lidi všech věkových kategorií a úrovní fyzické zdatnosti. Mnoho dospělých může mít obavy z toho, že je „pozdě“ začít, nebo že budou mít potíže se zvládnutím základů. Pravda je ale taková, že je normální cítit nervozitu, ale plavání je dovednost, kterou lze rozvíjet v jakémkoli věku.',
+            },
+          ],
+        },
+      ],
+    },
   },
   [SwimmingCategoryId.KINDERGARTEN]: {
     image: KindergartenLecture,
+    documents: [
+      {
+        title: 'GDPR',
+        url: DOCUMENT_GDPR,
+      },
+      {
+        title: 'Podmínky přijetí',
+        url: DOCUMENT_SCHOOL_ACCEPT_CONDITIONS,
+      },
+      {
+        title: 'Prohlášení o bezinfekčnosti',
+        url: DOCUMENT_SCHOOL_DECLARATION_INFECT_FREE,
+      },
+      {
+        title: 'Seznam dětí',
+        url: DOCUMENT_SCHOOL_DECLARATION_CHILDREN_LIST,
+      },
+      {
+        title: 'Smlouva pro školky',
+        url: DOCUMENT_SCHOOL_DECLARATION_KINDERGARTEN_CONTRACT,
+      },
+    ],
     heroSection: {
       description:
         'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů.',
@@ -274,9 +364,48 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         'Získávají důvěru ve své plavecké dovednosti a zlepšují koordinaci',
       ],
     },
+    skillLevelSection: {
+      data: [
+        {
+          title: 'Rozdělení do skupin',
+          descriptions: [
+            {
+              label: 'Rybička',
+              text: 'Tento level je určen pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
+            },
+            {
+              label: 'Delfínek',
+              text: 'Pro děti, které už zvládají potápění, kopání a bublání. Zaměřujeme se na výuku základů plaveckých stylů, zejména znaku a kraula, s cílem zlepšit techniku a koordinaci.',
+            },
+          ],
+        },
+      ],
+    },
   },
   [SwimmingCategoryId.SCHOOL]: {
     image: SchoolLecture,
+    documents: [
+      {
+        title: 'GDPR',
+        url: DOCUMENT_GDPR,
+      },
+      {
+        title: 'Podmínky přijetí',
+        url: DOCUMENT_SCHOOL_ACCEPT_CONDITIONS,
+      },
+      {
+        title: 'Prohlášení o bezinfekčnosti',
+        url: DOCUMENT_SCHOOL_DECLARATION_INFECT_FREE,
+      },
+      {
+        title: 'Seznam dětí',
+        url: DOCUMENT_SCHOOL_DECLARATION_CHILDREN_LIST,
+      },
+      {
+        title: 'Smlouva pro školky',
+        url: DOCUMENT_SCHOOL_DECLARATION_KINDERGARTEN_CONTRACT,
+      },
+    ],
     heroSection: {
       description:
         'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů.',
@@ -294,6 +423,23 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         'Hravou formou se seznamujeme s vodním prostředím',
         'Děti se naučí základy plaveckých stylů, jako je znak a kraul',
         'Získávají důvěru ve své plavecké dovednosti a zlepšují koordinaci',
+      ],
+    },
+    skillLevelSection: {
+      data: [
+        {
+          title: 'Rozdělení do skupin',
+          descriptions: [
+            {
+              label: 'Rybička',
+              text: 'Tento level je určen pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
+            },
+            {
+              label: 'Delfínek',
+              text: 'Pro děti, které už zvládají potápění, kopání a bublání. Zaměřujeme se na výuku základů plaveckých stylů, zejména znaku a kraula, s cílem zlepšit techniku a koordinaci.',
+            },
+          ],
+        },
       ],
     },
   },

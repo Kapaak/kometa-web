@@ -41,7 +41,7 @@ export function LuzankyContactSection() {
                 Plavání se věnuji od malička a prošla jsem si celou plaveckou
                 přípravku. Postupem času jsem se začala věnovat trénování dětí a
                 nyní vedu plavecké kurzy a závodní přípravku plavců na
-                Lužánkách. Ve volném čase ráda cestuji a poznávám nová místa.
+                Lužánkách.
               </Text>
               <S.BorderedRow>
                 <Phone size={22} weight="light" />

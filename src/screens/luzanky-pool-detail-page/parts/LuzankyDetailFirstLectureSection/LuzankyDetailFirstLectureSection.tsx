@@ -1,5 +1,5 @@
 import { CheckCircle } from '@phosphor-icons/react';
-import FirstLectureImage from '~/public/images/swimming-pool/luzanky/service/service-advanced.png';
+import FirstLectureImage from '~/public/images/swimming-pool-detail/kid_in_pool.png';
 import { Headline, MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
 import { IconText } from '~/ui/components/molecules';
 import { luzankyPoolDetailInformation } from '../../constants';

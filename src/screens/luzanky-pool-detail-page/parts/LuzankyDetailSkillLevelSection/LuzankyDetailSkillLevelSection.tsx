@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import {
   Button,
@@ -51,18 +51,31 @@ export function LuzankyDetailSkillLevelSection() {
                       </Flex>
                     </div>
                   ))}
+                  <Flex gap="1rem" wrap="wrap">
+                    {swimmingPoolDetailInformation?.documents?.map(
+                      (document) => (
+                        <NextLink
+                          key={document.title}
+                          href="/files/GDPR.pdf"
+                          download
+                        >
+                          <Button variant="outlined">{document.title}</Button>
+                        </NextLink>
+                      )
+                    )}
+                  </Flex>
                 </VerticalStack>
               </Flex>
             ))}
 
             {swimmingPoolDetail?.sampleTraining && (
-              <Link
+              <NextLink
                 href={swimmingPoolDetail?.sampleTraining}
                 download
                 style={{ alignSelf: 'flex-start' }}
               >
                 <Button>{actionButtonLabel}</Button>
-              </Link>
+              </NextLink>
             )}
           </S.SectionDescriptionContainer>
         </S.SectionContainer>
