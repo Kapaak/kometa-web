@@ -8,28 +8,98 @@
 
 <url>
   <loc>https://www.kometaplavani.cz/</loc>
-  <lastmod>2024-10-20T21:29:00+00:00</lastmod>
+  <lastmod>2025-05-13T17:46:59+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://www.kometaplavani.cz/dostupne-lekce</loc>
-  <lastmod>2024-10-20T21:29:00+00:00</lastmod>
+  <lastmod>2025-05-13T17:46:59+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.kometaplavani.cz/blog</loc>
-  <lastmod>2024-10-20T21:29:00+00:00</lastmod>
+  <lastmod>2025-05-13T17:46:59+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.kometaplavani.cz/kurzy-pro-deti</loc>
-  <lastmod>2024-10-20T21:29:01+00:00</lastmod>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.kometaplavani.cz/tabory</loc>
-  <lastmod>2024-10-20T21:29:01+00:00</lastmod>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
   <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky</loc>
+  <lastmod>2025-05-13T17:47:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky/zakladni-plavani</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky/zakladni-plavani/prihlasky</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky/zdokonalovaci-plavani</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky/zdokonalovaci-plavani/prihlasky</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky/kondicni-plavani</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky/kondicni-plavani/prihlasky</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky/plavani-pro-dospele</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky/plavani-pro-dospele/prihlasky</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky/skolky</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/bazeny/luzanky/skolky/prihlasky</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/files/GDPR.pdf</loc>
+  <lastmod>2025-05-13T17:47:03+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/files/children/VSEOBECNE_PODMINKY_DETI.pdf</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://www.kometaplavani.cz/files/adult/VSEOBECNE_PODMINKY_DOSPELI.pdf</loc>
+  <lastmod>2025-05-13T17:47:04+00:00</lastmod>
+  <priority>0.41</priority>
 </url>
 
 
