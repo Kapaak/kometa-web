@@ -85,20 +85,26 @@ export function LuzankyDetailHeroSection() {
                 <Text variant="body2">
                   Více informací o platbě najdete v sekci{' '}
                   <Text as="span" variant="body3" color={primary.main}>
-                    <S.Link href="/bazeny/luzanky#basic-information" passHref>
-                      placení a vouchery
+                    <S.Link href="/bazeny/luzanky#zakladni-informace" passHref>
+                      placení
+                      {categoryId !== SwimmingCategoryId.ADULT
+                        ? ' a vouchery'
+                        : ''}
                     </S.Link>
                   </Text>
+                  {categoryId === SwimmingCategoryId.ADULT
+                    ? '. Uplatnění rodičovských voucherů z Brno ID bohužel není možné.'
+                    : ''}
                   . Přehled dnů, kdy se nekonají lekce, je uveden v části{' '}
                   <Text as="span" variant="body3" color={primary.main}>
-                    <S.Link href="/bazeny/luzanky#basic-information">
+                    <S.Link href="/bazeny/luzanky#zakladni-informace">
                       Kdy neplaveme
                     </S.Link>
                   </Text>
                   . Omlouvání z lekce není nutné. Snažíme se nabízet náhrady,
                   pokud je to možné, v termínech, které nejsou obsazené.{' '}
                   <Text as="span" variant="body3" color={primary.main}>
-                    <S.Link href="/bazeny/luzanky#basic-information">
+                    <S.Link href="/bazeny/luzanky#zakladni-informace">
                       Více o absencích a náhradách
                     </S.Link>
                   </Text>

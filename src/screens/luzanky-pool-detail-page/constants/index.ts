@@ -224,10 +224,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     skillLevelSection: {
       data: [
         {
-          title: 'Co když dítě je dovednostmi na pomezí',
+          title: 'Nikdy není pozdě začít',
           descriptions: [
             {
-              text: 'Pokud dítě není zcela připravené na tuto úroveň, ale již má některé dovednosti, doporučujeme přihlásit ho na termín, kde probíhají jak kurzy základního, tak zdokonalovacího plavání. Díky tomu bude moci dítě střídat malý a velký bazén podle potřeby, což mu pomáhá adaptovat se na nové prostředí vlastním tempem.',
+              text: 'Plavání je jednou z nejlepších aktivit, které mohou děti zařadit do svého života. Přináší nespočet zdravotních benefitů, je šetrné ke kloubům a je vhodné pro lidi všech věkových kategorií a úrovní fyzické zdatnosti.',
             },
           ],
         },
@@ -256,7 +256,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       arrivalTime: {
         descriptions: [
           'Doporučujeme přijít 15 minut před začátkem lekce. Trenér bude čekat u turniketu poblíž pokladen a rozdá dětem čipy (modré) pro vstup do areálu bazénu. Příchod je možný nejpozději 5 minut před začátkem lekce, aby děti měly dostatek času na převlečení a přípravu. Pozdní příchody mohou narušit časový harmonogram lekce.',
-          'Děti mají k dispozici společné šatny, kde si je převezme trenér. Doprovod má nárok na doprovodný čip (černý), který je platný na 15 minut a slouží k pomoci s převlékáním nebo oblékáním dítěte.',
+          'Děti použijí čip k uzamčení skříňky, kterou si mohou v areálu vybrat. Poté se setkají s trenérum u 25m bazénu. Čip je třeba mít na ruce po celou dobu výuky. Po skončení lekce a převlečení je nutné čip vložit do turniketu, aby byl umožněn výstup z areálu.',
         ],
       },
       childHandoverProcess: {

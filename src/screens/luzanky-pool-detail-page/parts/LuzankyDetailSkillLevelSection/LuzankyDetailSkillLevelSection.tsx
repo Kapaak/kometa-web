@@ -53,7 +53,7 @@ export function LuzankyDetailSkillLevelSection() {
                   ))}
 
                   {swimmingPoolDetailInformation?.documents && (
-                    <VerticalStack gap="1rem">
+                    <VerticalStack gap="2.5rem" padding="2rem 0 0">
                       <Headline size="small" as="h3">
                         Dokumenty ke stažení
                       </Headline>

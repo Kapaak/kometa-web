@@ -8,7 +8,7 @@ export function LuzankyBasicInfoSection() {
   const { data } = useGetSwimmingPoolMainPageById(SwimmingPoolId.LUZANKY);
 
   return (
-    <S.BasicInfoSection id="basic-information">
+    <S.BasicInfoSection id="zakladni-informace">
       <MaxWidth>
         <S.SectionContainer>
           {/* //TODO: remove any type */}
