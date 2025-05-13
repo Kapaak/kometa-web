@@ -28,7 +28,7 @@ export function LuzankyDetailSkillLevelSection() {
   }
 
   return (
-    <S.Section>
+    <S.SkillLevelSection>
       <MaxWidth variant={hasImages ? 'main' : 'small'}>
         <S.SectionContainer>
           <Gallery images={swimmingPoolDetail?.imageGallery} />
@@ -67,6 +67,6 @@ export function LuzankyDetailSkillLevelSection() {
           </S.SectionDescriptionContainer>
         </S.SectionContainer>
       </MaxWidth>
-    </S.Section>
+    </S.SkillLevelSection>
   );
 }

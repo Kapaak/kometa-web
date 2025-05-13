@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components';
+import { Section } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
-export const Section = styled.section`
-  padding: 4rem 2rem;
+export const ContactSection = styled(Section).attrs({ variant: 'tall' })`
   background-color: ${({ theme }) => theme.colors.primary.light};
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {
-      padding: 5rem 2rem 10rem;
+      padding-bottom: 10rem;
     }
   `}
 `;

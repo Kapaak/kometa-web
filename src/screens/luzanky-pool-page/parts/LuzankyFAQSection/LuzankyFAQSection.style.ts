@@ -1,11 +1,10 @@
 import NextImage from 'next/image';
 
 import styled, { css } from 'styled-components';
+import { Section } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
-export const Section = styled.section`
-  padding: 2rem;
-`;
+export const FAQSection = styled(Section)``;
 
 export const SectionContainer = styled.div`
   display: flex;

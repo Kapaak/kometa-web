@@ -14,7 +14,6 @@ import { SanityLecture } from '~/domains';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import { SwimmingCategoryId, SwimmingPoolId } from '~/types';
 import {
-  A,
   Button,
   Headline,
   MaxWidth,
@@ -59,7 +58,7 @@ export function LuzankyDetailHeroSection() {
     }));
 
   return (
-    <S.Section>
+    <S.HeroSection>
       <MaxWidth>
         <S.SectionCard>
           <S.SectionContainer>
@@ -87,7 +86,7 @@ export function LuzankyDetailHeroSection() {
                   Více informací o platbě najdete v sekci{' '}
                   <Text as="span" variant="body3" color={primary.main}>
                     <S.Link href="/bazeny/luzanky#basic-information" passHref>
-                      <A>placení a vouchery</A>
+                      placení a vouchery
                     </S.Link>
                   </Text>
                   . Přehled dnů, kdy se nekonají lekce, je uveden v části{' '}
@@ -196,7 +195,7 @@ export function LuzankyDetailHeroSection() {
           </S.SectionContainer>
         </S.SectionCard>
       </MaxWidth>
-    </S.Section>
+    </S.HeroSection>
   );
 }
 

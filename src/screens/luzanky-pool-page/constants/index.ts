@@ -76,7 +76,7 @@ export const services: Service[] = [
     tags: ['děti od 4 let'],
     href: 'https://www.primestak-brno.cz/',
     src: Camps,
-    alt: 'Plavec s plaveckými brýlemi v mělké vodě na bazénu Lužánky',
+    alt: 'Účastnice příměstského tábora na bazénu Lužánky.',
     applicationDisabled: true,
   },
 ];

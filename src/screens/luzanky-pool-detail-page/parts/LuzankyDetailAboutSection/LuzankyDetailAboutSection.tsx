@@ -20,7 +20,7 @@ export function LuzankyDetailAboutSection() {
     swimmingPoolDetailInformation?.aboutSection ?? {};
 
   return (
-    <S.Section>
+    <S.AboutSection>
       <MaxWidth>
         <S.SectionContainer>
           <S.SectionDescriptionContainer>
@@ -57,6 +57,6 @@ export function LuzankyDetailAboutSection() {
           </S.SectionImageContainer>
         </S.SectionContainer>
       </MaxWidth>
-    </S.Section>
+    </S.AboutSection>
   );
 }

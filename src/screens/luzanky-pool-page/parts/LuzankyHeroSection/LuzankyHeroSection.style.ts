@@ -2,12 +2,10 @@ import Image from 'next/image';
 
 import styled, { css } from 'styled-components';
 
-import { Flex, Text, VerticalStack } from '~/ui/components/atoms';
+import { Flex, Section, Text, VerticalStack } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
-export const HeroSection = styled.section`
-  padding: 2rem 2rem 0;
-`;
+export const HeroSection = styled(Section)``;
 
 export const HeroSectionBanner = styled(Flex)`
   padding: 2rem;

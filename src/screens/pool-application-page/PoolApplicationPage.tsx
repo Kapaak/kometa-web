@@ -25,8 +25,8 @@ export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
 
   return (
     <PoolApplicationLayout>
-      <MaxWidth>
-        <S.Section>
+      <S.ApplicationPageSection>
+        <MaxWidth>
           <Headline>{getCategoryNameByCategoryId(categoryId)}</Headline>
           <ApplicationFormContextProvider
             swimmingPoolId={SwimmingPoolId.LUZANKY}
@@ -38,8 +38,8 @@ export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
               templateId={templateId}
             />
           </ApplicationFormContextProvider>
-        </S.Section>
-      </MaxWidth>
+        </MaxWidth>
+      </S.ApplicationPageSection>
     </PoolApplicationLayout>
   );
 }

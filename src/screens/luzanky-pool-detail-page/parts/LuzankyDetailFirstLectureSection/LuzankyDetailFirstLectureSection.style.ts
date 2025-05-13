@@ -1,22 +1,10 @@
 import NextImage from 'next/image';
 import styled, { css } from 'styled-components';
-import { VerticalStack } from '~/ui/components/atoms';
+import { Section, VerticalStack } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
-export const Section = styled.section`
+export const FirstLectureSection = styled(Section).attrs({ variant: 'tall' })`
   color: ${({ theme }) => theme.colors.primary.main};
-
-  ${({ theme }) => css`
-    @media (${minBreakpoint(theme.breakpoints.lg)}) {
-      padding: 2rem 0rem 6rem;
-    }
-  `}
-
-  ${({ theme }) => css`
-    @media (${minBreakpoint(theme.breakpoints.lg)}) {
-      padding: 2rem 0rem 6rem;
-    }
-  `}
 `;
 
 export const FirstLectureContainer = styled(VerticalStack)`

@@ -1,20 +1,12 @@
 import NextLink from 'next/link';
 import styled, { css } from 'styled-components';
-import { Card, Flex, VerticalStack } from '~/ui/components/atoms';
+import { Card, Flex, Section, VerticalStack } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
-export const Section = styled.section`
-  padding: 2rem;
-
-  ${({ theme }) => css`
-    @media (${minBreakpoint(theme.breakpoints.md)}) {
-      padding: 2rem 2rem 4rem;
-    }
-  `}
-
+export const HeroSection = styled(Section)`
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {
-      padding: 2rem 2rem 6rem;
+      padding-bottom: 6rem;
     }
   `}
 `;

@@ -8,7 +8,7 @@ export function LuzankyBasicInfoSection() {
   const { data } = useGetSwimmingPoolMainPageById(SwimmingPoolId.LUZANKY);
 
   return (
-    <S.Section id="basic-information">
+    <S.BasicInfoSection id="basic-information">
       <MaxWidth>
         <S.SectionContainer>
           {/* //TODO: remove any type */}
@@ -22,6 +22,6 @@ export function LuzankyBasicInfoSection() {
           ))}
         </S.SectionContainer>
       </MaxWidth>
-    </S.Section>
+    </S.BasicInfoSection>
   );
 }

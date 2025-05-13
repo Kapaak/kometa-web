@@ -4,7 +4,7 @@ import * as S from './LuzankyContactSection.style';
 
 export function LuzankyContactSection() {
   return (
-    <S.Section>
+    <S.ContactSection>
       <MaxWidth>
         <Headline>Kontakt</Headline>
 
@@ -59,6 +59,6 @@ export function LuzankyContactSection() {
           </S.Column>
         </S.SectionRow>
       </MaxWidth>
-    </S.Section>
+    </S.ContactSection>
   );
 }

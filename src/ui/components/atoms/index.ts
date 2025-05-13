@@ -23,6 +23,7 @@ export * from './NextSanityImage';
 export * from './Popover';
 export * from './RadioGroup';
 export * from './Scrollable';
+export * from './Section';
 export * from './Select';
 export * from './Skeleton';
 export * from './Sponsor';

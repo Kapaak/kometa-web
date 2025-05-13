@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components';
-import { Flex } from '~/ui/components/atoms';
+import { Flex, Section } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
-export const ServiceSection = styled.section`
+export const ServiceSection = styled(Section)`
   scroll-margin-top: 10rem;
-  padding: 1.5rem 2rem;
 `;
 
 export const Services = styled(Flex)`

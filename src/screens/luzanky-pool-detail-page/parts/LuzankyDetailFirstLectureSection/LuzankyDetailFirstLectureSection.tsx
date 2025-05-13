@@ -20,7 +20,7 @@ export function LuzankyDetailFirstLectureSection({}: LuzankyDetailFirstLectureSe
   if (!swimmingPoolDetailInformation?.initialLectureSection) return null;
 
   return (
-    <S.Section>
+    <S.FirstLectureSection>
       <MaxWidth>
         <S.FirstLectureContainer>
           <S.SectionWrapper>
@@ -88,6 +88,6 @@ export function LuzankyDetailFirstLectureSection({}: LuzankyDetailFirstLectureSe
           </S.SectionWrapper>
         </S.FirstLectureContainer>
       </MaxWidth>
-    </S.Section>
+    </S.FirstLectureSection>
   );
 }

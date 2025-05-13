@@ -1,5 +1,4 @@
 import styled from 'styled-components';
+import { Section } from '~/ui/components/atoms';
 
-export const Section = styled.section`
-  padding: 2rem;
-`;
+export const ApplicationPageSection = styled(Section)``;

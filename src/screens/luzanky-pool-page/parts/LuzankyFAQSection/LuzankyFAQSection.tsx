@@ -18,7 +18,7 @@ export function LuzankyFAQSection() {
   });
 
   return (
-    <S.Section>
+    <S.FAQSection>
       <MaxWidth>
         <S.SectionContainer>
           <S.TextContainer>
@@ -35,6 +35,6 @@ export function LuzankyFAQSection() {
           </S.ImageContainer>
         </S.SectionContainer>
       </MaxWidth>
-    </S.Section>
+    </S.FAQSection>
   );
 }
