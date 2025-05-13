@@ -51,19 +51,29 @@ export function LuzankyDetailSkillLevelSection() {
                       </Flex>
                     </div>
                   ))}
-                  <Flex gap="1rem" wrap="wrap">
-                    {swimmingPoolDetailInformation?.documents?.map(
-                      (document) => (
-                        <NextLink
-                          key={document.title}
-                          href="/files/GDPR.pdf"
-                          download
-                        >
-                          <Button variant="outlined">{document.title}</Button>
-                        </NextLink>
-                      )
-                    )}
-                  </Flex>
+
+                  {swimmingPoolDetailInformation?.documents && (
+                    <VerticalStack gap="1rem">
+                      <Headline size="small" as="h3">
+                        Dokumenty ke stažení
+                      </Headline>
+                      <Flex gap="1rem" wrap="wrap">
+                        {swimmingPoolDetailInformation.documents?.map(
+                          (document) => (
+                            <NextLink
+                              key={document.title}
+                              href="/files/GDPR.pdf"
+                              download
+                            >
+                              <Button variant="outlined">
+                                {document.title}
+                              </Button>
+                            </NextLink>
+                          )
+                        )}
+                      </Flex>
+                    </VerticalStack>
+                  )}
                 </VerticalStack>
               </Flex>
             ))}
