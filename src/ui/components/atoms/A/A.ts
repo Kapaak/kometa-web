@@ -1,9 +1,10 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import { Text } from '../Text'
+import { Text } from '../Text';
 
 export const A = styled(Text).attrs({ as: 'a' })`
   &:hover {
     text-decoration: underline;
+    text-decoration-color: inherit;
   }
-`
+`;

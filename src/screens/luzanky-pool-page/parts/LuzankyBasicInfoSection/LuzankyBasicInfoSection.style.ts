@@ -5,6 +5,7 @@ import { minBreakpoint } from '~/utils/dimensions';
 export const Section = styled.section`
   padding: 2rem;
   background-color: ${({ theme }) => theme.colors.primary.light};
+  scroll-margin: 6rem;
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {

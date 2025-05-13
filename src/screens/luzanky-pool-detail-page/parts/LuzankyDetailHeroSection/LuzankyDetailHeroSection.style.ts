@@ -61,7 +61,7 @@ export const SectionDescriptionContainer = styled(Flex)`
 export const SectionInformationContainer = styled.div`
   display: grid;
   gap: 2rem;
-  margin-top: 4rem;
+  margin-top: 2rem;
 
   li {
     list-style: none;
@@ -69,6 +69,7 @@ export const SectionInformationContainer = styled.div`
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.md)}) {
+      margin-top: 4rem;
       grid-template-columns: 1.5fr 2fr;
     }
   `}
@@ -118,4 +119,13 @@ export const SectionActionsContainer = styled(VerticalStack)`
 export const SectionActionLink = styled(NextLink)`
   align-self: flex-end;
   margin-top: auto;
+`;
+
+export const Link = styled(NextLink)`
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: inherit;
+  }
 `;

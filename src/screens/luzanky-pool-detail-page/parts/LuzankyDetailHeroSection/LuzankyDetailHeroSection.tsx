@@ -14,6 +14,7 @@ import { SanityLecture } from '~/domains';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import { SwimmingCategoryId, SwimmingPoolId } from '~/types';
 import {
+  A,
   Button,
   Headline,
   MaxWidth,
@@ -68,7 +69,6 @@ export function LuzankyDetailHeroSection() {
                   {getCategoryNameByCategoryId(categoryId)}
                 </Headline>
                 <Text variant="body2">{description}</Text>
-
                 {minimumLecturePrice > 0 && (
                   <S.SectionPriceContainer>
                     <Text variant="body3">
@@ -84,8 +84,26 @@ export function LuzankyDetailHeroSection() {
                 )}
 
                 <Text variant="body2">
-                  Součástí ceny je vždy pronájem bazénu, profesionální trenéři a
-                  kvalitní pomůcky, které pomohou zefektivnit výuku plavání.
+                  Více informací o platbě najdete v sekci{' '}
+                  <Text as="span" variant="body3" color={primary.main}>
+                    <S.Link href="/bazeny/luzanky#basic-information" passHref>
+                      <A>placení a vouchery</A>
+                    </S.Link>
+                  </Text>
+                  . Přehled dnů, kdy se nekonají lekce, je uveden v části{' '}
+                  <Text as="span" variant="body3" color={primary.main}>
+                    <S.Link href="/bazeny/luzanky#basic-information">
+                      Kdy neplaveme
+                    </S.Link>
+                  </Text>
+                  . Omlouvání z lekce není nutné. Snažíme se nabízet náhrady,
+                  pokud je to možné, v termínech, které nejsou obsazené.{' '}
+                  <Text as="span" variant="body3" color={primary.main}>
+                    <S.Link href="/bazeny/luzanky#basic-information">
+                      Více o absencích a náhradách
+                    </S.Link>
+                  </Text>
+                  .
                 </Text>
               </S.SectionTextContainer>
 
