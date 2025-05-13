@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-import { Scrollable as SScrollable } from '~/ui/components/atoms';
+import { Section, Scrollable as SScrollable } from '~/ui/components/atoms';
 
-export const AvailableCoursesSection = styled.section`
-  padding: 0 2rem;
+export const AvailableCoursesSection = styled(Section)`
   margin-bottom: 4rem;
 `;
 

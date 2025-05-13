@@ -8,7 +8,7 @@ import { data } from './Sponsors.data';
 
 export const Sponsors = () => {
   return (
-    <S.Sponsors id="sponzori">
+    <S.SponsorsSection id="sponzori">
       <Marquee pauseOnHover gradientColor="248, 248, 248">
         <S.SponsorContainer direction="row" align="center" gap="5rem">
           {data.map((d, i) => (
@@ -16,6 +16,6 @@ export const Sponsors = () => {
           ))}
         </S.SponsorContainer>
       </Marquee>
-    </S.Sponsors>
+    </S.SponsorsSection>
   );
 };

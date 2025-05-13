@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components';
 
-import { VerticalStack } from '~/ui/components/atoms';
+import { Section, VerticalStack } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
-export const KidsCoursesSection = styled.section`
-  padding: 0 2rem;
+export const KidsCoursesSection = styled(Section)`
   margin-bottom: 4rem;
 `;
 

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { Headline } from '~/ui/components/atoms';
+import { Headline, Section } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const ServicesSectionContainer = styled.div`
@@ -36,7 +36,6 @@ export const ServiceSectionHeadline = styled(Headline)`
   `}
 `;
 
-export const ServicesSection = styled.section`
-  padding: 0 2rem;
+export const ServicesSection = styled(Section)`
   scroll-margin-top: 11rem;
 `;

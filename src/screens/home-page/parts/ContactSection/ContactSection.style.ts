@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-import { Text, VerticalStack } from '~/ui/components/atoms';
+import { Section, Text, VerticalStack } from '~/ui/components/atoms';
 
-export const ContactSection = styled.section`
-  padding: 2rem 2rem 0;
+export const ContactSection = styled(Section)`
   scroll-margin-top: 10rem;
 `;
 
