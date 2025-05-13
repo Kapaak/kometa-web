@@ -8,6 +8,7 @@ import SchoolLecture from '~/public/images/swimming-pool/luzanky/service/service
 import { SwimmingCategoryId } from '~/types';
 
 const DOCUMENT_GDPR = '/files/GDPR.pdf';
+const VISITOR_BOARD = '/files/NAVSTEVNI_RAD.pdf';
 const DOCUMENT_ADULT_CONDITIONS = '/files/adult/PODMINKY_PRIJETI_DOSPELI.pdf';
 const DOCUMENT_CHILDREN_CONDITIONS =
   '/files/children/PODMINKY_PRIJETI_DETI.pdf';
@@ -70,6 +71,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       {
         title: 'Podmínky přijetí',
         url: DOCUMENT_CHILDREN_CONDITIONS,
+      },
+      {
+        title: 'Návštěvní řád',
+        url: VISITOR_BOARD,
       },
     ],
     heroSection: {
@@ -142,6 +147,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         title: 'Podmínky přijetí',
         url: DOCUMENT_CHILDREN_CONDITIONS,
       },
+      {
+        title: 'Návštěvní řád',
+        url: VISITOR_BOARD,
+      },
     ],
     heroSection: {
       description:
@@ -209,6 +218,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         title: 'Podmínky přijetí',
         url: DOCUMENT_CHILDREN_CONDITIONS,
       },
+      {
+        title: 'Návštěvní řád',
+        url: VISITOR_BOARD,
+      },
     ],
     heroSection: {
       description:
@@ -275,6 +288,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       {
         title: 'Podmínky přijetí',
         url: DOCUMENT_ADULT_CONDITIONS,
+      },
+      {
+        title: 'Návštěvní řád',
+        url: VISITOR_BOARD,
       },
     ],
     heroSection: {
@@ -344,6 +361,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         title: 'Smlouva pro školky',
         url: DOCUMENT_SCHOOL_DECLARATION_KINDERGARTEN_CONTRACT,
       },
+      {
+        title: 'Návštěvní řád',
+        url: VISITOR_BOARD,
+      },
     ],
     heroSection: {
       description:
@@ -404,6 +425,10 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       {
         title: 'Smlouva pro školky',
         url: DOCUMENT_SCHOOL_DECLARATION_KINDERGARTEN_CONTRACT,
+      },
+      {
+        title: 'Návštěvní řád',
+        url: VISITOR_BOARD,
       },
     ],
     heroSection: {
