@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { Section } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
-export const FAQSection = styled(Section)``;
+export const FAQSection = styled(Section).attrs({ variant: 'tall' })``;
 
 export const SectionContainer = styled.div`
   display: flex;

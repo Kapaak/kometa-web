@@ -54,6 +54,8 @@ export function ApplicationForm({
   const { sendEmail, isLoading: isSendingEmail } = useSendEmail();
 
   const form = useForm<ApplicationFormValues>({
+    mode: 'all',
+    reValidateMode: 'onChange',
     values: {
       lessonsPrice: lectures?.[0]?.priceSemester ?? 0,
       gdprConsent: false,

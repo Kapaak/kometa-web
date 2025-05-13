@@ -16,10 +16,10 @@ function stylesByVariant(variant: Variant, theme: DefaultTheme) {
 
   if (variant === 'tall') {
     return css`
-      padding: 4rem 2rem;
+      padding: 5rem 2rem;
 
       @media (${minBreakpoint(theme.breakpoints.md)}) {
-        padding: 5rem 4rem;
+        padding: 10rem 4rem;
       }
     `;
   }
