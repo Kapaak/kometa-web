@@ -33,6 +33,7 @@ export function prepareAdultSpreadsheetValues(
     String(adultData?.lastName ?? ''),
     String(adultData?.firstName ?? ''),
     String(adultData?.nationality ?? ''),
+    String(adultData?.personalIdNum ?? ''),
     String(adultData?.dateOfBirth ?? ''),
     String(adultData?.gender ?? ''),
     String(adultData?.streetAddress ?? ''),

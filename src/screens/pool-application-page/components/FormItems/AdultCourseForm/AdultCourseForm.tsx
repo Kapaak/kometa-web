@@ -75,6 +75,17 @@ export function AdultCourseForm() {
               required="Pohlaví musí být vyplněno"
             />
             <ControlledInput
+              name="personalIdNum"
+              label="Rodné číslo dítěte"
+              placeholder="Rodné číslo dítěte (př. 045421/1234)"
+              pattern={{
+                value: /^\d{6}\/\d{3,4}$/,
+                message:
+                  'Rodné číslo v nesprávném formátu. Příklad: 045421/1234.',
+              }}
+              required="Rodné číslo musí být vyplněno."
+            />
+            <ControlledInput
               name="dateOfBirth"
               label="Datum narození"
               placeholder="Datum narození"
