@@ -3,6 +3,7 @@ import 'yet-another-react-lightbox/styles.css';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { TransformedSwimmingPoolDetail } from '~/domains';
+import { Skeleton } from '~/ui/components/atoms';
 import { GalleryImageSlide } from '../GalleryImageSlide';
 import * as S from './Gallery.style';
 
@@ -12,11 +13,12 @@ const LightboxComponent = dynamic(() => import('yet-another-react-lightbox'), {
 
 interface GalleryProps {
   images?: TransformedSwimmingPoolDetail['imageGallery'];
+  isLoading?: boolean;
 }
 
 const MAX_DISPLAYED_IMAGES = 4;
 
-export function Gallery({ images }: GalleryProps) {
+export function Gallery({ images, isLoading }: GalleryProps) {
   const [lightBoxOpen, setLightBoxOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -30,25 +32,35 @@ export function Gallery({ images }: GalleryProps) {
   };
   return (
     <>
-      <S.ImageGaleryGrid hasImages={(images?.length ?? 0) > 0}>
-        {images?.map(
-          (image, index) =>
-            image?.url && (
-              <S.ClickableImageContainer
-                key={index}
-                onClick={() => handleImageClick(index)}
-                hiddenImagesCount={
-                  (images?.length ?? 0) > MAX_DISPLAYED_IMAGES &&
-                  index === MAX_DISPLAYED_IMAGES - 1
-                    ? (images?.length ?? 0) - MAX_DISPLAYED_IMAGES
-                    : undefined
-                }
-              >
-                <S.GalleryImage src={image.url} alt={image?.alt ?? ''} fill />
-              </S.ClickableImageContainer>
-            )
-        )}
-      </S.ImageGaleryGrid>
+      {isLoading && (
+        <S.ImageGaleryGrid hasImages={isLoading}>
+          <Skeleton height="100%" borderRadius="1rem" />
+          <Skeleton height="100%" borderRadius="1rem" />
+          <Skeleton height="100%" borderRadius="1rem" />
+          <Skeleton height="100%" borderRadius="1rem" />
+        </S.ImageGaleryGrid>
+      )}
+      {!isLoading && (
+        <S.ImageGaleryGrid hasImages={(images?.length ?? 0) > 0}>
+          {images?.map(
+            (image, index) =>
+              image?.url && (
+                <S.ClickableImageContainer
+                  key={index}
+                  onClick={() => handleImageClick(index)}
+                  hiddenImagesCount={
+                    (images?.length ?? 0) > MAX_DISPLAYED_IMAGES &&
+                    index === MAX_DISPLAYED_IMAGES - 1
+                      ? (images?.length ?? 0) - MAX_DISPLAYED_IMAGES
+                      : undefined
+                  }
+                >
+                  <S.GalleryImage src={image.url} alt={image?.alt ?? ''} fill />
+                </S.ClickableImageContainer>
+              )
+          )}
+        </S.ImageGaleryGrid>
+      )}
       <LightboxComponent
         open={lightBoxOpen}
         index={selectedImageIndex}

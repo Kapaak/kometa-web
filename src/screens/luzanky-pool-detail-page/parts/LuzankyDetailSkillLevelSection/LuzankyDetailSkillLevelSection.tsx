@@ -13,7 +13,8 @@ import { luzankyPoolDetailInformation } from '../../constants';
 import * as S from './LuzankyDetailSkillLevelSection.style';
 
 export function LuzankyDetailSkillLevelSection() {
-  const { swimmingPoolDetail, categoryId } = useSwimmingPoolDetailPageContext();
+  const { swimmingPoolDetail, categoryId, isLoading } =
+    useSwimmingPoolDetailPageContext();
 
   const swimmingPoolDetailInformation =
     luzankyPoolDetailInformation?.[categoryId];
@@ -31,7 +32,10 @@ export function LuzankyDetailSkillLevelSection() {
     <S.SkillLevelSection>
       <MaxWidth variant={hasImages ? 'main' : 'small'}>
         <S.SectionContainer>
-          <Gallery images={swimmingPoolDetail?.imageGallery} />
+          <Gallery
+            images={swimmingPoolDetail?.imageGallery}
+            isLoading={isLoading}
+          />
 
           <S.SectionDescriptionContainer>
             {data?.map((data) => (
