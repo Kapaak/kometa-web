@@ -99,9 +99,9 @@ export const theme: DefaultTheme = {
         background: 'transparent',
         text: colors.primary.main,
         hover: {
-          background: colors.primary.dark,
+          background: colors.primary.main,
           text: colors.grey[200],
-          border: colors.primary.dark,
+          border: colors.primary.main,
         },
       },
       secondary: {
