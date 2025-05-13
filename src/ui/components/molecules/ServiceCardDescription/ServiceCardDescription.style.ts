@@ -35,7 +35,10 @@ export const ServiceChipContainer = styled(VerticalStack)`
   position: relative;
   gap: 1.2rem;
   pointer-events: none;
-  padding: 1.8rem 2.9rem 0;
+  padding: 1.8rem;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 100%;
 `;
 
 export const ServiceCardTextContainer = styled(Flex)`

@@ -71,8 +71,9 @@ export const services: Service[] = [
   {
     id: 'camps',
     title: 'Příměstské tábory',
-    description: 'Cílem je naučit plavce základům plavání.',
-    tags: [],
+    description:
+      'Přijďte si s námi užít spoustu zábavy na sportovních příměstských táborech!',
+    tags: ['děti od 4 let'],
     href: 'https://www.primestak-brno.cz/',
     src: Camps,
     alt: 'Plavec s plaveckými brýlemi v mělké vodě na bazénu Lužánky',
