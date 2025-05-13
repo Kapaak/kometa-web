@@ -4,6 +4,12 @@ import { minBreakpoint } from '~/utils/dimensions';
 export const Section = styled.section`
   padding: 4rem 2rem;
   background-color: ${({ theme }) => theme.colors.primary.light};
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.lg)}) {
+      padding: 5rem 2rem 10rem;
+    }
+  `}
 `;
 
 export const SectionRow = styled.div`
@@ -23,7 +29,8 @@ export const SectionRow = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2.4rem;
+  flex: 1 1 50%;
 `;
 
 export const TextContainer = styled.div`

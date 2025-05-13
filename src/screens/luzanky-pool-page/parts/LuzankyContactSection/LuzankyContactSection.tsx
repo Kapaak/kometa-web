@@ -36,7 +36,13 @@ export function LuzankyContactSection() {
           <S.Column>
             <Text variant="body3">Anna Matušová</Text>
 
-            <S.TextContainer style={{ marginTop: '-1rem' }}>
+            <S.TextContainer>
+              <Text variant="body2">
+                Plavání se věnuji od malička a prošla jsem si celou plaveckou
+                přípravku. Postupem času jsem se začala věnovat trénování dětí a
+                nyní vedu plavecké kurzy a závodní přípravku plavců na
+                Lužánkách. Ve volném čase ráda cestuji a poznávám nová místa.
+              </Text>
               <S.BorderedRow>
                 <Phone size={22} weight="light" />
                 <Text variant="body2">

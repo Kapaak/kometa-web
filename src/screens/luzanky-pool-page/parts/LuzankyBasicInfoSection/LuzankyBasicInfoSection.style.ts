@@ -3,7 +3,7 @@ import { VerticalStack } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const Section = styled.section`
-  padding: 2rem;
+  padding: 4rem 2rem;
   background-color: ${({ theme }) => theme.colors.primary.light};
   scroll-margin: 6rem;
 
