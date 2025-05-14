@@ -25,8 +25,13 @@ export const getStaticProps = async (
 };
 
 export const getStaticPaths = async () => {
+  //Schools will not be available to create and application
+  const categoriesWithoutSchools = swimmingCategories.filter(
+    (category) => category.name !== 'school'
+  );
+
   return {
-    paths: swimmingCategories.map((category) => ({
+    paths: categoriesWithoutSchools.map((category) => ({
       params: { categoryId: category.path },
     })),
     fallback: false,
