@@ -53,6 +53,11 @@ export async function getAvailableLectures(
     filterQuery.push(`["${filters.skillLevel}"] match categoryId`);
   }
 
+  // Exclude School and Kindergarten categories
+  filterQuery.push(
+    `categoryId != "${SwimmingCategoryId.SCHOOL}" && categoryId != "${SwimmingCategoryId.KINDERGARTEN}"`
+  );
+
   //TODO: need to comment out mergedFilter to generate FE sanity types
   const mergedFilter = filterQuery.join(' && ');
 
