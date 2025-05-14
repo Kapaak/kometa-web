@@ -1,9 +1,9 @@
+import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { ArrowRight } from '@phosphor-icons/react';
 
-import { GoogleMap } from '~/components/GoogleMap';
 import {
   Headline,
   IconButton,
@@ -14,7 +14,13 @@ import {
 
 import * as S from './ContactSection.style';
 
-interface ContactSectionProps {}
+const LazyGoogleMap = dynamic(
+  () =>
+    import('~/components/GoogleMap').then((component) => component.GoogleMap),
+  {
+    ssr: false,
+  }
+);
 
 type SwimmingPoolBase = {
   id: string | null;
@@ -24,12 +30,36 @@ type SwimmingPoolBase = {
   isPrivate: boolean;
 };
 
-export function ContactSection({}: ContactSectionProps) {
+export function ContactSection() {
   const [selectedSwimmingPool, setSelectedSwimmingPool] =
     useState<SwimmingPoolBase | null>(null);
+  const [isMapVisible, setIsMapVisible] = useState(false);
+  const mapRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = useCallback((swimmingPool: SwimmingPoolBase) => {
     setSelectedSwimmingPool(swimmingPool);
+  }, []);
+
+  useEffect(() => {
+    const currentMapRef = mapRef.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsMapVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (currentMapRef) {
+      observer.observe(currentMapRef);
+    }
+
+    return () => {
+      if (currentMapRef) {
+        observer.unobserve(currentMapRef);
+      }
+    };
   }, []);
 
   return (
@@ -63,7 +93,9 @@ export function ContactSection({}: ContactSectionProps) {
               </VerticalStack>
             )}
           </VerticalStack>
-          <GoogleMap onClick={handleClick} />
+          <div ref={mapRef}>
+            {isMapVisible && <LazyGoogleMap onClick={handleClick} />}
+          </div>
         </S.ContactSectionContainer>
       </MaxWidth>
     </S.ContactSection>
