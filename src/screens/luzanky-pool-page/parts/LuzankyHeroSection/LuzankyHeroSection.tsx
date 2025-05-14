@@ -35,8 +35,8 @@ export function LuzankyHeroSection() {
             </VerticalStack>
 
             <Text>
-              Základní plavání pro děti. Svěřte se do rukou profesionálů pod
-              záštitou nejúspěšnějšího plaveckého klubu v České republice.
+              Svěřte se do rukou profesionálů pod záštitou nejúspěšnějšího
+              plaveckého klubu v České republice.
             </Text>
 
             <NextLink href="#service">

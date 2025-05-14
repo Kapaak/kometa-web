@@ -89,7 +89,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     },
     aboutSection: {
       description:
-        'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde děti nejen zdokonalují své plavecké dovednosti, ale zároveň si užívají cestu k vlastním cílům a mají z plavání radost. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost z vody.',
+        'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde si děti nejen zdokonalují své plavecké dovednosti, ale i užívají jednotlivé lekce. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost.',
       lectureFocus: [
         'Hravou formou se seznamujeme s vodním prostředím',
         'Děti se naučí základy plaveckých stylů, jako je znak a kraul',
@@ -103,7 +103,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
           descriptions: [
             {
               label: 'Rybička',
-              text: 'Tento level je určen pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
+              text: 'tato úroveň je určena pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
             },
             {
               label: 'Delfínek',
@@ -176,7 +176,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     },
     aboutSection: {
       description:
-        'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde děti nejen zdokonalují své plavecké dovednosti, ale zároveň si užívají cestu k vlastním cílům a mají z plavání radost. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost z vody.',
+        'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde si děti nejen zdokonalují své plavecké dovednosti, ale i užívají jednotlivé lekce. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost.',
       lectureFocus: [
         'Zdokonalování techniky plaveckých stylů (znak, kraul, prsa a základy motýla)',
         'Rozvíjíme výdrž, koodrinaci a rychlosti',
@@ -247,7 +247,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     },
     aboutSection: {
       description:
-        'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde děti nejen zdokonalují své plavecké dovednosti, ale zároveň si užívají cestu k vlastním cílům a mají z plavání radost. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost z vody.',
+        'Od prvních temp u rybiček až po závodní družstvo se snažíme vytvářet prostředí, kde si děti nejen zdokonalují své plavecké dovednosti, ale i užívají jednotlivé lekce. V našem klubu mohou zůstat po celý život – ať už se rozhodnou pro dráhu závodního plavce, nebo si plavání ponechají jako sport, který jim přináší pohyb a radost.',
       lectureFocus: [
         'Zlepšení techniky všech čtyř plaveckých stylů',
         'Zvládnutí startovních skoků a obrátek',
@@ -268,12 +268,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
       arrivalTime: {
         descriptions: [
           'Doporučujeme přijít 15 minut před začátkem lekce. Trenér bude čekat u turniketu poblíž pokladen a rozdá dětem čipy (modré) pro vstup do areálu bazénu. Příchod je možný nejpozději 5 minut před začátkem lekce, aby děti měly dostatek času na převlečení a přípravu. Pozdní příchody mohou narušit časový harmonogram lekce.',
-          'Děti použijí čip k uzamčení skříňky, kterou si mohou v areálu vybrat. Poté se setkají s trenérum u 25m bazénu. Čip je třeba mít na ruce po celou dobu výuky. Po skončení lekce a převlečení je nutné čip vložit do turniketu, aby byl umožněn výstup z areálu.',
-        ],
-      },
-      childHandoverProcess: {
-        descriptions: [
-          'Doprovod obdrží první čip při vstupu, který umožní vstup do areálu a následně se při odchodu vloží do turniketu pro opuštění bazénu. Po skončení lekce dostane doprovod druhý čip, opět na 15 minut, aby mohl dítě vyzvednout. Stejně jako u prvního čipu je nutné ho při odchodu vložit do turniketu stejně jako modrý čip dítěte. Černý čip nesmí být použit k uzamčení skříňky, jinak nebude možné opustit areál.',
+          'Děti použijí čip k uzamčení skříňky, kterou si mohou v areálu vybrat. Poté se setkají s trenérem u 25m bazénu. Čip je třeba mít na ruce po celou dobu výuky. Po skončení lekce a převlečení je nutné čip vložit do turniketu, aby byl umožněn výstup z areálu.',
         ],
       },
     },
@@ -306,7 +301,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     },
     aboutSection: {
       description:
-        'Kurzy plavání pro dospělé jsou navrženy tak, aby vám pomohly zlepšit vaši techniku, kondici a radost z pohybu ve vodě. Bez ohledu na to, jestli se chcete naučit základy nebo zdokonalit své plavecké dovednosti, jsme tu pro vás. Věříme, že plavání by mělo být zábavou, výzvou a cestou k celkovému zlepšení kondice.',
+        'Kurzy plavání pro dospělé jsou navrženy tak, aby vám pomohly zlepšit vaši techniku a kondici. Bez ohledu na to, jestli se chcete naučit základy nebo zdokonalit své plavecké dovednosti, jsme tu pro vás. Věříme, že plavání by mělo být zábavou, výzvou a cestou k celkovému zlepšení kondice.',
     },
     initialLectureSection: {
       requiredEquipment: {
@@ -321,7 +316,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         descriptions: [
           'Doporučujeme přijít 15 minut před začátkem lekce. Dospělí mají k dispozici plastové kartičky pro vstup do areálu, které vám umožní vstup 15 min před začátkem lekce.',
           'Po tréninku máte 30 minut na převlečení, takže si prosím hlídejte čas. Pokud odejdete později karta se zablokuje a za její odblokování je pokuta 50 Kč.',
-          'Na ktartu se vybírá záloha 500 Kč před první lekcí kurzu, proto prosím na první lekci přijďte všas a s přesnou hotovostí na zálohu (500 Kč). Tato záloha vám bude vrácena při vrácení karty na poslední hodině kurzu.',
+          'Na kartu se vybírá záloha 500 Kč před první lekcí kurzu, proto prosím na první lekci přijďte všas a s přesnou hotovostí. Tato záloha vám bude vrácena při vrácení karty na poslední hodině kurzu.',
         ],
       },
     },
@@ -392,7 +387,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
           descriptions: [
             {
               label: 'Rybička',
-              text: 'Tento level je určen pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
+              text: 'tato úroveň je určena pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
             },
             {
               label: 'Delfínek',
@@ -457,7 +452,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
           descriptions: [
             {
               label: 'Rybička',
-              text: 'Tento level je určen pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
+              text: 'tato úroveň je určena pro děti, které se teprve seznamují s vodou. Hravé cvičení s pomůckami pomáhá dětem zvládnout základní dovednosti, jako je foukání do vody, potápění a první kopání.',
             },
             {
               label: 'Delfínek',

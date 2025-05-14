@@ -14,7 +14,6 @@ import { SanityLecture } from '~/domains';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import { SwimmingCategoryId, SwimmingPoolId } from '~/types';
 import {
-  A,
   Button,
   Headline,
   MaxWidth,
@@ -83,23 +82,30 @@ export function LuzankyDetailHeroSection() {
                   </S.SectionPriceContainer>
                 )}
 
+                {categoryId !== SwimmingCategoryId.SCHOOL &&
+                  categoryId !== SwimmingCategoryId.KINDERGARTEN && (
+                    <Text variant="body2">
+                      Více informací o platbě najdete v sekci{' '}
+                      <Text as="span" variant="body3" color={primary.main}>
+                        <S.Link
+                          href="/bazeny/luzanky#zakladni-informace"
+                          passHref
+                        >
+                          placení
+                          {categoryId !== SwimmingCategoryId.ADULT
+                            ? ' a vouchery'
+                            : ''}
+                          .{' '}
+                        </S.Link>
+                      </Text>
+                    </Text>
+                  )}
+
                 <Text variant="body2">
-                  Více informací o platbě najdete v sekci{' '}
-                  <Text as="span" variant="body3" color={primary.main}>
-                    <S.Link href="/bazeny/luzanky#zakladni-informace" passHref>
-                      placení
-                      {categoryId !== SwimmingCategoryId.ADULT
-                        ? ' a vouchery'
-                        : ''}
-                    </S.Link>
-                  </Text>
-                  {categoryId === SwimmingCategoryId.ADULT
-                    ? '. Uplatnění rodičovských voucherů z Brno ID bohužel není možné.'
-                    : ''}
-                  . Přehled dnů, kdy se nekonají lekce, je uveden v části{' '}
+                  Přehled dnů, kdy se nekonají lekce, je uveden v části{' '}
                   <Text as="span" variant="body3" color={primary.main}>
                     <S.Link href="/bazeny/luzanky#zakladni-informace">
-                      Kdy neplaveme
+                      kdy neplaveme
                     </S.Link>
                   </Text>
                   . Omlouvání z lekce není nutné. Snažíme se nabízet náhrady,
@@ -115,13 +121,11 @@ export function LuzankyDetailHeroSection() {
                 {categoryId === SwimmingCategoryId.KINDERGARTEN && (
                   <Text variant="body2">
                     Pokud máte zájem o plavání pro školy, napište nám na e-mail{' '}
-                    <Text variant="body3" as="span" color={primary.main}>
-                      <A href="mailto:plavaniluzanky@kometaplavani.cz">
-                        plavaniluzanky@kometaplavani.cz
-                      </A>
+                    <Text variant="body3" as="span">
+                      plavaniluzanky@kometaplavani.cz
                     </Text>{' '}
                     nebo zavolejte na{' '}
-                    <Text variant="body3" as="span" color={primary.main}>
+                    <Text variant="body3" as="span">
                       +420 773 708 287
                     </Text>
                     .
