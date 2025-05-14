@@ -14,6 +14,7 @@ import { SanityLecture } from '~/domains';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import { SwimmingCategoryId, SwimmingPoolId } from '~/types';
 import {
+  A,
   Button,
   Headline,
   MaxWidth,
@@ -110,6 +111,23 @@ export function LuzankyDetailHeroSection() {
                   </Text>
                   .
                 </Text>
+
+                {categoryId === SwimmingCategoryId.KINDERGARTEN && (
+                  <Text variant="body2">
+                    Pokud máte zájem o plavání pro školy, napište nám na e-mail{' '}
+                    <Text variant="body3" as="span" color={primary.main}>
+                      <A href="mailto:plavaniluzanky@kometaplavani.cz">
+                        plavaniluzanky@kometaplavani.cz
+                      </A>
+                    </Text>{' '}
+                    nebo zavolejte na{' '}
+                    <Text variant="body3" as="span" color={primary.main}>
+                      +420 773 708 287
+                    </Text>
+                    . Kurzy zatím nemáme otevřené, ale rádi se s vámi
+                    individuálně domluvíme.
+                  </Text>
+                )}
               </S.SectionTextContainer>
 
               <S.SectionInformationContainer>
