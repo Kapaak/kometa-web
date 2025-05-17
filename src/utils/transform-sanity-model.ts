@@ -136,8 +136,12 @@ export function transformSwimmingPoolDetail(
 ): TransformedSwimmingPoolDetail {
   return {
     id: swimmingPoolDetail?.id ?? '',
-    faq: swimmingPoolDetail?.faq ?? [],
-    fileUploads: swimmingPoolDetail?.fileUploads ?? [],
+    uploadedDocuments: (swimmingPoolDetail?.uploadedDocuments ?? [])?.map(
+      (doc) => ({
+        label: doc?.label ?? '',
+        file: doc?.file ?? '',
+      })
+    ),
     imageGallery:
       swimmingPoolDetail?.imageGallery?.map((image) => ({
         url: urlForImage(image)?.url(),
@@ -149,8 +153,6 @@ export function transformSwimmingPoolDetail(
         },
         blurDataURL: image?.asset?.metadata?.blurHash,
       })) ?? [],
-    sampleTraining: swimmingPoolDetail?.sampleTraining ?? '',
     skillRequirement: swimmingPoolDetail?.skillRequirement ?? [],
-    announcements: swimmingPoolDetail?.announcements ?? [],
   };
 }

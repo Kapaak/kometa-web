@@ -7,25 +7,8 @@ import KindergartenLecture from '~/public/images/swimming-pool/luzanky/service/s
 import SchoolLecture from '~/public/images/swimming-pool/luzanky/service/service-school.png';
 import { SwimmingCategoryId } from '~/types';
 
-const DOCUMENT_GDPR = '/files/GDPR.pdf';
-const VISITOR_BOARD = '/files/NAVSTEVNI_RAD.pdf';
-const DOCUMENT_ADULT_CONDITIONS = '/files/adult/PODMINKY_PRIJETI_DOSPELI.pdf';
-const DOCUMENT_CHILDREN_CONDITIONS =
-  '/files/children/PODMINKY_PRIJETI_DETI.pdf';
-const DOCUMENT_SCHOOL_ACCEPT_CONDITIONS = '/files/school/PODMINKY_PRIJETI.pdf';
-const DOCUMENT_SCHOOL_DECLARATION_INFECT_FREE =
-  '/files/school/PROHLASENI_O_BEZINFEKCNOSTI.pdf';
-const DOCUMENT_SCHOOL_DECLARATION_CHILDREN_LIST =
-  '/files/school/SEZNAM_DETI.pdf';
-const DOCUMENT_SCHOOL_DECLARATION_KINDERGARTEN_CONTRACT =
-  '/files/school/SMLOUVA_PRO_SKOLKY.pdf';
-
 type PoolInformation = {
   image: StaticImageData;
-  documents: {
-    title: string;
-    url: string;
-  }[];
   heroSection: {
     description?: string;
     duration?: number;
@@ -63,20 +46,6 @@ type PoolInformation = {
 export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   [SwimmingCategoryId.BASIC]: {
     image: BasicLecture,
-    documents: [
-      {
-        title: 'GDPR',
-        url: DOCUMENT_GDPR,
-      },
-      {
-        title: 'Podmínky přijetí',
-        url: DOCUMENT_CHILDREN_CONDITIONS,
-      },
-      {
-        title: 'Návštěvní řád',
-        url: VISITOR_BOARD,
-      },
-    ],
     heroSection: {
       description:
         'Tento kurz je určen pro děti, které teprve začínají s plaváním, nebo pro ty, které už ovládají základy, jako je potápění, kopání a bublání, ale potřebují se naučit správnou techniku plaveckých stylů, zejména znaku a kraula.',
@@ -138,20 +107,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   },
   [SwimmingCategoryId.ADVANCED]: {
     image: AdvancedLecture,
-    documents: [
-      {
-        title: 'GDPR',
-        url: DOCUMENT_GDPR,
-      },
-      {
-        title: 'Podmínky přijetí',
-        url: DOCUMENT_CHILDREN_CONDITIONS,
-      },
-      {
-        title: 'Návštěvní řád',
-        url: VISITOR_BOARD,
-      },
-    ],
     heroSection: {
       description:
         'Tento kurz plavání je ideální pro děti, které již zvládly základní plavecké dovednosti a chtějí je dále rozvíjet.',
@@ -209,20 +164,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   },
   [SwimmingCategoryId.CONDITION]: {
     image: ConditionLecture,
-    documents: [
-      {
-        title: 'GDPR',
-        url: DOCUMENT_GDPR,
-      },
-      {
-        title: 'Podmínky přijetí',
-        url: DOCUMENT_CHILDREN_CONDITIONS,
-      },
-      {
-        title: 'Návštěvní řád',
-        url: VISITOR_BOARD,
-      },
-    ],
     heroSection: {
       description:
         'Tento kurz je určen pro děti, které již zvládají základní plavecké styly a chtějí se zaměřit na zlepšení své techniky a vytrvalosti.',
@@ -275,20 +216,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   },
   [SwimmingCategoryId.ADULT]: {
     image: AdultLecture,
-    documents: [
-      {
-        title: 'GDPR',
-        url: DOCUMENT_GDPR,
-      },
-      {
-        title: 'Podmínky přijetí',
-        url: DOCUMENT_ADULT_CONDITIONS,
-      },
-      {
-        title: 'Návštěvní řád',
-        url: VISITOR_BOARD,
-      },
-    ],
     heroSection: {
       description:
         'Určeno všem nadšencům, kterým bylo již 18 let a chtějí si zlepšit své plavecké dovednosti.',
@@ -335,32 +262,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   },
   [SwimmingCategoryId.KINDERGARTEN]: {
     image: KindergartenLecture,
-    documents: [
-      {
-        title: 'GDPR',
-        url: DOCUMENT_GDPR,
-      },
-      {
-        title: 'Podmínky přijetí',
-        url: DOCUMENT_SCHOOL_ACCEPT_CONDITIONS,
-      },
-      {
-        title: 'Prohlášení o bezinfekčnosti',
-        url: DOCUMENT_SCHOOL_DECLARATION_INFECT_FREE,
-      },
-      {
-        title: 'Seznam dětí',
-        url: DOCUMENT_SCHOOL_DECLARATION_CHILDREN_LIST,
-      },
-      {
-        title: 'Smlouva pro školky',
-        url: DOCUMENT_SCHOOL_DECLARATION_KINDERGARTEN_CONTRACT,
-      },
-      {
-        title: 'Návštěvní řád',
-        url: VISITOR_BOARD,
-      },
-    ],
     heroSection: {
       description:
         'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů.',
@@ -400,32 +301,6 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
   },
   [SwimmingCategoryId.SCHOOL]: {
     image: SchoolLecture,
-    documents: [
-      {
-        title: 'GDPR',
-        url: DOCUMENT_GDPR,
-      },
-      {
-        title: 'Podmínky přijetí',
-        url: DOCUMENT_SCHOOL_ACCEPT_CONDITIONS,
-      },
-      {
-        title: 'Prohlášení o bezinfekčnosti',
-        url: DOCUMENT_SCHOOL_DECLARATION_INFECT_FREE,
-      },
-      {
-        title: 'Seznam dětí',
-        url: DOCUMENT_SCHOOL_DECLARATION_CHILDREN_LIST,
-      },
-      {
-        title: 'Smlouva pro školky',
-        url: DOCUMENT_SCHOOL_DECLARATION_KINDERGARTEN_CONTRACT,
-      },
-      {
-        title: 'Návštěvní řád',
-        url: VISITOR_BOARD,
-      },
-    ],
     heroSection: {
       description:
         'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů.',

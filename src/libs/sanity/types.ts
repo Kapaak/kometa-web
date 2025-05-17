@@ -133,6 +133,55 @@ export type BlockContent = Array<
     }
 >;
 
+export type SwimmingPoolMainPage = {
+  _id: string;
+  _type: 'swimmingPoolMainPage';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  announcements?: Array<{
+    title?: string;
+    visible?: boolean;
+    text?: BlockContent;
+    _key: string;
+  }>;
+  infoBar?: Array<{
+    title?: string;
+    text?: string;
+    visibility?: boolean;
+    _key: string;
+  }>;
+  fileUploads?: Array<{
+    title?: string;
+    file?: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
+      };
+      _type: 'file';
+    };
+    _key: string;
+  }>;
+  faq?: Array<
+    {
+      _key: string;
+    } & FaqObjectType
+  >;
+  basicInformation?: Array<{
+    columnTitle?: string;
+    text?: BlockContent;
+    _key: string;
+  }>;
+  swimmingPool?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'swimmingPool';
+  };
+};
+
 export type PreliminaryCourse = {
   _id: string;
   _type: 'preliminaryCourse';
@@ -147,6 +196,19 @@ export type PreliminaryCourse = {
   };
   age?: AgeCategory;
   timeFrom?:
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
+    | '10:00'
+    | '10:15'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:30'
+    | '11:45'
+    | '12:00'
     | '15:00'
     | '15:15'
     | '15:30'
@@ -161,7 +223,28 @@ export type PreliminaryCourse = {
     | '17:45'
     | '18:00';
   timeTo?:
-    | '15:45'
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
+    | '10:00'
+    | '10:15'
+    | '10:15'
+    | '10:30'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:15'
+    | '11:30'
+    | '11:30'
+    | '11:45'
+    | '12:00'
+    | '12:15'
+    | '12:15'
+    | '12:30'
+    | '12:30'
+    | '12:45'
     | '16:00'
     | '16:15'
     | '16:30'
@@ -200,21 +283,6 @@ export type SwimmingPoolDetail = {
   _updatedAt: string;
   _rev: string;
   skillRequirement?: Array<string>;
-  announcements?: Array<{
-    title?: string;
-    visible?: boolean;
-    text?: BlockContent;
-    _key: string;
-  }>;
-  sampleTraining?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
-    };
-    _type: 'file';
-  };
   imageGallery?: Array<{
     asset?: {
       _ref: string;
@@ -227,8 +295,8 @@ export type SwimmingPoolDetail = {
     _type: 'image';
     _key: string;
   }>;
-  fileUploads?: Array<{
-    title?: string;
+  uploadedDocuments?: Array<{
+    label?: string;
     file?: {
       asset?: {
         _ref: string;
@@ -238,15 +306,7 @@ export type SwimmingPoolDetail = {
       };
       _type: 'file';
     };
-    _key: string;
-  }>;
-  faq?: Array<{
-    columnTitle?: string;
-    questions?: Array<
-      {
-        _key: string;
-      } & FaqObjectType
-    >;
+    _type: 'uploadedDocument';
     _key: string;
   }>;
   swimmingPool?: {
@@ -438,6 +498,19 @@ export type KidsCourse = {
   dayId?: 1 | 2 | 3 | 4 | 5;
   age?: AgeCategory;
   timeFrom?:
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
+    | '10:00'
+    | '10:15'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:30'
+    | '11:45'
+    | '12:00'
     | '15:00'
     | '15:15'
     | '15:30'
@@ -452,7 +525,28 @@ export type KidsCourse = {
     | '17:45'
     | '18:00';
   timeTo?:
-    | '15:45'
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
+    | '10:00'
+    | '10:15'
+    | '10:15'
+    | '10:30'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:15'
+    | '11:30'
+    | '11:30'
+    | '11:45'
+    | '12:00'
+    | '12:15'
+    | '12:15'
+    | '12:30'
+    | '12:30'
+    | '12:45'
     | '16:00'
     | '16:15'
     | '16:30'
@@ -830,6 +924,15 @@ export type QueryAvailableCoursesResult = Array<{
     | null;
   dayId: 1 | 2 | 3 | 4 | 5 | null;
   timeFrom:
+    | '10:00'
+    | '10:15'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:30'
+    | '11:45'
+    | '12:00'
     | '15:00'
     | '15:15'
     | '15:30'
@@ -843,9 +946,24 @@ export type QueryAvailableCoursesResult = Array<{
     | '17:30'
     | '17:45'
     | '18:00'
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
     | null;
   timeTo:
-    | '15:45'
+    | '10:00'
+    | '10:15'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:30'
+    | '11:45'
+    | '12:00'
+    | '12:15'
+    | '12:30'
+    | '12:45'
     | '16:00'
     | '16:15'
     | '16:30'
@@ -859,6 +977,10 @@ export type QueryAvailableCoursesResult = Array<{
     | '18:30'
     | '18:45'
     | '19:00'
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
     | null;
   ageFrom: number | null;
   ageTo: number | null;
@@ -910,6 +1032,15 @@ export type QueryLecturesResult = Array<{
     | null;
   dayId: 1 | 2 | 3 | 4 | 5 | null;
   timeFrom:
+    | '10:00'
+    | '10:15'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:30'
+    | '11:45'
+    | '12:00'
     | '15:00'
     | '15:15'
     | '15:30'
@@ -923,9 +1054,24 @@ export type QueryLecturesResult = Array<{
     | '17:30'
     | '17:45'
     | '18:00'
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
     | null;
   timeTo:
-    | '15:45'
+    | '10:00'
+    | '10:15'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:30'
+    | '11:45'
+    | '12:00'
+    | '12:15'
+    | '12:30'
+    | '12:45'
     | '16:00'
     | '16:15'
     | '16:30'
@@ -939,6 +1085,10 @@ export type QueryLecturesResult = Array<{
     | '18:30'
     | '18:45'
     | '19:00'
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
     | null;
   ageFrom: number | null;
   ageTo: number | null;
@@ -991,6 +1141,15 @@ export type QueryLecturesByPoolAndCategoryResult = Array<{
     | null;
   dayId: 1 | 2 | 3 | 4 | 5 | null;
   timeFrom:
+    | '10:00'
+    | '10:15'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:30'
+    | '11:45'
+    | '12:00'
     | '15:00'
     | '15:15'
     | '15:30'
@@ -1004,9 +1163,24 @@ export type QueryLecturesByPoolAndCategoryResult = Array<{
     | '17:30'
     | '17:45'
     | '18:00'
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
     | null;
   timeTo:
-    | '15:45'
+    | '10:00'
+    | '10:15'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:30'
+    | '11:45'
+    | '12:00'
+    | '12:15'
+    | '12:30'
+    | '12:45'
     | '16:00'
     | '16:15'
     | '16:30'
@@ -1020,6 +1194,10 @@ export type QueryLecturesByPoolAndCategoryResult = Array<{
     | '18:30'
     | '18:45'
     | '19:00'
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
     | null;
   ageFrom: number | null;
   ageTo: number | null;
@@ -1056,17 +1234,11 @@ export type QueryLecturesByPoolAndCategoryResult = Array<{
 }>;
 // Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool-detail.ts
 // Variable: querySwimmingPoolDetail
-// Query: *[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,announcements,"sampleTraining": sampleTraining.asset->url,imageGallery[]{asset->{...,metadata}},fileUploads,faq}
+// Query: *[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,announcements,imageGallery[]{asset->{...,metadata}},faq,  uploadedDocuments[]{label,"file":file.asset->url},    }
 export type QuerySwimmingPoolDetailResult = {
   id: string;
   skillRequirement: Array<string> | null;
-  announcements: Array<{
-    title?: string;
-    visible?: boolean;
-    text?: BlockContent;
-    _key: string;
-  }> | null;
-  sampleTraining: string | null;
+  announcements: null;
   imageGallery: Array<{
     asset: {
       _id: string;
@@ -1091,26 +1263,36 @@ export type QuerySwimmingPoolDetailResult = {
       source?: SanityAssetSourceData;
     } | null;
   }> | null;
-  fileUploads: Array<{
-    title?: string;
-    file?: {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
-      };
-      _type: 'file';
-    };
+  faq: null;
+  uploadedDocuments: Array<{
+    label: string | null;
+    file: string | null;
+  }> | null;
+} | null;
+// Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool-main.ts
+// Variable: querySwimmingPoolMain
+// Query: *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{faq,basicInformation,infoBar,announcements}
+export type QuerySwimmingPoolMainResult = {
+  faq: Array<
+    {
+      _key: string;
+    } & FaqObjectType
+  > | null;
+  basicInformation: Array<{
+    columnTitle?: string;
+    text?: BlockContent;
     _key: string;
   }> | null;
-  faq: Array<{
-    columnTitle?: string;
-    questions?: Array<
-      {
-        _key: string;
-      } & FaqObjectType
-    >;
+  infoBar: Array<{
+    title?: string;
+    text?: string;
+    visibility?: boolean;
+    _key: string;
+  }> | null;
+  announcements: Array<{
+    title?: string;
+    visible?: boolean;
+    text?: BlockContent;
     _key: string;
   }> | null;
 } | null;

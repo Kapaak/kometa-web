@@ -219,7 +219,7 @@ export function AdultCourseForm() {
               Potvrzuji, že jsem se seznámil(a) s{' '}
               <Text as="span" color={primary.main}>
                 <A
-                  href="/files/adult/PODMINKY_PRIJETI_DOSPELI.pdf"
+                  href="/files/PODMINKY_PRIJETI_DOSPELI.pdf"
                   rel="noopener noreferrer"
                   target="_blank"
                 >

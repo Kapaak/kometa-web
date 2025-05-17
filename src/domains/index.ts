@@ -98,8 +98,12 @@ export type TransformedBlogPost = {
 
 export type TransformedSwimmingPoolDetail = Omit<
   NonNullable<SanitySwimmingPoolDetail>,
-  'imageGallery'
+  'imageGallery' | 'uploadedDocuments' | 'announcements' | 'faq'
 > & {
+  uploadedDocuments?: {
+    label?: string;
+    file?: string;
+  }[];
   imageGallery?: {
     url?: string;
     alt?: string;

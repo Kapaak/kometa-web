@@ -19,8 +19,7 @@ export function LuzankyDetailSkillLevelSection() {
   const swimmingPoolDetailInformation =
     luzankyPoolDetailInformation?.[categoryId];
 
-  const { data, actionButtonLabel = 'Stáhnout vzorový trénink' } =
-    swimmingPoolDetailInformation?.skillLevelSection ?? {};
+  const { data } = swimmingPoolDetailInformation?.skillLevelSection ?? {};
 
   const hasImages = swimmingPoolDetail?.imageGallery?.length ?? 0;
 
@@ -56,24 +55,25 @@ export function LuzankyDetailSkillLevelSection() {
                     </div>
                   ))}
 
-                  {swimmingPoolDetailInformation?.documents && (
+                  {(swimmingPoolDetail?.uploadedDocuments?.length ?? 0) > 0 && (
                     <VerticalStack gap="2.5rem" padding="2rem 0 0">
                       <Headline size="small" as="h3">
                         Dokumenty ke stažení
                       </Headline>
                       <Flex gap="1rem" wrap="wrap">
-                        {swimmingPoolDetailInformation.documents?.map(
-                          (document) => (
-                            <NextLink
-                              key={document.title}
-                              href={document.url}
-                              download
-                            >
-                              <Button variant="outlined">
-                                {document.title}
-                              </Button>
-                            </NextLink>
-                          )
+                        {swimmingPoolDetail?.uploadedDocuments?.map(
+                          (document) =>
+                            document?.file && (
+                              <NextLink
+                                key={document.label}
+                                href={document.file}
+                                download
+                              >
+                                <Button variant="outlined">
+                                  {document.label}
+                                </Button>
+                              </NextLink>
+                            )
                         )}
                       </Flex>
                     </VerticalStack>
@@ -81,16 +81,6 @@ export function LuzankyDetailSkillLevelSection() {
                 </VerticalStack>
               </Flex>
             ))}
-
-            {swimmingPoolDetail?.sampleTraining && (
-              <NextLink
-                href={swimmingPoolDetail?.sampleTraining}
-                download
-                style={{ alignSelf: 'flex-start' }}
-              >
-                <Button>{actionButtonLabel}</Button>
-              </NextLink>
-            )}
           </S.SectionDescriptionContainer>
         </S.SectionContainer>
       </MaxWidth>
