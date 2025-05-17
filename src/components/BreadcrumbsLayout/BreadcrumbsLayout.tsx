@@ -3,23 +3,29 @@ import { PropsWithChildren } from 'react';
 import { Breadcrumbs, MaxWidth } from '~/ui/components/atoms';
 import { PageLayout } from '~/ui/components/templates';
 
-import * as S from './BlogLayout.style';
+import * as S from './BreadcrumbsLayout.style';
 
-interface BlogLayoutProps extends PropsWithChildren {}
+type BreadcrumbsItem = {
+  label: string;
+  href: string;
+};
 
-export function BlogLayout({ children }: BlogLayoutProps) {
-  const breadcrumbs = [
-    { label: 'Domů', href: '/' },
-    { label: 'Blog', href: '/blog' },
-  ];
+interface BreadcrumbsLayoutProps extends PropsWithChildren {
+  breadcrumbs: BreadcrumbsItem[];
+}
+
+export function BreadcrumbsLayout({
+  children,
+  breadcrumbs,
+}: BreadcrumbsLayoutProps) {
   return (
     <PageLayout>
       <main>
-        <S.BreadcrumbsWrapper>
+        <S.BreadcrumbsLayout>
           <MaxWidth>
             <Breadcrumbs breadcrumbs={breadcrumbs} />
           </MaxWidth>
-        </S.BreadcrumbsWrapper>
+        </S.BreadcrumbsLayout>
         {children}
       </main>
     </PageLayout>

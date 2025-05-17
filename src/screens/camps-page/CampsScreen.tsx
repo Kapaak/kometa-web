@@ -1,4 +1,4 @@
-import { CampsLayout } from './components';
+import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
 
 import { CampsSection } from './parts';
 
@@ -7,9 +7,14 @@ interface CampsScreenProps {
 }
 
 export function CampsScreen({ camps }: CampsScreenProps) {
+  const breadcrumbs = [
+    { label: 'Domů', href: '/' },
+    { label: 'Tábory', href: '/tabory' },
+  ];
+
   return (
-    <CampsLayout>
+    <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
       <CampsSection camps={camps} />
-    </CampsLayout>
+    </BreadcrumbsLayout>
   );
 }

@@ -1,5 +1,5 @@
+import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
 import { VerticalStack } from '~/ui/components/atoms';
-import { LuzankyPoolLayout } from './components';
 import {
   LuzankyAboutSection,
   LuzankyBasicInfoSection,
@@ -9,20 +9,23 @@ import {
   LuzankyServiceSection,
 } from './parts';
 
-interface LuzankyPoolScreenProps {}
+export function LuzankyPoolScreen() {
+  const breadcrumbs = [
+    { label: 'Domů', href: '/' },
+    { label: 'Bazény', href: '/kurzy-pro-deti' },
+    { label: 'Lužánky', href: '/bazeny/luzanky' },
+  ];
 
-export function LuzankyPoolScreen({}: LuzankyPoolScreenProps) {
   return (
-    <LuzankyPoolLayout>
+    <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
       <VerticalStack gap="2rem">
         <LuzankyHeroSection />
         <LuzankyAboutSection />
         <LuzankyServiceSection />
-        {/* <LuzankyDocumentSection /> */}
         <LuzankyBasicInfoSection />
         <LuzankyFAQSection />
         <LuzankyContactSection />
       </VerticalStack>
-    </LuzankyPoolLayout>
+    </BreadcrumbsLayout>
   );
 }

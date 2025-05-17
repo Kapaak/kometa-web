@@ -5,8 +5,8 @@ import { Headline, NextSanityImage } from '~/ui/components/atoms';
 import { IconText, TextBuilder } from '~/ui/components/molecules';
 import { convertDateToString } from '~/utils/date';
 
-import { BlogPostsLayout } from './components';
-
+import { useRouter } from 'next/router';
+import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
 import * as S from './BlogPostScreen.style';
 
 interface BlogPostScreenProps {
@@ -14,8 +14,15 @@ interface BlogPostScreenProps {
 }
 
 export function BlogPostScreen({ blog }: BlogPostScreenProps) {
+  const router = useRouter();
+
+  const breadcrumbs = [
+    { label: 'Domů', href: '/' },
+    { label: 'Blog', href: '/blog' },
+    { label: blog?.title ?? 'Neuvedeno', href: router.asPath },
+  ];
   return (
-    <BlogPostsLayout label={blog?.title ?? 'Neuvedeno'}>
+    <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
       <S.BlogPostSection>
         <S.BlogPostMaxWidth>
           <S.BlogPostContainer gap="1rem">
@@ -50,6 +57,6 @@ export function BlogPostScreen({ blog }: BlogPostScreenProps) {
           </S.BlogPostContainer>
         </S.BlogPostMaxWidth>
       </S.BlogPostSection>
-    </BlogPostsLayout>
+    </BreadcrumbsLayout>
   );
 }

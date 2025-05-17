@@ -1,12 +1,15 @@
-import { FoundersCupLayout } from './components';
+import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
 import { FoundersCupSection } from './parts';
 
-interface FoundersCupScreenProps {}
+export function FoundersCupScreen() {
+  const breadcrumbs = [
+    { label: 'Domů', href: '/' },
+    { label: 'Pohár zakladatelů', href: '/souteze/pohar-zakladatelu' },
+  ];
 
-export function FoundersCupScreen({}: FoundersCupScreenProps) {
   return (
-    <FoundersCupLayout>
+    <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
       <FoundersCupSection />
-    </FoundersCupLayout>
+    </BreadcrumbsLayout>
   );
 }

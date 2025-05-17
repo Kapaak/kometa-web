@@ -1,8 +1,12 @@
 import { Headline, MaxWidth } from '~/ui/components/atoms';
-import { getCategoryNameByCategoryId } from '~/utils/category';
-import { PoolApplicationLayout } from './components';
+import {
+  getCategoryNameByCategoryId,
+  getCategoryNameBySlug,
+} from '~/utils/category';
 import { ApplicationForm } from './parts';
 
+import { useRouter } from 'next/router';
+import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
 import { SwimmingPoolId } from '~/types';
 import {
   getSpreadsheetIdByCategoryId,
@@ -16,6 +20,8 @@ interface PoolApplicationPageProps {
 }
 
 export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
+  const router = useRouter();
+
   const spreadsheetId = getSpreadsheetIdByCategoryId(categoryId);
   const templateId = getTemplateIdByCategoryId(categoryId);
 
@@ -23,8 +29,20 @@ export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
     return null;
   }
 
+  const breadcrumbs = [
+    { label: 'Domů', href: '/' },
+    {
+      label: getCategoryNameBySlug(router.query.categoryId as string),
+      href: `/bazeny/luzanky/${router.query.categoryId}`,
+    },
+    {
+      label: 'Přihlášky',
+      href: `/bazeny/luzanky/${router.query.categoryId}/prihlasky`,
+    },
+  ];
+
   return (
-    <PoolApplicationLayout>
+    <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
       <S.ApplicationPageSection>
         <MaxWidth>
           <Headline>{getCategoryNameByCategoryId(categoryId)}</Headline>
@@ -40,6 +58,6 @@ export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
           </ApplicationFormContextProvider>
         </MaxWidth>
       </S.ApplicationPageSection>
-    </PoolApplicationLayout>
+    </BreadcrumbsLayout>
   );
 }

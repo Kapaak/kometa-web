@@ -1,7 +1,6 @@
 import { TransformedKidsCourse } from '~/types';
 
-import { KidsCoursesLayout } from './components';
-
+import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
 import { KidsCoursesSection } from './parts';
 
 interface KidsCoursesScreenProps {
@@ -9,9 +8,14 @@ interface KidsCoursesScreenProps {
 }
 
 export function KidsCoursesScreen({ courses }: KidsCoursesScreenProps) {
+  const breadcrumbs = [
+    { label: 'Domů', href: '/' },
+    { label: 'Kurzy pro děti', href: '/kurzy-pro-deti' },
+  ];
+
   return (
-    <KidsCoursesLayout>
+    <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
       <KidsCoursesSection courses={courses} />
-    </KidsCoursesLayout>
+    </BreadcrumbsLayout>
   );
 }

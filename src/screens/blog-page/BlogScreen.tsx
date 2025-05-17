@@ -10,10 +10,11 @@ import {
   VerticalStack,
 } from '~/ui/components/atoms';
 
-import { BlogFilterDrawer, BlogLayout } from './components';
+import { BlogFilterDrawer } from './components';
 
 import { BlogArticle, BlogFilter, LoadingBlogArticle } from './parts';
 
+import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
 import * as S from './BlogScreen.style';
 
 export function BlogScreen() {
@@ -43,8 +44,13 @@ export function BlogScreen() {
     return selectedFilter.includes(filterCategory);
   };
 
+  const breadcrumbs = [
+    { label: 'Domů', href: '/' },
+    { label: 'Blog', href: '/blog' },
+  ];
+
   return (
-    <BlogLayout>
+    <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
       <S.BlogSection>
         <MaxWidth>
           <VerticalStack gap="2rem">
@@ -101,6 +107,6 @@ export function BlogScreen() {
           </VerticalStack>
         </MaxWidth>
       </S.BlogSection>
-    </BlogLayout>
+    </BreadcrumbsLayout>
   );
 }
