@@ -1,16 +1,22 @@
-import { StaticImageData } from 'next/image'
+import { StaticImageData } from 'next/image';
 
-import * as S from './Sponsor.style'
+import * as S from './Sponsor.style';
 
 interface SponsorProps {
-  image?: StaticImageData
-  href: string
-  name: string
+  image?: StaticImageData;
+  href: string;
+  name: string;
+  disableGrayscale?: boolean;
 }
 
-export const Sponsor = ({ href, image, name }: SponsorProps) => {
+export const Sponsor = ({
+  href,
+  image,
+  name,
+  disableGrayscale = false,
+}: SponsorProps) => {
   return (
-    <S.Sponsor href={href}>
+    <S.Sponsor hasGrayscale={!disableGrayscale} href={href}>
       {image && (
         <S.SponsorImage
           src={image}
@@ -21,5 +27,5 @@ export const Sponsor = ({ href, image, name }: SponsorProps) => {
         />
       )}
     </S.Sponsor>
-  )
-}
+  );
+};
