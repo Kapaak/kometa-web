@@ -74,6 +74,7 @@ export type GetAvailableCourse = {
   timeFrom?: string;
   timeTo?: string;
   url?: string;
+  swimmingPoolUrl?: string;
   skillLevelId?: SwimmingCategoryId;
   skillLevel?: SwimmingCategoryId;
   skillLevelName?: string;

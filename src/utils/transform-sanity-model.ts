@@ -100,6 +100,7 @@ export function transformAvailableCourse(
       : '-',
     name: course?.name ?? '',
     url: course?.url ?? '',
+    swimmingPoolUrl: course?.swimmingPoolUrl ?? '',
     alt: course?.alt ?? '',
     isSchoolOrKindergartenAvailable:
       course.isSchoolOrKindergartenAvailable ?? false,

@@ -563,6 +563,7 @@ export type KidsCourse = {
   isFull?: boolean;
   price?: Price;
   discount?: number;
+  url?: string;
   swimmingPool?: {
     _ref: string;
     _type: 'reference';
@@ -908,7 +909,7 @@ export type QueryCampsResult = Array<{
 export type QueryDocumentsResult = Array<never>;
 // Source: ../../websites/kometa-web/src/libs/sanity/api/lecture.ts
 // Variable: queryAvailableCourses
-// Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"url":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
+// Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,url,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"swimmingPoolUrl":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
 export type QueryAvailableCoursesResult = Array<{
   id: string;
   priceYear: number | null;
@@ -951,6 +952,7 @@ export type QueryAvailableCoursesResult = Array<{
     | '9:30'
     | '9:45'
     | null;
+  url: string | null;
   timeTo:
     | '10:00'
     | '10:15'
@@ -1011,7 +1013,7 @@ export type QueryAvailableCoursesResult = Array<{
       source?: SanityAssetSourceData;
     } | null;
   } | null;
-  url: string | null;
+  swimmingPoolUrl: string | null;
   privateSwimmingPool: boolean | null;
   isSchoolOrKindergartenAvailable: boolean | null;
 }>;

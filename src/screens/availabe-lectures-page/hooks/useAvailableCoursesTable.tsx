@@ -116,7 +116,11 @@ export function useAvailableCoursesTable(
         id: 'actions',
         header: 'Možnosti',
         cell: (info) => {
-          const { isFull, url } = info.row.original ?? {};
+          const {
+            isFull,
+            url = '',
+            swimmingPoolUrl = '',
+          } = info.row.original ?? {};
 
           return (
             <Button
@@ -126,7 +130,12 @@ export function useAvailableCoursesTable(
               style={{ display: 'inline-flex' }}
             >
               {isFull && <span>Obsazeno</span>}
-              {!isFull && <NextLink href={url ?? ''}>Zobrazit kurz</NextLink>}
+              {!isFull && url?.length === 0 && (
+                <NextLink href={swimmingPoolUrl}>Zobrazit bazén</NextLink>
+              )}
+              {!isFull && url?.length > 0 && (
+                <NextLink href={url}>Zobrazit kurz</NextLink>
+              )}
             </Button>
           );
         },
@@ -137,7 +146,7 @@ export function useAvailableCoursesTable(
         },
       }),
     ];
-  }, [getAvailabilityColor, grey]);
+  }, [getAvailabilityColor]);
 
   const table = useReactTable({
     data: courses,
