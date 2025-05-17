@@ -133,7 +133,11 @@ export function LuzankyDetailHeroSection() {
                 )}
               </S.SectionTextContainer>
 
-              <S.SectionInformationContainer>
+              <S.SectionInformationContainer
+                hasSkillRequirement={
+                  (swimmingPoolDetail?.skillRequirement?.length ?? 0) > 0
+                }
+              >
                 <VerticalStack gap="1rem">
                   <Text variant="body3" as="h2">
                     Základní informace

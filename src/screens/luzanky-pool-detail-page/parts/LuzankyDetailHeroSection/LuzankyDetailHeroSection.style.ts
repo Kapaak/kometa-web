@@ -50,7 +50,11 @@ export const SectionDescriptionContainer = styled(Flex)`
   flex-direction: column;
 `;
 
-export const SectionInformationContainer = styled.div`
+export const SectionInformationContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['hasSkillRequirement'].includes(prop),
+})<{
+  hasSkillRequirement?: boolean;
+}>`
   display: grid;
   gap: 2rem;
   margin-top: 2rem;
@@ -59,10 +63,10 @@ export const SectionInformationContainer = styled.div`
     list-style: none;
   }
 
-  ${({ theme }) => css`
+  ${({ theme, hasSkillRequirement }) => css`
     @media (${minBreakpoint(theme.breakpoints.md)}) {
       margin-top: 4rem;
-      grid-template-columns: 1.5fr 2fr;
+      grid-template-columns: ${hasSkillRequirement ? '1.5fr 2fr' : '1fr'};
     }
   `}
 `;
