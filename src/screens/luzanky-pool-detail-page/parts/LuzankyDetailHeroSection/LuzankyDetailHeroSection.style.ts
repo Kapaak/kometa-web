@@ -50,27 +50,6 @@ export const SectionDescriptionContainer = styled(Flex)`
   flex-direction: column;
 `;
 
-export const SectionInformationContainer = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['hasSkillRequirement'].includes(prop),
-})<{
-  hasSkillRequirement?: boolean;
-}>`
-  display: grid;
-  gap: 2rem;
-  margin-top: 2rem;
-
-  li {
-    list-style: none;
-  }
-
-  ${({ theme, hasSkillRequirement }) => css`
-    @media (${minBreakpoint(theme.breakpoints.md)}) {
-      margin-top: 4rem;
-      grid-template-columns: ${hasSkillRequirement ? '1.5fr 2fr' : '1fr'};
-    }
-  `}
-`;
-
 export const SectionPriceContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.primary.main};
   width: fit-content;
@@ -124,4 +103,25 @@ export const Link = styled(NextLink)`
     text-decoration: underline;
     text-decoration-color: inherit;
   }
+`;
+
+export const SectionInformationContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['hasSkillRequirement'].includes(prop),
+})<{
+  hasSkillRequirement?: boolean;
+}>`
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+
+  li {
+    list-style: none;
+  }
+
+  ${({ theme, hasSkillRequirement }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      margin-top: 4rem;
+      grid-template-columns: ${hasSkillRequirement ? '1.5fr 2fr' : '1fr'};
+    }
+  `}
 `;

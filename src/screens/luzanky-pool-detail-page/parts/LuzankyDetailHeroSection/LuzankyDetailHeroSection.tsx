@@ -17,6 +17,7 @@ import {
   Button,
   Headline,
   MaxWidth,
+  Skeleton,
   Text,
   VerticalStack,
 } from '~/ui/components/atoms';
@@ -40,10 +41,11 @@ export function LuzankyDetailHeroSection() {
   const { poolParameters, description, duration } =
     luzankyPoolDetailInformation?.[categoryId]?.heroSection ?? {};
 
-  const { data: lectures } = useGetLecturesForSwimmingPoolAndCategory(
-    categoryId,
-    SwimmingPoolId.LUZANKY
-  );
+  const { data: lectures, isLoading } =
+    useGetLecturesForSwimmingPoolAndCategory(
+      categoryId,
+      SwimmingPoolId.LUZANKY
+    );
 
   const minimumLecturePrice = getMinimumLecturePrice(lectures);
   const minimumAge = getMinimumAge(lectures);
@@ -68,7 +70,14 @@ export function LuzankyDetailHeroSection() {
                   {getCategoryNameByCategoryId(categoryId)}
                 </Headline>
                 <Text variant="body2">{description}</Text>
-                {minimumLecturePrice > 0 && (
+
+                {isLoading && (
+                  <S.SectionPriceContainer>
+                    <Skeleton width="18rem" height="0" />
+                  </S.SectionPriceContainer>
+                )}
+
+                {!isLoading && minimumLecturePrice > 0 && (
                   <S.SectionPriceContainer>
                     <Text variant="body3">
                       {joinValues([
