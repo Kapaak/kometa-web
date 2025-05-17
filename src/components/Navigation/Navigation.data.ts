@@ -13,7 +13,7 @@ export const navigationData = [
   },
   {
     label: 'Sponzoři',
-    href: '/#sponzori',
+    href: '/sponzori',
   },
   {
     label: 'Dostupné lekce',
