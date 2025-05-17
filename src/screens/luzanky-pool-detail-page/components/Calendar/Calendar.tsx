@@ -2,6 +2,7 @@ import { Prohibit, UserPlus } from '@phosphor-icons/react';
 import { useTheme } from 'styled-components';
 import { getDayAbbreviation } from '~/utils/day';
 import * as S from './Calendar.style';
+import { getFilledTimes } from './utils';
 
 interface CalendarProps {
   onClick?: (dayId: number, time: number) => void;
@@ -13,9 +14,17 @@ interface CalendarProps {
     full?: boolean;
     discount?: number;
   }[];
+  //If times length is smaller than 4, then we add some blank times
+  maxBlankTimes?: number;
 }
 
-export function Calendar({ data, days, times, onClick }: CalendarProps) {
+export function Calendar({
+  data,
+  days,
+  times,
+  onClick,
+  maxBlankTimes = 2,
+}: CalendarProps) {
   const theme = useTheme();
   const { grey } = theme.colors;
 
@@ -29,17 +38,19 @@ export function Calendar({ data, days, times, onClick }: CalendarProps) {
     return;
   }
 
+  const filledTimes = getFilledTimes(times, maxBlankTimes);
+
   return (
-    <S.Calendar columns={times.length}>
+    <S.Calendar columns={filledTimes.length}>
       <S.CalendarRowContainer>
-        {times.map((time) => (
+        {filledTimes.map((time) => (
           <S.CalendarTime key={time}>{time}:00</S.CalendarTime>
         ))}
       </S.CalendarRowContainer>
 
       {days.map((day) => (
         <S.CalendarRowContainer label={getDayAbbreviation(day)} key={day}>
-          {times.map((time, index) => {
+          {filledTimes.map((time, index) => {
             const columnItem = getTimeByDayIdAndTime(day, time);
 
             if (!columnItem) {

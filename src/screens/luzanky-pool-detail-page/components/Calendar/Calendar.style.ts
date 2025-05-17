@@ -32,7 +32,7 @@ export const CalendarRowContainer = styled.div<{ label?: string }>`
   gap: inherit;
 
   &::before  {
-    content: '${({ label }) => label}';
+    content: '${({ label }) => label?.toUpperCase()}';
     line-height: 4.8rem;
   }
 `;

@@ -75,6 +75,7 @@ export const SectionCalendarContainer = styled.div`
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {
       align-self: flex-end;
+      padding-inline: 2.5rem;
     }
   `}
 `;
