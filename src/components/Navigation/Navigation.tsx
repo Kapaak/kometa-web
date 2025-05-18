@@ -13,7 +13,7 @@ import { navigationData } from './Navigation.data';
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <S.Navigation>
+    <S.Navigation aria-label="Hlavní navigace">
       <MaxWidth>
         <S.NavigationMenuList>
           <S.Logo as="li">

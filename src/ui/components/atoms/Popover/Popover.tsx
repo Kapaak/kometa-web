@@ -10,24 +10,37 @@ interface PopoverProps extends PropsWithChildren {
   action?: ReactNode;
   //allow styling via styled-components
   className?: string;
+  showCloseButton?: boolean;
+  open: boolean;
+  onChange: (open: boolean) => void;
 }
 
-export function Popover({ action, title, className, children }: PopoverProps) {
+export function Popover({
+  open,
+  onChange,
+  action,
+  title,
+  className,
+  showCloseButton,
+  children,
+}: PopoverProps) {
   return (
-    <RadixUiPopover.Root>
+    <RadixUiPopover.Root open={open} onOpenChange={onChange}>
       <RadixUiPopover.Trigger asChild>{action}</RadixUiPopover.Trigger>
       <RadixUiPopover.Portal>
         <S.PopoverContent sideOffset={5} className={className}>
           <S.PopoverHeader>
             {title && <S.PopoverTitle>{title}</S.PopoverTitle>}
-            <S.PopoverClose aria-label="Close">
-              <X size={20} />
-            </S.PopoverClose>
+            {showCloseButton && (
+              <S.PopoverClose aria-label="Close">
+                <X size={20} />
+              </S.PopoverClose>
+            )}
           </S.PopoverHeader>
 
           {children}
 
-          <S.PopoverArrow />
+          {/* <S.PopoverArrow /> */}
         </S.PopoverContent>
       </RadixUiPopover.Portal>
     </RadixUiPopover.Root>

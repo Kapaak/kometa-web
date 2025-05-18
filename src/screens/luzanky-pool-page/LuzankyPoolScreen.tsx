@@ -16,8 +16,39 @@ export function LuzankyPoolScreen() {
     { label: 'Lužánky', href: '/bazeny/luzanky' },
   ];
 
+  const subNavigation = {
+    mainLink: '/bazeny/luzanky',
+    mainLinkLabel: 'Plavecké kurzy Lužánky',
+    items: [
+      { label: 'O nás', href: '/o-nas' },
+      {
+        label: 'Kurzy',
+        dropdownItems: [
+          {
+            label: 'Základní plavání',
+            href: '/bazeny/luzanky/zakladni-plavani',
+          },
+          {
+            label: 'Zdokonalovací plavání',
+            href: '/bazeny/luzanky/zdokonalovaci-plavani',
+          },
+          {
+            label: 'Kondiční plavání',
+            href: '/bazeny/luzanky/kondicni-plavani',
+          },
+          { label: 'Pro organizace MŠMT', href: '/bazeny/luzanky/skolky' },
+          { label: 'Pro dospělé', href: '/bazeny/luzanky/plavani-pro-dospele' },
+        ],
+      },
+      { label: 'Základní informace', href: '/zakladni-informace' },
+      { label: 'Časté dotazy', href: '/caste-dotazy' },
+      { label: 'Adresa', href: '/adresa' },
+      { label: 'Kontakt', href: '/kontakt' },
+    ],
+  };
+
   return (
-    <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
+    <BreadcrumbsLayout subNavigation={subNavigation} breadcrumbs={breadcrumbs}>
       <VerticalStack gap="2rem">
         <LuzankyHeroSection />
         <LuzankyAboutSection />

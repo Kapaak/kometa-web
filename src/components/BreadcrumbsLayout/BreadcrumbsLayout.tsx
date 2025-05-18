@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react';
 import { Breadcrumbs, MaxWidth } from '~/ui/components/atoms';
 import { PageLayout } from '~/ui/components/templates';
 
+import type { SubNavigationProps } from '../SubNavigation';
 import * as S from './BreadcrumbsLayout.style';
 
 type BreadcrumbsItem = {
@@ -12,14 +13,16 @@ type BreadcrumbsItem = {
 
 interface BreadcrumbsLayoutProps extends PropsWithChildren {
   breadcrumbs: BreadcrumbsItem[];
+  subNavigation?: SubNavigationProps;
 }
 
 export function BreadcrumbsLayout({
-  children,
   breadcrumbs,
+  subNavigation,
+  children,
 }: BreadcrumbsLayoutProps) {
   return (
-    <PageLayout>
+    <PageLayout subNavigation={subNavigation}>
       <main>
         <S.BreadcrumbsLayout>
           <MaxWidth>
