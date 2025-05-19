@@ -5,7 +5,7 @@ import { AvailableCoursesSection } from './parts';
 export function AvailableCoursesScreen() {
   const breadcrumbs = [
     { label: 'Domů', href: '/' },
-    { label: 'Letní kurzy a akce', href: '/dostupne-lekce' },
+    { label: 'Dostupné lekce', href: '/dostupne-lekce' },
   ];
 
   return (
