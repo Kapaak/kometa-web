@@ -1,32 +1,32 @@
-import { ReactNode, useId } from 'react'
+import { ReactNode, useId } from 'react';
 
-import * as RadixAccordion from '@radix-ui/react-accordion'
+import * as RadixAccordion from '@radix-ui/react-accordion';
 
-import { AvailableIcons, getAvailableIconByName } from '~/utils/icons'
+import { AvailableIcons, getAvailableIconByName } from '~/utils/icons';
 
-import { Strong } from '../../atoms'
-import { Flex } from '../../atoms/Flex'
+import { Strong } from '../../atoms';
+import { Flex } from '../../atoms/Flex';
 
-import * as S from './Accordion.style'
+import * as S from './Accordion.style';
 
-type AccordionItem = {
-  title: string
-  subtitle?: string
-  content?: ReactNode
-  icon?: AvailableIcons
-}
+export type AccordionItem = {
+  title: string;
+  subtitle?: string;
+  content?: ReactNode;
+  icon?: AvailableIcons;
+};
 
 interface AccordionProps {
-  accordionItems?: AccordionItem[]
+  accordionItems?: AccordionItem[];
 }
 
 export function Accordion({ accordionItems }: AccordionProps) {
-  const id = useId()
+  const id = useId();
 
   return (
     <RadixAccordion.Root type="single" collapsible>
       {accordionItems?.map((accordionItem, index) => {
-        const Icon = getAvailableIconByName(accordionItem?.icon)
+        const Icon = getAvailableIconByName(accordionItem?.icon);
 
         return (
           <S.AccordionItem
@@ -56,8 +56,8 @@ export function Accordion({ accordionItems }: AccordionProps) {
               </S.StyledContentText>
             </S.StyledContent>
           </S.AccordionItem>
-        )
+        );
       })}
     </RadixAccordion.Root>
-  )
+  );
 }

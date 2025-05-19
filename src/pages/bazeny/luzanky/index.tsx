@@ -1,8 +1,11 @@
 import { LuzankyPoolScreen } from '~/screens/luzanky-pool-page';
-
-//TODO:
-// - pridat link v sanity na tuhle stranku na /bazeny/luzanky
+import { SwimmingPoolPageContextProvider } from '~/screens/luzanky-pool-page/contexts/SwimmingPoolContext';
+import { SwimmingPoolId } from '~/types';
 
 export default function LuzankyPoolPage() {
-  return <LuzankyPoolScreen />;
+  return (
+    <SwimmingPoolPageContextProvider swimmingPoolId={SwimmingPoolId.LUZANKY}>
+      <LuzankyPoolScreen />
+    </SwimmingPoolPageContextProvider>
+  );
 }

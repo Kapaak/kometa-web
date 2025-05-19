@@ -1,16 +1,17 @@
 import Image from 'next/image';
 import WaveYellow from '~/public/icons/wave.svg';
 
-// import { PortableText } from "@portabletext/react";
-
+import { PortableText } from 'next-sanity';
 import { useTheme } from 'styled-components';
 import { Flex, Text } from '~/ui/components/atoms';
+import { useSwimmingPoolPageContext } from '../../contexts/SwimmingPoolContext';
 import * as S from './LuzankyAboutSection.style';
 
 export function LuzankyAboutSection() {
-  // const { actualities } = useSanityHomeContext();
-  const { colors } = useTheme();
-  const { primary } = colors;
+  const theme = useTheme();
+  const { primary } = theme.colors;
+
+  const { swimmingPool } = useSwimmingPoolPageContext();
 
   return (
     <S.AboutSection>
@@ -18,25 +19,28 @@ export function LuzankyAboutSection() {
         <Image src={WaveYellow} alt="vlnka" height={50} width={50} />
       </Flex>
 
-      {/* //TODO: az vytvorim novou sekci v sanity, tak je potreba propojit */}
-
-      {/* {actualities?.map((actuality, index) => {
-          return (
+      {swimmingPool?.announcements?.map(
+        (announcement) =>
+          announcement?.text && (
             <PortableText
-              value={actuality?.text}
-              key={`${actuality?.title}_${index}`}
+              value={announcement?.text}
+              key={announcement.id}
               components={{
                 block: {
                   normal: (props) => {
-                    return <Text center>{props.children}</Text>;
+                    return (
+                      <Text variant="body3" align="center" color={primary.main}>
+                        {props.children}
+                      </Text>
+                    );
                   },
                 },
               }}
             />
-          );
-        })} */}
+          )
+      )}
 
-      <Text align="center" color={primary.main}>
+      <Text variant="body2" align="center" color={primary.main}>
         Naše plavecká škola pracuje pod záštitou plaveckého oddílu KPSP Kometa
         Brno. Naší specializací je výuka plavání dětí předškolního a školního
         věku. V plavecké přípravě dětí jsme nasbírali během řady let mnoho

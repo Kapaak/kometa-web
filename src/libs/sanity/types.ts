@@ -1292,6 +1292,7 @@ export type QuerySwimmingPoolMainResult = {
     _key: string;
   }> | null;
   announcements: Array<{
+    id: string;
     title?: string;
     visible?: boolean;
     text?: BlockContent;

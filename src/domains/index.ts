@@ -5,6 +5,7 @@ import {
   QueryBlogPostsResult,
   QueryLecturesResult,
   QuerySwimmingPoolDetailResult,
+  QuerySwimmingPoolMainResult,
   QuerySwimmingPoolsResult,
 } from '~/libs/sanity/types';
 import { Category, SwimmingCategoryId } from '~/types';
@@ -29,6 +30,7 @@ export type SanityLecture = QueryLecturesResult[0] & { discount?: number };
 export type SanityAvailableLecture = QueryAvailableCoursesResult[0];
 
 export type SanitySwimmingPool = QuerySwimmingPoolsResult[0];
+export type SanitySwimmingPoolPage = QuerySwimmingPoolMainResult;
 export type SanitySwimmingPoolDetail = QuerySwimmingPoolDetailResult;
 
 export type SanityUploadedFile = any[0];

@@ -1,21 +1,27 @@
-import { useGetSwimmingPoolMainPageById } from '~/adapters/swimmingPoolMainAdapter';
 import HappyChildImage from '~/public/images/swimming-pool-detail/happy-child.png';
-import { SwimmingPoolId } from '~/types';
 import { Headline, MaxWidth } from '~/ui/components/atoms';
-import { Accordion, TextBuilder } from '~/ui/components/molecules';
+import {
+  Accordion,
+  type AccordionItem,
+  TextBuilder,
+} from '~/ui/components/molecules';
 
+import { PortableTextBlock } from 'next-sanity';
+import { useSwimmingPoolPageContext } from '../../contexts/SwimmingPoolContext';
 import * as S from './LuzankyFAQSection.style';
 
 export function LuzankyFAQSection() {
-  const { data } = useGetSwimmingPoolMainPageById(SwimmingPoolId.LUZANKY);
+  const { swimmingPool } = useSwimmingPoolPageContext();
 
-  //TODO: remove any type
-  const accordionItems = data?.faq?.map((faqItem: any) => {
-    return {
-      title: faqItem?.title,
-      content: <TextBuilder value={faqItem?.text} />,
-    };
-  });
+  const accordionItems = swimmingPool?.faq
+    ?.map(
+      (faqItem) =>
+        faqItem?.text && {
+          title: faqItem?.title,
+          content: <TextBuilder value={faqItem.text as PortableTextBlock[]} />,
+        }
+    )
+    .filter(Boolean) as AccordionItem[];
 
   return (
     <S.FAQSection>
