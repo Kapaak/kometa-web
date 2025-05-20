@@ -18,6 +18,9 @@ export function MobileAvailableCoursesTableItem({
   const theme = useTheme();
   const { grey, error } = theme.colors;
 
+  const currentUrl =
+    availableCourse?.url ?? availableCourse?.swimmingPoolUrl ?? '';
+
   const content = (
     <S.MobileAvailableCoursesTableItem>
       <VerticalStack gap="1rem">
@@ -74,8 +77,6 @@ export function MobileAvailableCoursesTableItem({
   return availableCourse?.isFull ? (
     content
   ) : (
-    <NextLink href={availableCourse?.isFull ? '' : availableCourse?.url ?? ''}>
-      {content}
-    </NextLink>
+    <NextLink href={currentUrl}>{content}</NextLink>
   );
 }
