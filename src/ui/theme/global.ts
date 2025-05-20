@@ -50,6 +50,8 @@ export const GlobalStyle = createGlobalStyle(
     #__next {
       min-height: 100%;
       height: 100%;
+      //To prevent the scale down if some item overflows
+      overflow: auto;
     }
 
     a,

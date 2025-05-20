@@ -5,5 +5,7 @@ export const PageLayout = styled.div`
   grid-template-rows: auto 1fr auto;
   height: auto;
   min-height: inherit;
-  overflow: auto;
+
+  //cant set overflow here, the position: sticky for child elements wouldnt work
+  /* overflow: auto; */
 `;

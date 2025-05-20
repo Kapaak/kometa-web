@@ -73,7 +73,6 @@ export function MobileAvailableCoursesTableItem({
       </VerticalStack>
     </S.MobileAvailableCoursesTableItem>
   );
-
   return availableCourse?.isFull ? (
     content
   ) : (
