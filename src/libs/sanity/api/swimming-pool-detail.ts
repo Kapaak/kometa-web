@@ -8,7 +8,7 @@ export async function getSwimmingPoolDetailById(
   swimmingPoolId: string,
   categoryId: string
 ): Promise<SanitySwimmingPoolDetail> {
-  const querySwimmingPoolDetail = groq`*[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,announcements,imageGallery[]{asset->{...,metadata}},faq,
+  const querySwimmingPoolDetail = groq`*[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,dateRange{dateFrom,dateTo},announcements,imageGallery[]{asset->{...,metadata}},faq,
   uploadedDocuments[]{label,"file":file.asset->url},
   
   }`;

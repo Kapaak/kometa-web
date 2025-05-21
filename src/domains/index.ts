@@ -27,7 +27,13 @@ export type SanityKidsCourseVariant = {
 
 export type SanityLecture = QueryLecturesResult[0] & { discount?: number };
 
-export type SanityAvailableLecture = QueryAvailableCoursesResult[0];
+export type SanityAvailableLecture = QueryAvailableCoursesResult[0] & {
+  name?: string;
+  swimmingPoolUrl?: string;
+  alt?: string;
+  isSchoolOrKindergartenAvailable?: boolean;
+  privateSwimmingPool?: boolean;
+};
 
 export type SanitySwimmingPool = QuerySwimmingPoolsResult[0];
 export type SanitySwimmingPoolPage = QuerySwimmingPoolMainResult;
@@ -103,6 +109,10 @@ export type TransformedSwimmingPoolDetail = Omit<
   NonNullable<SanitySwimmingPoolDetail>,
   'imageGallery' | 'uploadedDocuments' | 'announcements' | 'faq'
 > & {
+  dateRange?: {
+    dateFrom?: string;
+    dateTo?: string;
+  };
   uploadedDocuments?: {
     label?: string;
     file?: string;

@@ -137,6 +137,10 @@ export function transformSwimmingPoolDetail(
 ): TransformedSwimmingPoolDetail {
   return {
     id: swimmingPoolDetail?.id ?? '',
+    dateRange: {
+      dateFrom: swimmingPoolDetail?.dateRange?.dateFrom ?? '',
+      dateTo: swimmingPoolDetail?.dateRange?.dateTo ?? '',
+    },
     uploadedDocuments: (swimmingPoolDetail?.uploadedDocuments ?? [])?.map(
       (doc) => ({
         label: doc?.label ?? '',

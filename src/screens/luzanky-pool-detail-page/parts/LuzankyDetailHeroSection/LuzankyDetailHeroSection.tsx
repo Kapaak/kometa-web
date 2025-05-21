@@ -23,6 +23,7 @@ import {
 } from '~/ui/components/atoms';
 import { IconText } from '~/ui/components/molecules';
 import { getCategoryNameByCategoryId } from '~/utils/category';
+import { convertDateToString } from '~/utils/date';
 import { dayTranslationAbbr } from '~/utils/day';
 import { joinValues } from '~/utils/format';
 import { formatToCurrency } from '~/utils/number';
@@ -140,6 +141,13 @@ export function LuzankyDetailHeroSection() {
                     .
                   </Text>
                 )}
+
+                {categoryId === SwimmingCategoryId.ADULT && (
+                  <Text variant="body2">
+                    První pololetí (polovina zaří - prosinec) je kratší než
+                    druhé (leden - polovina června).
+                  </Text>
+                )}
               </S.SectionTextContainer>
 
               <S.SectionInformationContainer
@@ -210,26 +218,50 @@ export function LuzankyDetailHeroSection() {
 
             {minimumLecturePrice > 0 && (
               <S.SectionActionsContainer>
-                <S.SectionCalendarContainer>
-                  <Calendar
-                    days={Object.values(dayTranslationAbbr).map(
-                      (_, index) => index + 1
+                <VerticalStack gap="1rem" align="center" height="100%">
+                  {(swimmingPoolDetail?.dateRange?.dateFrom?.length ?? 0) > 0 &&
+                    (swimmingPoolDetail?.dateRange?.dateTo?.length ?? 0) >
+                      0 && (
+                      <Text variant="body3">
+                        {joinValues(
+                          [
+                            convertDateToString(
+                              new Date(
+                                swimmingPoolDetail?.dateRange
+                                  ?.dateFrom as string
+                              )
+                            ),
+                            convertDateToString(
+                              new Date(
+                                swimmingPoolDetail?.dateRange?.dateTo as string
+                              )
+                            ),
+                          ],
+                          { separator: ' - ' }
+                        )}
+                      </Text>
                     )}
-                    times={getUniqueSortedTimes(lectures)}
-                    data={calendarData ?? []}
-                    onClick={(dayId, time) =>
-                      router.push(
-                        `/bazeny/luzanky/${router.query.categoryId}/prihlasky?day=${dayId}&time=${time}`
-                      )
-                    }
-                  />
-                </S.SectionCalendarContainer>
+                  <S.SectionCalendarContainer>
+                    <Calendar
+                      days={Object.values(dayTranslationAbbr).map(
+                        (_, index) => index + 1
+                      )}
+                      times={getUniqueSortedTimes(lectures)}
+                      data={calendarData ?? []}
+                      onClick={(dayId, time) =>
+                        router.push(
+                          `/bazeny/luzanky/${router.query.categoryId}/prihlasky?day=${dayId}&time=${time}`
+                        )
+                      }
+                    />
+                  </S.SectionCalendarContainer>
 
-                <S.SectionActionLink
-                  href={`/bazeny/luzanky/${router.query.categoryId}/prihlasky`}
-                >
-                  <Button color="secondary">Přihlásit se</Button>
-                </S.SectionActionLink>
+                  <S.SectionActionLink
+                    href={`/bazeny/luzanky/${router.query.categoryId}/prihlasky`}
+                  >
+                    <Button color="secondary">Přihlásit se</Button>
+                  </S.SectionActionLink>
+                </VerticalStack>
               </S.SectionActionsContainer>
             )}
           </S.SectionContainer>

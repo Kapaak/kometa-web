@@ -90,6 +90,7 @@ export type FaqObjectType = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         _type: 'image';
@@ -126,6 +127,7 @@ export type BlockContent = Array<
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       _type: 'image';
@@ -160,6 +162,7 @@ export type SwimmingPoolMainPage = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
       };
+      media?: unknown;
       _type: 'file';
     };
     _key: string;
@@ -282,6 +285,7 @@ export type SwimmingPoolDetail = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  dateRange?: DateRange;
   skillRequirement?: Array<string>;
   imageGallery?: Array<{
     asset?: {
@@ -290,6 +294,7 @@ export type SwimmingPoolDetail = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -304,6 +309,7 @@ export type SwimmingPoolDetail = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
       };
+      media?: unknown;
       _type: 'file';
     };
     _type: 'uploadedDocument';
@@ -374,6 +380,12 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
+export type DateRange = {
+  _type: 'dateRange';
+  dateFrom?: string;
+  dateTo?: string;
+};
+
 export type InfoBar = {
   _id: string;
   _type: 'infoBar';
@@ -407,6 +419,7 @@ export type Blog = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -419,6 +432,7 @@ export type Blog = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
     };
+    media?: unknown;
     _type: 'file';
   };
   description?: Array<
@@ -447,6 +461,7 @@ export type Blog = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
@@ -635,6 +650,7 @@ export type Camp = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -660,6 +676,7 @@ export type SwimmingPool = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -688,6 +705,7 @@ export type ImageAlt = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
   };
+  media?: unknown;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   alt?: string;
@@ -707,13 +725,42 @@ export type Slug = {
   current?: string;
   source?: string;
 };
+
+export type AllSanitySchemaTypes =
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | LectureFrequencyPricing
+  | YearMonthRange
+  | AvailableIconType
+  | FaqObjectType
+  | Rating
+  | BlockContent
+  | SwimmingPoolMainPage
+  | PreliminaryCourse
+  | SwimmingPoolDetail
+  | SanityImageCrop
+  | SanityImageHotspot
+  | SanityImageAsset
+  | SanityImageMetadata
+  | DateRange
+  | InfoBar
+  | Blog
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | KidsCourse
+  | Price
+  | AgeCategory
+  | Navigation
+  | Colors
+  | SiteSettings
+  | Camp
+  | SwimmingPool
+  | Geopoint
+  | ImageAlt
+  | MediaTag
+  | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ../../websites/kometa-web/src/pages/blog/[blogId].tsx
-// Variable: queryBlog
-// Query: *[_type == "blog"]{"slug": slug.current}
-export type QueryBlogResult = Array<{
-  slug: string | null;
-}>;
 // Source: ../../websites/kometa-web/src/libs/sanity/api/blog.ts
 // Variable: queryBlogPosts
 // Query: *[_type == "blog"  && _id > $lastId]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)
@@ -722,19 +769,6 @@ export type QueryBlogPostsResult = Array<{
   title: string | null;
   shortDescription: string | null;
   description: Array<
-    | {
-        asset?: {
-          _ref: string;
-          _type: 'reference';
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-        };
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        _type: 'imageAlt';
-        _key: string;
-      }
     | {
         children?: Array<{
           marks?: Array<string>;
@@ -751,6 +785,20 @@ export type QueryBlogPostsResult = Array<{
         }>;
         level?: number;
         _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'imageAlt';
         _key: string;
       }
   > | null;
@@ -793,6 +841,24 @@ export type QueryResult = {
   shortDescription: string | null;
   description: Array<
     | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'h2' | 'h3' | 'normal';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
         asset: {
           _id: string;
           _type: 'sanity.imageAsset';
@@ -815,27 +881,12 @@ export type QueryResult = {
           metadata?: SanityImageMetadata;
           source?: SanityAssetSourceData;
         } | null;
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
         _type: 'imageAlt';
-      }
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: 'span';
-          _key: string;
-        }>;
-        style?: 'h2' | 'h3' | 'normal';
-        listItem?: 'bullet' | 'number';
-        markDefs?: Array<{
-          href?: string;
-          _type: 'link';
-          _key: string;
-        }>;
-        level?: number;
-        _type: 'block';
+        _key: string;
       }
   > | null;
   createdAt: string | null;
@@ -869,6 +920,7 @@ export type QueryResult = {
   tags: Array<'equipment' | 'funFact' | 'tips' | 'training'> | null;
   slug: Slug | null;
 } | null;
+
 // Source: ../../websites/kometa-web/src/libs/sanity/api/camp.ts
 // Variable: queryCamps
 // Query: *[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]
@@ -903,120 +955,201 @@ export type QueryCampsResult = Array<{
   url: string | null;
   tags: Array<string> | null;
 }>;
+
 // Source: ../../websites/kometa-web/src/libs/sanity/api/document.ts
 // Variable: queryDocuments
 // Query: *[_type == "fileUpload"  &&  swimmingPool->slug.current == $swimmingPoolId]{"id":_id,title,file{    asset->{...,metadata}  },order,    swimmingPool -> {"slug":slug.current}  }[] | order(order)
 export type QueryDocumentsResult = Array<never>;
+
 // Source: ../../websites/kometa-web/src/libs/sanity/api/lecture.ts
 // Variable: queryAvailableCourses
 // Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,url,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"swimmingPoolUrl":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
-export type QueryAvailableCoursesResult = Array<{
-  id: string;
-  priceYear: number | null;
-  priceSemester: number | null;
-  isFull: boolean | null;
-  categoryId:
-    | 'adult'
-    | 'advanced'
-    | 'basic'
-    | 'condition'
-    | 'kindergarten'
-    | 'school'
-    | null;
-  dayId: 1 | 2 | 3 | 4 | 5 | null;
-  timeFrom:
-    | '10:00'
-    | '10:15'
-    | '10:30'
-    | '10:45'
-    | '11:00'
-    | '11:15'
-    | '11:30'
-    | '11:45'
-    | '12:00'
-    | '15:00'
-    | '15:15'
-    | '15:30'
-    | '15:45'
-    | '16:00'
-    | '16:15'
-    | '16:30'
-    | '16:45'
-    | '17:00'
-    | '17:15'
-    | '17:30'
-    | '17:45'
-    | '18:00'
-    | '9:00'
-    | '9:15'
-    | '9:30'
-    | '9:45'
-    | null;
-  url: string | null;
-  timeTo:
-    | '10:00'
-    | '10:15'
-    | '10:30'
-    | '10:45'
-    | '11:00'
-    | '11:15'
-    | '11:30'
-    | '11:45'
-    | '12:00'
-    | '12:15'
-    | '12:30'
-    | '12:45'
-    | '16:00'
-    | '16:15'
-    | '16:30'
-    | '16:45'
-    | '17:00'
-    | '17:15'
-    | '17:30'
-    | '17:45'
-    | '18:00'
-    | '18:15'
-    | '18:30'
-    | '18:45'
-    | '19:00'
-    | '9:00'
-    | '9:15'
-    | '9:30'
-    | '9:45'
-    | null;
-  ageFrom: number | null;
-  ageTo: number | null;
-  name: string | null;
-  slug: string | null;
-  alt: string | null;
-  image: {
-    asset: {
-      _id: string;
-      _type: 'sanity.imageAsset';
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata: SanityImageMetadata | null;
-      source?: SanityAssetSourceData;
-    } | null;
-  } | null;
-  swimmingPoolUrl: string | null;
-  privateSwimmingPool: boolean | null;
-  isSchoolOrKindergartenAvailable: boolean | null;
-}>;
+export type QueryAvailableCoursesResult = Array<
+  | {
+      id: string;
+      priceYear: number | null;
+      priceSemester: number | null;
+      isFull: boolean | null;
+      categoryId:
+        | 'adult'
+        | 'advanced'
+        | 'basic'
+        | 'condition'
+        | 'kindergarten'
+        | 'school'
+        | null;
+      dayId: 1 | 2 | 3 | 4 | 5 | null;
+      timeFrom:
+        | '10:00'
+        | '10:15'
+        | '10:30'
+        | '10:45'
+        | '11:00'
+        | '11:15'
+        | '11:30'
+        | '11:45'
+        | '12:00'
+        | '15:00'
+        | '15:15'
+        | '15:30'
+        | '15:45'
+        | '16:00'
+        | '16:15'
+        | '16:30'
+        | '16:45'
+        | '17:00'
+        | '17:15'
+        | '17:30'
+        | '17:45'
+        | '18:00'
+        | '9:00'
+        | '9:15'
+        | '9:30'
+        | '9:45'
+        | null;
+      url: string | null;
+      timeTo:
+        | '10:00'
+        | '10:15'
+        | '10:30'
+        | '10:45'
+        | '11:00'
+        | '11:15'
+        | '11:30'
+        | '11:45'
+        | '12:00'
+        | '12:15'
+        | '12:30'
+        | '12:45'
+        | '16:00'
+        | '16:15'
+        | '16:30'
+        | '16:45'
+        | '17:00'
+        | '17:15'
+        | '17:30'
+        | '17:45'
+        | '18:00'
+        | '18:15'
+        | '18:30'
+        | '18:45'
+        | '19:00'
+        | '9:00'
+        | '9:15'
+        | '9:30'
+        | '9:45'
+        | null;
+      ageFrom: number | null;
+      ageTo: number | null;
+      name: string | null;
+      slug: string | null;
+      alt: string | null;
+      image: {
+        asset: {
+          _id: string;
+          _type: 'sanity.imageAsset';
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata: SanityImageMetadata | null;
+          source?: SanityAssetSourceData;
+        } | null;
+      } | null;
+      swimmingPoolUrl: string | null;
+      privateSwimmingPool: boolean | null;
+      isSchoolOrKindergartenAvailable: boolean | null;
+    }
+  | {
+      id: string;
+      priceYear: number | null;
+      priceSemester: number | null;
+      isFull: boolean | null;
+      categoryId:
+        | 'adult'
+        | 'advanced'
+        | 'basic'
+        | 'condition'
+        | 'kindergarten'
+        | 'school'
+        | null;
+      dayId: 1 | 2 | 3 | 4 | 5 | null;
+      timeFrom:
+        | '10:00'
+        | '10:15'
+        | '10:30'
+        | '10:45'
+        | '11:00'
+        | '11:15'
+        | '11:30'
+        | '11:45'
+        | '12:00'
+        | '15:00'
+        | '15:15'
+        | '15:30'
+        | '15:45'
+        | '16:00'
+        | '16:15'
+        | '16:30'
+        | '16:45'
+        | '17:00'
+        | '17:15'
+        | '17:30'
+        | '17:45'
+        | '18:00'
+        | '9:00'
+        | '9:15'
+        | '9:30'
+        | '9:45'
+        | null;
+      url: string | null;
+      timeTo:
+        | '10:00'
+        | '10:15'
+        | '10:30'
+        | '10:45'
+        | '11:00'
+        | '11:15'
+        | '11:30'
+        | '11:45'
+        | '12:00'
+        | '12:15'
+        | '12:30'
+        | '12:45'
+        | '16:00'
+        | '16:15'
+        | '16:30'
+        | '16:45'
+        | '17:00'
+        | '17:15'
+        | '17:30'
+        | '17:45'
+        | '18:00'
+        | '18:15'
+        | '18:30'
+        | '18:45'
+        | '19:00'
+        | '9:00'
+        | '9:15'
+        | '9:30'
+        | '9:45'
+        | null;
+      ageFrom: number | null;
+      ageTo: number | null;
+    }
+>;
 // Variable: queryLectures
 // Query: *[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]
 export type QueryLecturesResult = Array<{
@@ -1234,12 +1367,17 @@ export type QueryLecturesByPoolAndCategoryResult = Array<{
   privateSwimmingPool: boolean | null;
   isSchoolOrKindergartenAvailable: boolean | null;
 }>;
+
 // Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool-detail.ts
 // Variable: querySwimmingPoolDetail
-// Query: *[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,announcements,imageGallery[]{asset->{...,metadata}},faq,  uploadedDocuments[]{label,"file":file.asset->url},    }
+// Query: *[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,dateRange{dateFrom,dateTo},announcements,imageGallery[]{asset->{...,metadata}},faq,  uploadedDocuments[]{label,"file":file.asset->url},    }
 export type QuerySwimmingPoolDetailResult = {
   id: string;
   skillRequirement: Array<string> | null;
+  dateRange: {
+    dateFrom: string | null;
+    dateTo: string | null;
+  } | null;
   announcements: null;
   imageGallery: Array<{
     asset: {
@@ -1271,9 +1409,10 @@ export type QuerySwimmingPoolDetailResult = {
     file: string | null;
   }> | null;
 } | null;
+
 // Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool-main.ts
 // Variable: querySwimmingPoolMain
-// Query: *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{faq,basicInformation,infoBar,announcements}
+// Query: *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{      faq,      basicInformation,      infoBar,      announcements[visible == true]{        "id":_key,        title,        text,        visible      }    }
 export type QuerySwimmingPoolMainResult = {
   faq: Array<
     {
@@ -1293,12 +1432,12 @@ export type QuerySwimmingPoolMainResult = {
   }> | null;
   announcements: Array<{
     id: string;
-    title?: string;
-    visible?: boolean;
-    text?: BlockContent;
-    _key: string;
+    title: string | null;
+    text: BlockContent | null;
+    visible: boolean | null;
   }> | null;
 } | null;
+
 // Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool.ts
 // Variable: querySwimmingPools
 // Query: *[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,totalLength,depth,temperature}[]
@@ -1376,3 +1515,29 @@ export type QuerySwimmingPoolResult = {
   depth: number | null;
   temperature: number | null;
 } | null;
+
+// Source: ../../websites/kometa-web/src/pages/blog/[blogId].tsx
+// Variable: queryBlog
+// Query: *[_type == "blog"]{"slug": slug.current}
+export type QueryBlogResult = Array<{
+  slug: string | null;
+}>;
+
+// Query TypeMap
+import '@sanity/client';
+declare module '@sanity/client' {
+  interface SanityQueries {
+    '*[_type == "blog"  && _id > $lastId]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)': QueryBlogPostsResult;
+    '*[_type == "blog" && slug.current == $blogId][0]{"id":_id,title,shortDescription, description[]{\n    ...,\n    _type == "imageAlt" => {\n      ...,\n      asset->\n    },\n  },createdAt,author,readTime,image{asset->{...,metadata},alt},tags,slug}': QueryResult;
+    '*[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]': QueryCampsResult;
+    '*[_type == "fileUpload"  &&  swimmingPool->slug.current == $swimmingPoolId]{"id":_id,title,file{\n    asset->{...,metadata}\n  },order,\n    swimmingPool -> {"slug":slug.current}\n  }[] | order(order)': QueryDocumentsResult;
+    '*[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,url,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,\n  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"swimmingPoolUrl":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})\n  }[] [0...$pageSize]': QueryAvailableCoursesResult;
+    '*[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]': QueryLecturesResult;
+    '*[_type == "kidsCourse" && categoryId == $categoryId &&\n   swimmingPool->slug.current == $swimmingPoolId\n  ]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]': QueryLecturesByPoolAndCategoryResult;
+    '*[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,dateRange{dateFrom,dateTo},announcements,imageGallery[]{asset->{...,metadata}},faq,\n  uploadedDocuments[]{label,"file":file.asset->url},\n  \n  }': QuerySwimmingPoolDetailResult;
+    '\n    *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{\n      faq,\n      basicInformation,\n      infoBar,\n      announcements[visible == true]{\n        "id":_key,\n        title,\n        text,\n        visible\n      }\n    }\n  ': QuerySwimmingPoolMainResult;
+    '*[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,totalLength,depth,temperature}[]': QuerySwimmingPoolsResult;
+    '*[_type == "swimmingPool" && slug.current == $swimmingPoolId][0]{"id":_id,name,"slug":slug.current,location,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool,totalLength,depth,temperature}': QuerySwimmingPoolResult;
+    '*[_type == "blog"]{"slug": slug.current}': QueryBlogResult;
+  }
+}
