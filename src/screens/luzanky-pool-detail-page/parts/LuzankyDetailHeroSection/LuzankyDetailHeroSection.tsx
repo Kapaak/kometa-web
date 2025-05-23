@@ -9,10 +9,9 @@ import {
 } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
-import { useGetLecturesForSwimmingPoolAndCategory } from '~/adapters/coursesAdapter';
 import { SanityLecture } from '~/domains';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
-import { SwimmingCategoryId, SwimmingPoolId } from '~/types';
+import { SwimmingCategoryId } from '~/types';
 import {
   Button,
   Headline,
@@ -29,6 +28,7 @@ import { joinValues } from '~/utils/format';
 import { formatToCurrency } from '~/utils/number';
 import { Calendar } from '../../components';
 import { luzankyPoolDetailInformation } from '../../constants';
+import { useAvailableLecturesContext } from '../../contexts/AvailableLecturesContext';
 import * as S from './LuzankyDetailHeroSection.style';
 
 export function LuzankyDetailHeroSection() {
@@ -37,21 +37,19 @@ export function LuzankyDetailHeroSection() {
 
   const router = useRouter();
 
-  const { swimmingPoolDetail, categoryId } = useSwimmingPoolDetailPageContext();
+  const { swimmingPoolDetail, categoryId, isLoading } =
+    useSwimmingPoolDetailPageContext();
+
+  const { availableLectures, isLoading: isAvailableLecturesLoading } =
+    useAvailableLecturesContext();
 
   const { poolParameters, description, duration } =
     luzankyPoolDetailInformation?.[categoryId]?.heroSection ?? {};
 
-  const { data: lectures, isLoading } =
-    useGetLecturesForSwimmingPoolAndCategory(
-      categoryId,
-      SwimmingPoolId.LUZANKY
-    );
+  const minimumLecturePrice = getMinimumLecturePrice(availableLectures);
+  const minimumAge = getMinimumAge(availableLectures);
 
-  const minimumLecturePrice = getMinimumLecturePrice(lectures);
-  const minimumAge = getMinimumAge(lectures);
-
-  const calendarData = lectures
+  const calendarData = availableLectures
     ?.filter((lecture) => lecture?.dayId)
     .map((lecture) => ({
       day: lecture.dayId as number,
@@ -246,7 +244,7 @@ export function LuzankyDetailHeroSection() {
                       days={Object.values(dayTranslationAbbr).map(
                         (_, index) => index + 1
                       )}
-                      times={getUniqueSortedTimes(lectures)}
+                      times={getUniqueSortedTimes(availableLectures)}
                       data={calendarData ?? []}
                       onClick={(dayId, time) =>
                         router.push(

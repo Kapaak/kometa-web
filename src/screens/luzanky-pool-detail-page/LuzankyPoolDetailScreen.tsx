@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
-import { getCategoryNameBySlug } from '~/utils/category';
+import { AvailableLecturesContextProvider } from './contexts/AvailableLecturesContext';
 import {
   LuzankyDetailAboutSection,
   LuzankyDetailFirstLectureSection,
@@ -8,7 +8,13 @@ import {
   LuzankyDetailSkillLevelSection,
 } from './parts';
 
-export function LuzankyPoolDetailScreen() {
+interface LuzankyPoolDetailScreenProps {
+  categoryId: string;
+}
+
+export function LuzankyPoolDetailScreen({
+  categoryId,
+}: LuzankyPoolDetailScreenProps) {
   const router = useRouter();
 
   const breadcrumbs = [
@@ -16,14 +22,16 @@ export function LuzankyPoolDetailScreen() {
     { label: 'Bazény', href: '/kurzy-pro-deti' },
     { label: 'Lužánky', href: '/bazeny/luzanky' },
     {
-      label: getCategoryNameBySlug(router.query.categoryId as string),
+      label: categoryId,
       href: router.asPath,
     },
   ];
 
   return (
     <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
-      <LuzankyDetailHeroSection />
+      <AvailableLecturesContextProvider categoryId={categoryId}>
+        <LuzankyDetailHeroSection />
+      </AvailableLecturesContextProvider>
       <LuzankyDetailAboutSection />
       <LuzankyDetailSkillLevelSection />
       <LuzankyDetailFirstLectureSection />

@@ -14,7 +14,7 @@ export default function LuzankyPage({ categoryId }: LuzankyPageProps) {
       swimmingPoolId={SwimmingPoolId.LUZANKY}
       categoryId={categoryId}
     >
-      <LuzankyPoolDetailScreen />
+      <LuzankyPoolDetailScreen categoryId={categoryId} />
     </SwimmingPoolDetailPageContextProvider>
   );
 }

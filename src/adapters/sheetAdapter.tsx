@@ -1,12 +1,15 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { fetchGet, fetchPost } from '~/utils/fetch';
 
-export function useGetGoogleSheetById(sheetId: string) {
+export function useGetGoogleSheetById(sheetId: number, capacity?: number) {
   const { data, isError, isLoading, isSuccess } = useQuery<string[]>({
     queryKey: ['googleSheet', sheetId],
     enabled: Boolean(sheetId),
     queryFn: async () => {
-      return fetchGet<string[]>('/api/sheets', { gid: sheetId });
+      return fetchGet<string[]>('/api/sheets', {
+        gid: String(sheetId),
+        capacity: String(capacity),
+      });
     },
   });
 
