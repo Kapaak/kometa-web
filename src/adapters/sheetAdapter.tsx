@@ -2,26 +2,6 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { SanityLecture } from '~/domains';
 import { fetchGet, fetchPost } from '~/utils/fetch';
 
-export function useGetGoogleSheetById(sheetId: number, capacity?: number) {
-  const { data, isError, isLoading, isSuccess } = useQuery<string[]>({
-    queryKey: ['googleSheet', sheetId],
-    enabled: Boolean(sheetId),
-    queryFn: async () => {
-      return fetchGet<string[]>('/api/sheets', {
-        gid: String(sheetId),
-        capacity: String(capacity),
-      });
-    },
-  });
-
-  return {
-    data,
-    isError,
-    isSuccess,
-    isLoading,
-  };
-}
-
 export function useAppendGoogleSheetById(sheetId: number) {
   const {
     isPending: isLoading,
@@ -30,7 +10,7 @@ export function useAppendGoogleSheetById(sheetId: number) {
   } = useMutation({
     mutationFn: async (values: string[]) => {
       return fetchPost(
-        '/api/sheets',
+        '/api/google-sheets/append',
         {
           values,
         },
