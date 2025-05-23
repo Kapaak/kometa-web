@@ -9,7 +9,7 @@ type AvailableLecturesContextType = {
 };
 
 const AvailableLecturesContext = createContext<AvailableLecturesContextType>({
-  availableLectures: undefined,
+  availableLectures: [],
   isLoading: false,
   isError: false,
 });

@@ -1,7 +1,8 @@
 import { createContext, PropsWithChildren, useContext } from 'react';
-import { useGetLecturesForSwimmingPoolAndCategory } from '~/adapters/coursesAdapter';
 import { SanityLecture } from '~/domains';
+
 import { getDayAbbreviation } from '~/utils/day';
+import { useAvailableLectures } from '../hooks/useAvailableLectures';
 
 type ApplicationFormContextType = {
   categoryId: string;
@@ -32,12 +33,12 @@ export function ApplicationFormContextProvider({
   categoryId,
   children,
 }: Props) {
-  const { data, isLoading } = useGetLecturesForSwimmingPoolAndCategory(
+  const { availableLectures, isLoading } = useAvailableLectures(
     categoryId,
     swimmingPoolId
   );
 
-  const availableLectures = data
+  const filteredLectures = availableLectures
     ?.filter((lecture) => !lecture?.isFull)
     ?.map(({ id, timeFrom, timeTo, discount, dayId }) => ({
       id,
@@ -47,15 +48,18 @@ export function ApplicationFormContextProvider({
       dayId: dayId ?? 0,
     }));
 
-  const availableLecturesOptions = availableLectures
-    ?.sort((a, b) => a.dayId - b.dayId)
+  const availableLecturesOptions = filteredLectures
+    ?.sort((a, b) => {
+      if (a.dayId !== b.dayId) return a.dayId - b.dayId;
+      return a.timeFrom.localeCompare(b.timeFrom);
+    })
     ?.map((lecture) => ({
       label: `${getDayAbbreviation(lecture.dayId)}: ${lecture.timeFrom} - ${lecture.timeTo}`,
       value: lecture.id,
     }));
 
   const getLectureById = (id: string) => {
-    return data?.find((lecture) => lecture.id === id) ?? null;
+    return availableLectures?.find((lecture) => lecture.id === id) ?? null;
   };
 
   return (
@@ -64,7 +68,7 @@ export function ApplicationFormContextProvider({
         categoryId,
         getLectureById,
         availableLecturesOptions,
-        lectures: data,
+        lectures: availableLectures,
         isLoading,
       }}
     >

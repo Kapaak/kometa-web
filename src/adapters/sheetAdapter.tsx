@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { SanityLecture } from '~/domains';
 import { fetchGet, fetchPost } from '~/utils/fetch';
 
 export function useGetGoogleSheetById(sheetId: number, capacity?: number) {
@@ -46,6 +47,31 @@ export function useAppendGoogleSheetById(sheetId: number) {
 
   return {
     appendGoogleSheetById: handleAppendGoogleSheet,
+    isError,
+    isLoading,
+  };
+}
+
+export function useGetAvailableLectures(
+  categoryId: string,
+  swimmingPoolId: string,
+  gid: number,
+  capacity: number
+) {
+  const { data, isError, isLoading } = useQuery<SanityLecture[]>({
+    queryKey: ['lectures-with-capacity', categoryId, swimmingPoolId],
+    queryFn: async () => {
+      return fetchGet('/api/google-sheets/lectures-with-capacity', {
+        categoryId,
+        swimmingPoolId,
+        gid: String(gid),
+        capacity: String(capacity),
+      });
+    },
+  });
+
+  return {
+    data,
     isError,
     isLoading,
   };

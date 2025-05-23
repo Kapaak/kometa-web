@@ -84,7 +84,7 @@ export async function getLectures(): Promise<SanityLecture[]> {
 export async function getLecturesForSwimmingPoolAndCategory(
   categoryId: string,
   swimmingPoolId: string
-) {
+): Promise<SanityLecture[]> {
   const queryLecturesByPoolAndCategory = groq`*[_type == "kidsCourse" && categoryId == $categoryId &&
    swimmingPool->slug.current == $swimmingPoolId
   ]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]`;
