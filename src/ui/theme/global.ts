@@ -51,7 +51,9 @@ export const GlobalStyle = createGlobalStyle(
       min-height: 100%;
       height: 100%;
       //To prevent the scale down if some item overflows
-      overflow: auto;
+      /* overflow: auto; */
+      //This broke pages and on next page it would retain scroll position
+      //TODO: FIX
     }
 
     a,
