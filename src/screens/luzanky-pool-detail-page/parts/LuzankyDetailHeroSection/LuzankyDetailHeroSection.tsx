@@ -82,7 +82,7 @@ export function LuzankyDetailHeroSection() {
 
                   <Flex gap="1.2rem" wrap="wrap">
                     <TimeSlotPrice
-                      isLoading={isLoading}
+                      isLoading={isLoading || isAvailableLecturesLoading}
                       price={minimumLecturePrice}
                       timeSlotName={
                         categoryId === SwimmingCategoryId.KINDERGARTEN ||
@@ -92,7 +92,7 @@ export function LuzankyDetailHeroSection() {
                       }
                     />
                     <TimeSlotPrice
-                      isLoading={isLoading}
+                      isLoading={isLoading || isAvailableLecturesLoading}
                       price={minimumYearlyLecturePrice}
                       timeSlotName={
                         categoryId === SwimmingCategoryId.KINDERGARTEN ||

@@ -21,7 +21,7 @@ export function TimeSlotPrice({
   return (
     <S.TimeSlotPrice>
       <Text variant="body3">
-        {joinValues([formatToCurrency(price ?? 0), timeSlotName])}
+        {joinValues([price ? formatToCurrency(price) : '-', timeSlotName])}
       </Text>
     </S.TimeSlotPrice>
   );
