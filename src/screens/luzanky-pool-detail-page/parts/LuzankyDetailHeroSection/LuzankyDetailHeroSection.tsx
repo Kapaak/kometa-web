@@ -22,10 +22,8 @@ import {
 } from '~/ui/components/atoms';
 import { IconText } from '~/ui/components/molecules';
 import { getCategoryNameByCategoryId } from '~/utils/category';
-import { convertDateToString } from '~/utils/date';
 import { dayTranslationAbbr } from '~/utils/day';
-import { joinValues } from '~/utils/format';
-import { Calendar, TimeSlotPrice } from '../../components';
+import { Calendar, SemesterRange, TimeSlotPrice } from '../../components';
 import { luzankyPoolDetailInformation } from '../../constants';
 import { useAvailableLecturesContext } from '../../contexts/AvailableLecturesContext';
 import * as S from './LuzankyDetailHeroSection.style';
@@ -232,26 +230,12 @@ export function LuzankyDetailHeroSection() {
 
             <S.SectionActionsContainer>
               <VerticalStack gap="1rem" align="center" height="100%">
-                {(swimmingPoolDetail?.dateRange?.dateFrom?.length ?? 0) > 0 &&
-                  (swimmingPoolDetail?.dateRange?.dateTo?.length ?? 0) > 0 && (
-                    <Text variant="body3">
-                      {joinValues(
-                        [
-                          convertDateToString(
-                            new Date(
-                              swimmingPoolDetail?.dateRange?.dateFrom as string
-                            )
-                          ),
-                          convertDateToString(
-                            new Date(
-                              swimmingPoolDetail?.dateRange?.dateTo as string
-                            )
-                          ),
-                        ],
-                        { separator: ' - ' }
-                      )}
-                    </Text>
-                  )}
+                <SemesterRange
+                  semesterFrom={swimmingPoolDetail?.dateRange?.dateFrom}
+                  semesterTo={swimmingPoolDetail?.dateRange?.dateTo}
+                  isLoading={isLoading}
+                />
+
                 <S.SectionCalendarContainer>
                   <Calendar
                     isLoading={isAvailableLecturesLoading}
