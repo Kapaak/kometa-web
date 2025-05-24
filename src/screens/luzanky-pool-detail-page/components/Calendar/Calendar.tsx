@@ -1,4 +1,5 @@
 import { Prohibit, UserPlus } from '@phosphor-icons/react';
+import Skeleton from 'react-loading-skeleton';
 import { useTheme } from 'styled-components';
 import { getDayAbbreviation } from '~/utils/day';
 import * as S from './Calendar.style';
@@ -8,6 +9,7 @@ interface CalendarProps {
   onClick?: (dayId: number, time: number) => void;
   days: number[];
   times: number[];
+  isLoading?: boolean;
   data: {
     day: number;
     time: number;
@@ -22,8 +24,9 @@ export function Calendar({
   data,
   days,
   times,
-  onClick,
+  isLoading,
   maxBlankTimes = 2,
+  onClick,
 }: CalendarProps) {
   const theme = useTheme();
   const { grey } = theme.colors;
@@ -34,11 +37,27 @@ export function Calendar({
     );
   };
 
-  if (!data || data.length === 0) {
-    return;
-  }
-
   const filledTimes = getFilledTimes(times, maxBlankTimes);
+  const loadingFilledTimes = getFilledTimes([15, 16, 17, 18], maxBlankTimes);
+
+  if (isLoading) {
+    return (
+      <S.Calendar columns={loadingFilledTimes.length}>
+        <S.CalendarRowContainer>
+          {loadingFilledTimes.map((time) => (
+            <S.CalendarTime key={time}>{time}:00</S.CalendarTime>
+          ))}
+        </S.CalendarRowContainer>
+        {days.map((day, rowIdx) => (
+          <S.CalendarRowContainer label={getDayAbbreviation(day)} key={rowIdx}>
+            {loadingFilledTimes.map((_, colIdx) => (
+              <Skeleton key={colIdx} height="100%" width="100%" />
+            ))}
+          </S.CalendarRowContainer>
+        ))}
+      </S.Calendar>
+    );
+  }
 
   return (
     <S.Calendar columns={filledTimes.length}>

@@ -230,54 +230,51 @@ export function LuzankyDetailHeroSection() {
               </S.SectionInformationContainer>
             </S.SectionDescriptionContainer>
 
-            {minimumLecturePrice > 0 && (
-              <S.SectionActionsContainer>
-                <VerticalStack gap="1rem" align="center" height="100%">
-                  {(swimmingPoolDetail?.dateRange?.dateFrom?.length ?? 0) > 0 &&
-                    (swimmingPoolDetail?.dateRange?.dateTo?.length ?? 0) >
-                      0 && (
-                      <Text variant="body3">
-                        {joinValues(
-                          [
-                            convertDateToString(
-                              new Date(
-                                swimmingPoolDetail?.dateRange
-                                  ?.dateFrom as string
-                              )
-                            ),
-                            convertDateToString(
-                              new Date(
-                                swimmingPoolDetail?.dateRange?.dateTo as string
-                              )
-                            ),
-                          ],
-                          { separator: ' - ' }
-                        )}
-                      </Text>
-                    )}
-                  <S.SectionCalendarContainer>
-                    <Calendar
-                      days={Object.values(dayTranslationAbbr).map(
-                        (_, index) => index + 1
+            <S.SectionActionsContainer>
+              <VerticalStack gap="1rem" align="center" height="100%">
+                {(swimmingPoolDetail?.dateRange?.dateFrom?.length ?? 0) > 0 &&
+                  (swimmingPoolDetail?.dateRange?.dateTo?.length ?? 0) > 0 && (
+                    <Text variant="body3">
+                      {joinValues(
+                        [
+                          convertDateToString(
+                            new Date(
+                              swimmingPoolDetail?.dateRange?.dateFrom as string
+                            )
+                          ),
+                          convertDateToString(
+                            new Date(
+                              swimmingPoolDetail?.dateRange?.dateTo as string
+                            )
+                          ),
+                        ],
+                        { separator: ' - ' }
                       )}
-                      times={getUniqueSortedTimes(availableLectures)}
-                      data={calendarData ?? []}
-                      onClick={(dayId, time) =>
-                        router.push(
-                          `/bazeny/luzanky/${router.query.categoryId}/prihlasky?day=${dayId}&time=${time}`
-                        )
-                      }
-                    />
-                  </S.SectionCalendarContainer>
+                    </Text>
+                  )}
+                <S.SectionCalendarContainer>
+                  <Calendar
+                    isLoading={isAvailableLecturesLoading}
+                    days={Object.values(dayTranslationAbbr).map(
+                      (_, index) => index + 1
+                    )}
+                    times={getUniqueSortedTimes(availableLectures)}
+                    data={calendarData ?? []}
+                    onClick={(dayId, time) =>
+                      router.push(
+                        `/bazeny/luzanky/${router.query.categoryId}/prihlasky?day=${dayId}&time=${time}`
+                      )
+                    }
+                  />
+                </S.SectionCalendarContainer>
 
-                  <S.SectionActionLink
-                    href={`/bazeny/luzanky/${router.query.categoryId}/prihlasky`}
-                  >
-                    <Button color="secondary">Přihlásit se</Button>
-                  </S.SectionActionLink>
-                </VerticalStack>
-              </S.SectionActionsContainer>
-            )}
+                <S.SectionActionLink
+                  href={`/bazeny/luzanky/${router.query.categoryId}/prihlasky`}
+                >
+                  <Button color="secondary">Přihlásit se</Button>
+                </S.SectionActionLink>
+              </VerticalStack>
+            </S.SectionActionsContainer>
           </S.SectionContainer>
         </S.SectionCard>
       </MaxWidth>
