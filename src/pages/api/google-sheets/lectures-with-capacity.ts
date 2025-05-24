@@ -34,7 +34,7 @@ async function getGoogleSheetByGid(
   googleSheets: sheets_v4.Sheets,
   gid: string
 ) {
-  const metadata = await googleSheets.spreadsheets.get({
+  const metadata = await googleSheets?.spreadsheets?.get({
     spreadsheetId: SPREADSHEET_ID,
     fields: 'sheets(properties(sheetId,title))',
   });
@@ -47,7 +47,7 @@ async function getGoogleSheetByGid(
     throw new Error('Sheet not found with specified GID');
   }
 
-  const response = await googleSheets.spreadsheets.values.get({
+  const response = await googleSheets?.spreadsheets?.values?.get({
     spreadsheetId: SPREADSHEET_ID,
     range: `${targetSheet.properties.title}!A:Z`,
   });
