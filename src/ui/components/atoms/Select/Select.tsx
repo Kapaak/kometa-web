@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ClipLoader } from 'react-spinners';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 import { CaretDown } from '@phosphor-icons/react';
 import * as RadixUiSelect from '@radix-ui/react-select';
@@ -87,8 +87,10 @@ export const Select = ({
           {!isLoading && <CaretDown />}
           {isLoading && (
             <ClipLoader
+              cssOverride={{
+                animation: 'spin-only 0.75s linear infinite',
+              }}
               size="1.8rem"
-              speedMultiplier={0.5}
               color={grey['800']}
             />
           )}

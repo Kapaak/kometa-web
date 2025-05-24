@@ -1,10 +1,19 @@
-import { FadeLoader } from 'react-spinners'
+import ClipLoader from 'react-spinners/ClipLoader';
 
 export interface LoaderProps {
-  color?: string
-  loading?: boolean
+  color?: string;
+  loading?: boolean;
 }
 
 export function Loader({ color, loading }: LoaderProps) {
-  return <FadeLoader loading={loading} color={color} width={4} height={12} />
+  return (
+    <ClipLoader
+      loading={loading}
+      color={color}
+      size={35}
+      cssOverride={{
+        animation: 'spin-only 0.75s linear infinite',
+      }}
+    />
+  );
 }

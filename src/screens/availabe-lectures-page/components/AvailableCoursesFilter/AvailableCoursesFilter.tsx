@@ -138,7 +138,6 @@ export function AvailableCoursesFilter() {
                 name="place"
                 placeholder="Preferovaná místa"
                 options={swimmingPoolOptions}
-                isLoading={isSwimmingPoolLoading}
               />
               <ControlledSelect
                 name="age"

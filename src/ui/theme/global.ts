@@ -38,6 +38,13 @@ export const GlobalStyle = createGlobalStyle(
       padding-right: 0 !important;
     }
 
+    //for react-spinners
+    @keyframes spin-only {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
     br {
       //fixes br height in Firefox to be the same as in Chromium browsers
       margin-bottom: 2.3rem;

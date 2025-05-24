@@ -21,7 +21,7 @@ export function Button({
     <S.Button size={size} disabled={disabled} {...rest}>
       {loading && (
         <S.FadeLoaderWrapper size={size}>
-          <Loader loading={loading} color={disabled ? grey[700] : grey[100]} />
+          <Loader loading={loading} color={grey['100']} />
         </S.FadeLoaderWrapper>
       )}
 
