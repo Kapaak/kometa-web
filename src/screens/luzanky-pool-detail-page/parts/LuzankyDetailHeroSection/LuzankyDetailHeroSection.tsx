@@ -14,9 +14,9 @@ import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-
 import { SwimmingCategoryId } from '~/types';
 import {
   Button,
+  Flex,
   Headline,
   MaxWidth,
-  Skeleton,
   Text,
   VerticalStack,
 } from '~/ui/components/atoms';
@@ -25,8 +25,7 @@ import { getCategoryNameByCategoryId } from '~/utils/category';
 import { convertDateToString } from '~/utils/date';
 import { dayTranslationAbbr } from '~/utils/day';
 import { joinValues } from '~/utils/format';
-import { formatToCurrency } from '~/utils/number';
-import { Calendar } from '../../components';
+import { Calendar, TimeSlotPrice } from '../../components';
 import { luzankyPoolDetailInformation } from '../../constants';
 import { useAvailableLecturesContext } from '../../contexts/AvailableLecturesContext';
 import * as S from './LuzankyDetailHeroSection.style';
@@ -46,8 +45,18 @@ export function LuzankyDetailHeroSection() {
   const { poolParameters, description, duration } =
     luzankyPoolDetailInformation?.[categoryId]?.heroSection ?? {};
 
-  const minimumLecturePrice = getMinimumLecturePrice(availableLectures);
-  const minimumAge = getMinimumAge(availableLectures);
+  const minimumLecturePrice = retrieveMinimumLectureAttribute(
+    availableLectures,
+    'priceSemester'
+  );
+  const minimumYearlyLecturePrice = retrieveMinimumLectureAttribute(
+    availableLectures,
+    'priceYear'
+  );
+  const minimumAge = retrieveMinimumLectureAttribute(
+    availableLectures,
+    'ageFrom'
+  );
 
   const calendarData = availableLectures
     ?.filter((lecture) => lecture?.dayId)
@@ -70,25 +79,32 @@ export function LuzankyDetailHeroSection() {
                 </Headline>
                 <Text variant="body2">{description}</Text>
 
-                {isLoading && (
-                  <S.SectionPriceContainer>
-                    <Skeleton width="18rem" height="0" />
-                  </S.SectionPriceContainer>
-                )}
+                <VerticalStack gap="1rem">
+                  <Text variant="body3">Cena kurzu je:</Text>
 
-                {!isLoading && minimumLecturePrice > 0 && (
-                  <S.SectionPriceContainer>
-                    <Text variant="body3">
-                      {joinValues([
-                        `Cena kurzu je od ${formatToCurrency(minimumLecturePrice)}`,
+                  <Flex gap="1.2rem" wrap="wrap">
+                    <TimeSlotPrice
+                      isLoading={isLoading}
+                      price={minimumLecturePrice}
+                      timeSlotName={
                         categoryId === SwimmingCategoryId.KINDERGARTEN ||
                         categoryId === SwimmingCategoryId.SCHOOL
                           ? 'za žáka'
-                          : 'za pololetí',
-                      ])}
-                    </Text>
-                  </S.SectionPriceContainer>
-                )}
+                          : 'za pololetí'
+                      }
+                    />
+                    <TimeSlotPrice
+                      isLoading={isLoading}
+                      price={minimumYearlyLecturePrice}
+                      timeSlotName={
+                        categoryId === SwimmingCategoryId.KINDERGARTEN ||
+                        categoryId === SwimmingCategoryId.SCHOOL
+                          ? 'za žáka'
+                          : 'za  celý školní rok'
+                      }
+                    />
+                  </Flex>
+                </VerticalStack>
 
                 {categoryId !== SwimmingCategoryId.SCHOOL &&
                   categoryId !== SwimmingCategoryId.KINDERGARTEN && (
@@ -277,26 +293,18 @@ function getUniqueSortedTimes(lectures?: SanityLecture[]): number[] {
   return uniqueTimes.sort((a, b) => a - b);
 }
 
-function getMinimumLecturePrice(lectures?: SanityLecture[]) {
+function retrieveMinimumLectureAttribute(
+  lectures: SanityLecture[] | undefined,
+  key: 'priceSemester' | 'priceYear' | 'ageFrom'
+): number {
   if (!lectures || lectures.length === 0) {
     return 0;
   }
 
   const prices = lectures
-    ?.filter((lecture) => !lecture?.isFull)
-    .map((lecture) => lecture?.priceSemester)
+    .filter((lecture) => !lecture?.isFull)
+    .map((lecture) => lecture?.[key])
     .filter((price): price is number => price != null);
 
   return prices.length > 0 ? Math.min(...prices) : 0;
-}
-
-function getMinimumAge(lectures?: SanityLecture[]) {
-  if (!lectures || lectures.length === 0) {
-    return 0;
-  }
-  const ages = lectures
-    ?.filter((lecture) => !lecture?.isFull)
-    .map((lecture) => lecture?.ageFrom)
-    .filter((age): age is number => age != null);
-  return ages.length > 0 ? Math.min(...ages) : 0;
 }
