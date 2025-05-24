@@ -1,8 +1,10 @@
-import { PropsWithChildren } from 'react'
+import 'react-loading-skeleton/dist/skeleton.css';
 
-import { ThemeProvider } from 'styled-components'
+import { PropsWithChildren } from 'react';
 
-import { GlobalStyle, theme } from '~/ui/theme'
+import { ThemeProvider } from 'styled-components';
+
+import { GlobalStyle, theme } from '~/ui/theme';
 
 export function StyleContext({ children }: PropsWithChildren) {
   return (
@@ -10,5 +12,5 @@ export function StyleContext({ children }: PropsWithChildren) {
       <GlobalStyle />
       {children}
     </ThemeProvider>
-  )
+  );
 }
