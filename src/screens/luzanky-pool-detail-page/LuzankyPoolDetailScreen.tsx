@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
+import { getCategoryNameBySlug } from '~/utils/category';
 import { AvailableLecturesContextProvider } from './contexts/AvailableLecturesContext';
 import {
   LuzankyDetailAboutSection,
@@ -22,7 +23,7 @@ export function LuzankyPoolDetailScreen({
     { label: 'Bazény', href: '/kurzy-pro-deti' },
     { label: 'Lužánky', href: '/bazeny/luzanky' },
     {
-      label: categoryId,
+      label: getCategoryNameBySlug(router.query.categoryId as string),
       href: router.asPath,
     },
   ];
