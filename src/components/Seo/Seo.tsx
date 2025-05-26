@@ -1,9 +1,14 @@
 import Head from 'next/head';
 
-import { data } from './Seo.data';
+import { useRouter } from 'next/router';
+import { data, defaultSeoData } from './Seo.data';
 
 export const SEO = () => {
-  const routeMetaData = data.default;
+  const router = useRouter();
+  const path = router.pathname;
+  const metadataByPath = data.find((item) => path?.includes(item?.path ?? ''));
+
+  const routeMetaData = metadataByPath ?? defaultSeoData;
 
   return (
     <Head>

@@ -1,7 +1,9 @@
-export type SeoData = Record<
-  string,
-  { title?: string; keywords: string; description: string }
->;
+export type SeoData = {
+  title?: string;
+  keywords: string;
+  description: string;
+  path?: string;
+};
 
 const keywords = `Plavání pro děti Brno,
 Dětské plavecké kurzy Brno,
@@ -27,11 +29,22 @@ Závodní plavání pro děti,
 Plavecký sportovní klub Brno
 `;
 
-export const data: SeoData = {
-  default: {
-    title: 'Plavecká škola | Kometa',
-    keywords,
-    description:
-      'Pod hlavičkou KPSP Kometa Brno (KomBr) se připravují sportovci v bazénovém plavání, dálkovém plavání, synchronizovaném plavání a ve vodním póle',
-  },
+const keywordsLuzanky =
+  'plavání Lužánky, bazén Lužánky, bazén za Lužánkami, výuka plavání v Brně, plavání Brno, plavecké kurzy brno, plavání brno, plavání pro děti, plavání s dětmi';
+
+export const defaultSeoData: SeoData = {
+  title: 'Plavecká škola | Kometa',
+  keywords,
+  description:
+    'Pod hlavičkou KPSP Kometa Brno (KomBr) se připravují sportovci v bazénovém plavání, dálkovém plavání, synchronizovaném plavání a ve vodním póle',
 };
+
+export const data: SeoData[] = [
+  {
+    title: 'Plavecká škola | Lužánky',
+    keywords: keywordsLuzanky,
+    path: '/bazeny/luzanky',
+    description:
+      'Plavecké kurzy pro děti i dospělé. Vedené kvalifikovanými trenéry, kteří působí na bazénech po celém Brně. Přijď si s námí zaplavat a navštiv bazén za Lužánkami.',
+  },
+];
