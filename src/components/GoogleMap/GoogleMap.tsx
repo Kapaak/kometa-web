@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
 
 import { useGetSwimmingPools } from '~/adapters/swimmingPoolAdapter';
-import { LatLng } from '~/types';
 import { convertComponentToNode } from '~/utils/transform';
 
 import { Marker, MarkerInfo } from './parts';
@@ -58,22 +57,14 @@ export function GoogleMap({ onClick }: GoogleMapProps) {
 
         if (data && data?.length > 0) {
           data?.forEach(async (pool) => {
-            // const geocoder = new Geocoder();
-
             const swimmingPoolLocation = {
               lat: pool?.location?.lat ?? 0,
               lng: pool.location?.lng ?? 0,
             };
 
-            // const address = pool?.location
-            //   ? await getAddressFromGeocode(swimmingPoolLocation, geocoder)
-            //   : '';
-
-            const address = '';
-
             const markerNode = convertComponentToNode(<Marker />);
             const infoWindowNode = convertComponentToNode(
-              <MarkerInfo address={address} url={pool?.url} />
+              <MarkerInfo address={pool?.address} url={pool?.url} />
             );
 
             const advancedMarker = new AdvancedMarkerElement({
@@ -109,25 +100,4 @@ export function GoogleMap({ onClick }: GoogleMapProps) {
   }, [data, onClick]);
 
   return <S.GoogleMap id="DEMO_MAP_ID" className="google-map" ref={mapRef} />;
-}
-
-function getAddressFromGeocode(
-  location: LatLng,
-  geocoder: google.maps.Geocoder
-) {
-  return new Promise<string>((resolve, reject) => {
-    geocoder.geocode({ location }, (results, status) => {
-      if (status === 'OK') {
-        if (results[0]) {
-          const address =
-            results[0].formatted_address?.split(', Česko')[0] ?? '';
-          resolve(address);
-        } else {
-          reject('No results found');
-        }
-      } else {
-        reject('Geocoder failed due to: ' + status);
-      }
-    });
-  });
 }
