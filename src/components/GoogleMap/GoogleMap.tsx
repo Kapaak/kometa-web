@@ -32,12 +32,12 @@ export function GoogleMap({ onClick }: GoogleMapProps) {
         apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '',
         version: 'weekly',
         language: 'cs',
-        libraries: ['geocoding'],
+        // libraries: ['geocoding'],
       });
 
       try {
         const { Map, InfoWindow } = await loader.importLibrary('maps');
-        const { Geocoder } = await loader.importLibrary('geocoding');
+        // const { Geocoder } = await loader.importLibrary('geocoding');
         const { AdvancedMarkerElement } = await loader.importLibrary('marker');
 
         const position = {
@@ -58,16 +58,18 @@ export function GoogleMap({ onClick }: GoogleMapProps) {
 
         if (data && data?.length > 0) {
           data?.forEach(async (pool) => {
-            const geocoder = new Geocoder();
+            // const geocoder = new Geocoder();
 
             const swimmingPoolLocation = {
               lat: pool?.location?.lat ?? 0,
               lng: pool.location?.lng ?? 0,
             };
 
-            const address = pool?.location
-              ? await getAddressFromGeocode(swimmingPoolLocation, geocoder)
-              : '';
+            // const address = pool?.location
+            //   ? await getAddressFromGeocode(swimmingPoolLocation, geocoder)
+            //   : '';
+
+            const address = '';
 
             const markerNode = convertComponentToNode(<Marker />);
             const infoWindowNode = convertComponentToNode(
