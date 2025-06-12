@@ -4,8 +4,6 @@ import styled, { css } from 'styled-components';
 import { maxBreakpoint, minBreakpoint } from '~/utils/dimensions';
 
 export const Navigation = styled(NavigationMenu.Root)`
-  position: sticky;
-  top: 0;
   width: 100%;
   padding: 0 2rem;
   background-color: ${({ theme }) => theme.colors.grey['100']};

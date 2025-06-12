@@ -1,17 +1,23 @@
 import { createContext, PropsWithChildren, useContext } from 'react';
 import { useGetSwimmingPoolDetailPageById } from '~/adapters/swimmingPoolDetailAdapter';
-import { TransformedSwimmingPoolDetail } from '~/domains';
+import { useGetSwimmingPoolMainPageById } from '~/adapters/swimmingPoolMainAdapter';
+import {
+  SanitySwimmingPoolPage,
+  TransformedSwimmingPoolDetail,
+} from '~/domains';
 
 type SwimmingPoolDetailPageContextType = {
   categoryId: string;
   swimmingPoolDetail?: TransformedSwimmingPoolDetail;
+  swimmingPool?: SanitySwimmingPoolPage;
   isLoading?: boolean;
 };
 
 const SwimmingPoolDetailPageContext =
   createContext<SwimmingPoolDetailPageContextType>({
-    categoryId: '',
     swimmingPoolDetail: undefined,
+    swimmingPool: undefined,
+    categoryId: '',
     isLoading: false,
   });
 
@@ -28,11 +34,14 @@ export function SwimmingPoolDetailPageContextProvider({
   const { data: swimmingPoolDetail, isLoading } =
     useGetSwimmingPoolDetailPageById(swimmingPoolId, categoryId);
 
+  const { data } = useGetSwimmingPoolMainPageById(swimmingPoolId);
+
   return (
     <SwimmingPoolDetailPageContext.Provider
       value={{
-        categoryId,
+        swimmingPool: data,
         swimmingPoolDetail,
+        categoryId,
         isLoading,
       }}
     >

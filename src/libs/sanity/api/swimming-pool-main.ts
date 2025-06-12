@@ -9,7 +9,7 @@ export async function getSwimmingPoolMainById(
     *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{
       faq,
       basicInformation,
-      infoBar,
+      "infoBar":infoBars[visible == true]{value}[0],
       announcements[visible == true]{
         "id":_key,
         title,

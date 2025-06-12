@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router';
 import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
+import { useInfoBarStatus } from '~/hooks/useInfoBar';
+import { InfoBar } from '~/ui/components/molecules/InfoBar';
 import { getCategoryNameBySlug } from '~/utils/category';
 import { AvailableLecturesContextProvider } from './contexts/AvailableLecturesContext';
+import { useSwimmingPoolDetailPageContext } from './contexts/SwimmingPoolDetailPageContext';
 import {
   LuzankyDetailAboutSection,
   LuzankyDetailFirstLectureSection,
@@ -28,8 +31,21 @@ export function LuzankyPoolDetailScreen({
     },
   ];
 
+  const { visible, toggleVisibility } = useInfoBarStatus();
+
+  const { swimmingPool } = useSwimmingPoolDetailPageContext();
+
   return (
-    <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
+    <BreadcrumbsLayout
+      breadcrumbs={breadcrumbs}
+      informationBar={
+        <InfoBar
+          visible={visible && Boolean(swimmingPool?.infoBar?.value)}
+          value={swimmingPool?.infoBar?.value ?? ''}
+          onClose={toggleVisibility}
+        />
+      }
+    >
       <AvailableLecturesContextProvider categoryId={categoryId}>
         <LuzankyDetailHeroSection />
       </AvailableLecturesContextProvider>

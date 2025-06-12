@@ -13,39 +13,6 @@
  */
 
 // Source: schema.json
-export type SanityImagePaletteSwatch = {
-  _type: 'sanity.imagePaletteSwatch';
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
-
-export type SanityImagePalette = {
-  _type: 'sanity.imagePalette';
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
-
-export type SanityImageDimensions = {
-  _type: 'sanity.imageDimensions';
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
-
-export type Geopoint = {
-  _type: 'geopoint';
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
 export type LectureFrequencyPricing = {
   _type: 'lectureFrequencyPricing';
   title?: string;
@@ -154,10 +121,16 @@ export type SwimmingPoolMainPage = {
     text?: BlockContent;
     _key: string;
   }>;
-  infoBar?: Array<{
-    title?: string;
-    text?: string;
-    visibility?: boolean;
+  infoBars?: Array<{
+    value?: string;
+    visible?: boolean;
+    swimmingPool?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'swimmingPool';
+    };
+    _type: 'infoBar';
     _key: string;
   }>;
   fileUploads?: Array<{
@@ -337,56 +310,6 @@ export type SwimmingPoolDetail = {
     | 'school';
 };
 
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop';
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot';
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageAsset = {
-  _id: string;
-  _type: 'sanity.imageAsset';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
-};
-
-export type SanityImageMetadata = {
-  _type: 'sanity.imageMetadata';
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type DateRange = {
   _type: 'dateRange';
   dateFrom?: string;
@@ -399,9 +322,8 @@ export type InfoBar = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  text?: string;
-  visibility?: boolean;
+  value?: string;
+  visible?: boolean;
   swimmingPool?: {
     _ref: string;
     _type: 'reference';
@@ -480,35 +402,6 @@ export type Blog = {
   author?: string;
   readTime?: number;
   tags?: Array<'equipment' | 'training' | 'tips' | 'funFact'>;
-};
-
-export type SanityFileAsset = {
-  _id: string;
-  _type: 'sanity.fileAsset';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
-export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData';
-  name?: string;
-  id?: string;
-  url?: string;
 };
 
 export type KidsCourse = {
@@ -724,17 +617,125 @@ export type MediaTag = {
   name?: Slug;
 };
 
+export type SanityImagePaletteSwatch = {
+  _type: 'sanity.imagePaletteSwatch';
+  background?: string;
+  foreground?: string;
+  population?: number;
+  title?: string;
+};
+
+export type SanityImagePalette = {
+  _type: 'sanity.imagePalette';
+  darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
+  darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
+  dominant?: SanityImagePaletteSwatch;
+  lightMuted?: SanityImagePaletteSwatch;
+  muted?: SanityImagePaletteSwatch;
+};
+
+export type SanityImageDimensions = {
+  _type: 'sanity.imageDimensions';
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot';
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop';
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: 'sanity.fileAsset';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
+};
+
+export type SanityImageAsset = {
+  _id: string;
+  _type: 'sanity.imageAsset';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  metadata?: SanityImageMetadata;
+  source?: SanityAssetSourceData;
+};
+
+export type SanityImageMetadata = {
+  _type: 'sanity.imageMetadata';
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
+};
+
+export type Geopoint = {
+  _type: 'geopoint';
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
+
 export type Slug = {
   _type: 'slug';
   current?: string;
   source?: string;
 };
 
+export type SanityAssetSourceData = {
+  _type: 'sanity.assetSourceData';
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
 export type AllSanitySchemaTypes =
-  | SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | Geopoint
   | LectureFrequencyPricing
   | YearMonthRange
   | AvailableIconType
@@ -744,15 +745,9 @@ export type AllSanitySchemaTypes =
   | SwimmingPoolMainPage
   | PreliminaryCourse
   | SwimmingPoolDetail
-  | SanityImageCrop
-  | SanityImageHotspot
-  | SanityImageAsset
-  | SanityImageMetadata
   | DateRange
   | InfoBar
   | Blog
-  | SanityFileAsset
-  | SanityAssetSourceData
   | KidsCourse
   | Price
   | AgeCategory
@@ -764,7 +759,17 @@ export type AllSanitySchemaTypes =
   | LatLng
   | ImageAlt
   | MediaTag
-  | Slug;
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageHotspot
+  | SanityImageCrop
+  | SanityFileAsset
+  | SanityImageAsset
+  | SanityImageMetadata
+  | Geopoint
+  | Slug
+  | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../../websites/kometa-web/src/libs/sanity/api/blog.ts
 // Variable: queryBlogPosts
@@ -1417,7 +1422,7 @@ export type QuerySwimmingPoolDetailResult = {
 
 // Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool-main.ts
 // Variable: querySwimmingPoolMain
-// Query: *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{      faq,      basicInformation,      infoBar,      announcements[visible == true]{        "id":_key,        title,        text,        visible      }    }
+// Query: *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{      faq,      basicInformation,      "infoBar":infoBars[visible == true]{value}[0],      announcements[visible == true]{        "id":_key,        title,        text,        visible      }    }
 export type QuerySwimmingPoolMainResult = {
   faq: Array<
     {
@@ -1429,12 +1434,9 @@ export type QuerySwimmingPoolMainResult = {
     text?: BlockContent;
     _key: string;
   }> | null;
-  infoBar: Array<{
-    title?: string;
-    text?: string;
-    visibility?: boolean;
-    _key: string;
-  }> | null;
+  infoBar: {
+    value: string | null;
+  } | null;
   announcements: Array<{
     id: string;
     title: string | null;
@@ -1536,7 +1538,7 @@ declare module '@sanity/client' {
     '*[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]': QueryLecturesResult;
     '*[_type == "kidsCourse" && categoryId == $categoryId &&\n   swimmingPool->slug.current == $swimmingPoolId\n  ]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]': QueryLecturesByPoolAndCategoryResult;
     '*[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,dateRange{dateFrom,dateTo},announcements,imageGallery[]{asset->{...,metadata}},faq,\n  uploadedDocuments[]{label,"file":file.asset->url},\n  \n  }': QuerySwimmingPoolDetailResult;
-    '\n    *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{\n      faq,\n      basicInformation,\n      infoBar,\n      announcements[visible == true]{\n        "id":_key,\n        title,\n        text,\n        visible\n      }\n    }\n  ': QuerySwimmingPoolMainResult;
+    '\n    *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{\n      faq,\n      basicInformation,\n      "infoBar":infoBars[visible == true]{value}[0],\n      announcements[visible == true]{\n        "id":_key,\n        title,\n        text,\n        visible\n      }\n    }\n  ': QuerySwimmingPoolMainResult;
     '*[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,"location":latLng,address,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]': QuerySwimmingPoolsResult;
     '*[_type == "swimmingPool" && slug.current == $swimmingPoolId][0]{"id":_id,name,"slug":slug.current,"location":latLng,address,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}': QuerySwimmingPoolResult;
     '*[_type == "blog"]{"slug": slug.current}': QueryBlogResult;

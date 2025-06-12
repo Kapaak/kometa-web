@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
 import { Breadcrumbs, MaxWidth } from '~/ui/components/atoms';
 import { PageLayout } from '~/ui/components/templates';
@@ -12,14 +12,16 @@ type BreadcrumbsItem = {
 
 interface BreadcrumbsLayoutProps extends PropsWithChildren {
   breadcrumbs: BreadcrumbsItem[];
+  informationBar?: ReactNode;
 }
 
 export function BreadcrumbsLayout({
-  children,
+  informationBar,
   breadcrumbs,
+  children,
 }: BreadcrumbsLayoutProps) {
   return (
-    <PageLayout>
+    <PageLayout informationBar={informationBar}>
       <main>
         <S.BreadcrumbsLayout>
           <MaxWidth>
