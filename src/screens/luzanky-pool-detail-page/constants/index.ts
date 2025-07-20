@@ -243,7 +243,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
         descriptions: [
           'Doporučujeme přijít 15 minut před začátkem lekce. Dospělí mají k dispozici plastové kartičky pro vstup do areálu, které vám umožní vstup 15 min před začátkem lekce.',
           'Po tréninku máte 30 minut na převlečení, takže si prosím hlídejte čas. Pokud odejdete později karta se zablokuje a za její odblokování je pokuta 50 Kč.',
-          'Na kartu se vybírá záloha 500 Kč před první lekcí kurzu, proto prosím na první lekci přijďte všas a s přesnou hotovostí. Tato záloha vám bude vrácena při vrácení karty na poslední hodině kurzu.',
+          'Na kartu se vybírá záloha 500 Kč před první lekcí kurzu, proto prosím na první lekci přijďte včas a s přesnou hotovostí. Tato záloha vám bude vrácena při vrácení karty na poslední hodině kurzu.',
         ],
       },
     },
