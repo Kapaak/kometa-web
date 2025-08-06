@@ -31,6 +31,7 @@ const colors: DefaultTheme['colors'] = {
   grey: {
     100: '#fff',
     200: '#F8F8F8',
+    300: '#D9D9D9',
     400: '#EDEDED',
     500: '#DADADA',
     600: '#C2C2C2',

@@ -1,27 +1,39 @@
+import NextImage from 'next/image';
 import styled, { css } from 'styled-components';
-import { Section } from '~/ui/components/atoms';
+import { Headline, Section, Text } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const ContactSection = styled(Section).attrs({ variant: 'tall' })`
   background-color: ${({ theme }) => theme.colors.primary.light};
 
   ${({ theme }) => css`
-    @media (${minBreakpoint(theme.breakpoints.lg)}) {
-      padding-bottom: 10rem;
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      padding-block: 6rem;
     }
   `}
+`;
+
+export const ContactHeadline = styled(Headline)`
+  margin-bottom: 4rem;
+`;
+
+export const ContactSubheadline = styled(Text).attrs({
+  variant: 'h3',
+  as: 'h3',
+})`
+  color: ${({ theme }) => theme.colors.primary.main};
+  font-family: ${({ theme }) => theme.fonts.secondary};
 `;
 
 export const SectionRow = styled.div`
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 4rem;
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.md)}) {
       flex-direction: row;
-      gap: 4rem;
     }
   `}
 `;
@@ -29,36 +41,44 @@ export const SectionRow = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  justify-content: space-between;
+  gap: 1.2rem;
   flex: 1 1 50%;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      gap: 4.2rem;
+    }
+  `}
 `;
 
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 32rem;
+  max-width: 48rem;
+  border-radius: 0.5rem;
+`;
+
+export const BorderedItemsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 
   ${({ theme }) => css`
-    @media (${minBreakpoint(theme.breakpoints.lg)}) {
-      gap: 2.4rem;
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      gap: 3.8rem;
     }
   `}
 `;
 
-export const BorderedRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey['600']};
-  padding: 1rem 0;
-
-  svg {
-    flex-shrink: 0;
-  }
-
-  ${({ theme }) => css`
-    @media (${minBreakpoint(theme.breakpoints.md)}) {
-      gap: 2.4rem;
-    }
-  `}
+export const Image = styled(NextImage)`
+  object-fit: cover;
+  border-radius: inherit;
 `;
