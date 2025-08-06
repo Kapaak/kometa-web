@@ -1,10 +1,20 @@
 import styled, { css } from 'styled-components';
-import { Section, VerticalStack } from '~/ui/components/atoms';
+import { Headline, Section, VerticalStack } from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const BasicInfoSection = styled(Section).attrs({ variant: 'tall' })`
   background-color: ${({ theme }) => theme.colors.primary.light};
   scroll-margin: 6rem;
+
+  ${({ theme }) => css`
+    @media (${minBreakpoint(theme.breakpoints.md)}) {
+      padding-block: 6rem;
+    }
+  `}
+`;
+
+export const BasicInfoHeadline = styled(Headline)`
+  margin-bottom: 4rem;
 `;
 
 export const SectionNotSwimmingList = styled(VerticalStack).attrs({

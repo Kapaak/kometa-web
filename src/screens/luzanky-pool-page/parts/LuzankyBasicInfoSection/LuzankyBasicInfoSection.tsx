@@ -11,6 +11,7 @@ export function LuzankyBasicInfoSection() {
   return (
     <S.BasicInfoSection id="zakladni-informace">
       <MaxWidth>
+        <S.BasicInfoHeadline>Základní informace</S.BasicInfoHeadline>
         <S.SectionContainer>
           {data?.basicInformation?.map(
             (information) =>
