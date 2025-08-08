@@ -1,5 +1,6 @@
 import { CookieConsent } from '~/types';
 import { hasEssentialAnalyticsConsents } from './cookies';
+import { isDevelopment } from './environment';
 
 export class MetaPixelManager {
   static async revokeConsent() {
@@ -15,7 +16,7 @@ export class MetaPixelManager {
   static async pageView() {
     if (typeof fbq === 'undefined') return;
 
-    if (process.env.NODE_ENV === 'development') console.log('Page View fired');
+    if (isDevelopment) console.log('Page View fired');
     fbq('track', 'PageView');
   }
 

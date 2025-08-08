@@ -13,6 +13,7 @@ import {
   cookieConsentGiven,
   hasEssentialAnalyticsConsents,
 } from '~/utils/cookies';
+import { isDevelopment } from '~/utils/environment';
 import { MetaPixelManager } from '~/utils/meta-pixel';
 
 export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
@@ -58,7 +59,7 @@ export const AnalyticsProvider = ({ children }: PropsWithChildren) => {
       />
 
       <GoogleAnalytics
-        debugMode={process.env.NODE_ENV === 'development'}
+        debugMode={isDevelopment}
         trackPageViews
         defaultConsent={defaultCookieConsent ? 'granted' : 'denied'}
         gaMeasurementId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}

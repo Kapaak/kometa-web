@@ -5,6 +5,7 @@ import {
   cookieConsentGiven,
   hasEssentialAnalyticsConsents,
 } from '~/utils/cookies';
+import { isDevelopment } from '~/utils/environment';
 
 //Posthog must be defined outside component !
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
@@ -16,7 +17,7 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
     api_host:
       process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com',
     loaded: (posthog) => {
-      if (process.env.NODE_ENV === 'development') posthog.debug();
+      if (isDevelopment) posthog.debug();
     },
   });
 }
