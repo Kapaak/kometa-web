@@ -29,7 +29,6 @@ export function SuccessApplicationDialog({
     <Modal
       title="vaše přihláška byla úspěšně odeslána"
       open={open}
-      onChange={onClose}
       actions={
         <S.ButtonContainer>
           <Button onClick={onClose}>Vytvořit další přihlášku</Button>

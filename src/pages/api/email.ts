@@ -23,9 +23,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const email = await sgMail.send(msg);
     return res.send({ data: email, email });
-  } catch (error) {
-    console.error(error);
-    return res.send({ message: error, email });
+  } catch (error: any) {
+    const errorCode = error?.code || 404;
+
+    return res.status(errorCode).send({ message: error, email });
   }
 };
 

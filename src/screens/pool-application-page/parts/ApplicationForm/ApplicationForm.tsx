@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { useSendEmail } from '~/adapters/emailAdapter';
 import { useAppendGoogleSheetById } from '~/adapters/sheetAdapter';
 import { SwimmingCategoryId } from '~/types';
 import { Button, Flex } from '~/ui/components/atoms';
 import { getDayAbbreviationWithoutDiacritics } from '~/utils/day';
+import { isDevelopment } from '~/utils/environment';
 import { calculatePriceAfterDiscount } from '~/utils/price';
 import { SuccessApplicationDialog } from '../../components';
 import {
@@ -14,6 +15,7 @@ import {
   KidCourseForm,
   ScholarCourseForm,
 } from '../../components/FormItems';
+import { testEmail, testFormData } from '../../constants';
 import { useApplicationFormContext } from '../../contexts/ApplicationFormContext';
 import {
   AdultCourseFormFields,
@@ -111,7 +113,11 @@ export function ApplicationForm({
               lectureById?.discount ?? 0
             )
           ),
-        });
+        }).catch(() =>
+          toast.error(
+            'Přihláška byla vytvořena, ale email se nepodařilo odeslat'
+          )
+        );
 
         setShowSuccessDialog(true);
       }
@@ -127,20 +133,26 @@ export function ApplicationForm({
         AdultCourseFormFields;
 
     if (templateId) {
-      await sendEmail({
-        email: email ?? contactPersonEmail,
-        templateId,
-        dayId: Number(lectureById?.dayId),
-        time: String(lectureById?.timeFrom),
-        priceWithDiscount: Math.floor(
-          calculatePriceAfterDiscount(
-            watch('lessonsPrice') ?? 0,
-            lectureById?.discount ?? 0
-          )
-        ),
-      });
+      try {
+        await sendEmail({
+          email: email ?? contactPersonEmail,
+          templateId,
+          dayId: Number(lectureById?.dayId),
+          time: String(lectureById?.timeFrom),
+          priceWithDiscount: Math.floor(
+            calculatePriceAfterDiscount(
+              watch('lessonsPrice') ?? 0,
+              lectureById?.discount ?? 0
+            )
+          ),
+        });
 
-      setShowSuccessDialog(true);
+        setShowSuccessDialog(true);
+      } catch (error) {
+        toast.error(
+          'Email se nepodařilo odeslat. Pro zjištění stavu své přihlášky nás kontaktujte na emailu.'
+        );
+      }
     }
   };
 
@@ -151,7 +163,6 @@ export function ApplicationForm({
 
   return (
     <FormProvider {...form}>
-      <ToastContainer />
       {showSuccessDialog && (
         <SuccessApplicationDialog
           open={showSuccessDialog}
@@ -160,12 +171,27 @@ export function ApplicationForm({
           onHomePageReturn={() => router.push('/bazeny/luzanky')}
         />
       )}
+      <ToastContainer closeButton={false} />
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         {isSchoolOrKindergartenCourse && <ScholarCourseForm />}
         {isKidCourse && <KidCourseForm />}
         {isAdultCourse && <AdultCourseForm />}
 
-        <Flex justify="flex-end">
+        <Flex justify="flex-end" gap="1rem">
+          {isDevelopment && (
+            <>
+              <Button
+                variant="outlined"
+                type="button"
+                onClick={() => reset(testFormData)}
+              >
+                Fill testing data
+              </Button>
+              <Button type="button" onClick={() => sendEmail(testEmail)}>
+                Send testing email
+              </Button>
+            </>
+          )}
           <Button
             disabled={!gdprConsent || isLoading || isSendingEmail}
             loading={isLoading || isSendingEmail}
