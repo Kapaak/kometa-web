@@ -18,6 +18,10 @@ export function TimeSlotPrice({
     return <Skeleton height="4.2rem" width="18rem" />;
   }
 
+  if (!price && price === 0) {
+    return null;
+  }
+
   return (
     <S.TimeSlotPrice>
       <Text variant="body3">

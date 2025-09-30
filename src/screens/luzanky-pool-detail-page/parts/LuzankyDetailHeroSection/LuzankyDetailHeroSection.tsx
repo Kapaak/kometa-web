@@ -7,13 +7,13 @@ import {
   Timer,
   User,
 } from '@phosphor-icons/react';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
 import { SanityLecture } from '~/domains';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import { SwimmingCategoryId } from '~/types';
 import {
-  Button,
   Flex,
   Headline,
   MaxWidth,
@@ -65,6 +65,8 @@ export function LuzankyDetailHeroSection() {
       discount: lecture?.discount,
     }));
 
+  const isFull = availableLectures?.every((lecture) => lecture?.isFull);
+
   return (
     <S.HeroSection>
       <MaxWidth>
@@ -77,32 +79,36 @@ export function LuzankyDetailHeroSection() {
                 </Headline>
                 <Text variant="body2">{description}</Text>
 
-                <VerticalStack gap="1rem">
-                  <Text variant="body3">Cena kurzu je:</Text>
+                {!isLoading &&
+                  minimumLecturePrice > 0 &&
+                  minimumYearlyLecturePrice > 0 && (
+                    <VerticalStack gap="1rem">
+                      <Text variant="body3">Cena kurzu je:</Text>
 
-                  <Flex gap="1.2rem" wrap="wrap">
-                    <TimeSlotPrice
-                      isLoading={isLoading || isAvailableLecturesLoading}
-                      price={minimumLecturePrice}
-                      timeSlotName={
-                        categoryId === SwimmingCategoryId.KINDERGARTEN ||
-                        categoryId === SwimmingCategoryId.SCHOOL
-                          ? 'za žáka'
-                          : 'za pololetí'
-                      }
-                    />
-                    <TimeSlotPrice
-                      isLoading={isLoading || isAvailableLecturesLoading}
-                      price={minimumYearlyLecturePrice}
-                      timeSlotName={
-                        categoryId === SwimmingCategoryId.KINDERGARTEN ||
-                        categoryId === SwimmingCategoryId.SCHOOL
-                          ? 'za žáka'
-                          : 'za  celý školní rok'
-                      }
-                    />
-                  </Flex>
-                </VerticalStack>
+                      <Flex gap="1.2rem" wrap="wrap">
+                        <TimeSlotPrice
+                          isLoading={isLoading || isAvailableLecturesLoading}
+                          price={minimumLecturePrice}
+                          timeSlotName={
+                            categoryId === SwimmingCategoryId.KINDERGARTEN ||
+                            categoryId === SwimmingCategoryId.SCHOOL
+                              ? 'za žáka'
+                              : 'za pololetí'
+                          }
+                        />
+                        <TimeSlotPrice
+                          isLoading={isLoading || isAvailableLecturesLoading}
+                          price={minimumYearlyLecturePrice}
+                          timeSlotName={
+                            categoryId === SwimmingCategoryId.KINDERGARTEN ||
+                            categoryId === SwimmingCategoryId.SCHOOL
+                              ? 'za žáka'
+                              : 'za  celý školní rok'
+                          }
+                        />
+                      </Flex>
+                    </VerticalStack>
+                  )}
 
                 {categoryId !== SwimmingCategoryId.SCHOOL &&
                   categoryId !== SwimmingCategoryId.KINDERGARTEN && (
@@ -235,7 +241,6 @@ export function LuzankyDetailHeroSection() {
                   semesterTo={swimmingPoolDetail?.dateRange?.dateTo}
                   isLoading={isLoading}
                 />
-
                 <S.SectionCalendarContainer>
                   <Calendar
                     isLoading={isAvailableLecturesLoading}
@@ -252,11 +257,19 @@ export function LuzankyDetailHeroSection() {
                   />
                 </S.SectionCalendarContainer>
 
-                <S.SectionActionLink
-                  href={`/bazeny/luzanky/${router.query.categoryId}/prihlasky`}
+                <S.SectionActionButton
+                  color="secondary"
+                  variant={
+                    isAvailableLecturesLoading || isFull ? 'outlined' : 'filled'
+                  }
+                  disabled={isAvailableLecturesLoading || isFull}
                 >
-                  <Button color="secondary">Přihlásit se</Button>
-                </S.SectionActionLink>
+                  <NextLink
+                    href={`/bazeny/luzanky/${router.query.categoryId}/prihlasky`}
+                  >
+                    Přihlásit se
+                  </NextLink>
+                </S.SectionActionButton>
               </VerticalStack>
             </S.SectionActionsContainer>
           </S.SectionContainer>

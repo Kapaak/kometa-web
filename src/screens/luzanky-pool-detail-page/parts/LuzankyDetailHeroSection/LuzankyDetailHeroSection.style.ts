@@ -1,6 +1,12 @@
 import NextLink from 'next/link';
 import styled, { css } from 'styled-components';
-import { Card, Flex, Section, VerticalStack } from '~/ui/components/atoms';
+import {
+  Button,
+  Card,
+  Flex,
+  Section,
+  VerticalStack,
+} from '~/ui/components/atoms';
 import { minBreakpoint } from '~/utils/dimensions';
 
 export const HeroSection = styled(Section)`
@@ -71,6 +77,7 @@ export const SectionCalendarContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.grey['100']};
   padding-block: 2rem;
   border-radius: 0.7rem;
+  margin-bottom: 2rem;
 
   ${({ theme }) => css`
     @media (${minBreakpoint(theme.breakpoints.lg)}) {
@@ -92,10 +99,9 @@ export const SectionActionsContainer = styled(VerticalStack)`
   `}
 `;
 
-export const SectionActionLink = styled(NextLink)`
+export const SectionActionButton = styled(Button)`
   align-self: flex-end;
   margin-top: auto;
-  padding-top: 2rem;
 `;
 
 export const Link = styled(NextLink)`

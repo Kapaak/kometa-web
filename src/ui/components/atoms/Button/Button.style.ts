@@ -17,6 +17,7 @@ export const Button = styled(ButtonInitial)`
   border: none;
   border-radius: 3rem;
   cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   font-weight: 500;
   white-space: nowrap;
   font-size: 1.4rem;
