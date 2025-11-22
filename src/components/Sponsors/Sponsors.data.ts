@@ -10,6 +10,7 @@ import NSALogo from '~/public/sponsors/nsa.png';
 import OlympLogo from '~/public/sponsors/olymp.png';
 import SeverBrnoLogo from '~/public/sponsors/severbrno.png';
 import SgldBrnoLogo from '~/public/sponsors/sglo.png';
+import TemplarnyBrnoLogo from '~/public/sponsors/templarny-brno.png';
 import VodniPoloLogo from '~/public/sponsors/vodni-polo.svg';
 import WaterdropLogo from '~/public/sponsors/waterdrop.png';
 
@@ -83,5 +84,10 @@ export const data = [
     href: 'https://www.waterdrop.cz',
     image: WaterdropLogo,
     name: 'waterdrop',
+  },
+  {
+    href: 'https://www.teplarny.cz/',
+    image: TemplarnyBrnoLogo,
+    name: 'templarny Brno',
   },
 ];

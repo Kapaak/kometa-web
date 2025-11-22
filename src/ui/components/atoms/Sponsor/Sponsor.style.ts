@@ -7,7 +7,7 @@ export const Sponsor = styled.a.withConfig({
 })<{ hasGrayscale?: boolean }>`
   flex: 1;
   display: flex;
-  min-width: 10rem;
+  min-width: 15rem;
   height: 11rem;
   filter: ${({ hasGrayscale }) => (hasGrayscale ? 'grayscale(50)' : 'none')};
   transition: all 0.3s ease;
