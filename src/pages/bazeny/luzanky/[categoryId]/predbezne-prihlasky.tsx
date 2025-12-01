@@ -1,5 +1,4 @@
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { swimmingCategories } from '~/constants/categories';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { getPreliminaryLecturesForSwimmingPoolAndCategory } from '~/libs/sanity/api/lecture';
 import { PreliminaryPoolApplicationPage } from '~/screens/pool-application-page';
 import { ApplicationFormContextProvider } from '~/screens/pool-application-page/contexts/ApplicationFormContext';
@@ -7,7 +6,7 @@ import { SwimmingPoolId } from '~/types';
 import { getCategoryIdBySlug } from '~/utils/category';
 
 interface LuzankyPageProps
-  extends InferGetStaticPropsType<typeof getStaticProps> {}
+  extends InferGetServerSidePropsType<typeof getServerSideProps> {}
 
 export default function LuzankyPoolPreliminaryApplicationPage({
   categoryId,
@@ -27,8 +26,8 @@ export default function LuzankyPoolPreliminaryApplicationPage({
   );
 }
 
-export const getStaticProps = async (
-  ctx: GetStaticPropsContext<{ categoryId: string }>
+export const getServerSideProps = async (
+  ctx: GetServerSidePropsContext<{ categoryId: string }>
 ) => {
   const { categoryId } = ctx.params ?? {};
 
@@ -43,19 +42,5 @@ export const getStaticProps = async (
       hasLectures: preliminaryLectures.length > 0,
       categoryId: getCategoryIdBySlug(categoryId as string),
     },
-  };
-};
-
-export const getStaticPaths = async () => {
-  //Schools will not be available to create and application
-  const categoriesWithoutSchools = swimmingCategories.filter(
-    (category) => category.name !== 'school'
-  );
-
-  return {
-    paths: categoriesWithoutSchools.map((category) => ({
-      params: { categoryId: category.path },
-    })),
-    fallback: false,
   };
 };
