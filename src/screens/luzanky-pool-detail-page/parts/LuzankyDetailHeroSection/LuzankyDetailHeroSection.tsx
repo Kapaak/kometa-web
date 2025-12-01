@@ -79,36 +79,37 @@ export function LuzankyDetailHeroSection() {
                 </Headline>
                 <Text variant="body2">{description}</Text>
 
-                {!isLoading &&
-                  minimumLecturePrice > 0 &&
-                  minimumYearlyLecturePrice > 0 && (
-                    <VerticalStack gap="1rem">
+                {!isLoading && (
+                  <VerticalStack gap="1rem">
+                    {(minimumLecturePrice > 0 ||
+                      minimumYearlyLecturePrice > 0) && (
                       <Text variant="body3">Cena kurzu je:</Text>
+                    )}
 
-                      <Flex gap="1.2rem" wrap="wrap">
-                        <TimeSlotPrice
-                          isLoading={isLoading || isAvailableLecturesLoading}
-                          price={minimumLecturePrice}
-                          timeSlotName={
-                            categoryId === SwimmingCategoryId.KINDERGARTEN ||
-                            categoryId === SwimmingCategoryId.SCHOOL
-                              ? 'za žáka'
-                              : 'za pololetí'
-                          }
-                        />
-                        <TimeSlotPrice
-                          isLoading={isLoading || isAvailableLecturesLoading}
-                          price={minimumYearlyLecturePrice}
-                          timeSlotName={
-                            categoryId === SwimmingCategoryId.KINDERGARTEN ||
-                            categoryId === SwimmingCategoryId.SCHOOL
-                              ? 'za žáka'
-                              : 'za  celý školní rok'
-                          }
-                        />
-                      </Flex>
-                    </VerticalStack>
-                  )}
+                    <Flex gap="1.2rem" wrap="wrap">
+                      <TimeSlotPrice
+                        isLoading={isLoading || isAvailableLecturesLoading}
+                        price={minimumLecturePrice}
+                        timeSlotName={
+                          categoryId === SwimmingCategoryId.KINDERGARTEN ||
+                          categoryId === SwimmingCategoryId.SCHOOL
+                            ? 'za žáka'
+                            : 'za pololetí'
+                        }
+                      />
+                      <TimeSlotPrice
+                        isLoading={isLoading || isAvailableLecturesLoading}
+                        price={minimumYearlyLecturePrice}
+                        timeSlotName={
+                          categoryId === SwimmingCategoryId.KINDERGARTEN ||
+                          categoryId === SwimmingCategoryId.SCHOOL
+                            ? 'za žáka'
+                            : 'za  celý školní rok'
+                        }
+                      />
+                    </Flex>
+                  </VerticalStack>
+                )}
 
                 {categoryId !== SwimmingCategoryId.SCHOOL &&
                   categoryId !== SwimmingCategoryId.KINDERGARTEN && (
