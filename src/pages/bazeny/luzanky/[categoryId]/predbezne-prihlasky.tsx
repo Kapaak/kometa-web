@@ -1,6 +1,7 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { swimmingCategories } from '~/constants/categories';
-import { PoolApplicationPage } from '~/screens/pool-application-page';
+import { getPreliminaryLecturesForSwimmingPoolAndCategory } from '~/libs/sanity/api/lecture';
+import { PreliminaryPoolApplicationPage } from '~/screens/pool-application-page';
 import { ApplicationFormContextProvider } from '~/screens/pool-application-page/contexts/ApplicationFormContext';
 import { SwimmingPoolId } from '~/types';
 import { getCategoryIdBySlug } from '~/utils/category';
@@ -8,15 +9,20 @@ import { getCategoryIdBySlug } from '~/utils/category';
 interface LuzankyPageProps
   extends InferGetStaticPropsType<typeof getStaticProps> {}
 
-export default function LuzankyPoolApplicationPage({
+export default function LuzankyPoolPreliminaryApplicationPage({
   categoryId,
+  hasLectures,
 }: LuzankyPageProps) {
   return (
     <ApplicationFormContextProvider
       swimmingPoolId={SwimmingPoolId.LUZANKY}
       categoryId={categoryId}
+      preliminary
     >
-      <PoolApplicationPage categoryId={categoryId} />
+      <PreliminaryPoolApplicationPage
+        categoryId={categoryId}
+        hasLectures={hasLectures}
+      />
     </ApplicationFormContextProvider>
   );
 }
@@ -26,8 +32,15 @@ export const getStaticProps = async (
 ) => {
   const { categoryId } = ctx.params ?? {};
 
+  const preliminaryLectures =
+    await getPreliminaryLecturesForSwimmingPoolAndCategory(
+      getCategoryIdBySlug(categoryId as string),
+      SwimmingPoolId.LUZANKY
+    );
+
   return {
     props: {
+      hasLectures: preliminaryLectures.length > 0,
       categoryId: getCategoryIdBySlug(categoryId as string),
     },
   };

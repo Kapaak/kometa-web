@@ -96,3 +96,19 @@ export async function getLecturesForSwimmingPoolAndCategory(
 
   return course;
 }
+
+export async function getPreliminaryLecturesForSwimmingPoolAndCategory(
+  categoryId: string,
+  swimmingPoolId: string
+) {
+  const queryLecturesByPoolAndCategory = groq`*[_type == "preliminaryCourse" && categoryId == $categoryId &&
+   swimmingPool->slug.current == $swimmingPoolId && activeDate.activeDateFrom <= now() && activeDate.activeDateTo >= now() && !isFull
+  ]{"id":_id,"dateFrom":activeDate.activeDateFrom,"dateTo":activeDate.activeDateTo,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]`;
+
+  const course = await client.fetch(queryLecturesByPoolAndCategory, {
+    categoryId,
+    swimmingPoolId,
+  });
+
+  return course;
+}

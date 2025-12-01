@@ -15,27 +15,32 @@ type ApplicationFormContextType = {
   isLoading?: boolean;
 };
 
-const ApplicationFormContext = createContext<ApplicationFormContextType>({
-  categoryId: '',
-  lectures: [],
-  getLectureById: () => null,
-  availableLecturesOptions: [],
-  isLoading: false,
-});
+export const ApplicationFormContext = createContext<ApplicationFormContextType>(
+  {
+    categoryId: '',
+    lectures: [],
+    getLectureById: () => null,
+    availableLecturesOptions: [],
+    isLoading: false,
+  }
+);
 
 interface Props extends PropsWithChildren {
   swimmingPoolId: string;
   categoryId: string;
+  preliminary?: boolean;
 }
 
 export function ApplicationFormContextProvider({
   swimmingPoolId,
   categoryId,
+  preliminary,
   children,
 }: Props) {
   const { availableLectures, isLoading } = useAvailableLectures(
     categoryId,
-    swimmingPoolId
+    swimmingPoolId,
+    preliminary
   );
 
   const filteredLectures = availableLectures

@@ -1,4 +1,4 @@
-import { Headline, MaxWidth } from '~/ui/components/atoms';
+import { Headline, MaxWidth, VerticalStack } from '~/ui/components/atoms';
 import {
   getCategoryNameByCategoryId,
   getCategoryNameBySlug,
@@ -7,20 +7,26 @@ import { ApplicationForm } from './parts';
 
 import { useRouter } from 'next/router';
 import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
+import { Text } from '~/ui/components/atoms';
 import {
-  getSpreadsheetIdByCategoryId,
+  getPreliminarySpreadsheetIdByCategoryId,
   getTemplateIdByCategoryId,
 } from '~/utils/sheets';
 import * as S from './PoolApplicationPage.style';
+import { PreliminaryApplicationsClosed } from './parts/PreliminaryApplicationsClosed';
 
-interface PoolApplicationPageProps {
+interface PreliminaryPoolApplicationPageProps {
   categoryId: string;
+  hasLectures: boolean;
 }
 
-export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
+export function PreliminaryPoolApplicationPage({
+  categoryId,
+  hasLectures,
+}: PreliminaryPoolApplicationPageProps) {
   const router = useRouter();
 
-  const spreadsheetId = getSpreadsheetIdByCategoryId(categoryId);
+  const spreadsheetId = getPreliminarySpreadsheetIdByCategoryId(categoryId);
   const templateId = getTemplateIdByCategoryId(categoryId);
 
   if (!spreadsheetId) {
@@ -39,11 +45,19 @@ export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
     },
   ];
 
+  if (!hasLectures) {
+    return <PreliminaryApplicationsClosed />;
+  }
+
   return (
     <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
       <S.ApplicationPageSection>
         <MaxWidth>
-          <Headline>{getCategoryNameByCategoryId(categoryId)}</Headline>
+          <VerticalStack gap="1rem">
+            <Text variant="body3">Předběžná přihláška</Text>
+            <Headline>{getCategoryNameByCategoryId(categoryId)}</Headline>
+          </VerticalStack>
+
           <ApplicationForm
             categoryId={categoryId}
             spreadsheetId={spreadsheetId}

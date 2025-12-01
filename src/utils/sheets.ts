@@ -9,6 +9,16 @@ const sheetIdByCategoryId: Record<string, number> = {
   [SwimmingCategoryId.SCHOOL]: 1899142510,
 };
 
+const preliminarySheetIdByCategoryId: Record<string, number> = {
+  [SwimmingCategoryId.BASIC]: 231545265,
+  [SwimmingCategoryId.ADVANCED]: 1871558121,
+  [SwimmingCategoryId.CONDITION]: 76650122,
+  [SwimmingCategoryId.ADULT]: 1385709919,
+  //Skoly a skolky nemaji predbezne prihlasky
+  [SwimmingCategoryId.KINDERGARTEN]: 0,
+  [SwimmingCategoryId.SCHOOL]: 0,
+};
+
 const templateIdByCategoryId: Record<string, string> = {
   [SwimmingCategoryId.BASIC]: 'd-874de2c55ad944d890768e75b9b2969b',
   [SwimmingCategoryId.ADVANCED]: 'd-874de2c55ad944d890768e75b9b2969b',
@@ -20,6 +30,10 @@ const templateIdByCategoryId: Record<string, string> = {
 
 export function getSpreadsheetIdByCategoryId(categoryId: string) {
   return sheetIdByCategoryId[categoryId];
+}
+
+export function getPreliminarySpreadsheetIdByCategoryId(categoryId: string) {
+  return preliminarySheetIdByCategoryId[categoryId];
 }
 
 export function getTemplateIdByCategoryId(categoryId: string) {
