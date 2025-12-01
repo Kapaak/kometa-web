@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 import { A, Headline, Text, VerticalStack } from '~/ui/components/atoms';
@@ -18,7 +19,7 @@ export function KidCourseForm() {
   const { lectures, getLectureById, availableLecturesOptions } =
     useApplicationFormContext();
 
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
 
   const selectedLectureId = watch('lessonsDayTime');
 
@@ -46,6 +47,13 @@ export function KidCourseForm() {
         ]
       : []),
   ].filter((option) => typeof option?.value);
+
+  useEffect(() => {
+    if (selectedLectureId && lessonsPriceOptions.length > 0) {
+      setValue('lessonsPrice', lessonsPriceOptions[0].value);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedLectureId]);
 
   return (
     <VerticalStack gap="1rem">

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 import { useApplicationFormContext } from '~/screens/pool-application-page/contexts/ApplicationFormContext';
@@ -20,7 +21,7 @@ export function ScholarCourseForm() {
   const { lectures, getLectureById, availableLecturesOptions } =
     useApplicationFormContext();
 
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
 
   const selectedLectureId = watch('lessonsDayTime');
 
@@ -48,6 +49,14 @@ export function ScholarCourseForm() {
         ]
       : []),
   ].filter((option) => typeof option?.value);
+
+  useEffect(() => {
+    if (selectedLectureId && lessonsPriceOptions.length > 0) {
+      setValue('lessonsPrice', lessonsPriceOptions[0].value);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedLectureId]);
+
   return (
     <VerticalStack gap="1rem">
       <FormItems.FormContainer>
