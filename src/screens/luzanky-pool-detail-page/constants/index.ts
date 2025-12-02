@@ -218,7 +218,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     image: AdultLecture,
     heroSection: {
       description:
-        'Určeno všem nadšencům, kterým bylo již 18 let a chtějí si zlepšit své plavecké dovednosti.',
+        'Určeno všem nadšencům, kterým bylo již 18 let a chtějí si zlepšit své plavecké dovednosti. Kurz probíhá na 2 plaveckých drahách, kde se účastníci rozdělí podle své výkonnosti. Maximální kapacita je 12 osob na dráhu.',
       duration: 60,
       poolParameters: {
         poolLength: '25 m',
