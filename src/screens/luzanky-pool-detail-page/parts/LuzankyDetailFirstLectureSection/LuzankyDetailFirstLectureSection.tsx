@@ -1,5 +1,7 @@
 import { CheckCircle } from '@phosphor-icons/react';
+import AdultSwimmerImage from '~/public/images/swimming-pool-detail/adult-female-swimmer.jpg';
 import FirstLectureImage from '~/public/images/swimming-pool-detail/kid_in_pool.png';
+import { SwimmingCategoryId } from '~/types';
 import { Headline, MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
 import { IconText } from '~/ui/components/molecules';
 import { luzankyPoolDetailInformation } from '../../constants';
@@ -14,6 +16,11 @@ export function LuzankyDetailFirstLectureSection({}: LuzankyDetailFirstLectureSe
   const swimmingPoolDetailInformation =
     luzankyPoolDetailInformation?.[categoryId];
 
+  const image =
+    categoryId === SwimmingCategoryId.ADULT
+      ? AdultSwimmerImage
+      : FirstLectureImage;
+
   const { arrivalTime, requiredEquipment, childHandoverProcess } =
     swimmingPoolDetailInformation?.initialLectureSection ?? {};
 
@@ -26,7 +33,7 @@ export function LuzankyDetailFirstLectureSection({}: LuzankyDetailFirstLectureSe
           <S.SectionWrapper>
             <S.ImageContainer>
               <S.Image
-                src={FirstLectureImage}
+                src={image}
                 alt="Děti na první lekci na bazénu Lužánky"
                 fill
               />
