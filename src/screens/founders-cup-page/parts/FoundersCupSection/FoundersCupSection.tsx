@@ -107,7 +107,7 @@ na území České republiky - „O ceny zakladatelů brněnského plavání“.
           </VerticalStack>
 
           <Flex>
-            <S.CzechSwimmingLink href="https://is.czechswimming.cz/souteze/10363">
+            <S.CzechSwimmingLink href="https://vysledky.czechswimming.cz/souteze/10363">
               <IconButton icon={<ArrowRight size={20} />}>
                 Stránky závodu v IS ČSPS
               </IconButton>
