@@ -20,9 +20,7 @@ import {
 } from '../../constants';
 import * as S from './FoundersCupSection.style';
 
-interface FoundersCupSectionProps {}
-
-export function FoundersCupSection({}: FoundersCupSectionProps) {
+export function FoundersCupSection() {
   const [resultHistoryValue, setResultHistoryValue] = useState(
     CUP_RESULT_HISTORY_IMAGES[0].value
   );
@@ -45,7 +43,7 @@ export function FoundersCupSection({}: FoundersCupSectionProps) {
         <FoundersCupBanner
           title="O ceny zakladatelů brněnského plavání"
           description="Klub plaveckých sportů policie Kometa Brno vás vítá na nejstarším plaveckém závodě
-na území České republiky - 77. ročníku „O ceny zakladatelů brněnského plavání“."
+na území České republiky - „O ceny zakladatelů brněnského plavání“."
           imageUrl="/images/banner/cup.jpg"
           url="#history"
           actionLabel="Historie výsledků"
@@ -109,65 +107,12 @@ na území České republiky - 77. ročníku „O ceny zakladatelů brněnského
           </VerticalStack>
 
           <Flex>
-            <S.CzechSwimmingLink href="https://vysledky.czechswimming.cz/souteze/9745">
+            <S.CzechSwimmingLink href="https://is.czechswimming.cz/souteze/10363">
               <IconButton icon={<ArrowRight size={20} />}>
                 Stránky závodu v IS ČSPS
               </IconButton>
             </S.CzechSwimmingLink>
           </Flex>
-
-          <S.Content>
-            <S.Subheadline>Rozpis soutěže</S.Subheadline>
-            <S.ContestDescriptionContainer gap="5rem" justify="space-between">
-              <VerticalStack gap="1rem">
-                <Text variant="body3" color={primary.main}>
-                  VŠEOBECNÁ USTANOVENÍ
-                </Text>
-                <Text color={primary.main}>
-                  <Strong>Pořadatel:</Strong> KPSP Kometa Brno
-                </Text>
-                <Text color={primary.main}>
-                  <Strong>Datum a místo konání:</Strong> 22. 2. 2025
-                  Brno-Lužánky (50m)
-                </Text>
-                <Text color={primary.main}>
-                  <Strong>Přihlášky:</Strong> Závody jsou určené pouze pro
-                  Brněnské oddíly!!! Přihlášky se provádějí přes IS ČSPS
-                  nejpozději do 13. 2. 2025. Závodníci a závodnice ročníků
-                  2011–2015 mohou startovat ve 3 disciplínách. Závodnící a
-                  závodnice ročníku 2016 ve 2 disciplínách.
-                </Text>
-                <Text color={primary.main}>
-                  <Strong>Odhlášky:</Strong> přes IS ČSPS do 20. 2. 2025.
-                  Odhlášky po termínu je vysílající oddíl povinen uhradit.
-                </Text>
-                <Text color={primary.main}>
-                  <Strong>Startovné:</Strong> 100 Kč za každý přijatý start.
-                  Platba převodem na účet na základě vystavené faktury.
-                </Text>
-                <Text color={primary.main}>
-                  <Strong>Informace:</Strong> Roman Havrlant, email:
-                  zakladatele@kometaplavani.cz
-                </Text>
-              </VerticalStack>
-
-              <VerticalStack gap="1rem">
-                <Text variant="body3" color={primary.main}>
-                  TECHNICKÁ USTANOVENÍ
-                </Text>
-                <Text color={primary.main}>
-                  <Strong>Startující:</Strong> Žáci a žačky kategorie A (roč.
-                  2011-2012), B (roč. 2013-2014), C (roč. 2015-2016).
-                </Text>
-                <Text color={primary.main}>
-                  <Strong>Ceny:</Strong> Závodníci, kteří se umístí na 1. -3.
-                  místě obdrží diplom. Držitel absolutně nejhodnotnějšího výkonu
-                  v každé kategorii bude odměněn putovním pohárem, diplomem
-                  “Zakladatelů brněnského plavání” a pohárem do osobního držení.
-                </Text>
-              </VerticalStack>
-            </S.ContestDescriptionContainer>
-          </S.Content>
 
           <S.Content>
             <S.Subheadline>Časový pořad disciplín</S.Subheadline>
