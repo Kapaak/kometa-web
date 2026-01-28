@@ -48,6 +48,13 @@ na území České republiky - „O ceny zakladatelů brněnského plavání“.
           url="#history"
           actionLabel="Historie výsledků"
         />
+        <Flex>
+          <S.CzechSwimmingLink href="https://vysledky.czechswimming.cz/souteze/10363">
+            <IconButton icon={<ArrowRight size={20} />}>
+              Stránky závodu v IS ČSPS
+            </IconButton>
+          </S.CzechSwimmingLink>
+        </Flex>
         <MaxWidth variant="small">
           <VerticalStack gap="2.4rem">
             <S.ImageContainer aspectRatio="400 / 283">
@@ -105,14 +112,6 @@ na území České republiky - „O ceny zakladatelů brněnského plavání“.
               </Text>
             </VerticalStack>
           </VerticalStack>
-
-          <Flex>
-            <S.CzechSwimmingLink href="https://vysledky.czechswimming.cz/souteze/10363">
-              <IconButton icon={<ArrowRight size={20} />}>
-                Stránky závodu v IS ČSPS
-              </IconButton>
-            </S.CzechSwimmingLink>
-          </Flex>
 
           <S.Content>
             <S.Subheadline>Časový pořad disciplín</S.Subheadline>
