@@ -50,9 +50,15 @@ type CupResultHistoryImage = {
 export const CUP_RESULT_HISTORY_IMAGES: CupResultHistoryImage[] = [
   {
     src: '/images/cups/pohar-jiriho-gazarka.jpg',
-    name: 'Pohár Jířího GAZÁRKA',
+    name: 'Pohár bratří VOGNÁRKŮ - žáci',
     aspectRatio: '2225/2293',
-    value: 'pohar-gazarek',
+    value: 'pohar-vognarek-zaci',
+  },
+  {
+    src: '/images/cups/pohar-vognarku.jpg',
+    name: 'Pohár bratří VOGNÁRKŮ - žačky',
+    aspectRatio: '135/187',
+    value: 'pohar-vognarek-zacky',
   },
   {
     src: '/images/cups/pohar-otakara-vlacika.jpg',
@@ -65,12 +71,6 @@ export const CUP_RESULT_HISTORY_IMAGES: CupResultHistoryImage[] = [
     name: 'Pohár Prof. Františka MAJDY',
     aspectRatio: '1080/2351',
     value: 'pohar-majda',
-  },
-  {
-    src: '/images/cups/pohar-vognarku.jpg',
-    name: 'Pohár bratří VOGNÁRKŮ',
-    aspectRatio: '135/187',
-    value: 'pohar-vognarek',
   },
   {
     src: '/images/cups/pohar-antonina-novotneho.jpg',
