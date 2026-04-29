@@ -14,6 +14,7 @@ interface SuccessApplicationDialogProps extends Omit<ModalProps, 'title'> {
   onHomePageReturn: () => void;
   onClose: () => void;
   onResendEmail: () => void;
+  isResendingEmail?: boolean;
 }
 
 export function SuccessApplicationDialog({
@@ -21,6 +22,7 @@ export function SuccessApplicationDialog({
   onHomePageReturn,
   onResendEmail,
   onClose,
+  isResendingEmail,
 }: SuccessApplicationDialogProps) {
   const theme = useTheme();
   const { grey } = theme.colors;
@@ -53,7 +55,12 @@ export function SuccessApplicationDialog({
               znova.
             </Strong>
           </Text>
-          <Button variant="outlined" onClick={onResendEmail}>
+          <Button
+            variant="outlined"
+            onClick={onResendEmail}
+            loading={isResendingEmail}
+            disabled={isResendingEmail}
+          >
             Znovu zaslat potvrzovací e-mail
           </Button>
         </VerticalStack>

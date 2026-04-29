@@ -5,8 +5,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useSendEmail } from '~/adapters/emailAdapter';
 import { useAppendGoogleSheetById } from '~/adapters/sheetAdapter';
 import { SwimmingCategoryId, SwimmingCategoryTranslation } from '~/types';
-import { getCategoryNameByCategoryId } from '~/utils/category';
 import { Button, Flex } from '~/ui/components/atoms';
+import { getCategoryNameByCategoryId } from '~/utils/category';
 import { getDayAbbreviationWithoutDiacritics } from '~/utils/day';
 import { isDevelopment } from '~/utils/environment';
 import { calculatePriceAfterDiscount, getSemesterPrice } from '~/utils/price';
@@ -181,6 +181,7 @@ export function ApplicationForm({
           onClose={handleCloseSuccessDialog}
           onResendEmail={handleResendEmail}
           onHomePageReturn={() => router.push('/bazeny/luzanky')}
+          isResendingEmail={isSendingEmail}
         />
       )}
       <ToastContainer closeButton={false} />
@@ -205,8 +206,11 @@ export function ApplicationForm({
             </>
           )}
           <Button
-            disabled={!gdprConsent || isLoading || isSendingEmail}
-            loading={isLoading || isSendingEmail}
+            disabled={
+              (!gdprConsent || isLoading || isSendingEmail) &&
+              !showSuccessDialog
+            }
+            loading={(isLoading || isSendingEmail) && !showSuccessDialog}
           >
             Odeslat
           </Button>
