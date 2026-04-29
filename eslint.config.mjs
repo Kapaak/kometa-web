@@ -1,17 +1,10 @@
 import nextTypescript from "eslint-config-next/typescript";
 import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
-import { FlatCompat } from '@eslint/eslintrc';
-import jsxa11y from 'eslint-plugin-jsx-a11y';
-
-const compat = new FlatCompat();
 
 export default [...nextTypescript, {
   ignores: ['next-env.d.ts', 'next.config.js'],
-}, ...compat.extends("plugin:jsx-a11y/strict"), ...nextCoreWebVitals, {
-  plugins: {
-    'jsx-a11y': jsxa11y,
-  },
-  files: ['*.ts', '*.tsx', '*.js', '*.jsx', '*.style.ts'],
+}, ...nextCoreWebVitals, {
+  files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.style.ts'],
   rules: {
     'import/no-cycle': 2,
     'import/order': [

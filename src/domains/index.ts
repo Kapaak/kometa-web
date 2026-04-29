@@ -1,4 +1,4 @@
-import { SanityImageObject } from '@sanity/image-url/lib/types/types';
+import { SanityImageObject } from '@sanity/image-url';
 
 import {
   QueryAvailableCoursesResult,
@@ -48,7 +48,8 @@ export type SanitySwimmingPool = QuerySwimmingPoolsResult[0];
 export type SanitySwimmingPoolPage = QuerySwimmingPoolMainResult;
 export type SanitySwimmingPoolDetail = QuerySwimmingPoolDetailResult;
 
-export type SanityUploadedFile = any[0];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type SanityUploadedFile = any;
 
 export type SanityBlogPost = QueryBlogPostsResult[0];
 
@@ -102,6 +103,7 @@ export type TransformedBlogPost = {
   id?: string;
   title?: string;
   shortDescription?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   description: any; //TODO -> is wysiwyg type from sanity
   createdAt?: string;
   author?: string;
