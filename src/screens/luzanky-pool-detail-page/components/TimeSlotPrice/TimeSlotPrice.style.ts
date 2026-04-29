@@ -13,4 +13,8 @@ export const TimeSlotPrice = styled.div`
       padding: 0.9rem 1.8rem;
     }
   `}
+
+  p {
+    font-weight: 500;
+  }
 `;

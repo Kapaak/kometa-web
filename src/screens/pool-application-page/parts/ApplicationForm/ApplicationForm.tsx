@@ -8,7 +8,7 @@ import { SwimmingCategoryId } from '~/types';
 import { Button, Flex } from '~/ui/components/atoms';
 import { getDayAbbreviationWithoutDiacritics } from '~/utils/day';
 import { isDevelopment } from '~/utils/environment';
-import { calculatePriceAfterDiscount } from '~/utils/price';
+import { calculatePriceAfterDiscount, getSemesterPrice } from '~/utils/price';
 import { SuccessApplicationDialog } from '../../components';
 import {
   AdultCourseForm,
@@ -59,7 +59,12 @@ export function ApplicationForm({
     mode: 'all',
     reValidateMode: 'onChange',
     values: {
-      lessonsPrice: lectures?.[0]?.priceSemester ?? 0,
+      lessonsPrice: getSemesterPrice({
+        priceYear: lectures?.[0]?.priceYear,
+        priceFirstHalf: lectures?.[0]?.priceFirstHalf,
+        priceSecondHalf: lectures?.[0]?.priceSecondHalf,
+        isAdultCategory: categoryId === SwimmingCategoryId.ADULT,
+      }),
       gdprConsent: false,
       gender: undefined,
     },

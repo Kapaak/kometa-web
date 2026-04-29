@@ -14,20 +14,18 @@ interface BlogPostFilters extends Pagination {
 export async function getBlogPosts(
   filters: BlogPostFilters
 ): Promise<SanityBlogPost[]> {
-  let filterQuery: string[] = [];
-
-  if (filters?.categories) {
-    filters?.categories?.forEach((category) => {
-      filterQuery.push(`"${category}" in tags`);
-    });
-  }
-
-  //TODO: need to comment out mergedFilter to generate FE sanity types
-  const mergedFilter = filterQuery.join(' || ');
-
-  const queryBlogPosts = groq`*[_type == "blog"  && _id > $lastId][${mergedFilter}]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)`;
+  const queryBlogPosts = groq`*[
+    _type == "blog" &&
+    _id > coalesce($lastId, "") &&
+    (
+      !defined($categories) ||
+      count($categories) == 0 ||
+      count(tags[@ in $categories]) > 0
+    )
+  ]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)`;
 
   const blogPosts = await client.fetch(queryBlogPosts, {
+    categories: filters.categories,
     lastId: filters.lastId,
     pageSize: filters.pageSize,
   });

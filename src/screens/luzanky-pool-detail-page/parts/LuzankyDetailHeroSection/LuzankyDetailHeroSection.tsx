@@ -43,14 +43,18 @@ export function LuzankyDetailHeroSection() {
   const { poolParameters, description, duration } =
     luzankyPoolDetailInformation?.[categoryId]?.heroSection ?? {};
 
-  const minimumLecturePrice = retrieveMinimumLectureAttribute(
-    availableLectures,
-    'priceSemester'
-  );
-  const minimumYearlyLecturePrice = retrieveMinimumLectureAttribute(
-    availableLectures,
-    'priceYear'
-  );
+  const isFull = availableLectures?.every((lecture) => lecture?.isFull);
+
+  const firstHalfLecturePrice = isFull
+    ? 0
+    : (availableLectures?.[0]?.priceFirstHalf ?? 0);
+  const secondHalfLecturePrice = isFull
+    ? 0
+    : (availableLectures?.[0]?.priceSecondHalf ?? 0);
+  const yearlyLecturePrice = isFull
+    ? 0
+    : (availableLectures?.[0]?.priceYear ?? 0);
+
   const minimumAge = retrieveMinimumLectureAttribute(
     availableLectures,
     'ageFrom'
@@ -64,8 +68,6 @@ export function LuzankyDetailHeroSection() {
       full: lecture?.isFull ?? false,
       discount: lecture?.discount,
     }));
-
-  const isFull = availableLectures?.every((lecture) => lecture?.isFull);
 
   return (
     <S.HeroSection>
@@ -81,32 +83,55 @@ export function LuzankyDetailHeroSection() {
 
                 {!isLoading && (
                   <VerticalStack gap="1rem">
-                    {(minimumLecturePrice > 0 ||
-                      minimumYearlyLecturePrice > 0) && (
+                    {(firstHalfLecturePrice > 0 ||
+                      secondHalfLecturePrice > 0 ||
+                      yearlyLecturePrice > 0) && (
                       <Text variant="body3">Cena kurzu je:</Text>
                     )}
 
                     <Flex gap="1.2rem" wrap="wrap">
-                      <TimeSlotPrice
-                        isLoading={isLoading || isAvailableLecturesLoading}
-                        price={minimumLecturePrice}
-                        timeSlotName={
-                          categoryId === SwimmingCategoryId.KINDERGARTEN ||
-                          categoryId === SwimmingCategoryId.SCHOOL
-                            ? 'za žáka'
-                            : 'za pololetí'
-                        }
-                      />
-                      <TimeSlotPrice
-                        isLoading={isLoading || isAvailableLecturesLoading}
-                        price={minimumYearlyLecturePrice}
-                        timeSlotName={
-                          categoryId === SwimmingCategoryId.KINDERGARTEN ||
-                          categoryId === SwimmingCategoryId.SCHOOL
-                            ? 'za žáka'
-                            : 'za  celý školní rok'
-                        }
-                      />
+                      {firstHalfLecturePrice > 0 &&
+                      firstHalfLecturePrice === secondHalfLecturePrice ? (
+                        <TimeSlotPrice
+                          isLoading={isLoading || isAvailableLecturesLoading}
+                          price={firstHalfLecturePrice}
+                          timeSlotName="Pololetí"
+                        />
+                      ) : (
+                        <>
+                          <TimeSlotPrice
+                            isLoading={isLoading || isAvailableLecturesLoading}
+                            price={firstHalfLecturePrice}
+                            timeSlotName={
+                              categoryId === SwimmingCategoryId.KINDERGARTEN ||
+                              categoryId === SwimmingCategoryId.SCHOOL
+                                ? 'za žáka 1. pololetí'
+                                : categoryId === SwimmingCategoryId.ADULT
+                                  ? 'Září - Prosinec'
+                                  : 'Září - Leden'
+                            }
+                          />
+                          <TimeSlotPrice
+                            isLoading={isLoading || isAvailableLecturesLoading}
+                            price={secondHalfLecturePrice}
+                            timeSlotName={
+                              categoryId === SwimmingCategoryId.KINDERGARTEN ||
+                              categoryId === SwimmingCategoryId.SCHOOL
+                                ? 'za žáka 2. pololetí'
+                                : categoryId === SwimmingCategoryId.ADULT
+                                  ? 'Leden - Červen'
+                                  : 'Únor - Červen'
+                            }
+                          />
+                        </>
+                      )}
+                      {yearlyLecturePrice > 0 && (
+                        <TimeSlotPrice
+                          isLoading={isLoading || isAvailableLecturesLoading}
+                          price={yearlyLecturePrice}
+                          timeSlotName="Celý školní rok"
+                        />
+                      )}
                     </Flex>
                   </VerticalStack>
                 )}
@@ -290,7 +315,7 @@ function getUniqueSortedTimes(lectures?: SanityLecture[]): number[] {
 
 function retrieveMinimumLectureAttribute(
   lectures: SanityLecture[] | undefined,
-  key: 'priceSemester' | 'priceYear' | 'ageFrom'
+  key: 'priceFirstHalf' | 'priceSecondHalf' | 'priceYear' | 'ageFrom'
 ): number {
   if (!lectures || lectures.length === 0) {
     return 0;

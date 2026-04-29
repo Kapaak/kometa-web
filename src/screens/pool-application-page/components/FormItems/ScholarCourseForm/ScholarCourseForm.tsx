@@ -12,6 +12,7 @@ import {
 } from '~/ui/components/molecules';
 import { getCapacityByCategoryId } from '~/utils/capacity';
 import { midTermOptions } from '~/utils/options';
+import { getSemesterPrice } from '~/utils/price';
 import * as FormItems from '../FormItems.style';
 
 export function ScholarCourseForm() {
@@ -24,16 +25,26 @@ export function ScholarCourseForm() {
   const { watch, setValue } = useFormContext();
 
   const selectedLectureId = watch('lessonsDayTime');
+  const selectedMidTerm = watch('midTerm');
 
   const selectedLecture = getLectureById(selectedLectureId);
+
+  const currentSemesterPrice = getSemesterPrice({
+    priceYear:
+      selectedLecture?.priceYear ?? (lectures?.[0] ? lectures[0].priceYear : 0),
+    priceFirstHalf:
+      selectedLecture?.priceFirstHalf ??
+      (lectures?.[0] ? lectures[0].priceFirstHalf : 0),
+    priceSecondHalf:
+      selectedLecture?.priceSecondHalf ??
+      (lectures?.[0] ? lectures[0].priceSecondHalf : 0),
+    midTerm: selectedMidTerm,
+  });
 
   const lessonsPriceOptions = [
     {
       label: 'pololetí - 1x týdně (cena je za 1 žáka)',
-      value:
-        selectedLecture?.priceSemester ??
-        (lectures?.[0] ? lectures[0].priceSemester : 0) ??
-        0,
+      value: currentSemesterPrice,
       lectureFrequency: 1,
     },
     ...(selectedLecture?.priceYear || (lectures?.[0] && lectures[0].priceYear)
@@ -55,7 +66,7 @@ export function ScholarCourseForm() {
       setValue('lessonsPrice', lessonsPriceOptions[0].value);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedLectureId]);
+  }, [selectedLectureId, selectedMidTerm]);
 
   return (
     <VerticalStack gap="1rem">

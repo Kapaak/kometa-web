@@ -19,13 +19,19 @@ export type SanityKidsCourseVariant = {
     dayId?: number;
     isFull?: boolean;
     priceYear?: number;
-    priceSemester?: number;
+    priceFirstHalf?: number;
+    priceSecondHalf?: number;
     timeFrom: string;
     timeTo: string;
   }[];
 };
 
-export type SanityLecture = QueryLecturesResult[0] & { discount?: number };
+export type SanityLecture = QueryLecturesResult[0] & {
+  discount?: number;
+  priceYear?: number | null;
+  priceFirstHalf?: number | null;
+  priceSecondHalf?: number | null;
+};
 
 export type SanityAvailableLecture = QueryAvailableCoursesResult[0] & {
   name?: string;
@@ -33,6 +39,9 @@ export type SanityAvailableLecture = QueryAvailableCoursesResult[0] & {
   alt?: string;
   isSchoolOrKindergartenAvailable?: boolean;
   privateSwimmingPool?: boolean;
+  priceYear?: number | null;
+  priceFirstHalf?: number | null;
+  priceSecondHalf?: number | null;
 };
 
 export type SanitySwimmingPool = QuerySwimmingPoolsResult[0];
@@ -76,8 +85,9 @@ export type GetAvailableCourse = {
   isFull?: boolean;
   isSchoolOrKindergartenAvailable?: boolean;
   name?: string;
-  priceSemester?: number;
   priceYear?: number;
+  priceFirstHalf?: number;
+  priceSecondHalf?: number;
   privateSwimmingPool?: boolean;
   timeFrom?: string;
   timeTo?: string;

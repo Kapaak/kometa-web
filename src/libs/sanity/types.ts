@@ -109,6 +109,36 @@ export type BlockContent = Array<
     }
 >;
 
+export type CourseCategoryPricing = {
+  _id: string;
+  _type: 'courseCategoryPricing';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  swimmingPool?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'swimmingPool';
+  };
+  categoryId?:
+    | 'basic'
+    | 'advanced'
+    | 'condition'
+    | 'adult'
+    | 'kindergarten'
+    | 'school';
+  coursePrice?: Price;
+  preliminaryCoursePrice?: Price;
+};
+
+export type Price = {
+  _type: 'price';
+  priceFirstHalf?: number;
+  priceSecondHalf?: number;
+  priceYear?: number;
+};
+
 export type SwimmingPoolMainPage = {
   _id: string;
   _type: 'swimmingPoolMainPage';
@@ -172,7 +202,6 @@ export type PreliminaryCourse = {
   _updatedAt: string;
   _rev: string;
   dayId?: 1 | 2 | 3 | 4 | 5;
-  slug?: Slug;
   activeDate?: {
     activeDateFrom?: string;
     activeDateTo?: string;
@@ -242,7 +271,6 @@ export type PreliminaryCourse = {
     | '18:45'
     | '19:00';
   isFull?: boolean;
-  price?: Price;
   discount?: number;
   swimmingPool?: {
     _ref: string;
@@ -476,7 +504,6 @@ export type KidsCourse = {
     | '18:45'
     | '19:00';
   isFull?: boolean;
-  price?: Price;
   discount?: number;
   url?: string;
   swimmingPool?: {
@@ -492,12 +519,6 @@ export type KidsCourse = {
     | 'adult'
     | 'kindergarten'
     | 'school';
-};
-
-export type Price = {
-  _type: 'price';
-  priceSemester?: number;
-  priceYear?: number;
 };
 
 export type AgeCategory = {
@@ -742,6 +763,8 @@ export type AllSanitySchemaTypes =
   | FaqObjectType
   | Rating
   | BlockContent
+  | CourseCategoryPricing
+  | Price
   | SwimmingPoolMainPage
   | PreliminaryCourse
   | SwimmingPoolDetail
@@ -749,7 +772,6 @@ export type AllSanitySchemaTypes =
   | InfoBar
   | Blog
   | KidsCourse
-  | Price
   | AgeCategory
   | Navigation
   | Colors
@@ -773,7 +795,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../../websites/kometa-web/src/libs/sanity/api/blog.ts
 // Variable: queryBlogPosts
-// Query: *[_type == "blog"  && _id > $lastId]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)
+// Query: *[    _type == "blog" &&    _id > coalesce($lastId, "") &&    (      !defined($categories) ||      count($categories) == 0 ||      count(tags[@ in $categories]) > 0    )  ]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)
 export type QueryBlogPostsResult = Array<{
   id: string;
   title: string | null;
@@ -973,12 +995,12 @@ export type QueryDocumentsResult = Array<never>;
 
 // Source: ../../websites/kometa-web/src/libs/sanity/api/lecture.ts
 // Variable: queryAvailableCourses
-// Query: *[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,url,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"swimmingPoolUrl":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
+// Query: *[    _type == "kidsCourse" &&    _id > coalesce($lastId, "") &&    (!defined($age) || (age.ageFrom <= $age && age.ageTo >= $age)) &&    (!defined($places) || count($places) == 0 || $places match swimmingPool->slug.current) &&    (!defined($days) || count($days) == 0 || dayId in $days) &&    (!defined($times) || count($times) == 0 || $times match timeFrom) &&    (!defined($skillLevel) || [$skillLevel] match categoryId) &&    categoryId != $schoolCategory &&    categoryId != $kindergartenCategory  ]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,url,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"swimmingPoolUrl":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})  }[] [0...$pageSize]
 export type QueryAvailableCoursesResult = Array<
   | {
       id: string;
-      priceYear: number | null;
-      priceSemester: number | null;
+      priceYear: null;
+      priceSemester: null;
       isFull: boolean | null;
       categoryId:
         | 'adult'
@@ -1084,8 +1106,8 @@ export type QueryAvailableCoursesResult = Array<
     }
   | {
       id: string;
-      priceYear: number | null;
-      priceSemester: number | null;
+      priceYear: null;
+      priceSemester: null;
       isFull: boolean | null;
       categoryId:
         | 'adult'
@@ -1164,8 +1186,8 @@ export type QueryAvailableCoursesResult = Array<
 // Query: *[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]
 export type QueryLecturesResult = Array<{
   id: string;
-  priceYear: number | null;
-  priceSemester: number | null;
+  priceYear: null;
+  priceSemester: null;
   isFull: boolean | null;
   categoryId:
     | 'adult'
@@ -1272,8 +1294,119 @@ export type QueryLecturesResult = Array<{
 // Query: *[_type == "kidsCourse" && categoryId == $categoryId &&   swimmingPool->slug.current == $swimmingPoolId  ]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]
 export type QueryLecturesByPoolAndCategoryResult = Array<{
   id: string;
-  priceYear: number | null;
-  priceSemester: number | null;
+  priceYear: null;
+  priceSemester: null;
+  discount: number | null;
+  isFull: boolean | null;
+  categoryId:
+    | 'adult'
+    | 'advanced'
+    | 'basic'
+    | 'condition'
+    | 'kindergarten'
+    | 'school'
+    | null;
+  dayId: 1 | 2 | 3 | 4 | 5 | null;
+  timeFrom:
+    | '10:00'
+    | '10:15'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:30'
+    | '11:45'
+    | '12:00'
+    | '15:00'
+    | '15:15'
+    | '15:30'
+    | '15:45'
+    | '16:00'
+    | '16:15'
+    | '16:30'
+    | '16:45'
+    | '17:00'
+    | '17:15'
+    | '17:30'
+    | '17:45'
+    | '18:00'
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
+    | null;
+  timeTo:
+    | '10:00'
+    | '10:15'
+    | '10:30'
+    | '10:45'
+    | '11:00'
+    | '11:15'
+    | '11:30'
+    | '11:45'
+    | '12:00'
+    | '12:15'
+    | '12:30'
+    | '12:45'
+    | '16:00'
+    | '16:15'
+    | '16:30'
+    | '16:45'
+    | '17:00'
+    | '17:15'
+    | '17:30'
+    | '17:45'
+    | '18:00'
+    | '18:15'
+    | '18:30'
+    | '18:45'
+    | '19:00'
+    | '9:00'
+    | '9:15'
+    | '9:30'
+    | '9:45'
+    | null;
+  ageFrom: number | null;
+  ageTo: number | null;
+  swimmingPoolId: string | null;
+  name: string | null;
+  alt: string | null;
+  image: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata: SanityImageMetadata | null;
+      source?: SanityAssetSourceData;
+    } | null;
+  } | null;
+  url: string | null;
+  privateSwimmingPool: boolean | null;
+  isSchoolOrKindergartenAvailable: boolean | null;
+}>;
+// Variable: queryPreliminaryLecturesByPoolAndCategory
+// Query: *[_type == "preliminaryCourse" && categoryId == $categoryId &&   swimmingPool->slug.current == $swimmingPoolId && activeDate.activeDateFrom <= now() && activeDate.activeDateTo >= now() && !isFull  ]{"id":_id,"dateFrom":activeDate.activeDateFrom,"dateTo":activeDate.activeDateTo,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]
+export type QueryPreliminaryLecturesByPoolAndCategoryResult = Array<{
+  id: string;
+  dateFrom: string | null;
+  dateTo: string | null;
+  priceYear: null;
+  priceSemester: null;
   discount: number | null;
   isFull: boolean | null;
   categoryId:
@@ -1530,13 +1663,14 @@ export type QueryBlogResult = Array<{
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "blog"  && _id > $lastId]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)': QueryBlogPostsResult;
+    '*[\n    _type == "blog" &&\n    _id > coalesce($lastId, "") &&\n    (\n      !defined($categories) ||\n      count($categories) == 0 ||\n      count(tags[@ in $categories]) > 0\n    )\n  ]{"id":_id,title,shortDescription,description,createdAt,author,readTime,"alt":image.alt,image{asset->{...,metadata}},tags,"slug":slug.current}[] [0...$pageSize] | order(createdAt desc)': QueryBlogPostsResult;
     '*[_type == "blog" && slug.current == $blogId][0]{"id":_id,title,shortDescription, description[]{\n    ...,\n    _type == "imageAlt" => {\n      ...,\n      asset->\n    },\n  },createdAt,author,readTime,image{asset->{...,metadata},alt},tags,slug}': QueryResult;
     '*[_type == "camp"]{"id":_id,name,"alt":image.alt,image{asset->{...,metadata}},url,"tags":tag}[]': QueryCampsResult;
     '*[_type == "fileUpload"  &&  swimmingPool->slug.current == $swimmingPoolId]{"id":_id,title,file{\n    asset->{...,metadata}\n  },order,\n    swimmingPool -> {"slug":slug.current}\n  }[] | order(order)': QueryDocumentsResult;
-    '*[_type == "kidsCourse" && _id > $lastId]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,url,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,\n  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"swimmingPoolUrl":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})\n  }[] [0...$pageSize]': QueryAvailableCoursesResult;
+    '*[\n    _type == "kidsCourse" &&\n    _id > coalesce($lastId, "") &&\n    (!defined($age) || (age.ageFrom <= $age && age.ageTo >= $age)) &&\n    (!defined($places) || count($places) == 0 || $places match swimmingPool->slug.current) &&\n    (!defined($days) || count($days) == 0 || dayId in $days) &&\n    (!defined($times) || count($times) == 0 || $times match timeFrom) &&\n    (!defined($skillLevel) || [$skillLevel] match categoryId) &&\n    categoryId != $schoolCategory &&\n    categoryId != $kindergartenCategory\n  ]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,url,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,\n  ...(swimmingPool->{"name":name,"slug":slug.current,"alt":image.alt,"image":image{asset->{...,metadata}},"swimmingPoolUrl":url,"privateSwimmingPool":privateSwimmingPool,"isSchoolOrKindergartenAvailable":isSchoolOrKindergartenAvailable})\n  }[] [0...$pageSize]': QueryAvailableCoursesResult;
     '*[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]': QueryLecturesResult;
     '*[_type == "kidsCourse" && categoryId == $categoryId &&\n   swimmingPool->slug.current == $swimmingPoolId\n  ]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]': QueryLecturesByPoolAndCategoryResult;
+    '*[_type == "preliminaryCourse" && categoryId == $categoryId &&\n   swimmingPool->slug.current == $swimmingPoolId && activeDate.activeDateFrom <= now() && activeDate.activeDateTo >= now() && !isFull\n  ]{"id":_id,"dateFrom":activeDate.activeDateFrom,"dateTo":activeDate.activeDateTo,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]': QueryPreliminaryLecturesByPoolAndCategoryResult;
     '*[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,dateRange{dateFrom,dateTo},announcements,imageGallery[]{asset->{...,metadata}},faq,\n  uploadedDocuments[]{label,"file":file.asset->url},\n  \n  }': QuerySwimmingPoolDetailResult;
     '\n    *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{\n      faq,\n      basicInformation,\n      "infoBar":infoBars[visible == true]{value}[0],\n      announcements[visible == true]{\n        "id":_key,\n        title,\n        text,\n        visible\n      }\n    }\n  ': QuerySwimmingPoolMainResult;
     '*[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,"location":latLng,address,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]': QuerySwimmingPoolsResult;

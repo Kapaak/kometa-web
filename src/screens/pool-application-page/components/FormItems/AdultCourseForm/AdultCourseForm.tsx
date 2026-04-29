@@ -9,6 +9,7 @@ import {
   ControlledSelect,
 } from '~/ui/components/molecules';
 import { binaryOptions, genderOptions } from '~/utils/options';
+import { getSemesterPrice } from '~/utils/price';
 import { useApplicationFormContext } from '../../../contexts/ApplicationFormContext';
 import * as FormItems from '../FormItems.style';
 
@@ -25,13 +26,22 @@ export function AdultCourseForm() {
 
   const selectedLecture = getLectureById(selectedLectureId);
 
+  const currentSemesterPrice = getSemesterPrice({
+    priceYear:
+      selectedLecture?.priceYear ?? (lectures?.[0] ? lectures[0].priceYear : 0),
+    priceFirstHalf:
+      selectedLecture?.priceFirstHalf ??
+      (lectures?.[0] ? lectures[0].priceFirstHalf : 0),
+    priceSecondHalf:
+      selectedLecture?.priceSecondHalf ??
+      (lectures?.[0] ? lectures[0].priceSecondHalf : 0),
+    isAdultCategory: true,
+  });
+
   const lessonsPriceOptions = [
     {
       label: 'pololetí - 1x týdně',
-      value:
-        selectedLecture?.priceSemester ??
-        (lectures?.[0] ? lectures[0].priceSemester : 0) ??
-        0,
+      value: currentSemesterPrice,
       lectureFrequency: 1,
     },
     ...(selectedLecture?.priceYear || (lectures?.[0] && lectures[0].priceYear)
