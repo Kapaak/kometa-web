@@ -1,18 +1,16 @@
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback.fs = false;
-      config.resolve.fallback.tls = false;
-      config.resolve.fallback.net = false;
-      config.resolve.fallback.child_process = false;
-    }
-
-    return config;
+  turbopack: {
+    root: __dirname,
   },
   experimental: {
     optimizePackageImports: ['@phosphor-icons/react'],

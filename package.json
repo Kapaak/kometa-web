@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "prepare": "husky install",
     "test": "jest --watch"
   },
@@ -32,15 +32,15 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "dayjs": "^1.11.13",
-    "next": "15.1.11",
+    "next": "16.2.4",
     "next-sanity": "^9.0.20",
     "nextjs-google-analytics": "^2.3.3",
     "posthog-js": "^1.246.0",
-    "react": "^19.0.0",
+    "react": "19.2.5",
     "react-aria-components": "^1.9.0",
     "react-burger-menu": "^3.0.9",
     "react-device-detect": "^2.2.3",
-    "react-dom": "^19.0.0",
+    "react-dom": "19.2.5",
     "react-fast-marquee": "^1.6.4",
     "react-hook-form": "^7.51.4",
     "react-loading-skeleton": "^3.5.0",
@@ -60,11 +60,11 @@
     "@types/googlemaps": "^3.43.3",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.10.1",
-    "@types/react": "^19.0.0",
+    "@types/react": "19.2.14",
     "@types/react-burger-menu": "^2.8.7",
-    "@types/react-dom": "^19.0.1",
+    "@types/react-dom": "19.2.3",
     "eslint": "^9.27.0",
-    "eslint-config-next": "^15.1.8",
+    "eslint-config-next": "16.2.4",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.1",
@@ -73,7 +73,10 @@
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^16.0.0",
     "prettier": "^3.2.5",
-    "typescript": "^5",
-    "webpack": "^5.99.8"
+    "typescript": "^6.0.3"
+  },
+  "resolutions": {
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3"
   }
 }
