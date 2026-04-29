@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import sgMail from '@sendgrid/mail';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { email, templateId, day, price } = req.body;
+  const { email, templateId, day, price, category } = req.body;
 
   sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY ?? '');
 
@@ -17,6 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     dynamic_template_data: {
       day,
       price,
+      category,
     },
   };
 

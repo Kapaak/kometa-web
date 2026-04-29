@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { getDayFullName } from '~/utils/day';
 import { fetchPost } from '~/utils/fetch';
+import { SwimmingCategoryTranslation } from '~/types';
 
 export type SendEmailAdapter = {
   email: string;
@@ -11,6 +12,7 @@ export type SendEmailAdapter = {
   time?: string;
   templateId: string;
   priceWithDiscount: number;
+  category?: SwimmingCategoryTranslation;
 };
 
 export function useSendEmail(showNotifications = false) {
@@ -33,12 +35,20 @@ export function useSendEmail(showNotifications = false) {
           'Nepodařilo se zaslat potvrzovací email. Zkuste to prosím znovu, nebo nás kontaktujte.'
         );
     },
-    mutationFn: ({ email, dayId, time, priceWithDiscount, templateId }) => {
+    mutationFn: ({
+      email,
+      dayId,
+      time,
+      priceWithDiscount,
+      templateId,
+      category,
+    }) => {
       return fetchPost('/api/email', {
         email,
         templateId,
         day: dayId && `${getDayFullName(dayId)} ${time}`,
         price: priceWithDiscount,
+        category,
       });
     },
   });
@@ -49,6 +59,7 @@ export function useSendEmail(showNotifications = false) {
     dayId,
     time,
     priceWithDiscount,
+    category,
   }: SendEmailAdapter) {
     return mutateAsync({
       email,
@@ -56,6 +67,7 @@ export function useSendEmail(showNotifications = false) {
       dayId,
       time,
       priceWithDiscount,
+      category,
     });
   }
 

@@ -4,7 +4,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
 import { useSendEmail } from '~/adapters/emailAdapter';
 import { useAppendGoogleSheetById } from '~/adapters/sheetAdapter';
-import { SwimmingCategoryId } from '~/types';
+import { SwimmingCategoryId, SwimmingCategoryTranslation } from '~/types';
+import { getCategoryNameByCategoryId } from '~/utils/category';
 import { Button, Flex } from '~/ui/components/atoms';
 import { getDayAbbreviationWithoutDiacritics } from '~/utils/day';
 import { isDevelopment } from '~/utils/environment';
@@ -118,6 +119,9 @@ export function ApplicationForm({
               lectureById?.discount ?? 0
             )
           ),
+          category: getCategoryNameByCategoryId(
+            categoryId
+          ) as SwimmingCategoryTranslation,
         }).catch(() =>
           toast.error(
             'Přihláška byla vytvořena, ale email se nepodařilo odeslat'
@@ -150,6 +154,9 @@ export function ApplicationForm({
               lectureById?.discount ?? 0
             )
           ),
+          category: getCategoryNameByCategoryId(
+            categoryId
+          ) as SwimmingCategoryTranslation,
         });
 
         setShowSuccessDialog(true);
