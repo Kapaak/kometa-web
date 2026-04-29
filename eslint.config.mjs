@@ -9,6 +9,13 @@ export default [
   },
   ...nextCoreWebVitals,
   {
+    settings: {
+      react: {
+        version: '19',
+      },
+    },
+  },
+  {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.style.ts'],
     rules: {
       'import/no-cycle': 2,
