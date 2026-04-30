@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { Loader } from '@googlemaps/js-api-loader';
+import { importLibrary, setOptions } from '@googlemaps/js-api-loader';
 
 import { useGetSwimmingPools } from '~/adapters/swimmingPoolAdapter';
 import { convertComponentToNode } from '~/utils/transform';
@@ -8,6 +8,12 @@ import { convertComponentToNode } from '~/utils/transform';
 import { Marker, MarkerInfo } from './parts';
 
 import * as S from './GoogleMap.style';
+
+setOptions({
+  key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '',
+  v: 'weekly',
+  language: 'cs',
+});
 
 type SwimmingPoolBase = {
   id: string | null;
@@ -21,23 +27,15 @@ interface GoogleMapProps {
 }
 
 export function GoogleMap({ onClick }: GoogleMapProps) {
-  const mapRef = useRef(null);
+  const mapRef = useRef<HTMLDivElement | null>(null);
 
   const { data } = useGetSwimmingPools();
 
   useEffect(() => {
     const initMap = async () => {
-      const loader = new Loader({
-        apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '',
-        version: 'weekly',
-        language: 'cs',
-        // libraries: ['geocoding'],
-      });
-
       try {
-        const { Map, InfoWindow } = await loader.importLibrary('maps');
-        // const { Geocoder } = await loader.importLibrary('geocoding');
-        const { AdvancedMarkerElement } = await loader.importLibrary('marker');
+        const { Map, InfoWindow } = await importLibrary('maps');
+        const { AdvancedMarkerElement } = await importLibrary('marker');
 
         const position = {
           lat: 49.195061,
@@ -49,6 +47,8 @@ export function GoogleMap({ onClick }: GoogleMapProps) {
           zoom: 11,
           mapId: 'DEMO_MAP_ID',
         };
+
+        if (!mapRef.current) return;
 
         const map = new Map(mapRef.current, mapOptions);
 
@@ -68,7 +68,6 @@ export function GoogleMap({ onClick }: GoogleMapProps) {
             );
 
             const advancedMarker = new AdvancedMarkerElement({
-              id: pool.id,
               position: swimmingPoolLocation,
               map,
               content: markerNode,
@@ -77,7 +76,7 @@ export function GoogleMap({ onClick }: GoogleMapProps) {
             const infoWindow = new InfoWindow({
               content: infoWindowNode,
               headerContent: pool?.name,
-              minWidth: '20rem',
+              minWidth: 10,
             });
 
             advancedMarker.addListener('click', () => {
@@ -91,6 +90,7 @@ export function GoogleMap({ onClick }: GoogleMapProps) {
             });
           });
         }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
         console.log(e.message, 'err');
       }

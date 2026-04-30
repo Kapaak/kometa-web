@@ -822,10 +822,12 @@
   dependencies:
     googleapis-common "^7.0.0"
 
-"@googlemaps/js-api-loader@^1.16.6":
-  version "1.16.10"
-  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.16.10.tgz#b61cf2b4a1b6ed77017b0dab131e6d51e814ec4e"
-  integrity sha512-c2erv2k7P2ilYzMmtYcMgAR21AULosQuUHJbStnrvRk2dG93k5cqptDrh9A8p+ZNlyhiqEOgHW7N9PAizdUM7Q==
+"@googlemaps/js-api-loader@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-2.0.2.tgz#09d8b2029e71bfeb3951747b1ca951e5f8fcb14f"
+  integrity sha512-bKVuTqatS8Jven5aFqVB7rCHF1VFEzpzyi0ruzO0GUR+A7m9oMqMgtnmpANj7kMYEvvhty8Fk7TnJ1MKjWHu+Q==
+  dependencies:
+    "@types/google.maps" "^3.53.1"
 
 "@humanfs/core@^0.19.1":
   version "0.19.1"
@@ -3452,6 +3454,11 @@
   integrity sha512-8/0UllZS7tF08WNBRPQlSJCkETvz3e3sZoPxzDaWkj2iV5dmFSnOKXVtoeKo8dLZSe+RkLn479t1wj6nXmLLSA==
   dependencies:
     "@types/react" "*"
+
+"@types/google.maps@^3.53.1":
+  version "3.64.0"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.64.0.tgz#2d0d6eaa457e3840eaf3c6b09c1243a5d91d3e8a"
+  integrity sha512-dN0H6tB4lgLQLovcbPXFYYOEV41TpyyJghzb5jrzjB96FZmjeOghevVdC+BMGd6YqyCqXaggyEtqRXLRjzCBZA==
 
 "@types/googlemaps@^3.43.3":
   version "3.43.3"
