@@ -24,6 +24,14 @@ export function getHalfFromDate(
   return month >= secondHalfStartMonth && month <= 6 ? 'second' : 'first';
 }
 
+function getNextHalfFromDate(
+  date: Date = new Date(),
+  isAdultCategory = false
+): SemesterHalf {
+  const current = getHalfFromDate(date, isAdultCategory);
+  return current === 'first' ? 'second' : 'first';
+}
+
 export function getSemesterPrice({
   priceYear,
   priceFirstHalf,
@@ -40,7 +48,7 @@ export function getSemesterPrice({
   isAdultCategory?: boolean;
 }): number {
   const selectedHalf =
-    getHalfFromMidTerm(midTerm) ?? getHalfFromDate(date, isAdultCategory);
+    getHalfFromMidTerm(midTerm) ?? getNextHalfFromDate(date, isAdultCategory);
 
   if (selectedHalf === 'first') {
     return priceFirstHalf ?? priceSecondHalf ?? priceYear ?? 0;
