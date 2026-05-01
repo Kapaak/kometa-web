@@ -1,7 +1,8 @@
 import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
 import nextTypescript from 'eslint-config-next/typescript';
+import importX from 'eslint-plugin-import-x';
 
-// eslint-disable-next-line import/no-anonymous-default-export
+// eslint-disable-next-line import-x/no-anonymous-default-export
 export default [
   ...nextTypescript,
   {
@@ -17,9 +18,14 @@ export default [
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.style.ts'],
+    plugins: {
+      'import-x': importX,
+    },
     rules: {
-      'import/no-cycle': 2,
-      'import/order': [
+      'import/no-cycle': 'off',
+      'import/order': 'off',
+      'import-x/no-cycle': 2,
+      'import-x/order': [
         'warn',
         {
           alphabetize: {
