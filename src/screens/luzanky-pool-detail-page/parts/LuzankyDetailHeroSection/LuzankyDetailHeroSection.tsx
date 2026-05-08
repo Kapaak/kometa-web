@@ -196,13 +196,6 @@ export function LuzankyDetailHeroSection() {
                     .
                   </Text>
                 )}
-
-                {categoryId === SwimmingCategoryId.ADULT && (
-                  <Text variant="body2">
-                    První pololetí (polovina zaří - prosinec) je kratší než
-                    druhé (leden - polovina června).
-                  </Text>
-                )}
               </S.SectionTextContainer>
 
               <S.SectionInformationContainer

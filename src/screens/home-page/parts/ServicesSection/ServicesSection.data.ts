@@ -29,7 +29,7 @@ export const servicesData: ServicesData[] = [
     title: 'Synchronizované plavání',
     imageAlt: 'Dvě dívky ve vodě na soutěži v synchronizovaném plavání',
     imageUrl: '/images/service/synchro.png',
-    url: 'https://klubova-zona.kometaplavani.cz/synchro/synchronizovane-plavani/',
+    url: 'https://www.akvabelykometa.cz',
   },
   {
     title: 'Příměstské tábory',

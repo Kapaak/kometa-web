@@ -14,7 +14,7 @@ export const banner: Record<string, BannerData> = {
       'Vaše dítě splňuje podmínky pro synchronizaované plavání. Pojďte si to vyzkoušet!',
     imageUrl: '/images/service/synchro.png',
     imageAlt: 'Ženy ve vodě při synchronizovaném plavání na bazéně Komety.',
-    url: 'https://klubova-zona.kometaplavani.cz/synchro/synchronizovane-plavani',
+    url: 'https://www.akvabelykometa.cz',
     actionLabel: 'Více informací',
   },
   initial: {
