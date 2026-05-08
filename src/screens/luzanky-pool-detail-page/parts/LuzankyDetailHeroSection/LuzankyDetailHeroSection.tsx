@@ -1,3 +1,6 @@
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+
 import {
   ArrowsHorizontal,
   Baby,
@@ -7,9 +10,8 @@ import {
   Timer,
   User,
 } from '@phosphor-icons/react';
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
+
 import { SanityLecture } from '~/domains';
 import { useSwimmingPoolDetailPageContext } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
 import { SwimmingCategoryId } from '~/types';
@@ -23,9 +25,11 @@ import {
 import { IconText } from '~/ui/components/molecules';
 import { getCategoryNameByCategoryId } from '~/utils/category';
 import { dayTranslationAbbr } from '~/utils/day';
+
 import { Calendar, SemesterRange, TimeSlotPrice } from '../../components';
 import { luzankyPoolDetailInformation } from '../../constants';
 import { useAvailableLecturesContext } from '../../contexts/AvailableLecturesContext';
+
 import * as S from './LuzankyDetailHeroSection.style';
 
 export function LuzankyDetailHeroSection() {
@@ -134,6 +138,13 @@ export function LuzankyDetailHeroSection() {
                       )}
                     </Flex>
                   </VerticalStack>
+                )}
+
+                {categoryId == SwimmingCategoryId.ADULT && (
+                  <Text variant="body2">
+                    První pololetí (polovina září - prosinec) je kratší než
+                    druhé (leden - polovina června).
+                  </Text>
                 )}
 
                 {categoryId !== SwimmingCategoryId.SCHOOL &&
