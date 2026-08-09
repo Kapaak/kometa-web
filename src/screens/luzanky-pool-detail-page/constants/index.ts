@@ -1,10 +1,12 @@
-import { StaticImageData } from 'next/image';
 import AdultLecture from '~/public/images/swimming-pool/luzanky/service/service-adult.jpg';
 import AdvancedLecture from '~/public/images/swimming-pool/luzanky/service/service-advanced.png';
 import BasicLecture from '~/public/images/swimming-pool/luzanky/service/service-basic.png';
 import ConditionLecture from '~/public/images/swimming-pool/luzanky/service/service-condition.jpg';
 import KindergartenLecture from '~/public/images/swimming-pool/luzanky/service/service-kindergarden.png';
 import SchoolLecture from '~/public/images/swimming-pool/luzanky/service/service-school.png';
+
+import { StaticImageData } from 'next/image';
+
 import { SwimmingCategoryId } from '~/types';
 
 type PoolInformation = {
@@ -265,7 +267,7 @@ export const luzankyPoolDetailInformation: Record<string, PoolInformation> = {
     heroSection: {
       description:
         'Naše dopolední kurzy plavání jsou určené pro předškoláky a mladší školní děti. Jsou navržené tak, aby děti zvládly základy plavání přímo v rámci výuky – bez potřeby dalších odpoledních kurzů.',
-      duration: 45,
+      duration: 40,
       poolParameters: {
         poolLength: '16 m',
         depth: '90 cm',
