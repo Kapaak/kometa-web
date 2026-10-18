@@ -2,12 +2,16 @@ import { toast } from 'react-toastify';
 
 import { useMutation } from '@tanstack/react-query';
 
+import { SwimmingCategoryTranslation } from '~/types';
 import { getDayFullName } from '~/utils/day';
 import { fetchPost } from '~/utils/fetch';
-import { SwimmingCategoryTranslation } from '~/types';
+
+import type { ClientResponse } from '@sendgrid/mail';
 
 export type SendEmailAdapter = {
   email: string;
+  firstName?: string;
+  lastName?: string;
   dayId?: number;
   time?: string;
   templateId: string;
@@ -15,9 +19,16 @@ export type SendEmailAdapter = {
   category?: SwimmingCategoryTranslation;
 };
 
+type SendGridResult = [ClientResponse, object];
+
+export type SendEmailResponse = {
+  data: SendGridResult;
+  email: SendGridResult;
+};
+
 export function useSendEmail(showNotifications = false) {
   const { mutateAsync, isError, isPending, isSuccess } = useMutation<
-    any,
+    SendEmailResponse,
     Error,
     SendEmailAdapter
   >({
@@ -37,14 +48,18 @@ export function useSendEmail(showNotifications = false) {
     },
     mutationFn: ({
       email,
+      firstName,
+      lastName,
       dayId,
       time,
       priceWithDiscount,
       templateId,
       category,
     }) => {
-      return fetchPost('/api/email', {
+      return fetchPost<SendEmailResponse>('/api/email', {
         email,
+        firstName,
+        lastName,
         templateId,
         day: dayId && `${getDayFullName(dayId)} ${time}`,
         price: priceWithDiscount,
@@ -55,6 +70,8 @@ export function useSendEmail(showNotifications = false) {
 
   function sendEmail({
     email,
+    firstName,
+    lastName,
     templateId,
     dayId,
     time,
@@ -63,6 +80,8 @@ export function useSendEmail(showNotifications = false) {
   }: SendEmailAdapter) {
     return mutateAsync({
       email,
+      firstName,
+      lastName,
       templateId,
       dayId,
       time,

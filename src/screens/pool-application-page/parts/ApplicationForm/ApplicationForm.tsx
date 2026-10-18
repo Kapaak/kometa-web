@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
+
 import { useSendEmail } from '~/adapters/emailAdapter';
 import { useAppendGoogleSheetById } from '~/adapters/sheetAdapter';
 import { SwimmingCategoryId, SwimmingCategoryTranslation } from '~/types';
@@ -10,6 +11,7 @@ import { getCategoryNameByCategoryId } from '~/utils/category';
 import { getDayAbbreviationWithoutDiacritics } from '~/utils/day';
 import { isDevelopment } from '~/utils/environment';
 import { calculatePriceAfterDiscount, getSemesterPrice } from '~/utils/price';
+
 import { SuccessApplicationDialog } from '../../components';
 import {
   AdultCourseForm,
@@ -110,6 +112,8 @@ export function ApplicationForm({
       if (templateId) {
         await sendEmail({
           email: dataUpdated?.email ?? dataUpdated?.contactPersonEmail,
+          firstName: dataUpdated?.firstName,
+          lastName: dataUpdated?.lastName,
           templateId,
           dayId: Number(lectureById?.dayId),
           time: String(lectureById?.timeFrom),
@@ -136,7 +140,7 @@ export function ApplicationForm({
   };
 
   const handleResendEmail = async () => {
-    const { email, contactPersonEmail } =
+    const { email, contactPersonEmail, firstName, lastName } =
       getValues() as ScholarCourseFormFields &
         KidCourseFormFields &
         AdultCourseFormFields;
@@ -145,6 +149,8 @@ export function ApplicationForm({
       try {
         await sendEmail({
           email: email ?? contactPersonEmail,
+          firstName,
+          lastName,
           templateId,
           dayId: Number(lectureById?.dayId),
           time: String(lectureById?.timeFrom),

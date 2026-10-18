@@ -1,5 +1,7 @@
 export const testEmail = {
   email: process.env.NEXT_PUBLIC_FORM_TEST_EMAIL ?? '',
+  firstName: 'Test',
+  lastName: 'Osteron',
   templateId: process.env.NEXT_PUBLIC_FORM_TEST_TEMPLATE_ID ?? '',
   dayId: 1,
   time: '10:00',

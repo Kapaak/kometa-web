@@ -3,7 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import sgMail from '@sendgrid/mail';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { email, templateId, day, price, category } = req.body;
+  const { email, firstName, lastName, templateId, day, price, category } =
+    req.body;
 
   sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY ?? '');
 
@@ -15,6 +16,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
     template_id: templateId,
     dynamic_template_data: {
+      firstName,
+      lastName,
       day,
       price,
       category,
@@ -24,8 +27,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const email = await sgMail.send(msg);
     return res.send({ data: email, email });
-  } catch (error: any) {
-    const errorCode = error?.code || 404;
+  } catch (error: unknown) {
+    const errorCode = (error as { code?: number })?.code || 404;
 
     return res.status(errorCode).send({ message: error, email });
   }
