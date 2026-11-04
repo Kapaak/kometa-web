@@ -1511,6 +1511,16 @@ export type QueryPreliminaryLecturesByPoolAndCategoryResult = Array<{
   isSchoolOrKindergartenAvailable: boolean | null;
 }>;
 
+// Source: ../../websites/kometa-web/src/libs/sanity/api/shared-documents.ts
+// Variable: querySharedDocuments
+// Query: *[_type == "sharedDocument" && defined(file.asset)] | order(_createdAt asc){"id":_id,label,documentType,"file":file.asset->url}
+export type QuerySharedDocumentsResult = Array<{
+  id: string;
+  label: string | null;
+  documentType: 'gdpr' | 'other' | null;
+  file: string | null;
+}>;
+
 // Source: ../../websites/kometa-web/src/libs/sanity/api/swimming-pool-detail.ts
 // Variable: querySwimmingPoolDetail
 // Query: *[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,dateRange{dateFrom,dateTo},announcements,imageGallery[]{asset->{...,metadata}},faq,  uploadedDocuments[]{label,"file":file.asset->url},    }
@@ -1671,6 +1681,7 @@ declare module '@sanity/client' {
     '*[_type == "kidsCourse"]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]': QueryLecturesResult;
     '*[_type == "kidsCourse" && categoryId == $categoryId &&\n   swimmingPool->slug.current == $swimmingPoolId\n  ]{"id":_id,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]': QueryLecturesByPoolAndCategoryResult;
     '*[_type == "preliminaryCourse" && categoryId == $categoryId &&\n   swimmingPool->slug.current == $swimmingPoolId && activeDate.activeDateFrom <= now() && activeDate.activeDateTo >= now() && !isFull\n  ]{"id":_id,"dateFrom":activeDate.activeDateFrom,"dateTo":activeDate.activeDateTo,"priceYear":price.priceYear,"priceSemester":price.priceSemester,discount,isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable,categoryId}[]': QueryPreliminaryLecturesByPoolAndCategoryResult;
+    '*[_type == "sharedDocument" && defined(file.asset)] | order(_createdAt asc){"id":_id,label,documentType,"file":file.asset->url}': QuerySharedDocumentsResult;
     '*[_type == "swimmingPoolDetail" && categoryId == $categoryId && swimmingPool->slug.current == $swimmingPoolId][0]{"id":_id,skillRequirement,dateRange{dateFrom,dateTo},announcements,imageGallery[]{asset->{...,metadata}},faq,\n  uploadedDocuments[]{label,"file":file.asset->url},\n  \n  }': QuerySwimmingPoolDetailResult;
     '\n    *[_type == "swimmingPoolMainPage" && swimmingPool->slug.current == $swimmingPoolId][0]{\n      faq,\n      basicInformation,\n      "infoBar":infoBars[visible == true]{value}[0],\n      announcements[visible == true]{\n        "id":_key,\n        title,\n        text,\n        visible\n      }\n    }\n  ': QuerySwimmingPoolMainResult;
     '*[_type == "swimmingPool"]{"id":_id,name,"slug":slug.current,"location":latLng,address,"alt":image.alt,image{asset->{...,metadata}},url,privateSwimmingPool}[]': QuerySwimmingPoolsResult;

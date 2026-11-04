@@ -1,4 +1,5 @@
 export type FooterContentData = {
+  id: 'contacts' | 'usefulLinks';
   title: string;
   data: {
     label: string;
@@ -13,6 +14,7 @@ export type FooterContentData = {
 
 export const footerMainContentData: FooterContentData[] = [
   {
+    id: 'contacts',
     title: 'Kontaktní osoba',
     data: [
       {
@@ -72,7 +74,8 @@ export const footerMainContentData: FooterContentData[] = [
     ],
   },
   {
-    title: 'Užitečné odkazy',
+    id: 'usefulLinks',
+    title: 'Užitečné odkazy a soubory',
     data: [
       {
         label: 'Plavecké kurzy Kometa',

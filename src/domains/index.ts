@@ -4,6 +4,7 @@ import {
   QueryAvailableCoursesResult,
   QueryBlogPostsResult,
   QueryLecturesResult,
+  QuerySharedDocumentsResult,
   QuerySwimmingPoolDetailResult,
   QuerySwimmingPoolMainResult,
   QuerySwimmingPoolsResult,
@@ -47,9 +48,8 @@ export type SanityAvailableLecture = QueryAvailableCoursesResult[0] & {
 export type SanitySwimmingPool = QuerySwimmingPoolsResult[0];
 export type SanitySwimmingPoolPage = QuerySwimmingPoolMainResult;
 export type SanitySwimmingPoolDetail = QuerySwimmingPoolDetailResult;
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type SanityUploadedFile = any;
+export type SanitySharedDocuments = QuerySharedDocumentsResult;
+export type SanitySharedDocument = SanitySharedDocuments[0];
 
 export type SanityBlogPost = QueryBlogPostsResult[0];
 
