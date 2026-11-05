@@ -1,16 +1,11 @@
 import { useRouter } from 'next/router';
 
 import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
-import { SwimmingPoolId } from '~/types/swimming-pool';
 import { Headline, MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
 import {
   getCategoryNameByCategoryId,
   getCategoryNameBySlug,
 } from '~/utils/category';
-import {
-  getPreliminarySheetTabIdByCategoryId,
-  getTemplateIdByCategoryId,
-} from '~/utils/swimming-pool-application';
 
 import { ApplicationsClosed } from './parts/ApplicationsClosed';
 
@@ -23,25 +18,17 @@ const CLOSED_MESSAGE =
 
 interface PreliminaryPoolApplicationPageProps {
   categoryId: string;
-  hasLectures: boolean;
+  // False when the category has no preliminary sheet tab or no preliminary lectures.
+  applicationsOpen: boolean;
 }
 
 export function PreliminaryPoolApplicationPage({
   categoryId,
-  hasLectures,
+  applicationsOpen,
 }: PreliminaryPoolApplicationPageProps) {
   const router = useRouter();
 
-  const sheetTabId = getPreliminarySheetTabIdByCategoryId(
-    SwimmingPoolId.LUZANKY,
-    categoryId
-  );
-  const templateId = getTemplateIdByCategoryId(
-    SwimmingPoolId.LUZANKY,
-    categoryId
-  );
-
-  if (!sheetTabId) {
+  if (!applicationsOpen) {
     return <ApplicationsClosed message={CLOSED_MESSAGE} />;
   }
 
@@ -57,10 +44,6 @@ export function PreliminaryPoolApplicationPage({
     },
   ];
 
-  if (!hasLectures) {
-    return <ApplicationsClosed message={CLOSED_MESSAGE} />;
-  }
-
   return (
     <BreadcrumbsLayout breadcrumbs={breadcrumbs}>
       <S.ApplicationPageSection>
@@ -70,11 +53,7 @@ export function PreliminaryPoolApplicationPage({
             <Headline>{getCategoryNameByCategoryId(categoryId)}</Headline>
           </VerticalStack>
 
-          <ApplicationForm
-            categoryId={categoryId}
-            sheetTabId={sheetTabId}
-            templateId={templateId}
-          />
+          <ApplicationForm categoryId={categoryId} />
         </MaxWidth>
       </S.ApplicationPageSection>
     </BreadcrumbsLayout>

@@ -3,33 +3,35 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { SanityLecture } from '~/domains';
 import { fetchGet, fetchPost } from '~/utils/fetch';
 
-export function useAppendGoogleSheetById(sheetTabId: number) {
+type AppendGoogleSheetParams = {
+  swimmingPoolId: string;
+  categoryId: string;
+  preliminary?: boolean;
+};
+
+// The server picks the spreadsheet and tab based on the pool and category.
+export function useAppendGoogleSheet({
+  swimmingPoolId,
+  categoryId,
+  preliminary,
+}: AppendGoogleSheetParams) {
   const {
     isPending: isLoading,
     isError,
     mutateAsync,
   } = useMutation({
     mutationFn: async (values: string[]) => {
-      return fetchPost(
-        '/api/google-sheets/append',
-        {
-          values,
-        },
-        {
-          gid: String(sheetTabId),
-        }
-      );
+      return fetchPost('/api/google-sheets/append', {
+        swimmingPoolId,
+        categoryId,
+        preliminary,
+        values,
+      });
     },
   });
 
-  //TODO: Fix in future
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleAppendGoogleSheet = async (values: any[]) => {
-    return await mutateAsync(values);
-  };
-
   return {
-    appendGoogleSheetById: handleAppendGoogleSheet,
+    appendGoogleSheet: mutateAsync,
     isError,
     isLoading,
   };
@@ -37,9 +39,7 @@ export function useAppendGoogleSheetById(sheetTabId: number) {
 
 export function useGetAvailableLectures(
   categoryId: string,
-  swimmingPoolId: string,
-  gid?: number,
-  capacity?: number
+  swimmingPoolId: string
 ) {
   const { data, isError, isLoading } = useQuery<SanityLecture[]>({
     queryKey: ['lectures-with-capacity', categoryId, swimmingPoolId],
@@ -47,8 +47,6 @@ export function useGetAvailableLectures(
       return fetchGet('/api/google-sheets/lectures-with-capacity', {
         categoryId,
         swimmingPoolId,
-        // Without a Google Sheet we can't count the remaining capacity
-        ...(gid ? { gid: String(gid), capacity: String(capacity ?? 0) } : {}),
       });
     },
   });

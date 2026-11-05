@@ -4,7 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { useSendEmail } from '~/adapters/emailAdapter';
-import { useAppendGoogleSheetById } from '~/adapters/sheetAdapter';
+import { useAppendGoogleSheet } from '~/adapters/sheetAdapter';
 import { SwimmingCategoryId, SwimmingCategoryTranslation } from '~/types';
 import { SwimmingPoolId } from '~/types/swimming-pool';
 import { Button, Flex } from '~/ui/components/atoms';
@@ -39,23 +39,21 @@ export type ApplicationFormValues =
 
 interface ApplicationFormProps {
   categoryId: string;
-  sheetTabId: number;
-  templateId?: string;
 }
 
-export function ApplicationForm({
-  categoryId,
-  sheetTabId,
-  templateId,
-}: ApplicationFormProps) {
+export function ApplicationForm({ categoryId }: ApplicationFormProps) {
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   const router = useRouter();
 
-  const { lectures, getLectureById } = useApplicationFormContext();
+  const { lectures, getLectureById, preliminary, availableLecturesOptions } =
+    useApplicationFormContext();
 
-  const { appendGoogleSheetById, isLoading } =
-    useAppendGoogleSheetById(sheetTabId);
+  const { appendGoogleSheet, isLoading } = useAppendGoogleSheet({
+    swimmingPoolId: SwimmingPoolId.LUZANKY,
+    categoryId,
+    preliminary,
+  });
 
   const { sendEmail, isLoading: isSendingEmail } = useSendEmail();
 
@@ -108,34 +106,30 @@ export function ApplicationForm({
     }
 
     try {
-      await appendGoogleSheetById(values);
+      await appendGoogleSheet(values);
 
-      if (templateId) {
-        await sendEmail({
-          email: dataUpdated?.email ?? dataUpdated?.contactPersonEmail,
-          firstName: dataUpdated?.firstName,
-          lastName: dataUpdated?.lastName,
-          templateId,
-          swimmingPoolId: SwimmingPoolId.LUZANKY,
-          dayId: Number(lectureById?.dayId),
-          time: String(lectureById?.timeFrom),
-          priceWithDiscount: Math.floor(
-            calculatePriceAfterDiscount(
-              dataUpdated.lessonsPrice ?? 0,
-              lectureById?.discount ?? 0
-            )
-          ),
-          category: getCategoryNameByCategoryId(
-            categoryId
-          ) as SwimmingCategoryTranslation,
-        }).catch(() =>
-          toast.error(
-            'Přihláška byla vytvořena, ale email se nepodařilo odeslat'
+      await sendEmail({
+        email: dataUpdated?.email ?? dataUpdated?.contactPersonEmail,
+        firstName: dataUpdated?.firstName,
+        lastName: dataUpdated?.lastName,
+        swimmingPoolId: SwimmingPoolId.LUZANKY,
+        categoryId,
+        dayId: Number(lectureById?.dayId),
+        time: String(lectureById?.timeFrom),
+        priceWithDiscount: Math.floor(
+          calculatePriceAfterDiscount(
+            dataUpdated.lessonsPrice ?? 0,
+            lectureById?.discount ?? 0
           )
-        );
+        ),
+        category: getCategoryNameByCategoryId(
+          categoryId
+        ) as SwimmingCategoryTranslation,
+      }).catch(() =>
+        toast.error('Přihláška byla vytvořena, ale email se nepodařilo odeslat')
+      );
 
-        setShowSuccessDialog(true);
-      }
+      setShowSuccessDialog(true);
     } catch (error) {
       console.error('Error sending email or appending to Google Sheet:', error);
     }
@@ -147,33 +141,31 @@ export function ApplicationForm({
         KidCourseFormFields &
         AdultCourseFormFields;
 
-    if (templateId) {
-      try {
-        await sendEmail({
-          email: email ?? contactPersonEmail,
-          firstName,
-          lastName,
-          templateId,
-          swimmingPoolId: SwimmingPoolId.LUZANKY,
-          dayId: Number(lectureById?.dayId),
-          time: String(lectureById?.timeFrom),
-          priceWithDiscount: Math.floor(
-            calculatePriceAfterDiscount(
-              watch('lessonsPrice') ?? 0,
-              lectureById?.discount ?? 0
-            )
-          ),
-          category: getCategoryNameByCategoryId(
-            categoryId
-          ) as SwimmingCategoryTranslation,
-        });
+    try {
+      await sendEmail({
+        email: email ?? contactPersonEmail,
+        firstName,
+        lastName,
+        swimmingPoolId: SwimmingPoolId.LUZANKY,
+        categoryId,
+        dayId: Number(lectureById?.dayId),
+        time: String(lectureById?.timeFrom),
+        priceWithDiscount: Math.floor(
+          calculatePriceAfterDiscount(
+            watch('lessonsPrice') ?? 0,
+            lectureById?.discount ?? 0
+          )
+        ),
+        category: getCategoryNameByCategoryId(
+          categoryId
+        ) as SwimmingCategoryTranslation,
+      });
 
-        setShowSuccessDialog(true);
-      } catch {
-        toast.error(
-          'Email se nepodařilo odeslat. Pro zjištění stavu své přihlášky nás kontaktujte na emailu.'
-        );
-      }
+      setShowSuccessDialog(true);
+    } catch {
+      toast.error(
+        'Email se nepodařilo odeslat. Pro zjištění stavu své přihlášky nás kontaktujte na emailu.'
+      );
     }
   };
 
@@ -205,11 +197,27 @@ export function ApplicationForm({
               <Button
                 variant="outlined"
                 type="button"
-                onClick={() => reset(testFormData)}
+                onClick={() =>
+                  reset({
+                    ...testFormData,
+                    // First free lecture of the category, or any lecture when all are full
+                    lessonsDayTime:
+                      availableLecturesOptions?.[0]?.value ?? lectures?.[0]?.id,
+                  })
+                }
               >
                 Fill testing data
               </Button>
-              <Button type="button" onClick={() => sendEmail(testEmail)}>
+              <Button
+                type="button"
+                onClick={() =>
+                  sendEmail({
+                    ...testEmail,
+                    swimmingPoolId: SwimmingPoolId.LUZANKY,
+                    categoryId,
+                  })
+                }
+              >
                 Send testing email
               </Button>
             </>

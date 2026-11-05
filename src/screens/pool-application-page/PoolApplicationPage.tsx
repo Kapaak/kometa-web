@@ -1,16 +1,11 @@
 import { useRouter } from 'next/router';
 
 import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
-import { SwimmingPoolId } from '~/types/swimming-pool';
 import { Headline, MaxWidth } from '~/ui/components/atoms';
 import {
   getCategoryNameByCategoryId,
   getCategoryNameBySlug,
 } from '~/utils/category';
-import {
-  getSheetTabIdByCategoryId,
-  getTemplateIdByCategoryId,
-} from '~/utils/swimming-pool-application';
 
 import { ApplicationsClosed } from './parts/ApplicationsClosed';
 
@@ -20,21 +15,16 @@ import * as S from './PoolApplicationPage.style';
 
 interface PoolApplicationPageProps {
   categoryId: string;
+  applicationsOpen: boolean;
 }
 
-export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
+export function PoolApplicationPage({
+  categoryId,
+  applicationsOpen,
+}: PoolApplicationPageProps) {
   const router = useRouter();
 
-  const sheetTabId = getSheetTabIdByCategoryId(
-    SwimmingPoolId.LUZANKY,
-    categoryId
-  );
-  const templateId = getTemplateIdByCategoryId(
-    SwimmingPoolId.LUZANKY,
-    categoryId
-  );
-
-  if (!sheetTabId) {
+  if (!applicationsOpen) {
     return (
       <ApplicationsClosed message="Přihlášky pro tento kurz zatím nejsou otevřené." />
     );
@@ -57,11 +47,7 @@ export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
       <S.ApplicationPageSection>
         <MaxWidth>
           <Headline>{getCategoryNameByCategoryId(categoryId)}</Headline>
-          <ApplicationForm
-            categoryId={categoryId}
-            sheetTabId={sheetTabId}
-            templateId={templateId}
-          />
+          <ApplicationForm categoryId={categoryId} />
         </MaxWidth>
       </S.ApplicationPageSection>
     </BreadcrumbsLayout>

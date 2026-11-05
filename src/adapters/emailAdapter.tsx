@@ -14,11 +14,11 @@ export type SendEmailAdapter = {
   lastName?: string;
   dayId?: number;
   time?: string;
-  templateId: string;
   priceWithDiscount: number;
   category?: SwimmingCategoryTranslation;
-  // The server picks the email sender based on the pool.
-  swimmingPoolId?: string;
+  // The server picks the email template and sender based on these.
+  swimmingPoolId: string;
+  categoryId: string;
 };
 
 type SendGridResult = [ClientResponse, object];
@@ -57,7 +57,7 @@ export function useSendEmail(showNotifications = false) {
       dayId,
       time,
       priceWithDiscount,
-      templateId,
+      categoryId,
       category,
       swimmingPoolId,
     }) => {
@@ -65,7 +65,7 @@ export function useSendEmail(showNotifications = false) {
         email,
         firstName,
         lastName,
-        templateId,
+        categoryId,
         day: dayId && `${getDayFullName(dayId)} ${time}`,
         price: priceWithDiscount,
         category,
@@ -78,7 +78,7 @@ export function useSendEmail(showNotifications = false) {
     email,
     firstName,
     lastName,
-    templateId,
+    categoryId,
     dayId,
     time,
     priceWithDiscount,
@@ -89,7 +89,7 @@ export function useSendEmail(showNotifications = false) {
       email,
       firstName,
       lastName,
-      templateId,
+      categoryId,
       dayId,
       time,
       priceWithDiscount,

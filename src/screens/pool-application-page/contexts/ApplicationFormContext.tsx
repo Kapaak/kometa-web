@@ -1,11 +1,15 @@
 import { createContext, PropsWithChildren, useContext } from 'react';
-import { SanityLecture } from '~/domains';
 
+import { SanityLecture } from '~/domains';
 import { getDayAbbreviation } from '~/utils/day';
+
 import { useAvailableLectures } from '../hooks/useAvailableLectures';
 
 type ApplicationFormContextType = {
   categoryId: string;
+  preliminary?: boolean;
+  // Max number of applications per lecture (from getStaticProps).
+  lectureCapacity?: number;
   lectures?: SanityLecture[];
   getLectureById: (id: string) => SanityLecture | null;
   availableLecturesOptions?: {
@@ -29,12 +33,14 @@ interface Props extends PropsWithChildren {
   swimmingPoolId: string;
   categoryId: string;
   preliminary?: boolean;
+  lectureCapacity?: number;
 }
 
 export function ApplicationFormContextProvider({
   swimmingPoolId,
   categoryId,
   preliminary,
+  lectureCapacity,
   children,
 }: Props) {
   const { availableLectures, isLoading } = useAvailableLectures(
@@ -71,6 +77,8 @@ export function ApplicationFormContextProvider({
     <ApplicationFormContext.Provider
       value={{
         categoryId,
+        preliminary,
+        lectureCapacity,
         getLectureById,
         availableLecturesOptions,
         lectures: availableLectures,

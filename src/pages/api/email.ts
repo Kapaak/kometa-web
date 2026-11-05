@@ -2,19 +2,30 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import sgMail from '@sendgrid/mail';
 
-import { getEmailSenderBySwimmingPoolId } from '~/utils/swimming-pool-application';
+import {
+  getEmailSenderBySwimmingPoolId,
+  getTemplateId,
+} from '~/utils/swimming-pool-application';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     email,
     firstName,
     lastName,
-    templateId,
+    categoryId,
     day,
     price,
     category,
     swimmingPoolId,
   } = req.body;
+
+  const templateId = getTemplateId(swimmingPoolId, categoryId);
+
+  if (!templateId) {
+    return res
+      .status(400)
+      .send({ message: 'No email template for this category' });
+  }
 
   sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY ?? '');
 

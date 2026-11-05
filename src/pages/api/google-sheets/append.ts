@@ -1,80 +1,56 @@
-import { auth, sheets } from '@googleapis/sheets';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-interface ExtendedNextApiRequest extends NextApiRequest {
-  query: {
-    gid: string;
-  };
-}
+import { appendSheetRow } from '~/libs/google-sheets';
+import {
+  getSheetTabId,
+  getSpreadsheetId,
+} from '~/utils/swimming-pool-application';
 
-const googleAuth = new auth.GoogleAuth({
-  credentials: {
-    client_email: process.env.NEXT_PUBLIC_CLIENT_EMAIL,
-    private_key: process.env.NEXT_PUBLIC_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-  },
-  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-});
-
-const SPREADSHEET_ID = process.env.NEXT_PUBLIC_SPREADSHEET_ID;
-
-async function initializeGoogleSheets() {
-  const authClient = (await googleAuth.getClient()) as any;
-  return sheets({ version: 'v4', auth: authClient });
-}
+type AppendRequestBody = {
+  swimmingPoolId?: string;
+  categoryId?: string;
+  preliminary?: boolean;
+  values?: unknown;
+};
 
 export default async function handler(
-  req: ExtendedNextApiRequest,
+  req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { gid } = req.query ?? {};
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', ['POST']);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 
-  const googleSheets = await initializeGoogleSheets();
+  const { swimmingPoolId, categoryId, preliminary, values } = (req.body ??
+    {}) as AppendRequestBody;
+
+  if (
+    !Array.isArray(values) ||
+    !values.every((value) => typeof value === 'string')
+  ) {
+    return res.status(400).json({ error: 'Expected an array of strings.' });
+  }
+
+  const spreadsheetId = getSpreadsheetId(swimmingPoolId ?? '');
+  const sheetTabId = getSheetTabId(
+    swimmingPoolId ?? '',
+    categoryId ?? '',
+    preliminary
+  );
+
+  if (!spreadsheetId || !sheetTabId) {
+    return res
+      .status(400)
+      .json({ error: 'Applications are not open for this category.' });
+  }
 
   try {
-    // Get spreadsheet metadata to find sheet name by GID
-    const metadata = await googleSheets.spreadsheets.get({
-      spreadsheetId: SPREADSHEET_ID,
-      fields: 'sheets(properties(sheetId,title))',
-    });
+    await appendSheetRow(spreadsheetId, sheetTabId, values);
 
-    const targetSheet = metadata.data.sheets?.find(
-      (sheet) => sheet.properties?.sheetId?.toString() === gid
-    );
-
-    if (!targetSheet?.properties?.title) {
-      throw new Error('Sheet not found with specified GID');
-    }
-
-    const sheetTitle = targetSheet.properties.title;
-
-    if (req.method === 'POST') {
-      // Append a new row to the sheet
-      const { values } = req.body;
-      if (!Array.isArray(values)) {
-        throw new Error('Invalid data format. Expected an array of values.');
-      }
-
-      const appendResponse = await googleSheets.spreadsheets.values.append({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${sheetTitle}`,
-        valueInputOption: 'RAW', // Use 'RAW' or 'USER_ENTERED' based on your needs
-        insertDataOption: 'INSERT_ROWS', // Ensures data is appended after the last row
-        requestBody: {
-          values: [values], // Wrap the values in an array to represent a single row
-        },
-      });
-
-      res
-        .status(200)
-        .json({ message: 'Row appended successfully', appendResponse });
-    } else {
-      res.setHeader('Allow', ['GET', 'POST']);
-      res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
+    return res.status(200).json({ message: 'Row appended successfully' });
   } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ error: 'Failed to process request', details: error });
+    console.error('Failed to append row:', error);
+    return res.status(500).json({ error: 'Failed to save the application' });
   }
 }

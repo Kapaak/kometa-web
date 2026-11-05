@@ -5,12 +5,13 @@ import { PreliminaryPoolApplicationPage } from '~/screens/pool-application-page'
 import { ApplicationFormContextProvider } from '~/screens/pool-application-page/contexts/ApplicationFormContext';
 import { SwimmingPoolId } from '~/types/swimming-pool';
 import { getCategoryIdBySlug } from '~/utils/category';
+import { getSheetTabId } from '~/utils/swimming-pool-application';
 
 type LuzankyPageProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function LuzankyPoolPreliminaryApplicationPage({
   categoryId,
-  hasLectures,
+  applicationsOpen,
 }: LuzankyPageProps) {
   return (
     <ApplicationFormContextProvider
@@ -20,7 +21,7 @@ export default function LuzankyPoolPreliminaryApplicationPage({
     >
       <PreliminaryPoolApplicationPage
         categoryId={categoryId}
-        hasLectures={hasLectures}
+        applicationsOpen={applicationsOpen}
       />
     </ApplicationFormContextProvider>
   );
@@ -29,18 +30,23 @@ export default function LuzankyPoolPreliminaryApplicationPage({
 export const getServerSideProps = async (
   ctx: GetServerSidePropsContext<{ categoryId: string }>
 ) => {
-  const { categoryId } = ctx.params ?? {};
+  const categoryId = getCategoryIdBySlug(ctx.params?.categoryId as string);
 
-  const preliminaryLectures =
-    await getPreliminaryLecturesForSwimmingPoolAndCategory(
-      getCategoryIdBySlug(categoryId as string),
-      SwimmingPoolId.LUZANKY
-    );
+  const hasSheetTab = Boolean(
+    getSheetTabId(SwimmingPoolId.LUZANKY, categoryId, true)
+  );
+
+  const preliminaryLectures = hasSheetTab
+    ? await getPreliminaryLecturesForSwimmingPoolAndCategory(
+        categoryId,
+        SwimmingPoolId.LUZANKY
+      )
+    : [];
 
   return {
     props: {
-      hasLectures: preliminaryLectures.length > 0,
-      categoryId: getCategoryIdBySlug(categoryId as string),
+      categoryId,
+      applicationsOpen: hasSheetTab && preliminaryLectures.length > 0,
     },
   };
 };

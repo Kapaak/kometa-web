@@ -3,53 +3,50 @@ import {
   swimmingPoolApplicationConfig,
 } from '~/constants/swimming-pools/applications';
 import { SwimmingCategoryId } from '~/types';
-import {
-  CategoryApplicationConfig,
-  SwimmingPoolId,
-} from '~/types/swimming-pool';
+import { SwimmingPoolId } from '~/types/swimming-pool';
 
-function getCategoryApplicationConfig(
-  swimmingPoolId: string,
-  categoryId: string
-): Partial<CategoryApplicationConfig> {
-  return (
-    swimmingPoolApplicationConfig[swimmingPoolId as SwimmingPoolId]
-      ?.categories?.[categoryId as SwimmingCategoryId] ?? {}
-  );
+// Application config is resolved on the server only (API routes, getStaticProps).
+// The client sends just the pool and category.
+
+function getSwimmingPoolApplicationConfig(swimmingPoolId: string) {
+  return swimmingPoolApplicationConfig[swimmingPoolId as SwimmingPoolId];
 }
 
-export function getSheetTabIdByCategoryId(
+export function getSpreadsheetId(swimmingPoolId: string) {
+  return getSwimmingPoolApplicationConfig(swimmingPoolId)?.spreadsheetId;
+}
+
+export function getCategoryApplicationConfig(
   swimmingPoolId: string,
   categoryId: string
 ) {
-  return getCategoryApplicationConfig(swimmingPoolId, categoryId).sheetTabId;
+  return getSwimmingPoolApplicationConfig(swimmingPoolId)?.categories[
+    categoryId as SwimmingCategoryId
+  ];
 }
 
-export function getPreliminarySheetTabIdByCategoryId(
+export function getSheetTabId(
   swimmingPoolId: string,
-  categoryId: string
+  categoryId: string,
+  preliminary = false
 ) {
+  const category = getCategoryApplicationConfig(swimmingPoolId, categoryId);
+
+  return preliminary ? category?.preliminarySheetTabId : category?.sheetTabId;
+}
+
+export function getTemplateId(swimmingPoolId: string, categoryId: string) {
+  return getCategoryApplicationConfig(swimmingPoolId, categoryId)?.templateId;
+}
+
+export function getLectureCapacity(swimmingPoolId: string, categoryId: string) {
   return getCategoryApplicationConfig(swimmingPoolId, categoryId)
-    .preliminarySheetTabId;
+    ?.lectureCapacity;
 }
 
-export function getTemplateIdByCategoryId(
-  swimmingPoolId: string,
-  categoryId: string
-) {
-  return getCategoryApplicationConfig(swimmingPoolId, categoryId).templateId;
-}
-
-export function getCapacityByCategoryId(
-  swimmingPoolId: string,
-  categoryId: string
-) {
-  return getCategoryApplicationConfig(swimmingPoolId, categoryId).capacity ?? 0;
-}
-
-export function getEmailSenderBySwimmingPoolId(swimmingPoolId?: string) {
+export function getEmailSenderBySwimmingPoolId(swimmingPoolId: string) {
   return (
-    swimmingPoolApplicationConfig[swimmingPoolId as SwimmingPoolId]
-      ?.emailSender ?? DEFAULT_EMAIL_SENDER
+    getSwimmingPoolApplicationConfig(swimmingPoolId)?.emailSender ??
+    DEFAULT_EMAIL_SENDER
   );
 }

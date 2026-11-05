@@ -4,8 +4,6 @@ import { useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 
 import { useApplicationFormContext } from '~/screens/pool-application-page/contexts/ApplicationFormContext';
-import { SwimmingCategoryId } from '~/types';
-import { SwimmingPoolId } from '~/types/swimming-pool';
 import { A, Headline, Text, VerticalStack } from '~/ui/components/atoms';
 import {
   ControlledCheckbox,
@@ -15,7 +13,6 @@ import {
 } from '~/ui/components/molecules';
 import { midTermOptions } from '~/utils/options';
 import { getSemesterPrice } from '~/utils/price';
-import { getCapacityByCategoryId } from '~/utils/swimming-pool-application';
 
 import * as FormItems from '../FormItems.style';
 
@@ -23,8 +20,12 @@ export function ScholarCourseForm() {
   const theme = useTheme();
   const { primary } = theme.colors;
 
-  const { lectures, getLectureById, availableLecturesOptions } =
-    useApplicationFormContext();
+  const {
+    lectures,
+    getLectureById,
+    availableLecturesOptions,
+    lectureCapacity,
+  } = useApplicationFormContext();
 
   const { watch, setValue } = useFormContext();
 
@@ -107,10 +108,7 @@ export function ScholarCourseForm() {
               required="Počet dětí musí být vyplněn"
               type="number"
               label="Počet dětí"
-              max={getCapacityByCategoryId(
-                SwimmingPoolId.LUZANKY,
-                SwimmingCategoryId.KINDERGARTEN
-              )}
+              max={lectureCapacity}
             />
             <ControlledSelect
               name="midTerm"
