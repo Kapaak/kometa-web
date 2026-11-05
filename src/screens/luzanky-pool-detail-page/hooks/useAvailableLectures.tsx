@@ -1,11 +1,16 @@
 import { useGetAvailableLectures } from '~/adapters/sheetAdapter';
-import { SwimmingPoolId } from '~/types';
-import { getCapacityByCategoryId } from '~/utils/capacity';
-import { getSpreadsheetIdByCategoryId } from '~/utils/sheets';
+import { SwimmingPoolId } from '~/types/swimming-pool';
+import {
+  getCapacityByCategoryId,
+  getSheetTabIdByCategoryId,
+} from '~/utils/swimming-pool-application';
 
 export function useAvailableLectures(categoryId: string) {
-  const spreadsheetId = getSpreadsheetIdByCategoryId(categoryId);
-  const capacity = getCapacityByCategoryId(categoryId);
+  const sheetTabId = getSheetTabIdByCategoryId(
+    SwimmingPoolId.LUZANKY,
+    categoryId
+  );
+  const capacity = getCapacityByCategoryId(SwimmingPoolId.LUZANKY, categoryId);
 
   const {
     data: availableLectures,
@@ -14,7 +19,7 @@ export function useAvailableLectures(categoryId: string) {
   } = useGetAvailableLectures(
     categoryId,
     SwimmingPoolId.LUZANKY,
-    spreadsheetId,
+    sheetTabId,
     capacity
   );
 

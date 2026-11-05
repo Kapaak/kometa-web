@@ -1,12 +1,12 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+
 import { swimmingCategories } from '~/constants/categories';
 import { LuzankyPoolDetailScreen } from '~/screens/luzanky-pool-detail-page';
 import { SwimmingPoolDetailPageContextProvider } from '~/screens/luzanky-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
-import { SwimmingPoolId } from '~/types';
+import { SwimmingPoolId } from '~/types/swimming-pool';
 import { getCategoryIdBySlug } from '~/utils/category';
 
-interface LuzankyPageProps
-  extends InferGetStaticPropsType<typeof getStaticProps> {}
+type LuzankyPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function LuzankyPage({ categoryId }: LuzankyPageProps) {
   return (

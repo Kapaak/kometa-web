@@ -1,6 +1,7 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+
 import { auth, sheets, sheets_v4 } from '@googleapis/sheets';
 
-import { NextApiRequest, NextApiResponse } from 'next';
 import { getLecturesForSwimmingPoolAndCategory } from '~/libs/sanity/api/lecture';
 import { getDayAbbreviationWithoutDiacritics } from '~/utils/day';
 
@@ -26,8 +27,8 @@ const googleAuth = new auth.GoogleAuth({
 const SPREADSHEET_ID = process.env.NEXT_PUBLIC_SPREADSHEET_ID;
 
 async function initializeGoogleSheets() {
-  const authClient = (await googleAuth.getClient()) as any;
-  return sheets({ version: 'v4', auth: authClient });
+  // GoogleAuth fetches and refreshes the access token on its own
+  return sheets({ version: 'v4', auth: googleAuth });
 }
 
 async function getGoogleSheetByGid(
@@ -100,6 +101,11 @@ export default async function handler(
       swimmingPoolId as string
     );
 
+    // Pool/category without a Google Sheet -> return lectures from Sanity as they are
+    if (!gid) {
+      return res.status(200).json(lecturesByCategory);
+    }
+
     const googleSheets = await initializeGoogleSheets();
 
     //Get spreadsheet metadata to find sheet name by GID
@@ -120,8 +126,8 @@ export default async function handler(
     });
 
     return res.status(200).json(availableLectures);
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error fetching data:', error);
-    return res.status(404).json({ error: error.message });
+    return res.status(500).json({ error: 'Failed to fetch lectures' });
   }
 }

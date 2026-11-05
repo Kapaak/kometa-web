@@ -1,12 +1,12 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+
 import { getPreliminaryLecturesForSwimmingPoolAndCategory } from '~/libs/sanity/api/lecture';
 import { PreliminaryPoolApplicationPage } from '~/screens/pool-application-page';
 import { ApplicationFormContextProvider } from '~/screens/pool-application-page/contexts/ApplicationFormContext';
-import { SwimmingPoolId } from '~/types';
+import { SwimmingPoolId } from '~/types/swimming-pool';
 import { getCategoryIdBySlug } from '~/utils/category';
 
-interface LuzankyPageProps
-  extends InferGetServerSidePropsType<typeof getServerSideProps> {}
+type LuzankyPageProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function LuzankyPoolPreliminaryApplicationPage({
   categoryId,

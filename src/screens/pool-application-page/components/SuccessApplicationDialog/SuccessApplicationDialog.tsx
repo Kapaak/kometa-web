@@ -1,3 +1,5 @@
+import { useTheme } from 'styled-components';
+
 import {
   Button,
   Divider,
@@ -7,7 +9,6 @@ import {
 } from '~/ui/components/atoms';
 import { Modal, ModalProps } from '~/ui/components/molecules';
 
-import { useTheme } from 'styled-components';
 import * as S from './SuccessApplicationDialog.style';
 
 interface SuccessApplicationDialogProps extends Omit<ModalProps, 'title'> {
@@ -70,7 +71,7 @@ export function SuccessApplicationDialog({
         <VerticalStack gap="1rem" align="flex-start">
           <Text>
             <Strong>Potřebujete pomoc? </Strong>V případě jakéhokoliv problému
-            se porsím obraťte na tel. číslo 773708287, nebo na e-mail
+            se prosím obraťte na tel. číslo 773708287, nebo na e-mail
             plavaniluzanky@kometaplavani.cz
           </Text>
           <Divider width="50%" color={grey['500']} />

@@ -19,7 +19,8 @@ export function MobileAvailableCoursesTableItem({
   const { grey, error } = theme.colors;
 
   const currentUrl =
-    availableCourse?.url ?? availableCourse?.swimmingPoolUrl ?? '';
+    // url is an empty string for courses without their own page, hence ||
+    availableCourse?.url || availableCourse?.swimmingPoolUrl || '';
 
   const content = (
     <S.MobileAvailableCoursesTableItem>

@@ -1,19 +1,25 @@
-import { Headline, MaxWidth, VerticalStack } from '~/ui/components/atoms';
+import { useRouter } from 'next/router';
+
+import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
+import { SwimmingPoolId } from '~/types/swimming-pool';
+import { Headline, MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
 import {
   getCategoryNameByCategoryId,
   getCategoryNameBySlug,
 } from '~/utils/category';
+import {
+  getPreliminarySheetTabIdByCategoryId,
+  getTemplateIdByCategoryId,
+} from '~/utils/swimming-pool-application';
+
+import { ApplicationsClosed } from './parts/ApplicationsClosed';
+
 import { ApplicationForm } from './parts';
 
-import { useRouter } from 'next/router';
-import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
-import { Text } from '~/ui/components/atoms';
-import {
-  getPreliminarySpreadsheetIdByCategoryId,
-  getTemplateIdByCategoryId,
-} from '~/utils/sheets';
 import * as S from './PoolApplicationPage.style';
-import { PreliminaryApplicationsClosed } from './parts/PreliminaryApplicationsClosed';
+
+const CLOSED_MESSAGE =
+  'Předběžné přihlášky pro tento kurz jsou momentálně uzavřeny.';
 
 interface PreliminaryPoolApplicationPageProps {
   categoryId: string;
@@ -26,11 +32,17 @@ export function PreliminaryPoolApplicationPage({
 }: PreliminaryPoolApplicationPageProps) {
   const router = useRouter();
 
-  const spreadsheetId = getPreliminarySpreadsheetIdByCategoryId(categoryId);
-  const templateId = getTemplateIdByCategoryId(categoryId);
+  const sheetTabId = getPreliminarySheetTabIdByCategoryId(
+    SwimmingPoolId.LUZANKY,
+    categoryId
+  );
+  const templateId = getTemplateIdByCategoryId(
+    SwimmingPoolId.LUZANKY,
+    categoryId
+  );
 
-  if (!spreadsheetId) {
-    return null;
+  if (!sheetTabId) {
+    return <ApplicationsClosed message={CLOSED_MESSAGE} />;
   }
 
   const breadcrumbs = [
@@ -46,7 +58,7 @@ export function PreliminaryPoolApplicationPage({
   ];
 
   if (!hasLectures) {
-    return <PreliminaryApplicationsClosed />;
+    return <ApplicationsClosed message={CLOSED_MESSAGE} />;
   }
 
   return (
@@ -60,7 +72,7 @@ export function PreliminaryPoolApplicationPage({
 
           <ApplicationForm
             categoryId={categoryId}
-            spreadsheetId={spreadsheetId}
+            sheetTabId={sheetTabId}
             templateId={templateId}
           />
         </MaxWidth>

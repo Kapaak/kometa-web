@@ -1,16 +1,21 @@
+import { useRouter } from 'next/router';
+
+import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
+import { SwimmingPoolId } from '~/types/swimming-pool';
 import { Headline, MaxWidth } from '~/ui/components/atoms';
 import {
   getCategoryNameByCategoryId,
   getCategoryNameBySlug,
 } from '~/utils/category';
+import {
+  getSheetTabIdByCategoryId,
+  getTemplateIdByCategoryId,
+} from '~/utils/swimming-pool-application';
+
+import { ApplicationsClosed } from './parts/ApplicationsClosed';
+
 import { ApplicationForm } from './parts';
 
-import { useRouter } from 'next/router';
-import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
-import {
-  getSpreadsheetIdByCategoryId,
-  getTemplateIdByCategoryId,
-} from '~/utils/sheets';
 import * as S from './PoolApplicationPage.style';
 
 interface PoolApplicationPageProps {
@@ -20,11 +25,19 @@ interface PoolApplicationPageProps {
 export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
   const router = useRouter();
 
-  const spreadsheetId = getSpreadsheetIdByCategoryId(categoryId);
-  const templateId = getTemplateIdByCategoryId(categoryId);
+  const sheetTabId = getSheetTabIdByCategoryId(
+    SwimmingPoolId.LUZANKY,
+    categoryId
+  );
+  const templateId = getTemplateIdByCategoryId(
+    SwimmingPoolId.LUZANKY,
+    categoryId
+  );
 
-  if (!spreadsheetId) {
-    return null;
+  if (!sheetTabId) {
+    return (
+      <ApplicationsClosed message="Přihlášky pro tento kurz zatím nejsou otevřené." />
+    );
   }
 
   const breadcrumbs = [
@@ -46,7 +59,7 @@ export function PoolApplicationPage({ categoryId }: PoolApplicationPageProps) {
           <Headline>{getCategoryNameByCategoryId(categoryId)}</Headline>
           <ApplicationForm
             categoryId={categoryId}
-            spreadsheetId={spreadsheetId}
+            sheetTabId={sheetTabId}
             templateId={templateId}
           />
         </MaxWidth>

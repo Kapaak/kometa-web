@@ -1,15 +1,17 @@
 import { useGetPreliminaryLectures } from '~/adapters/preliminaryAdapter';
 import { useGetAvailableLectures } from '~/adapters/sheetAdapter';
-import { getCapacityByCategoryId } from '~/utils/capacity';
-import { getSpreadsheetIdByCategoryId } from '~/utils/sheets';
+import {
+  getCapacityByCategoryId,
+  getSheetTabIdByCategoryId,
+} from '~/utils/swimming-pool-application';
 
 export function useAvailableLectures(
   categoryId: string,
   swimmingPoolId: string,
   preliminary?: boolean
 ) {
-  const spreadsheetId = getSpreadsheetIdByCategoryId(categoryId);
-  const capacity = getCapacityByCategoryId(categoryId);
+  const sheetTabId = getSheetTabIdByCategoryId(swimmingPoolId, categoryId);
+  const capacity = getCapacityByCategoryId(swimmingPoolId, categoryId);
 
   const hook = preliminary
     ? useGetPreliminaryLectures
@@ -19,7 +21,7 @@ export function useAvailableLectures(
     data: availableLectures,
     isLoading,
     isError,
-  } = hook(categoryId, swimmingPoolId, spreadsheetId, capacity);
+  } = hook(categoryId, swimmingPoolId, sheetTabId, capacity);
 
   return {
     availableLectures,

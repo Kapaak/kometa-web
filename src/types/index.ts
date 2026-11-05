@@ -91,7 +91,3 @@ export enum CookieConsentType {
 export type CookieConsentState = 'granted' | 'denied';
 
 export type CookieConsent = Record<string, CookieConsentState>;
-
-export enum SwimmingPoolId {
-  LUZANKY = 'luzanky',
-}

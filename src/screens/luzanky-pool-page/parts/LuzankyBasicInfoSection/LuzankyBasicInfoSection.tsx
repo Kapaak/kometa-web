@@ -1,8 +1,10 @@
 import { PortableTextBlock } from '@portabletext/types';
+
 import { useGetSwimmingPoolMainPageById } from '~/adapters/swimmingPoolMainAdapter';
-import { SwimmingPoolId } from '~/types';
+import { SwimmingPoolId } from '~/types/swimming-pool';
 import { Headline, MaxWidth } from '~/ui/components/atoms';
 import { TextBuilder } from '~/ui/components/molecules';
+
 import * as S from './LuzankyBasicInfoSection.style';
 
 export function LuzankyBasicInfoSection() {

@@ -1,6 +1,6 @@
 import { LuzankyPoolScreen } from '~/screens/luzanky-pool-page';
 import { SwimmingPoolPageContextProvider } from '~/screens/luzanky-pool-page/contexts/SwimmingPoolContext';
-import { SwimmingPoolId } from '~/types';
+import { SwimmingPoolId } from '~/types/swimming-pool';
 
 export default function LuzankyPoolPage() {
   return (

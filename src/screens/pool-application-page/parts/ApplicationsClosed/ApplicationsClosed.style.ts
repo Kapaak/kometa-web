@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PreliminaryApplicationsClosed = styled.div`
+export const ApplicationsClosed = styled.div`
   height: 20rem;
   display: flex;
   align-items: center;

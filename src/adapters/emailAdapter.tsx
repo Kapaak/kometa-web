@@ -17,6 +17,8 @@ export type SendEmailAdapter = {
   templateId: string;
   priceWithDiscount: number;
   category?: SwimmingCategoryTranslation;
+  // The server picks the email sender based on the pool.
+  swimmingPoolId?: string;
 };
 
 type SendGridResult = [ClientResponse, object];
@@ -34,17 +36,19 @@ export function useSendEmail(showNotifications = false) {
   >({
     mutationKey: ['sendEmail'],
     onSuccess: () => {
-      showNotifications &&
+      if (showNotifications) {
         toast.success('Potvrzovací email úspěšně odeslán.', {
           autoClose: 3000,
           hideProgressBar: true,
         });
+      }
     },
     onError: () => {
-      showNotifications &&
+      if (showNotifications) {
         toast.error(
           'Nepodařilo se zaslat potvrzovací email. Zkuste to prosím znovu, nebo nás kontaktujte.'
         );
+      }
     },
     mutationFn: ({
       email,
@@ -55,6 +59,7 @@ export function useSendEmail(showNotifications = false) {
       priceWithDiscount,
       templateId,
       category,
+      swimmingPoolId,
     }) => {
       return fetchPost<SendEmailResponse>('/api/email', {
         email,
@@ -64,6 +69,7 @@ export function useSendEmail(showNotifications = false) {
         day: dayId && `${getDayFullName(dayId)} ${time}`,
         price: priceWithDiscount,
         category,
+        swimmingPoolId,
       });
     },
   });
@@ -77,6 +83,7 @@ export function useSendEmail(showNotifications = false) {
     time,
     priceWithDiscount,
     category,
+    swimmingPoolId,
   }: SendEmailAdapter) {
     return mutateAsync({
       email,
@@ -87,6 +94,7 @@ export function useSendEmail(showNotifications = false) {
       time,
       priceWithDiscount,
       category,
+      swimmingPoolId,
     });
   }
 

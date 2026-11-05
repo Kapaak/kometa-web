@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
+
 import { SanityLecture } from '~/domains';
 import { fetchGet, fetchPost } from '~/utils/fetch';
 
-export function useAppendGoogleSheetById(sheetId: number) {
+export function useAppendGoogleSheetById(sheetTabId: number) {
   const {
     isPending: isLoading,
     isError,
@@ -15,12 +16,14 @@ export function useAppendGoogleSheetById(sheetId: number) {
           values,
         },
         {
-          gid: String(sheetId),
+          gid: String(sheetTabId),
         }
       );
     },
   });
 
+  //TODO: Fix in future
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleAppendGoogleSheet = async (values: any[]) => {
     return await mutateAsync(values);
   };
@@ -35,8 +38,8 @@ export function useAppendGoogleSheetById(sheetId: number) {
 export function useGetAvailableLectures(
   categoryId: string,
   swimmingPoolId: string,
-  gid: number,
-  capacity: number
+  gid?: number,
+  capacity?: number
 ) {
   const { data, isError, isLoading } = useQuery<SanityLecture[]>({
     queryKey: ['lectures-with-capacity', categoryId, swimmingPoolId],
@@ -44,8 +47,8 @@ export function useGetAvailableLectures(
       return fetchGet('/api/google-sheets/lectures-with-capacity', {
         categoryId,
         swimmingPoolId,
-        gid: String(gid),
-        capacity: String(capacity),
+        // Without a Google Sheet we can't count the remaining capacity
+        ...(gid ? { gid: String(gid), capacity: String(capacity ?? 0) } : {}),
       });
     },
   });

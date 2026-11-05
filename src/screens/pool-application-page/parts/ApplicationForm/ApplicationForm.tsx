@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useSendEmail } from '~/adapters/emailAdapter';
 import { useAppendGoogleSheetById } from '~/adapters/sheetAdapter';
 import { SwimmingCategoryId, SwimmingCategoryTranslation } from '~/types';
+import { SwimmingPoolId } from '~/types/swimming-pool';
 import { Button, Flex } from '~/ui/components/atoms';
 import { getCategoryNameByCategoryId } from '~/utils/category';
 import { getDayAbbreviationWithoutDiacritics } from '~/utils/day';
@@ -38,13 +39,13 @@ export type ApplicationFormValues =
 
 interface ApplicationFormProps {
   categoryId: string;
-  spreadsheetId: number;
+  sheetTabId: number;
   templateId?: string;
 }
 
 export function ApplicationForm({
   categoryId,
-  spreadsheetId,
+  sheetTabId,
   templateId,
 }: ApplicationFormProps) {
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
@@ -54,7 +55,7 @@ export function ApplicationForm({
   const { lectures, getLectureById } = useApplicationFormContext();
 
   const { appendGoogleSheetById, isLoading } =
-    useAppendGoogleSheetById(spreadsheetId);
+    useAppendGoogleSheetById(sheetTabId);
 
   const { sendEmail, isLoading: isSendingEmail } = useSendEmail();
 
@@ -115,6 +116,7 @@ export function ApplicationForm({
           firstName: dataUpdated?.firstName,
           lastName: dataUpdated?.lastName,
           templateId,
+          swimmingPoolId: SwimmingPoolId.LUZANKY,
           dayId: Number(lectureById?.dayId),
           time: String(lectureById?.timeFrom),
           priceWithDiscount: Math.floor(
@@ -152,6 +154,7 @@ export function ApplicationForm({
           firstName,
           lastName,
           templateId,
+          swimmingPoolId: SwimmingPoolId.LUZANKY,
           dayId: Number(lectureById?.dayId),
           time: String(lectureById?.timeFrom),
           priceWithDiscount: Math.floor(
@@ -166,7 +169,7 @@ export function ApplicationForm({
         });
 
         setShowSuccessDialog(true);
-      } catch (error) {
+      } catch {
         toast.error(
           'Email se nepodařilo odeslat. Pro zjištění stavu své přihlášky nás kontaktujte na emailu.'
         );
