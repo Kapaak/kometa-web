@@ -4,6 +4,7 @@ import type { SwimmingCategoryId } from './index';
 
 export enum SwimmingPoolId {
   LUZANKY = 'luzanky',
+  KRAVI_HORA = 'kravi-hora',
 }
 
 /**
@@ -94,6 +95,11 @@ export type SwimmingPoolConfig = {
   name: string;
   // Full name, e.g. "Bazén za Lužánkami".
   title: string;
+  /**
+   * When `false`, the pool pages are not generated in production
+   * (they are still available on localhost and in Vercel preview).
+   */
+  published: boolean;
   hero: {
     image: StaticImageData;
     imageAlt: string;

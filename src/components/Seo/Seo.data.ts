@@ -32,6 +32,9 @@ Plavecký sportovní klub Brno
 const keywordsLuzanky =
   'plavání Lužánky, bazén Lužánky, bazén za Lužánkami, výuka plavání v Brně, plavání Brno, plavecké kurzy brno, plavání brno, plavání pro děti, plavání s dětmi';
 
+const keywordsKraviHora =
+  'plavání Kraví hora, bazén Kraví hora, výuka plavání v Brně, plavání Brno, plavecké kurzy brno, plavání brno, plavání pro děti, plavání s dětmi';
+
 export const defaultSeoData: SeoData = {
   title: 'Plavecká škola | Kometa',
   keywords,
@@ -46,5 +49,12 @@ export const data: SeoData[] = [
     path: '/bazeny/luzanky',
     description:
       'Plavecké kurzy pro děti i dospělé. Vedené kvalifikovanými trenéry, kteří působí na bazénech po celém Brně. Přijď si s námí zaplavat a navštiv bazén za Lužánkami.',
+  },
+  {
+    title: 'Plavecká škola | Kraví hora',
+    keywords: keywordsKraviHora,
+    path: '/bazeny/kravi-hora',
+    description:
+      'Plavecké kurzy pro děti. Vedené kvalifikovanými trenéry, kteří působí na bazénech po celém Brně. Přijď si s námi zaplavat a navštiv bazén Kraví hora.',
   },
 ];

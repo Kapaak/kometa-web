@@ -14,6 +14,7 @@ import {
   SwimmingCategoryTranslation,
   TransformedKidsCourse,
 } from '~/types';
+import { resolveSwimmingPoolUrl } from '~/utils/swimming-pool';
 
 import { getDayFullName } from './day';
 import { urlForImage } from './sanity';
@@ -34,7 +35,8 @@ export function transformKidsCourses(
         pool = {
           id: course.id ?? '',
           name: course.name ?? '',
-          url: course.url ?? '',
+          url:
+            resolveSwimmingPoolUrl(course.swimmingPoolSlug, course.url) ?? '',
           alt: course.alt ?? '',
           image: course?.image
             ? urlForImage(course.image)?.url()
@@ -101,7 +103,8 @@ export function transformAvailableCourse(
       : '-',
     name: course?.name ?? '',
     url: course?.url ?? '',
-    swimmingPoolUrl: course?.swimmingPoolUrl ?? '',
+    swimmingPoolUrl:
+      resolveSwimmingPoolUrl(course?.slug, course?.swimmingPoolUrl) ?? '',
     alt: course?.alt ?? '',
     isSchoolOrKindergartenAvailable:
       course.isSchoolOrKindergartenAvailable ?? false,

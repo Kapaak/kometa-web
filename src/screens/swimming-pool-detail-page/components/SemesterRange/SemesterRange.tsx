@@ -19,10 +19,8 @@ export function SemesterRange({
     return <Skeleton height="2.4rem" width="20rem" />;
   }
 
-  if (
-    !isLoading &&
-    (typeof semesterFrom !== 'string' || typeof semesterTo !== 'string')
-  ) {
+  // Empty strings come from the transform when Sanity has no dateRange.
+  if (!semesterFrom || !semesterTo) {
     return null;
   }
 

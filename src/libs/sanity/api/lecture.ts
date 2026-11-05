@@ -1,6 +1,8 @@
 import { groq } from 'next-sanity';
+
 import { SanityAvailableLecture, SanityLecture } from '~/domains';
 import { SwimmingCategoryId } from '~/types';
+
 import { client } from '../config';
 
 interface Pagination {
@@ -75,7 +77,7 @@ export async function getLectures(): Promise<SanityLecture[]> {
   "priceYear":*[_type == "courseCategoryPricing" && categoryId == ^.categoryId && swimmingPool._ref == ^.swimmingPool._ref][0].coursePrice.priceYear,
   "priceFirstHalf":*[_type == "courseCategoryPricing" && categoryId == ^.categoryId && swimmingPool._ref == ^.swimmingPool._ref][0].coursePrice.priceFirstHalf,
   "priceSecondHalf":*[_type == "courseCategoryPricing" && categoryId == ^.categoryId && swimmingPool._ref == ^.swimmingPool._ref][0].coursePrice.priceSecondHalf,
-  isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]`;
+  isFull,categoryId,dayId,timeFrom,timeTo,"ageFrom":age.ageFrom,"ageTo":age.ageTo,"swimmingPoolId":swimmingPool->._id,"swimmingPoolSlug":swimmingPool->slug.current,"name":swimmingPool->.name,"alt":swimmingPool->.image.alt,"image":swimmingPool->.image{asset->{...,metadata}},"url":swimmingPool->.url,"privateSwimmingPool":swimmingPool->.privateSwimmingPool,"isSchoolOrKindergartenAvailable":swimmingPool->.isSchoolOrKindergartenAvailable}[]`;
 
   const course = await client.fetch(queryLectures);
 

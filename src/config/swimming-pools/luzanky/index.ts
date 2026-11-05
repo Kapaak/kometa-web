@@ -10,6 +10,7 @@ export const luzankyConfig: SwimmingPoolConfig = {
   id: SwimmingPoolId.LUZANKY,
   name: 'Lužánky',
   title: 'Bazén za Lužánkami',
+  published: true,
   hero: {
     image: HeroImage,
     imageAlt: 'Bazén za Lužánkami',

@@ -28,6 +28,7 @@ export type SanityKidsCourseVariant = {
 };
 
 export type SanityLecture = QueryLecturesResult[0] & {
+  swimmingPoolSlug?: string | null;
   discount?: number;
   priceYear?: number | null;
   priceFirstHalf?: number | null;
@@ -36,6 +37,7 @@ export type SanityLecture = QueryLecturesResult[0] & {
 
 export type SanityAvailableLecture = QueryAvailableCoursesResult[0] & {
   name?: string;
+  slug?: string | null;
   swimmingPoolUrl?: string;
   alt?: string;
   isSchoolOrKindergartenAvailable?: boolean;

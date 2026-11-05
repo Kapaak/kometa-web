@@ -5,7 +5,7 @@ import { getPreliminaryLecturesForSwimmingPoolAndCategory } from '~/libs/sanity/
 import { PreliminaryPoolApplicationPage } from '~/screens/pool-application-page';
 import { ApplicationFormContextProvider } from '~/screens/pool-application-page/contexts/ApplicationFormContext';
 import { getCategoryIdBySlug } from '~/utils/category';
-import { getSwimmingPoolConfig } from '~/utils/swimming-pool';
+import { isSwimmingPoolVisible } from '~/utils/swimming-pool';
 import { getSheetTabId } from '~/utils/swimming-pool-application';
 
 type SwimmingPoolPreliminaryApplicationPageProps = InferGetServerSidePropsType<
@@ -38,8 +38,8 @@ export const getServerSideProps = async (
 ) => {
   const poolId = ctx.params?.poolId as string;
 
-  // Server-rendered for any URL, so unknown pools have to be rejected here
-  if (!getSwimmingPoolConfig(poolId)) {
+  // Server-rendered for any URL, so unknown and unpublished pools have to be rejected here
+  if (!isSwimmingPoolVisible(poolId)) {
     return { notFound: true as const };
   }
 
