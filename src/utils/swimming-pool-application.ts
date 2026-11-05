@@ -1,7 +1,5 @@
-import {
-  DEFAULT_EMAIL_SENDER,
-  swimmingPoolApplicationConfig,
-} from '~/constants/swimming-pools/applications';
+import { swimmingPoolApplicationConfigs } from '~/config/swimming-pools/applications';
+import { DEFAULT_EMAIL_SENDER } from '~/config/swimming-pools/email';
 import { SwimmingCategoryId } from '~/types';
 import { SwimmingPoolId } from '~/types/swimming-pool';
 
@@ -9,7 +7,7 @@ import { SwimmingPoolId } from '~/types/swimming-pool';
 // The client sends just the pool and category.
 
 function getSwimmingPoolApplicationConfig(swimmingPoolId: string) {
-  return swimmingPoolApplicationConfig[swimmingPoolId as SwimmingPoolId];
+  return swimmingPoolApplicationConfigs[swimmingPoolId as SwimmingPoolId];
 }
 
 export function getSpreadsheetId(swimmingPoolId: string) {

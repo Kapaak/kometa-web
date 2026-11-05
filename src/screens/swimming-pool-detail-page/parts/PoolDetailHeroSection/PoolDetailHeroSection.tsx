@@ -1,0 +1,336 @@
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+
+import {
+  ArrowsHorizontal,
+  Baby,
+  CheckCircle,
+  SwimmingPool,
+  Thermometer,
+  Timer,
+  User,
+} from '@phosphor-icons/react';
+import { useTheme } from 'styled-components';
+
+import { useSwimmingPoolConfig } from '~/contexts/SwimmingPoolConfigContext';
+import { SanityLecture } from '~/domains';
+import { useSwimmingPoolDetailPageContext } from '~/screens/swimming-pool-detail-page/contexts/SwimmingPoolDetailPageContext';
+import { SwimmingCategoryId } from '~/types';
+import {
+  Flex,
+  Headline,
+  MaxWidth,
+  Text,
+  VerticalStack,
+} from '~/ui/components/atoms';
+import { IconText } from '~/ui/components/molecules';
+import { getCategoryNameByCategoryId } from '~/utils/category';
+import { dayTranslationAbbr } from '~/utils/day';
+import { getSwimmingPoolPath } from '~/utils/swimming-pool';
+
+import { Calendar, SemesterRange, TimeSlotPrice } from '../../components';
+import { useAvailableLecturesContext } from '../../contexts/AvailableLecturesContext';
+
+import * as S from './PoolDetailHeroSection.style';
+
+export function PoolDetailHeroSection() {
+  const theme = useTheme();
+  const { primary } = theme.colors;
+
+  const router = useRouter();
+
+  const { id, detailInformation, contact } = useSwimmingPoolConfig();
+  const poolPath = getSwimmingPoolPath(id);
+  const basicInfoPath = `${poolPath}#zakladni-informace`;
+  const applicationPath = `${poolPath}/${router.query.categoryId}/prihlasky`;
+
+  const { swimmingPoolDetail, categoryId, isLoading } =
+    useSwimmingPoolDetailPageContext();
+
+  const { availableLectures, isLoading: isAvailableLecturesLoading } =
+    useAvailableLecturesContext();
+
+  const { poolParameters, description, duration } =
+    detailInformation?.[categoryId as SwimmingCategoryId]?.heroSection ?? {};
+
+  const isFull = availableLectures?.every((lecture) => lecture?.isFull);
+
+  const firstHalfLecturePrice = isFull
+    ? 0
+    : (availableLectures?.[0]?.priceFirstHalf ?? 0);
+  const secondHalfLecturePrice = isFull
+    ? 0
+    : (availableLectures?.[0]?.priceSecondHalf ?? 0);
+  const yearlyLecturePrice = isFull
+    ? 0
+    : (availableLectures?.[0]?.priceYear ?? 0);
+
+  const minimumAge = retrieveMinimumLectureAttribute(
+    availableLectures,
+    'ageFrom'
+  );
+
+  const calendarData = availableLectures
+    ?.filter((lecture) => lecture?.dayId)
+    .map((lecture) => ({
+      day: lecture.dayId as number,
+      time: lecture.timeFrom ? Number(lecture.timeFrom.split(':')[0]) : 0,
+      full: lecture?.isFull ?? false,
+      discount: lecture?.discount,
+    }));
+
+  return (
+    <S.HeroSection>
+      <MaxWidth>
+        <S.SectionCard>
+          <S.SectionContainer>
+            <S.SectionDescriptionContainer>
+              <S.SectionTextContainer>
+                <Headline variant="h1">
+                  {getCategoryNameByCategoryId(categoryId)}
+                </Headline>
+                <Text variant="body2">{description}</Text>
+
+                {!isLoading && (
+                  <VerticalStack gap="1rem">
+                    {(firstHalfLecturePrice > 0 ||
+                      secondHalfLecturePrice > 0 ||
+                      yearlyLecturePrice > 0) && (
+                      <Text variant="body3">Cena kurzu je:</Text>
+                    )}
+
+                    <Flex gap="1.2rem" wrap="wrap">
+                      {firstHalfLecturePrice > 0 &&
+                      firstHalfLecturePrice === secondHalfLecturePrice ? (
+                        <TimeSlotPrice
+                          isLoading={isLoading || isAvailableLecturesLoading}
+                          price={firstHalfLecturePrice}
+                          timeSlotName="Pololetí"
+                        />
+                      ) : (
+                        <>
+                          <TimeSlotPrice
+                            isLoading={isLoading || isAvailableLecturesLoading}
+                            price={firstHalfLecturePrice}
+                            timeSlotName={
+                              categoryId === SwimmingCategoryId.KINDERGARTEN ||
+                              categoryId === SwimmingCategoryId.SCHOOL
+                                ? 'za žáka 1. pololetí'
+                                : categoryId === SwimmingCategoryId.ADULT
+                                  ? 'Září - Prosinec'
+                                  : 'Září - Leden'
+                            }
+                          />
+                          <TimeSlotPrice
+                            isLoading={isLoading || isAvailableLecturesLoading}
+                            price={secondHalfLecturePrice}
+                            timeSlotName={
+                              categoryId === SwimmingCategoryId.KINDERGARTEN ||
+                              categoryId === SwimmingCategoryId.SCHOOL
+                                ? 'za žáka 2. pololetí'
+                                : categoryId === SwimmingCategoryId.ADULT
+                                  ? 'Leden - Červen'
+                                  : 'Únor - Červen'
+                            }
+                          />
+                        </>
+                      )}
+                      {yearlyLecturePrice > 0 && (
+                        <TimeSlotPrice
+                          isLoading={isLoading || isAvailableLecturesLoading}
+                          price={yearlyLecturePrice}
+                          timeSlotName="Celý školní rok"
+                        />
+                      )}
+                    </Flex>
+                  </VerticalStack>
+                )}
+
+                {categoryId == SwimmingCategoryId.ADULT && (
+                  <Text variant="body2">
+                    První pololetí (polovina září - prosinec) je kratší než
+                    druhé (leden - polovina června).
+                  </Text>
+                )}
+
+                {categoryId !== SwimmingCategoryId.SCHOOL &&
+                  categoryId !== SwimmingCategoryId.KINDERGARTEN && (
+                    <Text variant="body2">
+                      Více informací o platbě najdete v sekci{' '}
+                      <Text as="span" variant="body3" color={primary.main}>
+                        <S.Link href={basicInfoPath} passHref>
+                          placení
+                          {categoryId !== SwimmingCategoryId.ADULT
+                            ? ' a vouchery'
+                            : ''}
+                          .{' '}
+                        </S.Link>
+                      </Text>
+                    </Text>
+                  )}
+
+                <Text variant="body2">
+                  Přehled dnů, kdy se nekonají lekce, je uveden v části{' '}
+                  <Text as="span" variant="body3" color={primary.main}>
+                    <S.Link href={basicInfoPath}>kdy neplaveme</S.Link>
+                  </Text>
+                  . Omlouvání z lekce není nutné. Snažíme se nabízet náhrady,
+                  pokud je to možné, v termínech, které nejsou obsazené.{' '}
+                  <Text as="span" variant="body3" color={primary.main}>
+                    <S.Link href={basicInfoPath}>
+                      Více o absencích a náhradách
+                    </S.Link>
+                  </Text>
+                  .
+                </Text>
+
+                {categoryId === SwimmingCategoryId.KINDERGARTEN &&
+                  contact.email &&
+                  contact.phone && (
+                    <Text variant="body2">
+                      Pokud máte zájem o plavání pro školy, napište nám na
+                      e-mail{' '}
+                      <Text variant="body3" as="span">
+                        {contact.email}
+                      </Text>{' '}
+                      nebo zavolejte na{' '}
+                      <Text variant="body3" as="span">
+                        {contact.phone}
+                      </Text>
+                      .
+                    </Text>
+                  )}
+              </S.SectionTextContainer>
+
+              <S.SectionInformationContainer
+                hasSkillRequirement={
+                  (swimmingPoolDetail?.skillRequirement?.length ?? 0) > 0
+                }
+              >
+                <VerticalStack gap="1rem">
+                  <Text variant="body3" as="h2">
+                    Základní informace
+                  </Text>
+
+                  {minimumAge > 0 && (
+                    <IconText
+                      icon={
+                        categoryId !== SwimmingCategoryId.ADULT ? Baby : User
+                      }
+                      iconColor={primary.main}
+                      text={`${categoryId !== SwimmingCategoryId.ADULT ? `pro děti` : ''} od ${minimumAge} let`}
+                    />
+                  )}
+                  {duration && (
+                    <IconText
+                      icon={Timer}
+                      iconColor={primary.main}
+                      text={`${duration} min`}
+                    />
+                  )}
+                  {poolParameters?.poolLength && (
+                    <IconText
+                      icon={ArrowsHorizontal}
+                      iconColor={primary.main}
+                      text={`Délka bazénu: ${poolParameters.poolLength}`}
+                    />
+                  )}
+                  {poolParameters?.depth && (
+                    <IconText
+                      icon={SwimmingPool}
+                      iconColor={primary.main}
+                      text={`Maximální hloubka: ${poolParameters.depth}`}
+                    />
+                  )}
+                  {poolParameters?.waterTemperature && (
+                    <IconText
+                      icon={Thermometer}
+                      iconColor={primary.main}
+                      text={`Teplota vody: ${poolParameters.waterTemperature}`}
+                    />
+                  )}
+                </VerticalStack>
+
+                {(swimmingPoolDetail?.skillRequirement?.length ?? 0) > 0 && (
+                  <VerticalStack gap="1rem">
+                    <Text variant="body3" as="h2">
+                      Potřebné dovednosti před nástupem do kurzu
+                    </Text>
+
+                    {swimmingPoolDetail?.skillRequirement?.map((skill) => (
+                      <IconText
+                        key={skill}
+                        icon={CheckCircle}
+                        text={skill}
+                        iconColor={primary.main}
+                      />
+                    ))}
+                  </VerticalStack>
+                )}
+              </S.SectionInformationContainer>
+            </S.SectionDescriptionContainer>
+
+            <S.SectionActionsContainer>
+              <VerticalStack gap="1rem" align="center" height="100%">
+                <SemesterRange
+                  semesterFrom={swimmingPoolDetail?.dateRange?.dateFrom}
+                  semesterTo={swimmingPoolDetail?.dateRange?.dateTo}
+                  isLoading={isLoading}
+                />
+                <S.SectionCalendarContainer>
+                  <Calendar
+                    isLoading={isAvailableLecturesLoading}
+                    days={Object.values(dayTranslationAbbr).map(
+                      (_, index) => index + 1
+                    )}
+                    times={getUniqueSortedTimes(availableLectures)}
+                    data={calendarData ?? []}
+                    onClick={(dayId, time) =>
+                      router.push(
+                        `${applicationPath}?day=${dayId}&time=${time}`
+                      )
+                    }
+                  />
+                </S.SectionCalendarContainer>
+
+                <S.SectionActionButton
+                  color="secondary"
+                  variant={
+                    isAvailableLecturesLoading || isFull ? 'outlined' : 'filled'
+                  }
+                  disabled={isAvailableLecturesLoading || isFull}
+                >
+                  <NextLink href={applicationPath}>Přihlásit se</NextLink>
+                </S.SectionActionButton>
+              </VerticalStack>
+            </S.SectionActionsContainer>
+          </S.SectionContainer>
+        </S.SectionCard>
+      </MaxWidth>
+    </S.HeroSection>
+  );
+}
+
+function getUniqueSortedTimes(lectures?: SanityLecture[]): number[] {
+  const uniqueTimes = Array.from(
+    new Set(lectures?.map((lecture) => Number(lecture.timeFrom?.split(':')[0])))
+  );
+
+  return uniqueTimes.sort((a, b) => a - b);
+}
+
+function retrieveMinimumLectureAttribute(
+  lectures: SanityLecture[] | undefined,
+  key: 'priceFirstHalf' | 'priceSecondHalf' | 'priceYear' | 'ageFrom'
+): number {
+  if (!lectures || lectures.length === 0) {
+    return 0;
+  }
+
+  const prices = lectures
+    .filter((lecture) => !lecture?.isFull)
+    .map((lecture) => lecture?.[key])
+    .filter((price): price is number => price != null);
+
+  return prices.length > 0 ? Math.min(...prices) : 0;
+}

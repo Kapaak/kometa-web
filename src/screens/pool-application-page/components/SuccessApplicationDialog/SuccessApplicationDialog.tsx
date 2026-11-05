@@ -1,5 +1,6 @@
 import { useTheme } from 'styled-components';
 
+import { useSwimmingPoolConfig } from '~/contexts/SwimmingPoolConfigContext';
 import {
   Button,
   Divider,
@@ -27,6 +28,8 @@ export function SuccessApplicationDialog({
 }: SuccessApplicationDialogProps) {
   const theme = useTheme();
   const { grey } = theme.colors;
+
+  const { contact } = useSwimmingPoolConfig();
 
   return (
     <Modal
@@ -71,8 +74,10 @@ export function SuccessApplicationDialog({
         <VerticalStack gap="1rem" align="flex-start">
           <Text>
             <Strong>Potřebujete pomoc? </Strong>V případě jakéhokoliv problému
-            se prosím obraťte na tel. číslo 773708287, nebo na e-mail
-            plavaniluzanky@kometaplavani.cz
+            se prosím obraťte
+            {contact.phone && ` na tel. číslo ${contact.phone}`}
+            {contact.phone && contact.email && ', nebo'}
+            {contact.email && ` na e-mail ${contact.email}`}.
           </Text>
           <Divider width="50%" color={grey['500']} />
         </VerticalStack>

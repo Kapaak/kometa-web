@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 import { useTheme } from 'styled-components';
 
+import { useSwimmingPoolConfig } from '~/contexts/SwimmingPoolConfigContext';
 import { useApplicationFormContext } from '~/screens/pool-application-page/contexts/ApplicationFormContext';
 import { A, Headline, Text, VerticalStack } from '~/ui/components/atoms';
 import {
@@ -19,6 +20,8 @@ import * as FormItems from '../FormItems.style';
 export function ScholarCourseForm() {
   const theme = useTheme();
   const { primary } = theme.colors;
+
+  const { contact } = useSwimmingPoolConfig();
 
   const {
     lectures,
@@ -168,10 +171,11 @@ export function ScholarCourseForm() {
             discount={selectedLecture?.discount}
             options={lessonsPriceOptions}
           />
-          <Text variant="body2">
-            V případě individuálních požadavků kontaktujte
-            plavaniluzanky@kometaplavani.cz
-          </Text>
+          {contact.email && (
+            <Text variant="body2">
+              V případě individuálních požadavků kontaktujte {contact.email}
+            </Text>
+          )}
         </FormItems.FormColumnItems>
       </FormItems.FormColumn>
 

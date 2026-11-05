@@ -1,11 +1,12 @@
 import Head from 'next/head';
-
 import { useRouter } from 'next/router';
+
 import { data, defaultSeoData } from './Seo.data';
 
 export const SEO = () => {
   const router = useRouter();
-  const path = router.pathname;
+  // asPath because of dynamic routes (e.g. /bazeny/[poolId])
+  const path = router.asPath.split(/[?#]/)[0];
   const metadataByPath = data.find((item) => path?.includes(item?.path ?? ''));
 
   const routeMetaData = metadataByPath ?? defaultSeoData;

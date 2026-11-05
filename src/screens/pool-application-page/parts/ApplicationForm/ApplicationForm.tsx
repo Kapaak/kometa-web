@@ -5,13 +5,14 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import { useSendEmail } from '~/adapters/emailAdapter';
 import { useAppendGoogleSheet } from '~/adapters/sheetAdapter';
+import { useSwimmingPoolConfig } from '~/contexts/SwimmingPoolConfigContext';
 import { SwimmingCategoryId, SwimmingCategoryTranslation } from '~/types';
-import { SwimmingPoolId } from '~/types/swimming-pool';
 import { Button, Flex } from '~/ui/components/atoms';
 import { getCategoryNameByCategoryId } from '~/utils/category';
 import { getDayAbbreviationWithoutDiacritics } from '~/utils/day';
 import { isDevelopment } from '~/utils/environment';
 import { calculatePriceAfterDiscount, getSemesterPrice } from '~/utils/price';
+import { getSwimmingPoolPath } from '~/utils/swimming-pool';
 
 import { SuccessApplicationDialog } from '../../components';
 import {
@@ -46,11 +47,13 @@ export function ApplicationForm({ categoryId }: ApplicationFormProps) {
 
   const router = useRouter();
 
+  const { id: swimmingPoolId } = useSwimmingPoolConfig();
+
   const { lectures, getLectureById, preliminary, availableLecturesOptions } =
     useApplicationFormContext();
 
   const { appendGoogleSheet, isLoading } = useAppendGoogleSheet({
-    swimmingPoolId: SwimmingPoolId.LUZANKY,
+    swimmingPoolId,
     categoryId,
     preliminary,
   });
@@ -112,7 +115,7 @@ export function ApplicationForm({ categoryId }: ApplicationFormProps) {
         email: dataUpdated?.email ?? dataUpdated?.contactPersonEmail,
         firstName: dataUpdated?.firstName,
         lastName: dataUpdated?.lastName,
-        swimmingPoolId: SwimmingPoolId.LUZANKY,
+        swimmingPoolId,
         categoryId,
         dayId: Number(lectureById?.dayId),
         time: String(lectureById?.timeFrom),
@@ -146,7 +149,7 @@ export function ApplicationForm({ categoryId }: ApplicationFormProps) {
         email: email ?? contactPersonEmail,
         firstName,
         lastName,
-        swimmingPoolId: SwimmingPoolId.LUZANKY,
+        swimmingPoolId,
         categoryId,
         dayId: Number(lectureById?.dayId),
         time: String(lectureById?.timeFrom),
@@ -181,7 +184,9 @@ export function ApplicationForm({ categoryId }: ApplicationFormProps) {
           open={showSuccessDialog}
           onClose={handleCloseSuccessDialog}
           onResendEmail={handleResendEmail}
-          onHomePageReturn={() => router.push('/bazeny/luzanky')}
+          onHomePageReturn={() =>
+            router.push(getSwimmingPoolPath(swimmingPoolId))
+          }
           isResendingEmail={isSendingEmail}
         />
       )}
@@ -213,7 +218,7 @@ export function ApplicationForm({ categoryId }: ApplicationFormProps) {
                 onClick={() =>
                   sendEmail({
                     ...testEmail,
-                    swimmingPoolId: SwimmingPoolId.LUZANKY,
+                    swimmingPoolId,
                     categoryId,
                   })
                 }

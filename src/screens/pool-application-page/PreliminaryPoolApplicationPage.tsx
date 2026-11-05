@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
 
 import { BreadcrumbsLayout } from '~/components/BreadcrumbsLayout';
+import { useSwimmingPoolConfig } from '~/contexts/SwimmingPoolConfigContext';
 import { Headline, MaxWidth, Text, VerticalStack } from '~/ui/components/atoms';
 import {
   getCategoryNameByCategoryId,
   getCategoryNameBySlug,
 } from '~/utils/category';
+import { getSwimmingPoolPath } from '~/utils/swimming-pool';
 
 import { ApplicationsClosed } from './parts/ApplicationsClosed';
 
@@ -28,19 +30,23 @@ export function PreliminaryPoolApplicationPage({
 }: PreliminaryPoolApplicationPageProps) {
   const router = useRouter();
 
+  const { id, name } = useSwimmingPoolConfig();
+  const poolPath = getSwimmingPoolPath(id);
+
   if (!applicationsOpen) {
     return <ApplicationsClosed message={CLOSED_MESSAGE} />;
   }
 
   const breadcrumbs = [
     { label: 'Domů', href: '/' },
+    { label: name, href: poolPath },
     {
       label: getCategoryNameBySlug(router.query.categoryId as string),
-      href: `/bazeny/luzanky/${router.query.categoryId}`,
+      href: `${poolPath}/${router.query.categoryId}`,
     },
     {
       label: 'Přihlášky',
-      href: `/bazeny/luzanky/${router.query.categoryId}/prihlasky`,
+      href: `${poolPath}/${router.query.categoryId}/prihlasky`,
     },
   ];
 
